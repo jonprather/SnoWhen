@@ -16,12 +16,10 @@ export default function Address(props) {
   const [coordinates, setCoordinates] = useState({});
   const [address, setAddress] = useState("test");
   const [filterType, setFilterType] = useState("none");
-  const [count, setCount] = useState("");
   const [templateStringObj, setTemplateStringObj] = useState({});
 
   const exclude = "hourly";
   const tempAPIKEY = process.env.NEXT_PUBLIC_WEATHER;
-  const queryClient = useQueryClient();
 
   const date = new Date();
   const [month, dayOfWeekNumber, dayOfMonth, year, unixTime] = [
@@ -44,6 +42,7 @@ export default function Address(props) {
     return () => {};
   }, [router.isReady]);
 
+  //query fn
   const getWeather = async function (coordinates) {
     let res = await fetch(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lng}&exclude=${exclude}&units=imperial&appid=${tempAPIKEY}`
@@ -65,7 +64,7 @@ export default function Address(props) {
 
   function handleEmit(filterType) {
     setFilterType(filterType);
-    // setTemplateStringObj(weatherStringFormatter({ filterType, data }));
+    setTemplateStringObj(weatherStringFormatter({ filterType, data }));
   }
 
   return status === "loading" ? (
@@ -78,14 +77,12 @@ export default function Address(props) {
       {isFetching ? <div>Refreshing...</div> : null}
       <Link href='/weather'>Go Home</Link>
       <div>
-        {data && filterType && (
+        {templateStringObj && (
           <p>
-            {weatherStringFormatter({ filterType, data }).firstPart}
-            <strong>
-              {weatherStringFormatter({ filterType, data }).countDay}
-            </strong>
-            <i>{weatherStringFormatter({ filterType, data }).filterType}</i>
-            {weatherStringFormatter({ filterType, data }).closing}
+            {templateStringObj.firstPart}
+            <strong>{templateStringObj.countDay}</strong>
+            <i>{templateStringObj.filterType}</i>
+            {templateStringObj.closing}
           </p>
         )}
         {data &&
@@ -102,8 +99,6 @@ export default function Address(props) {
                 dayOfMonth={dayOfMonth}
                 unixTime={unixTime}
                 filterCondition={selectFilterFn(filterType)}
-                count={countDays({ data, filterType })}
-                filterType={filterType}
               />
             ))}
       </div>

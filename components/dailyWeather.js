@@ -12,7 +12,6 @@ export default function dayWeather({
   unixTime,
   filterCondition,
   filterType,
-  count,
 }) {
   const [date, setDate] = useState();
 
