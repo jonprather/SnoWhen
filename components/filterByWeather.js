@@ -30,7 +30,6 @@ export default function filterByWeather(props) {
         <option value='rainy'>Rain or Drizzle</option>
         <option value='cloudy'>Clouds</option>
         <option value='thunderstorm'>Thunderstorm</option>
-
         <option value='clear'>Clear</option>
         <option value='inclement'>Any Non-Clear</option>
       </select>

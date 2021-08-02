@@ -9,15 +9,19 @@ import { selectFilterFn } from "../../components/selectFilterFn";
 import {
   weatherStringFormatter,
   countDays,
-} from "../../lib/filterStringFormatters";
+} from "../../lib/helpers/filterStringFormatters";
 
 export default function Address(props) {
   const router = useRouter();
-  var [coordinates, setCoordinates] = useState({});
-  var [address, setAddress] = useState("test");
-  var [filterType, setFilterType] = useState("none");
-  var [count, setCount] = useState("");
-  var [templateStringObj, setTemplateStringObj] = useState({});
+  const [coordinates, setCoordinates] = useState({});
+  const [address, setAddress] = useState("test");
+  const [filterType, setFilterType] = useState("none");
+  const [count, setCount] = useState("");
+  const [templateStringObj, setTemplateStringObj] = useState({});
+
+  const exclude = "hourly";
+  const tempAPIKEY = process.env.NEXT_PUBLIC_WEATHER;
+  const queryClient = useQueryClient();
 
   const date = new Date();
   const [month, dayOfWeekNumber, dayOfMonth, year, unixTime] = [
@@ -37,21 +41,10 @@ export default function Address(props) {
       var lng = router.query.lng;
       setCoordinates({ add, lat, lng });
     }
-
-    //made error where i spread them in instead of passed them in
     return () => {};
   }, [router.isReady]);
 
-  function handleEmit(filterType) {
-    setFilterType(filterType);
-    setTemplateStringObj(weatherStringFormatter(filterType));
-  }
-  var exclude = "hourly";
-  console.log("COORDS", coordinates);
-  var tempAPIKEY = process.env.NEXT_PUBLIC_WEATHER;
-  const queryClient = useQueryClient();
-
-  let getWeather = async function (coordinates) {
+  const getWeather = async function (coordinates) {
     let res = await fetch(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lng}&exclude=${exclude}&units=imperial&appid=${tempAPIKEY}`
     );
@@ -65,10 +58,15 @@ export default function Address(props) {
     [address.toLowerCase().trim(), coordinates],
     () => getWeather(coordinates),
     {
-      // The query will not execute until the userId exists
+      // The query will not execute until coordinates exists
       enabled: !!coordinates,
     }
   );
+
+  function handleEmit(filterType) {
+    setFilterType(filterType);
+    // setTemplateStringObj(weatherStringFormatter({ filterType, data }));
+  }
 
   return status === "loading" ? (
     <span>Loading...</span>
@@ -82,10 +80,12 @@ export default function Address(props) {
       <div>
         {data && filterType && (
           <p>
-            {weatherStringFormatter(filterType).firstPart}
-            <strong>{weatherStringFormatter(filterType).countDay}</strong>
-            <i>{weatherStringFormatter(filterType).filterType}</i>
-            {weatherStringFormatter(filterType).closing}
+            {weatherStringFormatter({ filterType, data }).firstPart}
+            <strong>
+              {weatherStringFormatter({ filterType, data }).countDay}
+            </strong>
+            <i>{weatherStringFormatter({ filterType, data }).filterType}</i>
+            {weatherStringFormatter({ filterType, data }).closing}
           </p>
         )}
         {data &&
@@ -102,7 +102,7 @@ export default function Address(props) {
                 dayOfMonth={dayOfMonth}
                 unixTime={unixTime}
                 filterCondition={selectFilterFn(filterType)}
-                count={countDays()}
+                count={countDays({ data, filterType })}
                 filterType={filterType}
               />
             ))}
