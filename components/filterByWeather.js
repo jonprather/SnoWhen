@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { selectFilterFn } from "./selectFilterFn";
 
 export default function filterByWeather(props) {
-  var [filterType, setFilterType] = useState("none");
+  var [filterType, setFilterType] = useState(null);
 
   function handleSubmit(data) {
     console.log("SELCT", data);
@@ -26,12 +26,11 @@ export default function filterByWeather(props) {
       >
         <option value='none'>No filter</option>
 
-        <option value='snowy'>Snow</option>
-        <option value='rainy'>Rain or Drizzle</option>
-        <option value='cloudy'>Clouds</option>
+        <option value='snow'>Snow</option>
+        <option value='rain'>Rain or Drizzle</option>
+        <option value='clouds'>Clouds</option>
         <option value='thunderstorm'>Thunderstorm</option>
         <option value='clear'>Clear</option>
-        <option value='inclement'>Any Non-Clear</option>
       </select>
     </div>
   );
