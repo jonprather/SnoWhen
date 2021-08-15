@@ -44,9 +44,8 @@ export default function Address(props) {
 
   //query fn
   const getWeather = async function (coordinates) {
-    let res = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lng}&exclude=${exclude}&units=imperial&appid=${tempAPIKEY}`
-    );
+    let res = await fetch("/api/fakeSnowReport");
+    //`api.weatherunlocked.com/api/resortforecast/${env.NEXT_PUBLIC_RESORT_MAMMOTH}?app_id=${env.NEXT_PUBLIC_RESORT_APP_ID}&app_key=${env.NEXT_PUBLIC_RESORT_APP_KEY}`
 
     if (!res.ok) {
       throw new Error("Network response was not ok");
@@ -77,7 +76,7 @@ export default function Address(props) {
     <span>Error: {error.message}</span>
   ) : (
     <>
-      <FilterByWeather handleSubmit={handleFilterTypeEmit} />
+      {/* <FilterByWeather handleSubmit={handleFilterTypeEmit} /> */}
       {isFetching ? <div>Refreshing...</div> : null}
       <Link href='/weather'>Go Home</Link>
       <div>

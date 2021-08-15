@@ -22,6 +22,8 @@ export default function index() {
   var [searchHistory, setSearchHistory] = useState(null); //by default can set this in useEffect to get from cookie local storage or have default
   var [queriesObj, setQueriesObj] = useState([]);
   var [filterType, setFilterType] = useState(null);
+  var [snowAcc, setSnowAcc] = useState(null);
+
   //can make this global state to pass around context api.. idk if worth it as this works and need multi locaion to do it
 
   var [sortFunction, setSortFunction] = useState({
@@ -33,55 +35,55 @@ export default function index() {
 
   useEffect(() => {
     setSearchHistory(getAllLocal());
+    // if (results.every((num) => num.isSuccess === true)) {
+    //   let deez = weatherAccumulation(results);
+    //   setSnowAcc(deez);
+    // }
 
+    console.log(snowAcc);
     // setQueriesObj(obj);
   }, [coordinates]);
 
-  function weatherAccumulation(day, condition = "snow") {
-    //there often doesnot seem to be snow so would need a way to check if has it and need to scout see if enough locations have
-    //that data and if not then pivot to just do soomething else
-    // console.log("SNOW res====", res);
-    //wait this would be for all locations i would need a specific location first to get its totals
-    // would have to pass in not results but instead already have done a map to get ele then do reduce here
-    let err = false;
-    let snowAcc = day.reduce(
-      (acc, day) => {
-        if (day[condition]) {
-          return acc + day[condition];
-        } else {
-          //also need to set a flag an error to user that no snow data to work with
-          err = true;
-          // setError((prev)=> [...prev, `error with ${i} with condition of {}`] )//dont need this as will likely be location not day based
-        }
-      },
+  function weatherAccumulation(location) {
+    let snowPerDay = [];
+    let snowPerHourly = [];
+    let tempArr = [];
 
-      0
-    );
-    // setError(err);
+    console.log("WEATHER DATA___", location);
 
-    //so this works and can prob make it work for rain or snow for the week fairly easily
-    //or just have the
-    console.log("SNOW ACCC====", snowAcc);
-    if (err)
-      return `This location does not support ${condition} data at this Time. Please try another location.`;
-    return snowAcc;
+    location.data.forecast.reduce((acc, ele, i) => {
+      console.log("ELE", i, acc, ele["snow_in"]);
+      tempArr.push(ele);
+
+      if (ele.time === "22:00") {
+        snowPerHourly.push(tempArr);
+        tempArr = [];
+        snowPerDay.push({ date: ele.date, total: acc + ele["snow_in"] });
+        acc = 0;
+        return acc; //ele["snow_in"];
+      }
+      return acc + ele["snow_in"]; //ele["snow_in"];
+    }, 0);
+
+    let total = snowPerDay.reduce((acc, ele) => acc + ele.total, 0);
+    console.log("SnowPerHourly", snowPerHourly);
+
+    console.log("ARRRR____________", snowPerDay);
+
+    return { total, snowPerDay, snowPerHourly };
   }
 
-  //setCoord array from local storage fetching
-  // forEach thing in setCoords arr call useWeather
   const getWeather = async function (coordinates) {
-    console.log("CORGIESSSSSSSSSS_____:", coordinates);
-    const tempAPIKEY = process.env.NEXT_PUBLIC_WEATHER;
-    const exclude = "hourly";
-    coordinates = coordinates.queryKey[1];
-    const { data } = await axios.get(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lng}&exclude=${exclude}&units=imperial&appid=${tempAPIKEY}`
-    );
+    const { data } = await axios.get(`/api/fakeSnowReport`);
     // /api/fakeWeather
-    //`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lng}&exclude=${exclude}&units=imperial&appid=${tempAPIKEY}`
-    // this is the real api now i fake it till fix api issue then put this back but use less need to optimize that
-    return { ...data, coordinates };
+    //  `https://api.weatherunlocked.com/api/resortforecast/${process.env.NEXT_PUBLIC_RESORT_MAMMOTH}?app_id=${process.env.NEXT_PUBLIC_RESORT_APP_ID}&app_key=${process.env.NEXT_PUBLIC_RESORT_APP_KEY}`
+    //
+    //w i fake it till fix api issue then put this back but use less need to optimize that
+    console.log("NEW API DATA", data);
+
+    return data;
   };
+  //coordinates here could jus tbecome the searched thing which i have a lookup table for to pass the resort id
   function hasWeatherCondition(condition, ele) {
     // /input a condition to check
     //out put a boolean whether it exists or not
@@ -138,7 +140,7 @@ export default function index() {
       >
         Clear Local Storage
       </button>
-      <p></p>
+      <p>{snowAcc && snowAcc.total}</p>
       {searchHistory &&
         searchHistory
           .sort(sortFunction[sortDirection])
@@ -161,29 +163,24 @@ export default function index() {
             </>
           ))}
 
-      {results.every((num) => num.isSuccess === true) &&
-        results?.sort(sortFunction[sortDirection]).map((ele) => (
+      {true &&
+        results.every((num) => num.isSuccess === true) &&
+        results?.sort(sortFunction[sortDirection]).map((ele, i) => (
           <>
             <Link
-              href={`/weather/${ele?.data?.coordinates?.address
-                .toLowerCase()
-                .trim()}?lat=${ele?.data?.coordinates?.lat}&lng=${
-                ele?.data?.coordinates?.lng
-              }`}
+              href={`/weather/${ele?.data?.name.toLowerCase().trim()}?id=${i}
+              `}
             >
               <div>
-                The Current Temp For {ele?.data?.coordinates?.address} is:
-                {ele?.data?.current?.temp}
-                <p>
-                  The Total Predicted Snow for this week is{" "}
-                  {/* Make this conditional so can display a warning in red for the area 
-                  and on the positve can highlight the snow amount */}
-                  {weatherAccumulation(ele?.data?.daily, "snow")}
-                </p>
-                <p>
-                  The Total Rain for this area is{" "}
-                  {weatherAccumulation(ele?.data?.daily, "rain")}
-                </p>
+                The Snow Total For {ele?.data?.name} is:
+                {weatherAccumulation(ele)["total"]}
+                {weatherAccumulation(ele)["snowPerDay"].map((day, i) => {
+                  return (
+                    <p>
+                      The Total for day {day.date} is {day.total}
+                    </p>
+                  );
+                })}
               </div>
             </Link>
             <button
@@ -196,7 +193,7 @@ export default function index() {
             >
               remove
             </button>
-            <div>
+            {/* <div>
               {filterType &&
               results.every((num) => num.isSuccess === true) &&
               filterType !== "none" ? (
@@ -228,7 +225,7 @@ export default function index() {
               ) : (
                 ""
               )}
-            </div>
+            </div> */}
           </>
         ))}
     </div>
