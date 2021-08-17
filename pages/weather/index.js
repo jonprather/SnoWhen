@@ -125,109 +125,74 @@ export default function index() {
 
   return (
     //loop over results....
-    <div>
+    <section className='home'>
+      <div className='home__hero-img'></div>
       <Location emit={handleEmit} />
-      <FilterByWeather handleSubmit={handleFilterTypeEmit} />
+      <div className='home__darkmode'>
+        <p className='home__darkmode-dark'>Dark</p>
 
-      <button onClick={() => setSortDirection("asc")}> Ascending</button>
-      <button onClick={() => setSortDirection("desc")}> Descending</button>
+        <p className='home__darkmode-light'>Light</p>
+      </div>
+      <main className='home__main'>
+        <p>{snowAcc && snowAcc.total}</p>
 
-      <button
-        onClick={() => {
-          localStorage.clear();
-          setSearchHistory(null);
-        }}
-      >
-        Clear Local Storage
-      </button>
-      <p>{snowAcc && snowAcc.total}</p>
-      {searchHistory &&
-        searchHistory
-          .sort(sortFunction[sortDirection])
-          .filter((ele) => true) // cant filter by weather yet it is not prefecthed yet unless change how its done to fetch on this page too
-          .map((address) => (
-            <>
-              <Link
-                href={`/weather/${address.address}?lat=${address.lat}&lng=${address.lng}`}
-              >
-                {address.address}
-              </Link>
-              <button
-                onClick={() => {
-                  localStorage.removeItem(address.address.toLowerCase());
-                  setSearchHistory(getAllLocal());
-                }}
-              >
-                Delete
-              </button>
-            </>
-          ))}
-
-      {true &&
-        results.every((num) => num.isSuccess === true) &&
-        results?.sort(sortFunction[sortDirection]).map((ele, i) => (
-          <>
+        {results.every((num) => num.isSuccess === true) &&
+          results?.sort(sortFunction[sortDirection]).map((ele, i) => (
             <Link
               href={`/weather/${ele?.data?.name.toLowerCase().trim()}?id=${i}
               `}
             >
-              <div>
-                The Snow Total For {ele?.data?.name} is:
-                {weatherAccumulation(ele)["total"]}
-                {weatherAccumulation(ele)["snowPerDay"].map((day, i) => {
-                  return (
-                    <p>
-                      The Total for day {day.date} is {day.total}
-                    </p>
-                  );
-                })}
+              <div className='home__card'>
+                <p className='home__card-title'>{ele?.data?.name}</p>
+                <p className='home__card-subtitle'>mountain</p>
+
+                <p className='home__card-state'>Ca</p>
+
+                <div className='home__card__snow-amount-box'>
+                  <p className='home__card__snow-amount-box-title'>Next Five</p>
+                  <p className='home__card__snow-amount-box-subtitle'>
+                    Snow Total
+                  </p>
+
+                  <p className='home__card__snow-amount-box-quantity'>
+                    {weatherAccumulation(ele)["total"]}
+                  </p>
+                </div>
+
+                <p className='home__card__forecast-title'>Forecast</p>
+
+                <div className='home__card__snow-forecast-days-box'>
+                  {weatherAccumulation(ele)["snowPerDay"].map((day, i) => {
+                    return (
+                      <div>
+                        <p className='home__card__snow-forecast-days-box-day'>
+                          {day.date}
+                        </p>
+                        <p className='home__card__snow-forecast-days-box-amount'>
+                          {day.total}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className='card__accent-box'>
+                  <p className='card__accent-box__details'>Click for Details</p>
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem(
+                        ele?.data?.coordinates?.address.toLowerCase().trim()
+                      );
+                      setSearchHistory(getAllLocal());
+                    }}
+                  >
+                    remove
+                  </button>
+                </div>
               </div>
             </Link>
-            <button
-              onClick={() => {
-                localStorage.removeItem(
-                  ele?.data?.coordinates?.address.toLowerCase().trim()
-                );
-                setSearchHistory(getAllLocal());
-              }}
-            >
-              remove
-            </button>
-            {/* <div>
-              {filterType &&
-              results.every((num) => num.isSuccess === true) &&
-              filterType !== "none" ? (
-                <p>
-                  {
-                    weatherStringFormatter({ filterType, data: ele.data })
-                      ?.firstPart
-                  }
-                  <span>
-                    {
-                      weatherStringFormatter({ filterType, data: ele.data })
-                        ?.countDay
-                    }
-                  </span>
-                  <span>
-                    {
-                      weatherStringFormatter({ filterType, data: ele.data })
-                        ?.weatherCondition
-                    }
-                  </span>
-                  <span>
-                    {" "}
-                    {
-                      weatherStringFormatter({ filterType, data: ele.data })
-                        ?.closing
-                    }
-                  </span>
-                </p>
-              ) : (
-                ""
-              )}
-            </div> */}
-          </>
-        ))}
-    </div>
+          ))}
+      </main>
+    </section>
   );
 }
