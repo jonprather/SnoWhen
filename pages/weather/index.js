@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useWeather } from "../../components/hooks/useWeather";
 import FilterByWeather from "../../components/filterByWeather";
+// import Image from "next/image";
+// import hero from "../../public/images/snowy-trees-large.jpg";
 import {
   weatherStringFormatter,
   countDays,
@@ -43,7 +45,12 @@ export default function index() {
     console.log(snowAcc);
     // setQueriesObj(obj);
   }, [coordinates]);
-
+  function changeDateOrder(date) {
+    // Reorder "12/08/2021"; to // let date = "08/12/2021";
+    let arr = date.split("/");
+    let newDate = [arr[1], arr[0], arr[2]].join("/");
+    return newDate;
+  }
   function weatherAccumulation(location) {
     let snowPerDay = [];
     let snowPerHourly = [];
@@ -126,7 +133,9 @@ export default function index() {
   return (
     //loop over results....
     <section className='home'>
-      <div className='home__hero-img'></div>
+      <div className='home__hero-img'>
+        {/* <Image src={hero} alt=' Close up picture of a snowy tree branch' /> */}
+      </div>
       <Location emit={handleEmit} />
       <div className='home__darkmode'>
         <p className='home__darkmode-dark'>Dark</p>
@@ -134,65 +143,72 @@ export default function index() {
         <p className='home__darkmode-light'>Light</p>
       </div>
       <main className='home__main'>
-        <p>{snowAcc && snowAcc.total}</p>
-
-        {results.every((num) => num.isSuccess === true) &&
-          results?.sort(sortFunction[sortDirection]).map((ele, i) => (
-            <Link
-              href={`/weather/${ele?.data?.name.toLowerCase().trim()}?id=${i}
+        <div className='home__card-container'>
+          {results.every((num) => num.isSuccess === true) &&
+            results?.sort(sortFunction[sortDirection]).map((ele, i) => (
+              <Link
+                href={`/weather/${ele?.data?.name.toLowerCase().trim()}?id=${i}
               `}
-            >
-              <div className='home__card'>
-                <p className='home__card-title'>{ele?.data?.name}</p>
-                <p className='home__card-subtitle'>mountain</p>
+              >
+                <div className='home__card'>
+                  <p className='home__card-title'>{ele?.data?.name}</p>
+                  <p className='home__card-state'>Ca</p>
 
-                <p className='home__card-state'>Ca</p>
+                  <p className='home__card-subtitle'>mountain</p>
 
-                <div className='home__card__snow-amount-box'>
-                  <p className='home__card__snow-amount-box-title'>Next Five</p>
-                  <p className='home__card__snow-amount-box-subtitle'>
-                    Snow Total
-                  </p>
+                  <div className='home__card__snow-amount-box'>
+                    <div>
+                      <p className='home__card__snow-amount-box-title'>
+                        Next Week
+                      </p>
+                      <p className='home__card__snow-amount-box-subtitle'>
+                        Snow Total
+                      </p>
+                    </div>
+                    <p className='home__card__snow-amount-box-quantity'>
+                      {weatherAccumulation(ele)["total"]} "
+                    </p>
+                  </div>
 
-                  <p className='home__card__snow-amount-box-quantity'>
-                    {weatherAccumulation(ele)["total"]}
-                  </p>
-                </div>
+                  <p className='home__card__forecast-title'>Forecast</p>
 
-                <p className='home__card__forecast-title'>Forecast</p>
-
-                <div className='home__card__snow-forecast-days-box'>
-                  {weatherAccumulation(ele)["snowPerDay"].map((day, i) => {
-                    return (
-                      <div>
-                        <p className='home__card__snow-forecast-days-box-day'>
-                          {day.date}
-                        </p>
-                        <p className='home__card__snow-forecast-days-box-amount'>
-                          {day.total}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div className='card__accent-box'>
-                  <p className='card__accent-box__details'>Click for Details</p>
-                  <button
-                    onClick={() => {
-                      localStorage.removeItem(
-                        ele?.data?.coordinates?.address.toLowerCase().trim()
+                  <div className='home__card__forecast-days-box'>
+                    {weatherAccumulation(ele)["snowPerDay"].map((day, i) => {
+                      if (i > 4) return "";
+                      return (
+                        <div className='home__card__forecast-days-box-cell'>
+                          <p className='home__card__forecast-days-box-day'>
+                            {dayjs(changeDateOrder(day.date)).format("ddd")}
+                          </p>
+                          <p className='home__card__forecast-days-box-amount'>
+                            {day.total} "
+                          </p>
+                        </div>
                       );
-                      setSearchHistory(getAllLocal());
-                    }}
-                  >
-                    remove
-                  </button>
+                    })}
+                  </div>
+
+                  <div className='home__card__accent-box'>
+                    <p className='home__card__accent-box__details'>
+                      Check Details
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+        </div>
       </main>
     </section>
   );
 }
+
+//   <button
+// onClick={() => {
+//   localStorage.removeItem(
+//     ele?.data?.coordinates?.address.toLowerCase().trim()
+//   );
+//   setSearchHistory(getAllLocal());
+// }}
+// >
+// remove
+// </button>
