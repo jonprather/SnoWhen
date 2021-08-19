@@ -30,6 +30,10 @@ html {
   --accent-box-bg: rgba(27, 38, 44, 100); // rgba(187, 225, 250, 0.05);
   --lightmodebox-bg: rgba(255, 255, 255, 0.03);
 }
+
+// @media (prefers-color-scheme: light) {
+
+// }
 html[data-theme="light"] {
   --bg-primary: #ffff;
   --subheading-color: #0f4c75;

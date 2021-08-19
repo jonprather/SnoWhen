@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Geocode from "react-geocode";
 import { setLocalAddress, getLocalAddress } from "../lib/LocalStorage";
-import SelectResort from "./selectResort";
 export default function Location(props) {
   const [address, setAddress] = useState("");
   const [error, setError] = useState(null);

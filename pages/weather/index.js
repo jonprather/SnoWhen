@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useQueries } from "react-query";
 import axios from "axios";
 import Location from "../../components/location";
-import DailyWeather from "../../components/dailyWeather";
+
 import {
   getAllLocal,
   getLocalDarkMode,
@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useWeather } from "../../components/hooks/useWeather";
 import FilterByWeather from "../../components/filterByWeather";
-// import Image from "next/image";
+import Image from "next/image";
 // import hero from "../../public/images/snowy-trees-large.jpg";
 import {
   weatherStringFormatter,
@@ -42,12 +42,11 @@ export default function index() {
 
   useEffect(() => {
     setSearchHistory(getAllLocal());
-    console.log("USEFF---------", getAllLocal());
+
     if (getLocalDarkMode()) {
       document.documentElement.setAttribute("data-theme", getLocalDarkMode());
     }
 
-    console.log(snowAcc);
     // setQueriesObj(obj);
   }, [resort]);
   function changeDateOrder(date) {
@@ -61,10 +60,7 @@ export default function index() {
     let snowPerHourly = [];
     let tempArr = [];
 
-    console.log("WEATHER DATA___", location);
-
-    location.data.forecast.reduce((acc, ele, i) => {
-      console.log("ELE", i, acc, ele["snow_in"]);
+    location?.data?.forecast?.reduce((acc, ele, i) => {
       tempArr.push(ele);
 
       if (ele.time === "22:00") {
@@ -78,43 +74,36 @@ export default function index() {
     }, 0);
 
     let total = snowPerDay.reduce((acc, ele) => acc + ele.total, 0);
-    console.log("SnowPerHourly", snowPerHourly);
-
-    console.log("ARRRR____________", snowPerDay);
 
     return { total, snowPerDay, snowPerHourly };
   }
 
   const getWeather = async function (resort) {
-    const { data } = await axios.get(`/api/fakeSnowReport`);
-    // /api/fakeWeather
-    let resortCode = resort.code;
-    //put resort code into api
-    //  `https://api.weatherunlocked.com/api/resortforecast/${process.env.NEXT_PUBLIC_RESORT_MAMMOTH}?app_id=${process.env.NEXT_PUBLIC_RESORT_APP_ID}&app_key=${process.env.NEXT_PUBLIC_RESORT_APP_KEY}`
-    //
-    //w i fake it till fix api issue then put this back but use less need to optimize that
-    console.log("NEW API DATA", data);
-
-    return data;
+    try {
+      console.log("resort", resort);
+      const { data } = await axios.get(
+        `/api/snowReport?ID=${resort?.queryKey[1]?.resortCode}`
+      );
+      // test with fakeSnowReport after this
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   };
   //coordinates here could jus tbecome the searched thing which i have a lookup table for to pass the resort id
 
   const results = useQueries(
     searchHistory?.map((obj, i) => {
-      console.log("OBJ IN USEQUESRIS-", obj);
       return {
         queryKey: [obj.resortCode, obj],
         queryFn: (obj) => getWeather(obj),
-        onSuccess: () => console.log("I", i),
+        onSuccess: () => console.log(""),
       };
     }) ?? []
   );
 
-  console.log("Results", results);
-  console.log("SEARCH HISATORY>NAME", searchHistory?.name);
-
   function handleEmit(resortObj) {
-    console.log("EMIT", resortObj);
     setResort(resortObj);
   }
   function toggleTheme(color) {
@@ -127,7 +116,7 @@ export default function index() {
     //loop over results....
     <section className='home'>
       <div className='home__hero-img'>
-        {/* <Image src={hero} alt=' Close up picture of a snowy tree branch' /> */}
+        {/* <Image src={require(`../../public/images/snowy-trees-large.jpg`)} /> */}
       </div>
       <Location emit={handleEmit} />
       <div className='home__darkmode'>
