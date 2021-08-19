@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useQueries } from "react-query";
 import axios from "axios";
-import Location from "../../lib/location";
+import Location from "../../components/location";
 import DailyWeather from "../../components/dailyWeather";
-import { getAllLocal } from "../../lib/LocalStorage";
+import {
+  getAllLocal,
+  getLocalDarkMode,
+  setLocalDarkMode,
+} from "../../lib/LocalStorage";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useWeather } from "../../components/hooks/useWeather";
@@ -25,6 +29,7 @@ export default function index() {
   var [queriesObj, setQueriesObj] = useState([]);
   var [filterType, setFilterType] = useState(null);
   var [snowAcc, setSnowAcc] = useState(null);
+  var [resort, setResort] = useState(null);
 
   //can make this global state to pass around context api.. idk if worth it as this works and need multi locaion to do it
 
@@ -37,14 +42,14 @@ export default function index() {
 
   useEffect(() => {
     setSearchHistory(getAllLocal());
-    // if (results.every((num) => num.isSuccess === true)) {
-    //   let deez = weatherAccumulation(results);
-    //   setSnowAcc(deez);
-    // }
+    console.log("USEFF---------", getAllLocal());
+    if (getLocalDarkMode()) {
+      document.documentElement.setAttribute("data-theme", getLocalDarkMode());
+    }
 
     console.log(snowAcc);
     // setQueriesObj(obj);
-  }, [coordinates]);
+  }, [resort]);
   function changeDateOrder(date) {
     // Reorder "12/08/2021"; to // let date = "08/12/2021";
     let arr = date.split("/");
@@ -80,9 +85,11 @@ export default function index() {
     return { total, snowPerDay, snowPerHourly };
   }
 
-  const getWeather = async function (coordinates) {
+  const getWeather = async function (resort) {
     const { data } = await axios.get(`/api/fakeSnowReport`);
     // /api/fakeWeather
+    let resortCode = resort.code;
+    //put resort code into api
     //  `https://api.weatherunlocked.com/api/resortforecast/${process.env.NEXT_PUBLIC_RESORT_MAMMOTH}?app_id=${process.env.NEXT_PUBLIC_RESORT_APP_ID}&app_key=${process.env.NEXT_PUBLIC_RESORT_APP_KEY}`
     //
     //w i fake it till fix api issue then put this back but use less need to optimize that
@@ -91,29 +98,12 @@ export default function index() {
     return data;
   };
   //coordinates here could jus tbecome the searched thing which i have a lookup table for to pass the resort id
-  function hasWeatherCondition(condition, ele) {
-    // /input a condition to check
-    //out put a boolean whether it exists or not
-    //eg snow does snow exist in the weekly obj weather array?
 
-    return ele?.data?.daily.some(
-      (day) => day.weather[0].main.toLowerCase() === condition
-    );
-  }
-  function handleFilterTypeEmit(filterType) {
-    console.log("FILTER TYPE EMIT", filterType);
-    setFilterType(filterType);
-
-    // setTemplateStringObj(weatherStringFormatter({ filterType, data }));
-    //so cant set it here like this but i can use it in function i think
-    //so weatherStringFormatter expects the data to be the individual results for one place
-    // equivalent would be results[0]
-    //could resuse that logic here but it isnt dry how would i make it dry ?
-  }
   const results = useQueries(
     searchHistory?.map((obj, i) => {
+      console.log("OBJ IN USEQUESRIS-", obj);
       return {
-        queryKey: [obj.address.toLowerCase().trim(), obj],
+        queryKey: [obj.resortCode, obj],
         queryFn: (obj) => getWeather(obj),
         onSuccess: () => console.log("I", i),
       };
@@ -121,13 +111,16 @@ export default function index() {
   );
 
   console.log("Results", results);
-  console.log("address", searchHistory?.address);
+  console.log("SEARCH HISATORY>NAME", searchHistory?.name);
 
-  function handleEmit(coordinates) {
-    setCoordinates(coordinates);
-    // router.push(
-    //   `/weather/${coordinates.address}?lat=${coordinates.lat}&lng=${coordinates.lng}`
-    // );
+  function handleEmit(resortObj) {
+    console.log("EMIT", resortObj);
+    setResort(resortObj);
+  }
+  function toggleTheme(color) {
+    document.documentElement.setAttribute("data-theme", color);
+
+    setLocalDarkMode(color);
   }
 
   return (
@@ -138,9 +131,19 @@ export default function index() {
       </div>
       <Location emit={handleEmit} />
       <div className='home__darkmode'>
-        <p className='home__darkmode-dark'>Dark</p>
+        <button
+          onClick={() => toggleTheme("dark")}
+          className='home__darkmode-dark'
+        >
+          Dark
+        </button>
 
-        <p className='home__darkmode-light'>Light</p>
+        <button
+          onClick={() => toggleTheme("light")}
+          className='home__darkmode-light'
+        >
+          Light
+        </button>
       </div>
       <main className='home__main'>
         <div className='home__card-container'>
@@ -151,17 +154,17 @@ export default function index() {
               `}
               >
                 <div className='home__card'>
-                  <p className='home__card-title'>{ele?.data?.name}</p>
+                  <h1 className='home__card-heading'>{ele?.data?.name}</h1>
                   <p className='home__card-state'>Ca</p>
 
-                  <p className='home__card-subtitle'>mountain</p>
+                  <h2 className='home__card-subheading'>mountain</h2>
 
                   <div className='home__card__snow-amount-box'>
                     <div>
-                      <p className='home__card__snow-amount-box-title'>
+                      <p className='home__card__snow-amount-box-heading'>
                         Next Week
                       </p>
-                      <p className='home__card__snow-amount-box-subtitle'>
+                      <p className='home__card__snow-amount-box-subheading'>
                         Snow Total
                       </p>
                     </div>
@@ -170,7 +173,7 @@ export default function index() {
                     </p>
                   </div>
 
-                  <p className='home__card__forecast-title'>Forecast</p>
+                  <p className='home__card__forecast-heading'>Forecast</p>
 
                   <div className='home__card__forecast-days-box'>
                     {weatherAccumulation(ele)["snowPerDay"].map((day, i) => {
