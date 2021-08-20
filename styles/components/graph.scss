@@ -1,0 +1,110 @@
+// Not sure if graph should have its own styles maybe i guess so that it can be componentized
+// <div className='graph'>
+//       <p className='subheading'>Fresh Snow</p>
+//       <div className='graph__container'>
+//         {data.map((unit) => {
+//           return (
+//             <div>
+//               TOTALUP here?? Total:{unit.total}
+//               <div
+//                 style={{
+//                   height: unit.total * 1.2 + "rem",
+//                   backgroundColor: "#3282B8",
+//                 }}
+//               >
+//                 {" "}
+//                 Total:{unit.total}
+//               </div>
+//             </div>
+//           );
+//         })}
+//       </div>
+//       {data.map((unit) => {
+//         return (
+//           <div>
+//             Bottom Date area
+//             <p>
+//               {" "}
+//               Title:
+//               {isHourlyTitles
+//                 ? unit.time
+//                 : dayjs(changeDateOrder(unit.date)).format("ddd")}{" "}
+//             </p>
+//           </div>
+//         );
+//       })}
+
+//       <p className='graph__total'>Total:{graphTotal} </p>
+//     </div>
+.graph {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  gap: 2rem;
+  &__subheading {
+    @extend .subheading;
+    text-align: right;
+    margin: 0 0 !important;
+
+    // display: flex;
+    // justify-content: flex-end;
+  }
+  &__container {
+    width: 104.4rem;
+    max-width: 104.4rem;
+    margin: 0 auto;
+    &--top {
+      padding: 1rem;
+      padding-bottom: 0rem;
+      background-color: var(--graph-container-bg);
+
+      height: 44.8rem;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 1rem;
+      &__block {
+        background-color: $color-primary-dark;
+        width: 14.1rem;
+        &__total {
+          font-family: $font-primary;
+          font-size: 2.7rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 4.1rem;
+          letter-spacing: -0.025em;
+          text-align: center;
+
+          color: white;
+        }
+      }
+    }
+
+    &--bottom {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+
+      &__cells {
+        width: 14.1rem;
+        & > p {
+          @extend .subheading;
+          text-align: right;
+
+          margin-top: 1rem;
+          font-family: $font-primary;
+          font-size: 2.1rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 3.1rem;
+          letter-spacing: 0em;
+          text-align: center;
+          color: var(--subheading-color);
+          text-align: center;
+        }
+      }
+    }
+  }
+}
