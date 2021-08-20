@@ -9,21 +9,39 @@
 //   --accent-box-bg: rgba(2, 3, 3, 0.2);
 //   --lightmodebox-bg: $color-primary-dark;
 // }var(--heading-color);
+//
+//         <div>
+//           Back Button //will have to use icons fot it or arrow smbol &arrRight{" "}
+//         </div>
+//         <div>
+//           Day picker ie day and or arrow brackets to pick next day also back
+//           button
+//         </div>
+//         {state && (
+//           <Graph
+//             location={location}
+//             isHourlyTitles={false}
+//             dayIndex={null}
+//             data={
+//               weatherAccumulation(queryClient?.queryCache?.queries[id].state)[
+//                 "snowPerDay"
+//               ]
+//             }
+//           />
+//         )}
+//       </div>
 
-.home {
+.location {
   background-color: var(--bg-primary);
-  &__hero-img {
-    height: 34.9rem;
-    // width: 1440px;
 
-    // background: url("snowy-trees-large.jpg");
+  &__forecast {
+    &__ {
+    }
+    &__daySelector {
+    }
   }
 
-  &__main {
-    margin-top: 10.5rem;
-    padding-bottom: 10rem;
-    // display: flex;
-    // justify-content: center;
+  &__weather {
   }
 
   &__card {
@@ -47,12 +65,12 @@
       }
     }
     position: relative;
-    box-shadow: $box-shadow;
+    box-shadow: 0px 4px 4px 0px #00000040;
 
     height: 41rem;
     width: 37rem;
     // background-color: rgba(255, 255, 255, 0.02);
-    background: $card-background;
+    background: rgba(187, 225, 250, 0.025);
 
     border-radius: 2.4rem;
 

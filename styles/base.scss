@@ -18,9 +18,11 @@ $bp-large: 62.5em; // 1000px
 $bp-medium: 50em; // 800px;
 $bp-small: 37.5em; // 600px;
 $bp-smallest: 37em;
+$card-background: rgba(187, 225, 250, 0.025);
+$box-shadow: 0px 4px 4px 0px #00000040;
 html {
   scroll-behavior: smooth;
-  transition: color 3000ms, background-color 3000ms;
+  // transition: color 3000ms, background-color 3000ms;
 }
 :root {
   --bg-primary: rgba(27, 38, 44, 100);
@@ -29,6 +31,7 @@ html {
   --text-color: #ffff;
   --accent-box-bg: rgba(27, 38, 44, 100); // rgba(187, 225, 250, 0.05);
   --lightmodebox-bg: rgba(255, 255, 255, 0.03);
+  --graph-container-bg: rgba(255, 255, 255, 0.02);
 }
 
 // @media (prefers-color-scheme: light) {
@@ -41,7 +44,8 @@ html[data-theme="light"] {
   --text-color: #1b262c;
   --accent-box-bg: #bbe1fa;
   --lightmodebox-bg: #0f4c75;
-  transition: color 3000ms, background-color 3000ms;
+  --graph-container-bg: rgba(187, 225, 250, 0.9);
+  // transition: color 3000ms, background-color 3000ms;
 }
 button {
   border: 3px solid transparent;
@@ -53,7 +57,7 @@ button {
   color: white;
   cursor: pointer;
 
-  transition: background 250ms ease-in-out, transform 150ms ease;
+  // transition: background 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
   //typography

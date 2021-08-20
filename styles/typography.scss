@@ -1,0 +1,130 @@
+// html {
+//   transition: color 300ms, background-color 300ms;
+//   background: var(--background-primary);
+//   color: var(--color-primary);
+// --bg-primary: $color-white;
+//   --subheading-color: rgba(255, 255, 255, 0.2);
+//   --heading-color: $color-primary-dark;
+//   --text-color: $color-black;
+//   --accent-box-bg: rgba(2, 3, 3, 0.2);
+//   --lightmodebox-bg: $color-primary-dark;
+// }var(--heading-color);
+%heading {
+  font-family: $font-display;
+  // font-weight: 500;
+}
+
+.heading {
+  @extend %heading;
+  font-size: 4rem;
+  color: var(--heading-color);
+  line-height: 10rem;
+  letter-spacing: -0.08em;
+
+  font-style: normal;
+  font-weight: 400;
+  line-height: 5.1rem;
+  letter-spacing: -0.11em;
+  text-align: center;
+
+  font-family: $font-display;
+  //   font-style: normal;
+  font-weight: 800;
+  font-size: 6rem;
+  line-height: 4.6rem;
+  text-align: center;
+  letter-spacing: -0.065em;
+  text-align: center;
+  padding-top: 2.2rem;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+
+  color: var(--heading-color);
+}
+.subheading {
+  font-family: $font-primary;
+
+  color: var(--subheading-color);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.1rem;
+  letter-spacing: -0.045em;
+  text-align: center;
+
+  //from card heading
+
+  text-align: center;
+  margin: 0 auto;
+  font-family: $font-primary;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 4.3rem;
+
+  color: var(--subheading-color);
+}
+.heading-small {
+  font-family: $font-primary;
+  @extend %heading;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  color: $color-primary;
+  &--black {
+    font-family: Poppins;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 3rem;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+}
+
+.heading-2 {
+  @extend %heading;
+  font-family: Abhaya Libre ExtraBold;
+  font-size: 8rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 8rem;
+  letter-spacing: -0.08em;
+  text-align: center;
+  color: $color-primary;
+  text-transform: capitalize;
+}
+
+.heading-3 {
+  @extend %heading;
+  font-family: Abhaya Libre ExtraBold;
+  font-size: 6.2rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 6rem;
+  letter-spacing: -0.08em;
+  text-align: left;
+  color: $color-primary;
+  text-align: center;
+}
+
+.btn {
+  background-color: $color-primary;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  font-weight: 700;
+  font-family: $font-primary;
+  font-size: 1.8rem;
+  padding: 1.9rem 3.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:focus {
+    outline: transparent;
+  }
+}

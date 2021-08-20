@@ -1,3 +1,9 @@
 @import "base.scss";
-@import "locations.scss";
+@import "selectLocation.scss";
 @import "pages/home.scss";
+@import "pages/location.scss";
+@import "components/darkMode.scss";
+@import "components/graph.scss";
+@import "components/weatherCard.scss";
+// implent scss code file like i did darkmode but for graph in comp folder
+@import "typography.scss";

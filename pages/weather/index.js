@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useQueries } from "react-query";
 import axios from "axios";
-import Location from "../../components/location";
-
+import SelectLocation from "../../components/selectLocation";
+import Darkmode from "../../components/darkMode";
 import {
   getAllLocal,
   getLocalDarkMode,
@@ -10,14 +10,10 @@ import {
 } from "../../lib/LocalStorage";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useWeather } from "../../components/hooks/useWeather";
-import FilterByWeather from "../../components/filterByWeather";
 import Image from "next/image";
 // import hero from "../../public/images/snowy-trees-large.jpg";
-import {
-  weatherStringFormatter,
-  countDays,
-} from "../../lib/helpers/filterStringFormatters";
+
+import DarkMode from "../../components/darkMode";
 
 export default function index() {
   const router = useRouter();
@@ -106,11 +102,6 @@ export default function index() {
   function handleEmit(resortObj) {
     setResort(resortObj);
   }
-  function toggleTheme(color) {
-    document.documentElement.setAttribute("data-theme", color);
-
-    setLocalDarkMode(color);
-  }
 
   return (
     //loop over results....
@@ -118,22 +109,9 @@ export default function index() {
       <div className='home__hero-img'>
         {/* <Image src={require(`../../public/images/snowy-trees-large.jpg`)} /> */}
       </div>
-      <Location emit={handleEmit} />
-      <div className='home__darkmode'>
-        <button
-          onClick={() => toggleTheme("dark")}
-          className='home__darkmode-dark'
-        >
-          Dark
-        </button>
-
-        <button
-          onClick={() => toggleTheme("light")}
-          className='home__darkmode-light'
-        >
-          Light
-        </button>
-      </div>
+      <SelectLocation emit={handleEmit} />
+      <DarkMode />
+      {/* Shit disapeaered even tho i import it and */}
       <main className='home__main'>
         <div className='home__card-container'>
           {results.every((num) => num.isSuccess === true) &&

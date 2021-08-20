@@ -40,8 +40,9 @@ export default function Location(props) {
         id='resort'
         value={resort}
         onChange={(event) => {
-          // setFilterType();
+          setResort();
           handleChange(event.target.value);
+          setResort();
         }}
       >
         <option value=''></option>

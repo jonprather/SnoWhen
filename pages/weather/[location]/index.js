@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import WeatherCard from "../../../components/weatherCard";
 import Graph from "../../../components/graph";
-
+import DarkMode from "../../../components/darkMode";
 export default function location() {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -58,47 +58,59 @@ export default function location() {
   }, [router.isReady]);
 
   return (
-    <div>
-      Days Page for: {location}
-      {state && (
-        <Graph
-          location={location}
-          isHourlyTitles={false}
-          dayIndex={null}
-          data={
-            weatherAccumulation(queryClient?.queryCache?.queries[id].state)[
-              "snowPerDay"
-            ]
-          }
-        />
-      )}
-      {state &&
-        weatherAccumulation(queryClient?.queryCache?.queries[id].state)[
-          "snowPerDay"
-        ].map((day, i) => {
-          return (
-            <>
-              Yo maybe i need to make it an onclick thing idk why this link
-              doesnt work with the weather card
-              {/* WEATHER COMPONENT */}
-              <a
-                onClick={() =>
-                  router.push(`/weather/${location}/${i}?id=${id}`)
-                }
-              >
-                <WeatherCard
-                  location={location}
-                  weatherDesc={day.base["wx_desc"]}
-                  humPct={day["hum_pct"]}
-                  windSpd={day.base["windspd_mph"]}
-                  temp={day.base["temp_f"]}
-                  date={day.date}
-                />
-              </a>
-              {/* //IDK HOW TO MAKE THIS FUCKING CLICKABLE LIKE I WANT TO CHANGE THE PAGE>>>>> */}
-            </>
-          );
-        })}
+    <div className='location'>
+      <div className='location__forecast'>
+        <h1 className='heading'>{location}</h1>
+        <h2 className='subheading'>Snow Forecast</h2>
+        <div>
+          Back Button //will have to use icons fot it or arrow smbol &arrRight{" "}
+        </div>
+        <DarkMode />
+        <div>
+          Day picker ie day and or arrow brackets to pick next day also back
+          button
+        </div>
+        {state && (
+          <Graph
+            location={location}
+            isHourlyTitles={false}
+            dayIndex={null}
+            data={
+              weatherAccumulation(queryClient?.queryCache?.queries[id].state)[
+                "snowPerDay"
+              ]
+            }
+          />
+        )}
+      </div>
+      <div className='location__weather'>
+        <h1 className='heading'>{location} </h1>
+        <h2 className='subheading'>Weather </h2>
+
+        {state &&
+          weatherAccumulation(queryClient?.queryCache?.queries[id].state)[
+            "snowPerDay"
+          ].map((day, i) => {
+            return (
+              <>
+                <a
+                  onClick={() =>
+                    router.push(`/weather/${location}/${i}?id=${id}`)
+                  }
+                >
+                  <WeatherCard
+                    location={location}
+                    weatherDesc={day.base["wx_desc"]}
+                    humPct={day["hum_pct"]}
+                    windSpd={day.base["windspd_mph"]}
+                    temp={day.base["temp_f"]}
+                    date={day.date}
+                  />
+                </a>
+              </>
+            );
+          })}
+      </div>
     </div>
   );
 }
