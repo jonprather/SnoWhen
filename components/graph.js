@@ -1,4 +1,5 @@
 import React from "react";
+import { formatDate } from "../lib/helpers/formatDate";
 
 export default function graph({ data, location, isHourlyTitles }) {
   console.log("data in comp bro", data);
@@ -9,16 +10,18 @@ export default function graph({ data, location, isHourlyTitles }) {
   };
 
   let graphTotal = data.reduce((acc, ele) => acc + ele?.total, 0);
-  function changeDateOrder(date) {
-    // Reorder "12/08/2021"; to // let date = "08/12/2021";
-    let arr = date.split("/");
-    let newDate = [arr[1], arr[0], arr[2]].join("/");
-    return newDate;
-  }
+
   // 1.2 bc 12px per inch and rem is 10 px so 1.2rem per inch
   return (
     <div className='graph'>
       <p className='graph__subheading '>Fresh Snow</p>
+      SO IF IT IS HOURLY THEN DISPLY THIS OTHER ELE //well could also make it
+      work with locations like click on it //and it updates the location to the
+      next one and rerenders
+      <div>
+        <button> SSSSSSSSSSSS{String.fromCharCode(60)}</button> day{" "}
+        <button>{String.fromCharCode(62)}</button>
+      </div>
       <div className='graph__container'>
         <div className='graph__container--top'>
           {data.map((unit) => {
@@ -52,11 +55,7 @@ export default function graph({ data, location, isHourlyTitles }) {
           {data.map((unit) => {
             return (
               <div className='graph__container--bottom__cells'>
-                <p>
-                  {isHourlyTitles
-                    ? unit.time
-                    : dayjs(changeDateOrder(unit.date)).format("ddd")}{" "}
-                </p>
+                <p>{isHourlyTitles ? unit.time : formatDate(unit.date)}</p>
               </div>
             );
           })}

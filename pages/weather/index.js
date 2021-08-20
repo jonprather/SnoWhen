@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useQueries } from "react-query";
 import axios from "axios";
 import SelectLocation from "../../components/selectLocation";
-import Darkmode from "../../components/darkMode";
+import { formatDate } from "../../lib/helpers/formatDate";
+
 import {
   getAllLocal,
   getLocalDarkMode,
@@ -148,7 +149,7 @@ export default function index() {
                       return (
                         <div className='home__card__forecast-days-box-cell'>
                           <p className='home__card__forecast-days-box-day'>
-                            {dayjs(changeDateOrder(day.date)).format("ddd")}
+                            {formatDate(day.date)}
                           </p>
                           <p className='home__card__forecast-days-box-amount'>
                             {day.total} "

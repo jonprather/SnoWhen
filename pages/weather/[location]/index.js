@@ -63,13 +63,10 @@ export default function location() {
         <h1 className='heading'>{location}</h1>
         <h2 className='subheading'>Snow Forecast</h2>
         <div>
-          Back Button //will have to use icons fot it or arrow smbol &arrRight{" "}
+          Back Button //will have to use icons fot it or arrow smbol &#60{" "}
         </div>
         <DarkMode />
-        <div>
-          Day picker ie day and or arrow brackets to pick next day also back
-          button
-        </div>
+
         {state && (
           <Graph
             location={location}
