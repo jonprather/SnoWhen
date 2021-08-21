@@ -12,6 +12,9 @@
     line-height: 3.1rem;
     letter-spacing: 0em;
     text-align: center;
+    &:hover {
+      cursor: pointer;
+    }
     & > span {
       color: var(--heading-span-color);
     }

@@ -6,6 +6,7 @@ import WeatherCard from "../../../components/weatherCard";
 import Graph from "../../../components/graph";
 import DarkMode from "../../../components/darkMode";
 import Nav from "../../../components/nav";
+import BackButton from "../../../components/backButton";
 
 export default function location() {
   const router = useRouter();
@@ -54,10 +55,11 @@ export default function location() {
   return (
     <div className='location'>
       <Nav />
+      <BackButton />
       <div className='location__forecast'>
         <h1 className='heading'>{location}</h1>
         <h2 className='subheading'>Snow Forecast</h2>
-        <div>Back Button</div>
+
         <DarkMode />
 
         {state && (

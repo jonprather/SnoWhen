@@ -1,0 +1,38 @@
+.back-button {
+  //   height: 2rem;
+  //   width: 10.2rem;
+  color: var(--subheading-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 5.5rem;
+  position: absolute;
+  margin-top: 15.9rem;
+  //   margin-top: 17.9rem;
+  //   gap: 1rem;;
+  &__lt {
+    font-family: $font-primary;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 3.8rem;
+    letter-spacing: 0em;
+    text-align: center;
+    height: 4rem;
+  }
+  &__text {
+    padding-left: 1.5rem;
+    padding: 0.5rem 1.5rem;
+    vertical-align: middle;
+    color: inherit;
+    font-family: $font-primary;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.1rem;
+    letter-spacing: -0.05em;
+    text-align: center;
+    vertical-align: middle;
+    // height: 2rem;
+  }
+}
