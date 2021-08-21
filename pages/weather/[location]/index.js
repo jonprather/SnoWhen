@@ -5,6 +5,8 @@ import Link from "next/link";
 import WeatherCard from "../../../components/weatherCard";
 import Graph from "../../../components/graph";
 import DarkMode from "../../../components/darkMode";
+import Nav from "../../../components/nav";
+
 export default function location() {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -30,13 +32,6 @@ export default function location() {
       return acc + ele["snow_in"]; //ele["snow_in"];
     }, 0);
 
-    console.log("SnowPerHourly", snowPerHourly);
-
-    console.log("snowPerDay", snowPerDay);
-    // Why does this only have the time of 22 not the others?
-    //bc only pushing in elements when they have that time but the total is right bc acc is always acc just only pushing in at that
-    //time whihc is time
-
     return { snowPerDay, snowPerHourly };
   }
 
@@ -46,7 +41,6 @@ export default function location() {
     setState(queryClient.queryCache.queries[0]);
     if (queryClient?.queryCache.queries.length === 0) {
       router.push(`/weather`);
-      //can hypothetically do a refecth with similar logic right?
     }
     if (router.isReady) {
       var id = router.query.id;
@@ -59,12 +53,11 @@ export default function location() {
 
   return (
     <div className='location'>
+      <Nav />
       <div className='location__forecast'>
         <h1 className='heading'>{location}</h1>
         <h2 className='subheading'>Snow Forecast</h2>
-        <div>
-          Back Button //will have to use icons fot it or arrow smbol &#60{" "}
-        </div>
+        <div>Back Button</div>
         <DarkMode />
 
         {state && (
@@ -82,31 +75,33 @@ export default function location() {
       </div>
       <div className='location__weather'>
         <h1 className='heading'>{location} </h1>
-        <h2 className='subheading'>Weather </h2>
-
-        {state &&
-          weatherAccumulation(queryClient?.queryCache?.queries[id].state)[
-            "snowPerDay"
-          ].map((day, i) => {
-            return (
-              <>
-                <a
-                  onClick={() =>
-                    router.push(`/weather/${location}/${i}?id=${id}`)
-                  }
-                >
-                  <WeatherCard
-                    location={location}
-                    weatherDesc={day.base["wx_desc"]}
-                    humPct={day["hum_pct"]}
-                    windSpd={day.base["windspd_mph"]}
-                    temp={day.base["temp_f"]}
-                    date={day.date}
-                  />
-                </a>
-              </>
-            );
-          })}
+        <h2 className='subheading location__weather__subheading'>Weather </h2>
+        <div className='weather-card__container'>
+          {state &&
+            weatherAccumulation(queryClient?.queryCache?.queries[id].state)[
+              "snowPerDay"
+            ].map((day, i) => {
+              return (
+                <>
+                  <a
+                    onClick={() =>
+                      router.push(`/weather/${location}/${i}?id=${id}`)
+                    }
+                  >
+                    <WeatherCard
+                      location={location}
+                      weatherDesc={day.base["wx_desc"]}
+                      humPct={day["hum_pct"]}
+                      windSpd={day.base["windspd_mph"]}
+                      temp={day.base["temp_f"]}
+                      date={day.date}
+                      isHourlyTitles={false}
+                    />
+                  </a>
+                </>
+              );
+            })}
+        </div>
       </div>
     </div>
   );

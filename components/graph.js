@@ -15,13 +15,13 @@ export default function graph({ data, location, isHourlyTitles }) {
   return (
     <div className='graph'>
       <p className='graph__subheading '>Fresh Snow</p>
-      SO IF IT IS HOURLY THEN DISPLY THIS OTHER ELE //well could also make it
-      work with locations like click on it //and it updates the location to the
-      next one and rerenders
-      <div>
-        <button> SSSSSSSSSSSS{String.fromCharCode(60)}</button> day{" "}
-        <button>{String.fromCharCode(62)}</button>
-      </div>
+
+      {false && (
+        <div>
+          <button>{String.fromCharCode(60)}</button> day{" "}
+          <button>{String.fromCharCode(62)}</button>
+        </div>
+      )}
       <div className='graph__container'>
         <div className='graph__container--top'>
           {data.map((unit) => {
@@ -34,13 +34,15 @@ export default function graph({ data, location, isHourlyTitles }) {
                 }}
               >
                 <div className='graph__container--top__block__total'>
-                  {unit.total > 0 ? (
+                  {unit.total > 2 ? (
                     unit.total + `"`
                   ) : (
                     <p
                       style={{
                         position: "relative",
                         top: "-4.5rem",
+                        color: "#0f4c75",
+                        fontSize: "2rem",
                       }}
                     >
                       {unit.total + `"`}
@@ -61,7 +63,7 @@ export default function graph({ data, location, isHourlyTitles }) {
           })}
         </div>
       </div>
-      <p className='graph__total'>Total:{graphTotal} </p>
+      <p className='graph__total'>Total {graphTotal} inches</p>
     </div>
   );
 }

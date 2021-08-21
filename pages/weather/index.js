@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useQueries } from "react-query";
 import axios from "axios";
 import SelectLocation from "../../components/selectLocation";
+import Nav from "../../components/nav";
+
 import { formatDate } from "../../lib/helpers/formatDate";
 
 import {
@@ -107,6 +109,7 @@ export default function index() {
   return (
     //loop over results....
     <section className='home'>
+      <Nav />
       <div className='home__hero-img'>
         {/* <Image src={require(`../../public/images/snowy-trees-large.jpg`)} /> */}
       </div>

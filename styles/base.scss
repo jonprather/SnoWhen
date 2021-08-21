@@ -28,10 +28,14 @@ html {
   --bg-primary: rgba(27, 38, 44, 100);
   --subheading-color: rgba(255, 255, 255, 0.2);
   --heading-color: #0f4c75;
+  --heading-span-color: #ffff; //
   --text-color: #ffff;
   --accent-box-bg: rgba(27, 38, 44, 100); // rgba(187, 225, 250, 0.05);
   --lightmodebox-bg: rgba(255, 255, 255, 0.03);
   --graph-container-bg: rgba(255, 255, 255, 0.02);
+  --weather-container-bg: rgba(255, 255, 255, 0.005);
+  --weather-card-bg: rgba(255, 255, 255, 0.005);
+  --weather-card-desc-bg: rgba(255, 255, 255, 0.01);
 }
 
 // @media (prefers-color-scheme: light) {
@@ -40,11 +44,14 @@ html {
 html[data-theme="light"] {
   --bg-primary: #ffff;
   --subheading-color: #0f4c75;
-  // --heading-color: $color-primary-dark;
+  --heading-span-color: #0f4c75;
   --text-color: #1b262c;
   --accent-box-bg: #bbe1fa;
   --lightmodebox-bg: #0f4c75;
-  --graph-container-bg: rgba(187, 225, 250, 0.9);
+  --graph-container-bg: white;
+  --weather-container-bg: rgba(187, 225, 250, 0.22);
+  --weather-card-bg: rgba(255, 255, 255, 0.9);
+  --weather-card-desc-bg: rgba(187, 225, 250, 0.33);
   // transition: color 3000ms, background-color 3000ms;
 }
 button {
