@@ -1,0 +1,19 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  &__brand-title {
+    color: var(--heading-color);
+    margin: 2.8rem 0 0 5.5rem;
+    font-family: $font-display;
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 3.1rem;
+    letter-spacing: 0em;
+    text-align: center;
+    & > span {
+      color: var(--heading-span-color);
+    }
+  }
+}
