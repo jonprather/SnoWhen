@@ -4,6 +4,10 @@ import React, { useEffect, useState } from "react";
 import WeatherCard from "../../../components/weatherCard";
 import Graph from "../../../components/graph";
 import Nav from "../../../components/nav";
+import DaySelector from "../../../components/daySelector";
+import DarkMode from "../../../components/darkMode";
+import BackButton from "../../../components/backButton";
+import { formatDate } from "../../../lib/helpers/formatDate";
 
 export default function location() {
   const router = useRouter();
@@ -11,6 +15,8 @@ export default function location() {
   const [state, setState] = useState();
   const [locationId, setLocationId] = useState("test");
   const [dayId, setDayId] = useState("test");
+  const [dayname, setDayName] = useState(null);
+
   const [altitude, setAltitude] = useState("base");
   const [location, setLocation] = useState(null);
   const [weatherObj, setWeatherObj] = useState(null);
@@ -54,7 +60,10 @@ export default function location() {
 
       setLocationId(id);
       setDayId(daysId);
+      // setDayName(weatherObj[daysID]);
+
       setLocation(router.query.location);
+
       if (queryClient) {
         setWeatherObj(() => {
           return weatherAccumulation(
@@ -63,47 +72,71 @@ export default function location() {
         });
         console.log(
           "WESATHER OBJ",
-          queryClient?.queryCache?.queries[id]?.state,
-          weatherObj
+          weatherAccumulation(queryClient?.queryCache?.queries[id]?.state)[
+            "snowPerHour"
+          ][daysId]
         );
       }
     }
 
     //would like to save this computation but idk how yet... maybe useMemo or ... idk but its not even working right
     return () => {};
-  }, [router.isReady]);
+  }, [router.isReady, router.query.id]);
   console.log("8===========>", weatherObj);
   return (
-    <div>
+    <div className='day'>
       <Nav />
-      "YO WTF"
-      {weatherObj &&
-        queryClient?.queryCache?.queries[locationId]?.state?.data?.name}
-      {weatherObj && (
-        <Graph
-          location={location}
-          isHourlyTitles={true}
-          dayIndex={dayId}
-          data={weatherObj}
-        />
-      )}
-      <div className='weather-card__container'>
-        {weatherObj &&
-          weatherObj.map((hour, i) => {
-            return (
-              // THE CARDS FOR WEATHER COULD MAKE THIS A WEATHER COMPONENT pass data as props
+      <BackButton />
 
-              <WeatherCard
-                location={location}
-                weatherDesc={hour[altitude]["wx_desc"]}
-                humPct={hour.hum_pct}
-                windSpd={hour[altitude]["windspd_mph"]}
-                temp={hour[altitude]["temp_f"]}
-                date={hour.time}
-                isHourlyTitles={true}
-              />
-            );
-          })}
+      <div className='day__forecast'>
+        <h1 className='heading'>{location}</h1>
+        <h2 className='subheading'>Snow Forecast</h2>
+
+        <DarkMode />
+        {weatherObj && (
+          <DaySelector
+            locationId={locationId}
+            locationName={
+              queryClient?.queryCache?.queries[locationId]?.state?.data?.name
+            }
+            day={formatDate(weatherObj[0].date)}
+          />
+        )}
+
+        {weatherObj && (
+          <Graph
+            location={location}
+            isHourlyTitles={true}
+            dayIndex={dayId}
+            data={weatherObj}
+          />
+        )}
+      </div>
+      <div className='day__weather'>
+        <h1 className='heading'>{location} </h1>
+        <h2 className='subheading day__weather__subheading'>Weather </h2>
+        {weatherObj && (
+          <h2 className='subheading'>{formatDate(weatherObj[0].date)}</h2>
+        )}
+        <div className='weather-card__container'>
+          {weatherObj &&
+            weatherObj.map((hour, i) => {
+              return (
+                // THE CARDS FOR WEATHER COULD MAKE THIS A WEATHER COMPONENT pass data as props
+
+                <WeatherCard
+                  location={location}
+                  weatherDesc={hour[altitude]["wx_desc"]}
+                  humPct={hour.hum_pct}
+                  windSpd={hour[altitude]["windspd_mph"]}
+                  temp={hour[altitude]["temp_f"]}
+                  date={hour.time}
+                  isHourlyTitles={true}
+                  icon={hour.base["wx_icon"].slice(0, -4)}
+                />
+              );
+            })}
+        </div>
       </div>
     </div>
   );

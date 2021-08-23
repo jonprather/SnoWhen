@@ -59,15 +59,22 @@
     width: 9.48rem;
     height: 7.719rem;
     margin: 0 auto;
+
     margin-top: 3.31rem;
     margin-bottom: 1.684rem;
+    & > img {
+      object-fit: cover;
+      width: 9.48rem;
+      height: 7.719rem;
+    }
   }
 
   &__description-container {
     width: 12rem;
     height: 4rem;
 
-    background: var(--weather-card-desc-bg);
+    // background: var(--weather-card-desc-bg);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
     border-radius: 3.25rem;
     display: flex;
     justify-content: center;

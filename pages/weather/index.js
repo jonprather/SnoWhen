@@ -112,6 +112,7 @@ export default function index() {
       <Nav />
       <div className='home__hero-img'>
         {/* <Image src={require(`../../public/images/snowy-trees-large.jpg`)} /> */}
+        <img src='/images/snowy-trees-large.jpg' />
       </div>
       <SelectLocation emit={handleEmit} />
       <DarkMode />

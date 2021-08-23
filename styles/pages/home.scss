@@ -13,8 +13,17 @@
 .home {
   background-color: var(--bg-primary);
   &__hero-img {
-    height: 34.9rem;
-    // width: 1440px;
+    // height: 34.9rem;
+    // width: 144rem;
+    & > img {
+      // position: absolute;
+      z-index: 1;
+
+      height: 34.9rem;
+      // width: 144rem;
+      width: 100%;
+      object-fit: cover;
+    }
 
     // background: url("snowy-trees-large.jpg");
   }
@@ -24,6 +33,7 @@
     padding-bottom: 10rem;
     // display: flex;
     // justify-content: center;
+    z-index: 0;
   }
 
   &__card {

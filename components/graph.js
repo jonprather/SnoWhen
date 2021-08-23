@@ -41,7 +41,7 @@ export default function graph({ data, location, isHourlyTitles }) {
                       style={{
                         position: "relative",
                         top: "-4.5rem",
-                        color: "#0f4c75",
+                        color: "var(--heading-span-color)",
                         fontSize: "2rem",
                       }}
                     >

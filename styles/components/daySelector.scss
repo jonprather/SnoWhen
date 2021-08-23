@@ -1,0 +1,78 @@
+.back-button {
+  //   height: 2rem;
+  //   width: 10.2rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 5.5rem;
+  position: absolute;
+  margin-top: 15.9rem;
+  //   margin-top: 17.9rem;
+  //   gap: 1rem;;
+  &__lt {
+    font-family: $font-primary;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 3.8rem;
+    letter-spacing: 0em;
+    text-align: center;
+    height: 4rem;
+  }
+  &__text {
+    padding-left: 1.5rem;
+    padding: 0.5rem 1.5rem;
+    vertical-align: middle;
+    color: inherit;
+    font-family: $font-primary;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.1rem;
+    letter-spacing: -0.05em;
+    text-align: center;
+    vertical-align: middle;
+    // height: 2rem;
+  }
+}
+
+.day-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 5.8rem;
+  //   position: absolute;
+  //   margin-top: 15.9rem;
+  color: var(--subheading-color);
+  &__back-button {
+    color: var(--subheading-color);
+    &__lt {
+      font-family: $font-display;
+      font-size: 3.6rem;
+      font-style: normal;
+      font-weight: 800;
+      line-height: 4.6rem;
+      letter-spacing: 0em;
+      text-align: center;
+    }
+  }
+  &__day-name {
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: -0.11em;
+    text-align: center;
+    color: var(--heading-color);
+  }
+  &__forward-button {
+    @extend .day-selector__back-button;
+
+    &__gt {
+      @extend .day-selector__back-button__lt;
+    }
+  }
+}

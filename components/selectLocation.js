@@ -34,7 +34,7 @@ export default function Location(props) {
 
       {error && <span>Error {error.message}</span>}
 
-      <label htmlFor='resort'>Select </label>
+      <label htmlFor='resort'> </label>
       <select
         name='resort'
         id='resort'

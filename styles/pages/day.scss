@@ -1,0 +1,19 @@
+.day {
+  background-color: var(--bg-primary);
+
+  &__forecast {
+    background-color: var(--weather-container-bg);
+    padding-bottom: 25rem;
+    padding-top: 15.9rem;
+    &__daySelector {
+    }
+  }
+
+  &__weather {
+    background-color: var(--weather-container-bg);
+    padding-bottom: 20rem;
+    &__subheading {
+      margin-bottom: 16.6rem;
+    }
+  }
+}

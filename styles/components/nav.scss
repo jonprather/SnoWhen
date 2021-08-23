@@ -12,6 +12,8 @@
     line-height: 3.1rem;
     letter-spacing: 0em;
     text-align: center;
+    z-index: 10;
+
     &:hover {
       cursor: pointer;
     }

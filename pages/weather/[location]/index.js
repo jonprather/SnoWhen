@@ -14,6 +14,7 @@ export default function location() {
   const [state, setState] = useState();
   const [id, setId] = useState("test");
   const [location, setLocation] = useState(null);
+  const [weatherObj, setWeatherObj] = useState(null);
 
   function weatherAccumulation(location) {
     let snowPerDay = [];
@@ -32,7 +33,7 @@ export default function location() {
       }
       return acc + ele["snow_in"]; //ele["snow_in"];
     }, 0);
-
+    console.log("SNOWPERDAY___", snowPerDay);
     return { snowPerDay, snowPerHourly };
   }
 
@@ -49,6 +50,20 @@ export default function location() {
       setLocation(router.query.location);
       console.log("RQ___", router.query);
     }
+
+    if (queryClient) {
+      setWeatherObj(() => {
+        return weatherAccumulation(queryClient?.queryCache?.queries[id]?.state)[
+          "snowPerDay"
+        ];
+      });
+      console.log(
+        "WESATHER OBJ",
+        queryClient?.queryCache?.queries[id]?.state,
+        weatherObj
+      );
+    }
+
     return () => {};
   }, [router.isReady]);
 
@@ -67,11 +82,7 @@ export default function location() {
             location={location}
             isHourlyTitles={false}
             dayIndex={null}
-            data={
-              weatherAccumulation(queryClient?.queryCache?.queries[id].state)[
-                "snowPerDay"
-              ]
-            }
+            data={weatherObj}
           />
         )}
       </div>
@@ -80,9 +91,7 @@ export default function location() {
         <h2 className='subheading location__weather__subheading'>Weather </h2>
         <div className='weather-card__container'>
           {state &&
-            weatherAccumulation(queryClient?.queryCache?.queries[id].state)[
-              "snowPerDay"
-            ].map((day, i) => {
+            weatherObj.map((day, i) => {
               return (
                 <>
                   <a
@@ -98,6 +107,7 @@ export default function location() {
                       temp={day.base["temp_f"]}
                       date={day.date}
                       isHourlyTitles={false}
+                      icon={day.base["wx_icon"].slice(0, -4)}
                     />
                   </a>
                 </>
