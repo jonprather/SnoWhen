@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { formatDate, addDay, subtractDay } from "../lib/helpers/formatDate";
 
-export default function selectAltitude({ emitAltitude }) {
+export default function selectAltitude({ emitAltitude, altitude }) {
   const router = useRouter();
   let dayId = router.query.dayId * 1;
   const [activeElement, setActiveElement] = useState("base");
 
+  useEffect(() => {
+    setActiveElement(altitude);
+  }, [altitude]);
   function handleClick(alt) {
     emitAltitude(alt);
     //take the base mid upper and add some bottom border class to it

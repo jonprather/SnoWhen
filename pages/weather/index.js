@@ -21,6 +21,7 @@ import DarkMode from "../../components/darkMode";
 export default function index() {
   const router = useRouter();
   var [error, setError] = useState(null);
+  const [weatherObj, setWeatherObj] = useState(null);
 
   var [coordinates, setCoordinates] = useState(null);
   var [sortDirection, setSortDirection] = useState("desc");

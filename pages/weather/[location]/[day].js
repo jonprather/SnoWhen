@@ -93,7 +93,7 @@ export default function location() {
           "WESATHER OBJ",
           weatherAccumulation(queryClient?.queryCache?.queries[id]?.state)[
             "snowPerHour"
-          ][router.query.dayId]
+          ][(router.query.dayId, altitude)]
         );
       }
     }
@@ -112,7 +112,10 @@ export default function location() {
 
         <div className='day__forecast__graph-container'>
           <div className='day__forecast__graph-container__header'>
-            <SelectAltitude emitAltitude={handleEmitAltitude} />
+            <SelectAltitude
+              emitAltitude={handleEmitAltitude}
+              altitude={altitude}
+            />
             {weatherObj && (
               <SelectDay
                 locationId={locationId}
@@ -142,7 +145,10 @@ export default function location() {
         <div className='day__weather__cards-container'>
           <div className='day__weather__cards-container__header'>
             <div className='day__weather__cards-container__header--positioner'>
-              <SelectAltitude emitAltitude={handleEmitAltitude} />
+              <SelectAltitude
+                emitAltitude={handleEmitAltitude}
+                altitude={altitude}
+              />
             </div>
             {weatherObj && (
               <SelectDay

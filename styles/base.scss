@@ -82,12 +82,17 @@ html[data-theme="dark"] {
   --underline-color: #0f4c75;
   --accent-box-bg: rgba(27, 38, 44, 100); // rgba(187, 225, 250, 0.05);
   --lightmodebox-bg: rgb(
-    26,
     37,
-    43
+    52,
+    61
   ); //rgba(32, 44, 51, 0.932); //rgba(255, 255, 255, 0.9);
-  --graph-container-bg: rgba(255, 255, 255, 0.02);
-  --weather-container-bg: rgba(255, 255, 255, 0.005);
+  --graph-container-bg: rgb(37, 52, 61); //rgba(255, 255, 255, 0.02);
+  --weather-container-bg: rgba(
+    32,
+    44,
+    51,
+    0.932
+  ); // rgba(255, 255, 255, 0.005);
   --weather-card-bg: rgba(255, 255, 255, 0.005);
   --weather-card-desc-bg: rgba(255, 255, 255, 0.01);
 }

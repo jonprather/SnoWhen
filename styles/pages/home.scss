@@ -39,6 +39,7 @@
   }
 
   &__card {
+    background-color: var(--lightmodebox-bg);
     &:hover {
       cursor: pointer;
     }
@@ -63,7 +64,7 @@
 
     height: 41rem;
     width: 37rem;
-    // background-color: rgba(255, 255, 255, 0.02);
+    background-color: var(--graph-container-bg); //rgba(255, 255, 255, 0.02);
     background: $card-background;
 
     border-radius: 2.4rem;
@@ -160,7 +161,7 @@
     }
 
     &__forecast-heading {
-      font-family: Poppins;
+      font-family: $font-primary;
       font-size: 1.4rem;
       font-style: normal;
       font-weight: 600;

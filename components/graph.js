@@ -75,7 +75,7 @@ export default function graph({ data, location, isHourlyTitles }) {
           })}
         </div>
       </div>
-      <p className='graph__total'>Total {graphTotal} "</p>
+      <p className='graph__total'>Total {graphTotal}"</p>
     </div>
   );
 }
