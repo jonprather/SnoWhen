@@ -26,7 +26,15 @@ export default function weatherCard({
       <div className='weather-card__info-container'>
         <div className='weather-card__info-container__temp'>
           <h4 className='weather-card__info-container__temp__heading'>Temp</h4>
-          <p className='weather-card__info-container__temp__num'>{temp}</p>
+          <p className='weather-card__info-container__temp__num'>
+            {temp ? (
+              temp
+            ) : (
+              <span style={{ fontSize: "1.25rem", textTransform: "lowercase" }}>
+                N/A
+              </span>
+            )}
+          </p>
         </div>
         <div className='weather-card__info-container__hum'>
           <h4 className='weather-card__info-container__temp__heading'>Wind</h4>

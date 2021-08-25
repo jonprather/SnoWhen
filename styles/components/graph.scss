@@ -40,8 +40,18 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-
-  gap: 2rem;
+  // width: 80%;
+  margin: 0 auto;
+  @media only screen and (min-width: $bp-large) {
+    width: 100%;
+    gap: 1rem;
+  }
+  @media only screen and (min-width: $bp-largest) {
+    width: 100%;
+    // justify-content: unset;
+    gap: 2rem;
+  }
+  gap: 0.5rem;
   &__subheading {
     @extend .subheading;
     text-align: right !important;
@@ -58,9 +68,23 @@
     margin: 0 0 4rem 2rem !important;
   }
   &__container {
-    width: 104.4rem;
-    max-width: 104.4rem;
-
+    // @media only screen and (min-width: $bp-small) {
+    //   // max-width: 104.4rem;
+    //   width: 70%;
+    // }
+    @media only screen and (min-width: $bp-medium) {
+      // max-width: 104.4rem;
+      width: 80%;
+    }
+    @media only screen and (min-width: $bp-large) {
+      // max-width: 104.4rem;
+      width: 100%;
+    }
+    @media only screen and (min-width: $bp-largest) {
+      // max-width: 104.4rem;
+      width: 100%;
+    }
+    width: 80%;
     &--top {
       padding: 1rem;
       padding-bottom: 0rem;
@@ -71,8 +95,11 @@
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      gap: 1rem;
+      gap: 0.5rem;
       border-radius: 2.86184px 2.86184px 0px 0px;
+      @media only screen and (min-width: $bp-largest) {
+        gap: 1rem;
+      }
       &__block {
         background-color: $color-primary-dark;
         width: 14.1rem;
@@ -94,14 +121,17 @@
     &--bottom {
       display: flex;
       justify-content: center;
-      gap: 1rem;
-
+      gap: 0.5rem;
+      border-radius: 2.86184px 2.86184px 0px 0px;
+      @media only screen and (min-width: $bp-largest) {
+        gap: 1rem;
+      }
       &__cells {
         width: 14.1rem;
         & > p {
           //   @extend .subheading;
           text-align: right;
-
+          text-transform: uppercase;
           margin-top: 1rem;
           font-family: $font-primary;
           font-size: 2.1rem;

@@ -29,7 +29,11 @@ export default function Location(props) {
   //when its a react component capitalize this shit but doesnt seem needed when not react
   return (
     <div className='locations__search-box'>
-      <p className='locations__search-box-title'>Find a Resort</p>
+      <p className='locations__search-box__title'>Find a Resort</p>
+      {/* <p className='locations__search-box__paragraph'>
+        Search Our growing resort List for your favorites. Then Quickly get the
+        data you want without distraction.
+      </p> */}
       {isLoading && <span>Loading...</span>}
 
       {error && <span>Error {error.message}</span>}

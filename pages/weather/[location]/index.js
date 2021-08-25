@@ -7,12 +7,13 @@ import Graph from "../../../components/graph";
 import DarkMode from "../../../components/darkMode";
 import Nav from "../../../components/nav";
 import BackButton from "../../../components/backButton";
+import { formatDate } from "../../../lib/helpers/formatDate";
 
 export default function location() {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [state, setState] = useState();
-  const [id, setId] = useState("test");
+  const [locationId, setLocationId] = useState("test");
   const [location, setLocation] = useState(null);
   const [weatherObj, setWeatherObj] = useState(null);
 
@@ -41,14 +42,15 @@ export default function location() {
   useEffect(() => {
     //would need to pass the index or name if pass index of query could do in router very easily
     setState(queryClient.queryCache.queries[0]);
-    if (queryClient?.queryCache.queries.length === 0) {
-      router.push(`/weather`);
-    }
+
     if (router.isReady) {
-      var id = router.query.id;
-      setId(id);
-      setLocation(router.query.location);
+      var id = router.query.locationId;
+      setLocationId(id);
+      setLocation(router.query.location.toLowerCase());
       console.log("RQ___", router.query);
+      if (queryClient?.queryCache.queries.length === 0) {
+        router.push(`/weather`);
+      }
     }
 
     if (queryClient) {
@@ -59,8 +61,9 @@ export default function location() {
       });
       console.log(
         "WESATHER OBJ",
-        queryClient?.queryCache?.queries[id]?.state,
-        weatherObj
+        weatherAccumulation(queryClient?.queryCache?.queries[id]?.state)[
+          "snowPerDay"
+        ]
       );
     }
 
@@ -70,49 +73,55 @@ export default function location() {
   return (
     <div className='location'>
       <Nav />
-      <BackButton />
+      <BackButton url={`/weather`} />
       <div className='location__forecast'>
         <h1 className='heading'>{location}</h1>
-        <h2 className='subheading'>Snow Forecast</h2>
-
-        <DarkMode />
-
-        {state && (
-          <Graph
-            location={location}
-            isHourlyTitles={false}
-            dayIndex={null}
-            data={weatherObj}
-          />
-        )}
+        <h2 className='subheading mb-16'>Snow Forecast</h2>
+        <div className='day__forecast__graph-container'>
+          {state && (
+            <Graph
+              location={location}
+              isHourlyTitles={false}
+              dayIndex={null}
+              data={weatherObj}
+            />
+          )}
+        </div>
       </div>
       <div className='location__weather'>
         <h1 className='heading'>{location} </h1>
         <h2 className='subheading location__weather__subheading'>Weather </h2>
-        <div className='weather-card__container'>
-          {state &&
-            weatherObj.map((day, i) => {
-              return (
-                <>
-                  <a
-                    onClick={() =>
-                      router.push(`/weather/${location}/${i}?id=${id}`)
-                    }
-                  >
-                    <WeatherCard
-                      location={location}
-                      weatherDesc={day.base["wx_desc"]}
-                      humPct={day["hum_pct"]}
-                      windSpd={day.base["windspd_mph"]}
-                      temp={day.base["temp_f"]}
-                      date={day.date}
-                      isHourlyTitles={false}
-                      icon={day.base["wx_icon"].slice(0, -4)}
-                    />
-                  </a>
-                </>
-              );
-            })}
+        <div className='day__weather__cards-container'>
+          <div className='weather-card__container'>
+            {state &&
+              weatherObj.map((day, i) => {
+                return (
+                  <>
+                    <a
+                      className='link'
+                      onClick={() =>
+                        router.push(
+                          `/weather/${location}/${formatDate(
+                            weatherObj[i].date
+                          ).toLowerCase()}?locationId=${locationId}&dayId=${i}`
+                        )
+                      }
+                    >
+                      <WeatherCard
+                        location={location}
+                        weatherDesc={day.base["wx_desc"]}
+                        humPct={day["hum_pct"]}
+                        windSpd={day.base["windspd_mph"]}
+                        temp={day.base["temp_f"]}
+                        date={day.date}
+                        isHourlyTitles={false}
+                        icon={day.base["wx_icon"].slice(0, -4)}
+                      />
+                    </a>
+                  </>
+                );
+              })}
+          </div>
         </div>
       </div>
     </div>

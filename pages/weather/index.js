@@ -112,24 +112,27 @@ export default function index() {
       <Nav />
       <div className='home__hero-img'>
         {/* <Image src={require(`../../public/images/snowy-trees-large.jpg`)} /> */}
-        <img src='/images/snowy-trees-large.jpg' />
+        <img src='/images/snowy-trees-large.jpg' defer />
       </div>
       <SelectLocation emit={handleEmit} />
-      <DarkMode />
-      {/* Shit disapeaered even tho i import it and */}
+
+      <h1 className='heading'>Favorite Resorts</h1>
+      <h2 className='subheading mb-16'>Recent Searches</h2>
       <main className='home__main'>
         <div className='home__card-container'>
           {results.every((num) => num.isSuccess === true) &&
             results?.sort(sortFunction[sortDirection]).map((ele, i) => (
               <Link
-                href={`/weather/${ele?.data?.name.toLowerCase().trim()}?id=${i}
+                href={`/weather/${ele?.data?.name
+                  .toLowerCase()
+                  .trim()}?locationId=${i}
               `}
               >
                 <div className='home__card'>
                   <h1 className='home__card-heading'>{ele?.data?.name}</h1>
                   <p className='home__card-state'>Ca</p>
 
-                  <h2 className='home__card-subheading'>mountain</h2>
+                  <h2 className='home__card-subheading mb-16'>mountain</h2>
 
                   <div className='home__card__snow-amount-box'>
                     <div>

@@ -1,0 +1,110 @@
+// <div className='altitude-selector'>
+// <button
+//   className='day-selector__base'
+//   onClick={() => handleClick("base")}
+// >
+//   Base
+// </button>
+
+// <button className='day-selector__mid' onClick={() => handleClick("mid")}>
+//   Mid
+// </button>
+// <button
+//   className='day-selector__top'
+//   onClick={() => handleClick("upper")}
+// >
+//   Top
+// </button>
+// </div>
+.select-altitude {
+  // margin: 0 auto;
+  width: 16rem;
+  position: static;
+  margin: 0 auto;
+  // @media only screen and (min-width: $bp-small) {
+  //   // max-width: 104.4rem;
+  //   width: 70%;
+  // }
+  @media only screen and (min-width: $bp-medium) {
+    // max-width: 104.4rem;
+  }
+  @media only screen and (min-width: $bp-large) {
+    // max-width: 104.4rem;
+    position: absolute;
+
+    top: -8px;
+  }
+  // @media only screen and (min-width: $bp-largest) {
+  //   // max-width: 104.4rem;
+  //   width: 100%;
+  // }
+  // width: 60%;
+  &__heading {
+    text-align: center;
+    color: var(--heading-span-color);
+    font-family: $font-primary;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.8rem;
+    letter-spacing: 0em;
+    text-align: center;
+    padding-bottom: 0.25rem;
+  }
+  &__container {
+    margin: 0 auto;
+    margin-bottom: 1.1rem;
+    height: 3.8rem;
+    width: 16rem;
+    // width: 70%;
+    margin-bottom: 3rem;
+    @media only screen and (min-width: $bp-large) {
+      // max-width: 104.4rem;
+      position: static;
+      margin: 0;
+      margin-bottom: 1.1rem;
+      width: 16rem;
+    }
+    @media only screen and (min-width: $bp-largest) {
+      // max-width: 104.4rem;
+    }
+
+    background-color: var(--lightmodebox-bg);
+    box-shadow: 0px 2px 2px 0px #00000040;
+    align-items: center;
+    border-radius: 4.7rem;
+    font-family: Poppins;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.8rem;
+    letter-spacing: -0.07em;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0.5rem;
+    padding: 0 2rem;
+    & > button {
+      padding: 0 0.5rem;
+    }
+
+    & > button:focus {
+      outline: none;
+      & > p {
+        color: var(--selection-text);
+      }
+    }
+    & > button:hover {
+      outline: none;
+      & > p {
+        color: var(--selection-text);
+      }
+    }
+    & > button:active {
+      color: var(--selection-text);
+      outline: none;
+      color: $color-primary;
+    }
+  }
+}

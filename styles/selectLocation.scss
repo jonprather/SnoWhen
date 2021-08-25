@@ -8,6 +8,7 @@
   border-radius: 4.7rem;
   height: 20rem;
   width: 61.5rem;
+
   & > select {
     width: 20rem;
     // height: 2.5rem;
@@ -18,13 +19,13 @@
     font-family: $font-primary;
     font-size: 2rem;
     font-weight: 500;
-    color: var(--heading-span-color); //var(--subheading-color);
-    background-color: var(--bg-primary);
+    color: $color-primary-dark; //var(--subheading-color); //var(--heading-span-color); //
+    background-color: white; //var(--bg-primary);
     outline: none;
     border: none;
     // box-shadow: 2px 2px $color-black;
   }
-  &-title {
+  &__title {
     /* Find a Location */
     padding-top: 4rem;
     font-family: $font-primary;

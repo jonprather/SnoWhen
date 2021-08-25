@@ -1,0 +1,40 @@
+.day-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 5.8rem;
+  //   position: absolute;
+  //   margin-top: 15.9rem;
+  color: var(--subheading-color);
+  &__back-button {
+    color: var(--subheading-color);
+    &__lt {
+      font-family: $font-display;
+      font-size: 3.6rem;
+      font-style: normal;
+      font-weight: 800;
+      line-height: 4.6rem;
+      letter-spacing: 0em;
+      text-align: center;
+    }
+  }
+  &__day-name {
+    font-family: $font-primary;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.7rem;
+    letter-spacing: -0.11em;
+    text-align: center;
+    color: var(--heading-color);
+    width: 5rem;
+  }
+  &__forward-button {
+    @extend .day-selector__back-button;
+
+    &__gt {
+      @extend .day-selector__back-button__lt;
+    }
+  }
+}

@@ -7,6 +7,16 @@
     padding-top: 15.9rem;
     &__daySelector {
     }
+
+    &__graph-container {
+      margin: 0 auto;
+      width: min(104.4rem, 90%);
+      position: relative;
+      &__header {
+        // display: flex;
+        // justify-content: space-between;
+      }
+    }
   }
 
   &__weather {
@@ -14,6 +24,35 @@
     padding-bottom: 20rem;
     &__subheading {
       margin-bottom: 16.6rem;
+    }
+    &__cards-container {
+      //   background-color: var(--graph-container-bg);
+      //   padding: 2rem 4rem;
+      border-radius: 3.4rem;
+      margin: 0 auto;
+      width: min(104.4rem, 90%);
+
+      &__header {
+        &--positioner {
+          @media only screen and (min-width: $bp-medium) {
+            position: relative;
+            left: 0;
+          }
+          @media only screen and (min-width: $bp-large) {
+            position: relative;
+            left: 15.4rem;
+          }
+          @media only screen and (min-width: $bp-largest) {
+            grid-template-columns: repeat(3, auto);
+            position: relative;
+            left: 0;
+            // justify-content: unset;
+          }
+        }
+        // padding: 2rem;
+        // display: flex;
+        // justify-content: space-between;
+      }
     }
   }
 }

@@ -8,7 +8,15 @@ export default function graph({ data, location, isHourlyTitles }) {
     width: "4rem",
     height: "5rem",
   };
-
+  function miltaryToStandardTime(time) {
+    var time = time.slice(0, -3);
+    time = time * 1;
+    if (time > 12) {
+      time = time - 12;
+      return time + " pm";
+    }
+    return time + " am";
+  }
   let graphTotal = data.reduce((acc, ele) => acc + ele?.total, 0);
 
   // 1.2 bc 12px per inch and rem is 10 px so 1.2rem per inch
@@ -57,13 +65,17 @@ export default function graph({ data, location, isHourlyTitles }) {
           {data.map((unit) => {
             return (
               <div className='graph__container--bottom__cells'>
-                <p>{isHourlyTitles ? unit.time : formatDate(unit.date)}</p>
+                <p>
+                  {isHourlyTitles
+                    ? miltaryToStandardTime(unit.time)
+                    : formatDate(unit.date)}
+                </p>
               </div>
             );
           })}
         </div>
       </div>
-      <p className='graph__total'>Total {graphTotal} inches</p>
+      <p className='graph__total'>Total {graphTotal} "</p>
     </div>
   );
 }
