@@ -1,0 +1,50 @@
+.darkmode {
+  margin: 4rem auto;
+  height: 3.8rem;
+  width: 11.9rem;
+  padding-top: 3px;
+  background-color: var(
+    --lightmodebox-bg
+  ); //$color-primary-dark; // //great if no pic but doesnt work on white pic background unless chagne it sat or somethin
+  box-shadow: 0px 2px 2px 0px #00000040;
+  align-items: center;
+  border-radius: 4.7rem;
+  font-family: Poppins;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.8rem;
+  letter-spacing: -0.07em;
+  text-align: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  position: absolute;
+  right: 5.5rem;
+  margin: 3.4rem 0 0 5.5rem;
+  & > button {
+    border: 3px solid transparent;
+    border-radius: 0rem;
+    padding: 0 0.5rem;
+  }
+
+  // & > button:focus {
+  //   outline: none;
+  //   border-bottom: 3px solid $color-primary;
+  // }
+  // & > button:active {
+  //   outline: none;
+  //   border-bottom: 3px solid $color-primary;
+  // }
+  // &-dark {
+  //   &:hover {
+  //     border-bottom: 3px solid $color-primary;
+  //   }
+  // }
+  // &-light {
+  //   &:hover {
+  //     border-bottom: 3px solid $color-primary;
+  //   }
+  // }
+}

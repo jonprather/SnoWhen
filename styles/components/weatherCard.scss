@@ -1,0 +1,145 @@
+// <h3 className='heading weather-card__heading'>
+//   {!isHourlyTitles ? formatDate(date) : date}
+// </h3>
+// <div className='weather-card__icon'>ICON</div>
+// {/* <div className="subheading"></div> */}
+// <div className='weather-card__icon'>
+//   <p>{weatherDesc}</p>
+// </div>
+// <div className='weather-card__info-container'>
+//   <div className='weather-card__info-container__temp'>
+//     <h4 className='weather-card__info-container__temp__heading'>Temp</h4>
+//     <p className='weather-card__info-container__temp__num'>{temp}</p>
+//   </div>
+//   <div className='weather-card__info-container__hum'>
+//     <h4 className='weather-card__info-container__temp__heading'>Wind</h4>
+//     <p className='weather-card__info-container__temp__num'>{humPct}</p>
+//   </div>
+//   <div className='weather-card__info-container__wind'>
+//     <h4 className='weather-card__info-container__temp__heading'>Hum</h4>
+//     <p className='weather-card__info-container__temp__num'>{windSpd}</p>
+//   </div>
+
+.weather-card {
+  background-color: var(--graph-container-bg);
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    row-gap: 4rem;
+    column-gap: 3.2rem;
+    justify-content: center;
+    // width: 104.4rem;
+    //   margin-left: 8.6rem;
+    @media only screen and (min-width: $bp-medium) {
+      grid-template-columns: repeat(2, auto);
+    }
+    @media only screen and (min-width: $bp-large) {
+      grid-template-columns: repeat(3, auto);
+    }
+    @media only screen and (min-width: $bp-largest) {
+      grid-template-columns: repeat(4, auto);
+      // justify-content: unset;
+    }
+  }
+  box-shadow: $box-shadow;
+  height: 31rem;
+  width: 23.7rem;
+
+  border-radius: 3.25rem;
+
+  &__heading {
+    padding-top: 2.167rem;
+    font-family: $font-display;
+    font-size: 2.8rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 3.1rem;
+    letter-spacing: -0.065em;
+    text-align: center;
+    color: var(--heading-color);
+    text-transform: uppercase;
+  }
+  &__icon {
+    width: 9.48rem;
+    height: 7.719rem;
+    margin: 0 auto;
+
+    margin-top: 3.31rem;
+    margin-bottom: 1.684rem;
+    & > img {
+      object-fit: cover;
+      width: 9.48rem;
+      height: 7.719rem;
+    }
+  }
+
+  &__description-container {
+    width: 12rem;
+    height: 4rem;
+
+    // background: var(--weather-card-desc-bg);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 3.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    & > p {
+      color: var(--heading-span-color); // var(--text-color);
+      font-family: $font-primary;
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 2.4rem;
+      letter-spacing: -0.065em;
+      text-align: center;
+      text-transform: capitalize;
+    }
+  }
+  &__info-container {
+    display: flex;
+    justify-content: center;
+    gap: 2.12rem;
+    & > div > h4 {
+      font-family: $font-primary;
+      font-size: 1.4rem;
+      color: var(--subheading-color);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 21px;
+      letter-spacing: -0.065em;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    & > div > p {
+      font-family: $font-primary;
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 2.4rem;
+      letter-spacing: -0.065em;
+      text-align: center;
+      color: var(--text-color);
+    }
+
+    &__temp {
+      &__heading {
+      }
+      &__number {
+      }
+    }
+    &__hum {
+      &__heading {
+      }
+      &__number {
+      }
+    }
+    &__wind {
+      &__heading {
+      }
+      &__number {
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.back-button {
+  //   height: 2rem;
+  //   width: 10.2rem;
+  color: var(--subheading-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 5.5rem;
+  position: absolute;
+  margin-top: 15.9rem;
+  //   margin-top: 17.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //   gap: 1rem;;
+  &__lt {
+    font-family: $font-primary;
+    font-size: 2.2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 3.8rem;
+    letter-spacing: 0em;
+    text-align: center;
+    // height: 4rem;
+  }
+  &__text {
+    padding-left: 1.5rem;
+    // height: 3rem;
+    padding: 0.2rem 1.5rem;
+    vertical-align: center;
+    color: inherit;
+    font-family: $font-primary;
+    font-size: 1.1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.1rem;
+    letter-spacing: -0.05em;
+    text-align: center;
+
+    // height: 2rem;
+  }
+}

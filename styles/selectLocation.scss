@@ -1,0 +1,128 @@
+.locations__search-box {
+  //   position: relative;
+  z-index: 100;
+
+  position: relative;
+  top: -15rem; // -12.5rem; for when there is a picture 12.5 is good
+  background: #0f4c75;
+  border-radius: 4.7rem;
+  height: 20rem;
+  width: 61.5rem;
+
+  & > select {
+    width: 20rem;
+    // height: 2.5rem;
+    border-radius: 2.5rem;
+    padding: 0.25rem;
+    padding-left: 2.2rem;
+
+    font-family: $font-primary;
+    font-size: 2rem;
+    font-weight: 500;
+    color: $color-primary-dark; //var(--subheading-color); //var(--heading-span-color); //
+    background-color: white; //var(--bg-primary);
+    outline: none;
+    border: none;
+    // box-shadow: 2px 2px $color-black;
+  }
+  &__title {
+    /* Find a Location */
+    padding-top: 4rem;
+    font-family: $font-primary;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+    text-align: center;
+
+    color: #ffffff;
+    margin-bottom: 4.4rem;
+  }
+
+  margin: 0 auto;
+  @media only screen and (min-width: $bp-large) {
+    height: 20rem;
+    width: 61.5rem;
+  }
+  height: 23.6rem;
+  width: 75%;
+  box-sizing: border-box;
+  border-radius: 47px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__header {
+    text-transform: capitalize;
+    font-family: Poppins;
+    font-size: 2.3rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.1rem;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-top: 3.1rem;
+    margin-bottom: 3.4rem;
+  }
+
+  &__paragraph {
+    font-family: Poppins;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.9rem;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    width: 45ch;
+  }
+
+  &__input-container {
+    position: relative;
+    width: 44.8rem;
+    height: 5.6rem;
+    border: 1px solid #ea0000;
+    box-sizing: border-box;
+    border-radius: 47px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-input {
+      margin-left: 2.9rem;
+      width: 60%;
+      height: 3rem;
+      // padding-left: 1.9rem;
+      font-family: Poppins;
+      font-size: 1.2rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.8rem;
+      letter-spacing: 0em;
+      text-align: left;
+      &:focus {
+        outline: none;
+      }
+    }
+    &-button {
+      margin-right: 0.7rem;
+
+      font-family: Poppins;
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 2.1rem;
+      letter-spacing: 0em;
+      text-align: center;
+
+      width: 11.6rem;
+      height: 4.6rem;
+
+      /* Red */
+      color: white;
+      background: #ea0000;
+      border-radius: 47px;
+    }
+  }
+}

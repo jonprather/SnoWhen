@@ -1,0 +1,149 @@
+// Not sure if graph should have its own styles maybe i guess so that it can be componentized
+// <div className='graph'>
+//       <p className='subheading'>Fresh Snow</p>
+//       <div className='graph__container'>
+//         {data.map((unit) => {
+//           return (
+//             <div>
+//               TOTALUP here?? Total:{unit.total}
+//               <div
+//                 style={{
+//                   height: unit.total * 1.2 + "rem",
+//                   backgroundColor: "#3282B8",
+//                 }}
+//               >
+//                 {" "}
+//                 Total:{unit.total}
+//               </div>
+//             </div>
+//           );
+//         })}
+//       </div>
+//       {data.map((unit) => {
+//         return (
+//           <div>
+//             Bottom Date area
+//             <p>
+//               {" "}
+//               Title:
+//               {isHourlyTitles
+//                 ? unit.time
+//                 : dayjs(changeDateOrder(unit.date)).format("ddd")}{" "}
+//             </p>
+//           </div>
+//         );
+//       })}
+
+//       <p className='graph__total'>Total:{graphTotal} </p>
+//     </div>
+.graph {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  // width: 80%;
+  margin: 0 auto;
+  @media only screen and (min-width: $bp-large) {
+    width: 100%;
+    gap: 1rem;
+  }
+  @media only screen and (min-width: $bp-largest) {
+    width: 100%;
+    // justify-content: unset;
+    gap: 2rem;
+  }
+  gap: 0.5rem;
+  &__subheading {
+    @extend .subheading;
+    text-align: right !important;
+    font-size: 1.5rem !important;
+    margin: 0 2rem 4rem 0 !important;
+
+    // display: flex;
+    // justify-content: flex-end;
+  }
+  &__total {
+    font-size: 1.5rem !important;
+    @extend .subheading;
+
+    margin: 0 0 4rem 2rem !important;
+  }
+  &__container {
+    // @media only screen and (min-width: $bp-small) {
+    //   // max-width: 104.4rem;
+    //   width: 70%;
+    // }
+    @media only screen and (min-width: $bp-medium) {
+      // max-width: 104.4rem;
+      width: 80%;
+    }
+    @media only screen and (min-width: $bp-large) {
+      // max-width: 104.4rem;
+      width: 100%;
+    }
+    @media only screen and (min-width: $bp-largest) {
+      // max-width: 104.4rem;
+      width: 100%;
+    }
+    width: 80%;
+    &--top {
+      padding: 1rem;
+      padding-bottom: 0rem;
+      background-color: var(--graph-container-bg);
+
+      height: 44.8rem;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 0.5rem;
+      border-radius: 2.86184px 2.86184px 0px 0px;
+      @media only screen and (min-width: $bp-largest) {
+        gap: 1rem;
+      }
+      &__block {
+        background-color: $color-primary-dark;
+        width: 14.1rem;
+        border-radius: 2.86184px 2.86184px 0px 0px;
+        &__total {
+          font-family: $font-primary;
+          font-size: 2.7rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 4.1rem;
+          letter-spacing: -0.025em;
+          text-align: center;
+
+          color: white; //var(--text-color);
+        }
+      }
+    }
+
+    &--bottom {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 2.86184px 2.86184px 0px 0px;
+      @media only screen and (min-width: $bp-largest) {
+        gap: 1rem;
+      }
+      &__cells {
+        width: 14.1rem;
+        & > p {
+          //   @extend .subheading;
+          text-align: right;
+          text-transform: uppercase;
+          margin-top: 1rem;
+          font-family: $font-primary;
+          font-size: 2.1rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 3.1rem;
+          letter-spacing: 0em;
+          text-align: center;
+          color: var(--subheading-color);
+          text-align: center;
+        }
+      }
+    }
+  }
+}
