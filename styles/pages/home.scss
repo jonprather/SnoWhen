@@ -1,22 +1,8 @@
-// html {
-//   transition: color 300ms, background-color 300ms;
-//   background: var(--background-primary);
-//   color: var(--color-primary);
-// --bg-primary: $color-white;
-//   --subheading-color: rgba(255, 255, 255, 0.2);
-//   --heading-color: $color-primary-dark;
-//   --text-color: $color-black;
-//   --accent-box-bg: rgba(2, 3, 3, 0.2);
-//   --lightmodebox-bg: $color-primary-dark;
-// }var(--heading-color);
-
 .home {
   background-color: var(--bg-primary);
   &__hero-img {
     height: 34.9rem;
-    // width: 144rem;
-
-    background-color: var(--accent-box-bg); //$color-primary-light;
+    // background-color: var(--accent-box-bg); //$color-primary-light;
     & > img {
       // position: absolute;
       z-index: 1;
@@ -219,7 +205,7 @@
       transform: rotate(-3deg);
 
       &__details {
-        color: var(--text-color);
+        color: var(--heading-span-color);
         transform: rotate(3deg);
         /* Check Details */
 

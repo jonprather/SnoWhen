@@ -125,6 +125,9 @@ button {
     border-bottom: 3px solid transparent !important;
   }
 }
+.unhand {
+  cursor: default;
+}
 .link {
   &:hover {
     cursor: pointer;

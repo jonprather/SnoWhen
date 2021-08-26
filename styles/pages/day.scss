@@ -40,12 +40,12 @@
           }
           @media only screen and (min-width: $bp-large) {
             position: relative;
-            left: 15.4rem;
+            left: 16.7rem; //17.4rem;  //17.4 for centered 16 for left aligned
           }
           @media only screen and (min-width: $bp-largest) {
             grid-template-columns: repeat(3, auto);
             position: relative;
-            left: 0;
+            left: 0.7rem;
             // justify-content: unset;
           }
         }

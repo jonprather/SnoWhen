@@ -9,6 +9,9 @@
   color: var(--subheading-color);
   &__back-button {
     color: var(--subheading-color);
+    &:hover {
+      color: var(--selection-text);
+    }
     &__lt {
       font-family: $font-display;
       font-size: 3.6rem;
@@ -32,6 +35,9 @@
   }
   &__forward-button {
     @extend .day-selector__back-button;
+    &:hover {
+      color: var(--selection-text);
+    }
 
     &__gt {
       @extend .day-selector__back-button__lt;
