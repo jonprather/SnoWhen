@@ -8,66 +8,34 @@ import DarkMode from "../../../components/darkMode";
 import Nav from "../../../components/nav";
 import BackButton from "../../../components/backButton";
 import { formatDate } from "../../../lib/helpers/formatDate";
+import { weatherReducer } from "../../../lib/weatherReducer";
 
 export default function location() {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [state, setState] = useState();
+
   const [locationId, setLocationId] = useState("test");
   const [location, setLocation] = useState(null);
   const [weatherObj, setWeatherObj] = useState(null);
 
-  function weatherAccumulation(location) {
-    let snowPerDay = [];
-    let snowPerHourly = [];
-    let tempArr = [];
-
-    location?.data?.forecast.reduce((acc, ele, i) => {
-      tempArr.push(ele);
-
-      if (ele.time === "22:00") {
-        snowPerHourly.push(tempArr);
-        tempArr = [];
-        snowPerDay.push({ ...ele, total: acc + ele["snow_in"] });
-        acc = 0;
-        return acc; //ele["snow_in"];
-      }
-      return acc + ele["snow_in"]; //ele["snow_in"];
-    }, 0);
-    console.log("SNOWPERDAY___", snowPerDay);
-    return { snowPerDay, snowPerHourly };
-  }
-
-  console.log("QUERY CLINET", queryClient);
   useEffect(() => {
-    //would need to pass the index or name if pass index of query could do in router very easily
-    setState(queryClient.queryCache.queries[0]);
+    if (!router.isReady) return;
 
-    if (router.isReady) {
-      var id = router.query.locationId;
-      setLocationId(id);
-      setLocation(router.query.location.toLowerCase());
-      console.log("RQ___", router.query);
-      if (queryClient?.queryCache.queries.length === 0) {
-        router.push(`/weather`);
-      }
+    var id = router.query.locationId;
+    setLocationId(id);
+    setLocation(router.query.location.toLowerCase());
+
+    if (!queryClient) return;
+
+    if (queryClient?.queryCache.queries.length === 0) {
+      router.push(`/weather`);
     }
 
-    if (queryClient) {
-      setWeatherObj(() => {
-        return weatherAccumulation(queryClient?.queryCache?.queries[id]?.state)[
-          "snowPerDay"
-        ];
-      });
-      console.log(
-        "WESATHER OBJ",
-        weatherAccumulation(queryClient?.queryCache?.queries[id]?.state)[
-          "snowPerDay"
-        ]
-      );
-    }
-
-    return () => {};
+    setWeatherObj(() => {
+      return weatherReducer(queryClient?.queryCache?.queries[id]?.state)[
+        "snowPerDay"
+      ];
+    });
   }, [router.isReady]);
 
   return (
@@ -78,7 +46,7 @@ export default function location() {
         <h1 className='heading'>{location}</h1>
         <h2 className='subheading mb-16'>Snow Forecast</h2>
         <div className='day__forecast__graph-container'>
-          {state && (
+          {weatherObj && (
             <Graph
               location={location}
               isHourlyTitles={false}
@@ -93,7 +61,7 @@ export default function location() {
         <h2 className='subheading location__weather__subheading'>Weather </h2>
         <div className='day__weather__cards-container'>
           <div className='weather-card__container'>
-            {state &&
+            {weatherObj &&
               weatherObj.map((day, i) => {
                 return (
                   <>

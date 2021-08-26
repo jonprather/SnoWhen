@@ -1,5 +1,6 @@
 import React from "react";
 import { formatDate } from "../lib/helpers/formatDate";
+import { militaryToStandardTime } from "../lib/helpers/militaryToStandardTime";
 
 export default function graph({ data, location, isHourlyTitles }) {
   console.log("data in comp bro", data);
@@ -8,15 +9,7 @@ export default function graph({ data, location, isHourlyTitles }) {
     width: "4rem",
     height: "5rem",
   };
-  function miltaryToStandardTime(time) {
-    var time = time.slice(0, -3);
-    time = time * 1;
-    if (time > 12) {
-      time = time - 12;
-      return time + " pm";
-    }
-    return time + " am";
-  }
+
   let graphTotal = data.reduce((acc, ele) => acc + ele?.total, 0);
 
   // 1.2 bc 12px per inch and rem is 10 px so 1.2rem per inch
@@ -37,13 +30,20 @@ export default function graph({ data, location, isHourlyTitles }) {
               <div
                 className='graph__container--top__block'
                 style={{
-                  height: unit.total * 1.2 + "rem",
+                  height:
+                    unit.total < 37
+                      ? unit.total * 1.2 + "rem"
+                      : 37 * 1.2 + "rem",
                   backgroundColor: "#3282B8",
                 }}
               >
                 <div className='graph__container--top__block__total'>
                   {unit.total > 2 ? (
-                    unit.total + `"`
+                    unit.total > 37 ? (
+                      unit.total + '" !'
+                    ) : (
+                      unit.total + '"'
+                    )
                   ) : (
                     <p
                       style={{
@@ -67,7 +67,7 @@ export default function graph({ data, location, isHourlyTitles }) {
               <div className='graph__container--bottom__cells'>
                 <p>
                   {isHourlyTitles
-                    ? miltaryToStandardTime(unit.time)
+                    ? militaryToStandardTime(unit.time)
                     : formatDate(unit.date)}
                 </p>
               </div>

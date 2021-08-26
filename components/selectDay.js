@@ -15,6 +15,7 @@ export default function daySelector({
   function handleClick(direction) {
     let newDay = direction === "up" ? addDay(date) : subtractDay(date);
     let pathName = `/weather/${locationName.toLowerCase()}/${newDay.toLowerCase()}`;
+
     if (direction == "up") {
       if (dayId == 6) {
         return "";
@@ -49,23 +50,46 @@ export default function daySelector({
   }
   return (
     <div className='day-selector'>
-      <button
-        className='day-selector__back-button'
-        onClick={() => handleClick("down")}
-      >
-        <p className='day-selector__back-button__lt'>
-          {dayId === 0 ? String.fromCharCode(60) : String.fromCharCode(60)}
-        </p>
-      </button>
+      {dayId === 0 ? (
+        <div className='day-selector__back-button unhand'>
+          <p
+            className='day-selector__back-button__lt'
+            style={{ color: "transparent" }}
+          >
+            {String.fromCharCode(60)}
+          </p>
+        </div>
+      ) : (
+        <button
+          className='day-selector__back-button'
+          onClick={() => handleClick("down")}
+        >
+          <p className='day-selector__back-button__lt'>
+            {String.fromCharCode(60)}
+          </p>
+        </button>
+      )}
+
       <p className='day-selector__day-name'>{dayId === 0 ? "Today" : day}</p>
-      <button
-        className='day-selector__forward-button'
-        onClick={() => handleClick("up")}
-      >
-        <p className='day-selector__forward-button__gt'>
-          {dayId === 6 ? String.fromCharCode(62) : String.fromCharCode(62)}
-        </p>
-      </button>
+      {dayId === 6 ? (
+        <button className='day-selector__back-button unhand'>
+          <p
+            className='day-selector__back-button__lt'
+            style={{ color: "transparent" }}
+          >
+            {String.fromCharCode(62)}
+          </p>
+        </button>
+      ) : (
+        <button
+          className='day-selector__back-button'
+          onClick={() => handleClick("up")}
+        >
+          <p className='day-selector__back-button__lt'>
+            {String.fromCharCode(62)}
+          </p>
+        </button>
+      )}
     </div>
   );
 }

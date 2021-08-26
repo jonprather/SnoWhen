@@ -6,6 +6,8 @@ import Graph from "../../../components/graph";
 import Nav from "../../../components/nav";
 import SelectDay from "../../../components/selectDay";
 import SelectAltitude from "../../../components/selectAltitude";
+import { weatherReducer } from "../../../lib/weatherReducer";
+import { militaryToStandardTime } from "../../../lib/helpers/militaryToStandardTime";
 
 import DarkMode from "../../../components/darkMode";
 import BackButton from "../../../components/backButton";
@@ -24,39 +26,6 @@ export default function location() {
   const [location, setLocation] = useState(null);
   const [weatherObj, setWeatherObj] = useState(null);
 
-  function weatherAccumulation(location) {
-    let snowPerDay = [];
-    let snowPerHour = [];
-    let tempArr = [];
-
-    location?.data?.forecast.reduce((acc, ele, i) => {
-      tempArr.push({
-        ...ele,
-        date: ele.date,
-        total: ele[altitude]["freshsnow_in"],
-        // also still have option for total snow for all together instead of alt just snow again
-      });
-      if (ele.time === "22:00") {
-        snowPerHour.push(tempArr);
-        tempArr = [];
-        snowPerDay.push({ date: ele.date, total: acc + ele["snow_in"] });
-        acc = 0;
-        return acc;
-      }
-      return acc + ele["snow_in"];
-    }, 0);
-    return { snowPerDay, snowPerHour };
-  }
-  function miltaryToStandardTime(time) {
-    var time = time.slice(0, -3);
-    time = time * 1;
-    if (time > 12) {
-      time = time - 12;
-      return time + " pm";
-    }
-    return time + " am";
-  }
-
   function handleEmit(data) {
     setDayId(data);
     // setDayName(formatDate(weatherObj[dayId].date));
@@ -68,37 +37,27 @@ export default function location() {
   useEffect(() => {
     //would need to pass the index or name if pass index of query could do in router very easily
 
-    var id;
-    var daysId;
-    if (router.isReady) {
-      if (queryClient?.queryCache.queries.length === 0) {
-        router.push(`/weather`);
-        //can hypothetically do a refecth with similar logic right?
-      }
-      id = router.query.locationId;
-      daysId = router.query.dayId;
+    if (!router.isReady) return;
+    if (!queryClient) return;
 
-      setLocationId(id);
-      setDayId(daysId);
-
-      setLocation(router.query.location.toLowerCase());
-
-      if (queryClient) {
-        setWeatherObj(() => {
-          return weatherAccumulation(
-            queryClient?.queryCache?.queries[id]?.state
-          )["snowPerHour"][daysId];
-        });
-        console.log(
-          "WESATHER OBJ",
-          weatherAccumulation(queryClient?.queryCache?.queries[id]?.state)[
-            "snowPerHour"
-          ][(router.query.dayId, altitude)]
-        );
-      }
+    if (queryClient?.queryCache.queries.length === 0) {
+      router.push(`/weather`);
+      //can hypothetically do a refecth with similar logic right?
     }
 
-    return () => {};
+    let id = router.query.locationId;
+    let daysId = router.query.dayId;
+
+    setLocationId(id);
+    setDayId(daysId);
+
+    setLocation(router.query.location.toLowerCase());
+
+    setWeatherObj(() => {
+      return weatherReducer(queryClient?.queryCache?.queries[id]?.state)[
+        "snowPerHour"
+      ][daysId];
+    });
   }, [router.isReady, dayId, altitude]);
   console.log("8===========>", weatherObj);
   return (
@@ -175,7 +134,7 @@ export default function location() {
                     humPct={hour.hum_pct}
                     windSpd={hour[altitude]["windspd_mph"]}
                     temp={hour[altitude]["temp_f"]}
-                    date={miltaryToStandardTime(hour.time)}
+                    date={militaryToStandardTime(hour.time)}
                     isHourlyTitles={true}
                     icon={hour.base["wx_icon"].slice(0, -4)}
                   />
