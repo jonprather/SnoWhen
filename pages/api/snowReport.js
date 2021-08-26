@@ -1,5 +1,5 @@
 import axios from "axios";
-import { mammothData } from "../mammothFaker";
+import { mammothData } from "../../lib/mammothFaker";
 
 export default async function handler(req, res) {
   //ill have to take in a req which includes the resort code
@@ -23,3 +23,5 @@ export default async function handler(req, res) {
   // need some error handling thos
   res.status(200).json(mammothData);
 }
+
+/// long fake data below just delete when deploy
