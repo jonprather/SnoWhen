@@ -28,21 +28,16 @@ export default function location() {
 
   function handleEmit(data) {
     setDayId(data);
-    // setDayName(formatDate(weatherObj[dayId].date));
   }
   function handleEmitAltitude(alt) {
     setAltitude(alt);
-    // setDayName(formatDate(weatherObj[dayId].date));
   }
   useEffect(() => {
-    //would need to pass the index or name if pass index of query could do in router very easily
-
     if (!router.isReady) return;
     if (!queryClient) return;
 
     if (queryClient?.queryCache.queries.length === 0) {
       router.push(`/weather`);
-      //can hypothetically do a refecth with similar logic right?
     }
 
     let id = router.query.locationId;
@@ -52,14 +47,14 @@ export default function location() {
     setDayId(daysId);
 
     setLocation(router.query.location.toLowerCase());
-
+    setTimeout(() => {}, 1000);
     setWeatherObj(() => {
       return weatherReducer(queryClient?.queryCache?.queries[id]?.state)[
         "snowPerHour"
       ][daysId];
     });
   }, [router.isReady, dayId, altitude]);
-  console.log("8===========>", weatherObj);
+
   return (
     <div className='day'>
       <Nav />
@@ -75,6 +70,7 @@ export default function location() {
               emitAltitude={handleEmitAltitude}
               altitude={altitude}
             />
+            {!weatherObj && <p className='subheading'>..Loading</p>}
             {weatherObj && (
               <SelectDay
                 locationId={locationId}
@@ -126,8 +122,6 @@ export default function location() {
             {weatherObj &&
               weatherObj.map((hour, i) => {
                 return (
-                  // THE CARDS FOR WEATHER COULD MAKE THIS A WEATHER COMPONENT pass data as props
-
                   <WeatherCard
                     location={location}
                     weatherDesc={hour[altitude]["wx_desc"]}

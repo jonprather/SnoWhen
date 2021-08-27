@@ -7,7 +7,7 @@ export default function backButton({ url }) {
   return (
     <button className='back-button' onClick={() => router.push(url)}>
       <p className='back-button__lt'>{String.fromCharCode(60)}</p>
-      <p className='back-button__text'> Back</p>
+      <p className='back-button__text'>Back</p>
     </button>
   );
 }

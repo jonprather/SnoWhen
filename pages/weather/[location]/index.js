@@ -45,6 +45,7 @@ export default function location() {
       <div className='location__forecast'>
         <h1 className='heading'>{location}</h1>
         <h2 className='subheading mb-16'>Snow Forecast</h2>
+        {!weatherObj && <p className='subheading'>..Loading</p>}
         <div className='day__forecast__graph-container'>
           {weatherObj && (
             <Graph
@@ -59,12 +60,13 @@ export default function location() {
       <div className='location__weather'>
         <h1 className='heading'>{location} </h1>
         <h2 className='subheading location__weather__subheading'>Weather </h2>
+
         <div className='day__weather__cards-container'>
           <div className='weather-card__container'>
             {weatherObj &&
               weatherObj.map((day, i) => {
                 return (
-                  <>
+                  <React.Fragment key={day.date}>
                     <a
                       className='link'
                       onClick={() =>
@@ -76,6 +78,7 @@ export default function location() {
                       }
                     >
                       <WeatherCard
+                        key={i}
                         location={location}
                         weatherDesc={day.base["wx_desc"]}
                         humPct={day["hum_pct"]}
@@ -86,7 +89,7 @@ export default function location() {
                         icon={day.base["wx_icon"].slice(0, -4)}
                       />
                     </a>
-                  </>
+                  </React.Fragment>
                 );
               })}
           </div>

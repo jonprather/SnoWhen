@@ -10,7 +10,8 @@
   &__back-button {
     color: var(--subheading-color);
     &:hover {
-      color: var(--selection-text);
+      color: var(--heading-color);
+      transform: scale(1.15);
     }
     &__lt {
       font-family: $font-display;

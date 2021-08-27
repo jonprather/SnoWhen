@@ -98,6 +98,8 @@
     & > button:hover {
       outline: none;
       & > p {
+        transform: scale(1.1);
+
         color: var(--selection-text);
       }
     }

@@ -7,7 +7,7 @@
       // position: absolute;
       z-index: 1;
 
-      height: 34.9rem;
+      height: 30rem; //34.9rem;
       // width: 144rem;
       width: 100%;
       object-fit: cover;
@@ -26,7 +26,11 @@
 
   &__card {
     background-color: var(--lightmodebox-bg);
+    transition: all 0.3s ease-in;
     &:hover {
+      // margin-top: 10px;
+      transform: scale(1.15) rotate(0.5deg);
+      box-shadow: 0px 6px 6px 0px #00000040;
       cursor: pointer;
     }
     overflow: hidden;
@@ -203,21 +207,28 @@
       background: var(--accent-box-bg);
       border-radius: 0px 0px 24px 24px;
       transform: rotate(-3deg);
-
+      &:hover {
+        // color: var(--heading-color);
+        // transform: scale(1.1) rotate(-3deg);
+      }
       &__details {
         color: var(--heading-span-color);
         transform: rotate(3deg);
-        /* Check Details */
 
-        // position: absolute;
-
-        // left: 233px;
-        // top: 368px;
-
+        & > button {
+          &:hover {
+            color: var(--heading-color);
+            transform: scale(1.1) rotate(0.5deg);
+          }
+        }
+        &--riser {
+          color: var(--heading-span-color);
+          transform: rotate(3deg);
+        }
         font-family: $font-primary;
         font-style: normal;
         font-weight: 600;
-        font-size: 1.4rem;
+        font-size: 2rem;
         line-height: 2.1rem;
         /* identical to box height */
         text-align: right;

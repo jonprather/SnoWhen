@@ -1,6 +1,13 @@
 .back-button {
   //   height: 2rem;
   //   width: 10.2rem;
+
+  outline: none;
+  transition: all 0.05s ease-in;
+  &:hover {
+    color: var(--selection-text);
+  }
+
   color: var(--subheading-color);
   display: flex;
   justify-content: space-between;
@@ -30,12 +37,13 @@
     vertical-align: center;
     color: inherit;
     font-family: $font-primary;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 2.1rem;
-    letter-spacing: -0.05em;
+    line-height: 3.8rem;
+    letter-spacing: -0.04em;
     text-align: center;
+    text-transform: lowercase;
 
     // height: 2rem;
   }

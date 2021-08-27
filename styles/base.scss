@@ -120,7 +120,7 @@ button {
 }
 //utitlity
 .underline {
-  border-bottom: 3px solid var(--underline-color) !important;
+  border-bottom: 3px solid var(--heading-color) !important;
   &--null {
     border-bottom: 3px solid transparent !important;
   }

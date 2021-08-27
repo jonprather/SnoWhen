@@ -28,7 +28,7 @@ export default function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>SnoWhen</title>
-        <meta charset='UTF-8' />
+        <meta charSet='UTF-8' />
         <meta
           name='description'
           content='Snow Report for Resort Locations App'

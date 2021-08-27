@@ -47,8 +47,12 @@ export default function Location(props) {
         }}
       >
         <option value=''></option>
-        {resorts.map((resort) => {
-          return <option value={resort.code}>{resort.name}</option>;
+        {resorts.map((resort, i) => {
+          return (
+            <option key={i} value={resort.code}>
+              {resort.name}
+            </option>
+          );
         })}
       </select>
     </div>

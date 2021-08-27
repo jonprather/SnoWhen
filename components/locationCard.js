@@ -1,14 +1,18 @@
 import React from "react";
-
-export default function locationCard({ weatherData }) {
+import Link from "next/link";
+import { formatDate } from "../lib/helpers/formatDate";
+export default function locationCard({ weatherData, i, id, deleteFromLS }) {
+  console.log(weatherData);
   return (
     <>
       <Link
-        href={`/weather/${ele?.data?.name.toLowerCase().trim()}?locationId=${i}
+        href={`/weather/${weatherData?.name
+          .toLowerCase()
+          .trim()}?locationId=${i}
               `}
       >
         <div className='home__card'>
-          <h1 className='home__card-heading'>{ele?.data?.name}</h1>
+          <h1 className='home__card-heading'>{weatherData?.name}</h1>
           <p className='home__card-state'>Ca</p>
 
           <h2 className='home__card-subheading mb-16'>mountain</h2>
@@ -21,17 +25,17 @@ export default function locationCard({ weatherData }) {
               </p>
             </div>
             <p className='home__card__snow-amount-box-quantity'>
-              {weatherAccumulation(ele)["total"]} "
+              {weatherData["total"]} "
             </p>
           </div>
 
           <p className='home__card__forecast-heading'>Forecast</p>
 
           <div className='home__card__forecast-days-box'>
-            {weatherAccumulation(ele)["snowPerDay"].map((day, i) => {
+            {weatherData["snowPerDay"].map((day, i) => {
               if (i > 4) return "";
               return (
-                <div className='home__card__forecast-days-box-cell'>
+                <div key={i} className='home__card__forecast-days-box-cell'>
                   <p className='home__card__forecast-days-box-day'>
                     {formatDate(day.date)}
                   </p>
@@ -44,7 +48,20 @@ export default function locationCard({ weatherData }) {
           </div>
 
           <div className='home__card__accent-box'>
-            <p className='home__card__accent-box__details'>Check Details</p>
+            <p className='home__card__accent-box__details'>
+              <button
+                onClick={(e) => {
+                  deleteFromLS(id);
+                  console.log("ID", id);
+                  e.stopPropagation();
+                }}
+              >
+                Remove
+              </button>
+            </p>
+            {/* <p className='home__card__accent-box__details home__card__accent-box__details--riser'>
+              Click for Details
+            </p> */}
           </div>
         </div>
       </Link>

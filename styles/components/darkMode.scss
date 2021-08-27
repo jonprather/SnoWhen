@@ -24,6 +24,10 @@
   right: 5.5rem;
   margin: 3.4rem 0 0 5.5rem;
   & > button {
+    &:hover {
+      color: var(--heading-color);
+      transform: scale(1.1);
+    }
     border: 3px solid transparent;
     border-radius: 0rem;
     padding: 0 0.5rem;

@@ -25,9 +25,10 @@ export default function graph({ data, location, isHourlyTitles }) {
       )}
       <div className='graph__container'>
         <div className='graph__container--top'>
-          {data.map((unit) => {
+          {data.map((unit, i) => {
             return (
               <div
+                key={i}
                 className='graph__container--top__block'
                 style={{
                   height:
@@ -40,7 +41,7 @@ export default function graph({ data, location, isHourlyTitles }) {
                 <div className='graph__container--top__block__total'>
                   {unit.total > 2 ? (
                     unit.total > 37 ? (
-                      unit.total + '" !'
+                      unit.total + '"'
                     ) : (
                       unit.total + '"'
                     )
@@ -62,9 +63,9 @@ export default function graph({ data, location, isHourlyTitles }) {
           })}
         </div>
         <div className='graph__container--bottom'>
-          {data.map((unit) => {
+          {data.map((unit, i) => {
             return (
-              <div className='graph__container--bottom__cells'>
+              <div className='graph__container--bottom__cells' key={i}>
                 <p>
                   {isHourlyTitles
                     ? militaryToStandardTime(unit.time)
