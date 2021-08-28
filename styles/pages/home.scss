@@ -7,7 +7,7 @@
       // position: absolute;
       z-index: 1;
 
-      height: 30rem; //34.9rem;
+      height: 31.97rem; // 30rem;; //34.9rem;
       // width: 144rem;
       width: 100%;
       object-fit: cover;
@@ -25,6 +25,39 @@
   }
 
   &__card {
+    transition: all 0.4s ease-in;
+
+    & .hidden {
+      display: none;
+      font-family: $font-display;
+
+      & > button {
+        color: var(--subheading-color);
+      }
+    }
+    &:hover .hidden {
+      display: flex;
+      position: absolute;
+      top: 10;
+      width: 2.5rem;
+      height: 2.5rem;
+
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--subheading-color);
+      // background-color: var(--lightmodebox-bg);
+      border-radius: 4rem;
+      position: absolute;
+
+      top: 2.5%;
+
+      border-radius: 50%;
+      right: 4%;
+
+      // -webkit-transform: translateX(-50%); // translateY(-50%);
+      // transform: translateX(-50%); // translateY(-50%);
+    }
     background-color: var(--lightmodebox-bg);
     transition: all 0.3s ease-in;
     &:hover {
@@ -214,21 +247,23 @@
       &__details {
         color: var(--heading-span-color);
         transform: rotate(3deg);
-
+        padding-top: 0.25rem;
         & > button {
           &:hover {
             color: var(--heading-color);
             transform: scale(1.1) rotate(0.5deg);
           }
         }
-        &--riser {
-          color: var(--heading-span-color);
-          transform: rotate(3deg);
+
+        display: none;
+
+        .home__card:hover & {
+          display: block;
         }
         font-family: $font-primary;
         font-style: normal;
         font-weight: 600;
-        font-size: 2rem;
+        font-size: 1rem;
         line-height: 2.1rem;
         /* identical to box height */
         text-align: right;

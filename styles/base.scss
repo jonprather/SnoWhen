@@ -1,5 +1,10 @@
-// COLOR VARIABLES
+//selection heirarchy
+// sass 1 level deep using bem
+// inline styles for dynaic css changes based on content
+// overwriting inline styles with the dreaded !important only for @import
 
+// COLOR VARIABLES
+$color-error: #b00020;
 $color-primary-dark: #0f4c75;
 $color-primary: #3282b8;
 $color-primary-light: #bbe1fa;
@@ -125,6 +130,25 @@ button {
     border-bottom: 3px solid transparent !important;
   }
 }
+// .hidden {
+//   color:black;
+// }
+.flash-msg {
+  color: $color-error !important;
+  text-align: center;
+  margin: 10rem auto;
+  font-size: 2rem;
+  font-family: $font-primary;
+  font-weight: 600;
+  position: absolute;
+  top: 50%;
+
+  border-radius: 50%;
+  right: 50%;
+
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
 .unhand {
   cursor: default;
 }
@@ -136,19 +160,18 @@ button {
 .mb-16 {
   margin-bottom: 16.5rem;
 }
-
-// button:hover,
-// button:focus {
-//   border-bottom: 1px solid $color-primary;
-// }
-
-// button:focus {
-//   border-bottom: 3px solid $color-primary;
-// }
-
-// button:active {
-//   border-bottom: 3px solid $color-primary;
-// }
+.mb-12 {
+  margin-bottom: 14rem;
+}
+.flex {
+  display: flex;
+}
+.align-c {
+  align-items: center;
+}
+.justify-c {
+  justify-content: center;
+}
 *,
 *::before,
 *::after {
@@ -186,4 +209,13 @@ body {
 // Utility color
 .color-primary {
   color: $color-primary;
+}
+.error {
+  // background-color: $color-error;
+  width: fit-content;
+  height: 5rem;
+  margin: 4rem auto 5rem auto;
+  border-radius: 2rem;
+  color: $color-error !important;
+  // color: $color-error;
 }

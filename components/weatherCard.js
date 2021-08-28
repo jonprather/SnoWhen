@@ -15,7 +15,10 @@ export default function weatherCard({
   return (
     <div
       className='weather-card'
-      style={{ transform: isHourlyTitles ? "scale(1)" : "" }}
+      style={{
+        transform: isHourlyTitles ? "scale(1)" : "",
+        boxShadow: isHourlyTitles ? "0px 4px 4px 0px #00000040" : "",
+      }}
     >
       <h3 className='weather-card__heading'>
         {!isHourlyTitles ? formatDate(date) : date}
