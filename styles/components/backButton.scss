@@ -1,50 +1,81 @@
 .back-button {
   //   height: 2rem;
   //   width: 10.2rem;
+  &__wrapper {
+    display: flex;
+    gap: 1rem;
+    position: absolute;
+    align-items: center;
 
-  outline: none;
-  transition: all 0.05s ease-in;
-  &:hover {
-    color: var(--selection-text);
+    margin-top: 15.9rem;
+    margin-left: 5.5rem;
   }
 
-  color: var(--subheading-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 5.5rem;
-  position: absolute;
-  margin-top: 15.9rem;
-  //   margin-top: 17.9rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  &__button {
+    color: var(--subheading-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // margin-left: 5.5rem;
+    // position: absolute;
+    // margin-top: 15.9rem;
+    //   margin-top: 17.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    transition: all 0.05s ease-in;
+    &:hover {
+      color: var(--selection-text);
+    }
+    &__lt {
+      font-family: $font-primary;
+      font-size: 2.2rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 3.8rem;
+      letter-spacing: 0em;
+      text-align: center;
+      // height: 4rem;
+    }
+    &__text {
+      padding-left: 1.5rem;
+      // height: 3rem;
+      padding: 0.2rem 1.5rem;
+      vertical-align: center;
+      color: inherit;
+      font-family: $font-primary;
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 3.8rem;
+      letter-spacing: -0.04em;
+      text-align: center;
+      text-transform: lowercase;
+
+      // height: 2rem;
+    }
+  }
+
   //   gap: 1rem;;
-  &__lt {
+
+  &__path {
     font-family: $font-primary;
-    font-size: 2.2rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 3.8rem;
-    letter-spacing: 0em;
-    text-align: center;
-    // height: 4rem;
-  }
-  &__text {
-    padding-left: 1.5rem;
-    // height: 3rem;
-    padding: 0.2rem 1.5rem;
-    vertical-align: center;
-    color: inherit;
-    font-family: $font-primary;
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 700;
     line-height: 3.8rem;
     letter-spacing: -0.04em;
     text-align: center;
     text-transform: lowercase;
-
-    // height: 2rem;
+    color: var(--subheading-color);
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    // position: absolute;
+    & > p {
+      width: 5rem; //fit-content;
+    }
   }
 }
