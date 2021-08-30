@@ -25,7 +25,7 @@ export default function location() {
   const [altitude, setAltitude] = useState("base");
   const [location, setLocation] = useState(null);
   const [weatherObj, setWeatherObj] = useState(null);
-
+  console.log("ROUTER___________", router);
   function handleEmit(data) {
     setDayId(data);
   }
@@ -58,7 +58,10 @@ export default function location() {
   return (
     <div className='day'>
       <Nav />
-      <BackButton url={`/weather/${location}?locationId=${locationId}`} />
+      <BackButton
+        url={`/weather/${location}?locationId=${locationId}`}
+        path={[location, router.query.day]}
+      />
 
       <div className='day__forecast'>
         <h1 className='heading'>{location}</h1>

@@ -133,21 +133,33 @@ button {
 // .hidden {
 //   color:black;
 // }
-.flash-msg {
-  color: $color-error !important;
-  text-align: center;
-  margin: 10rem auto;
-  font-size: 2rem;
-  font-family: $font-primary;
-  font-weight: 600;
-  position: absolute;
-  top: 50%;
+.flash-msg__box {
+  &--delete {
+    background-color: red;
+  }
+  &--already {
+    background-color: yellow;
+  }
+  &--success {
+    background-color: green;
+  }
+  &__text {
+    color: black !important;
+    text-align: center;
+    // margin: 10rem auto;
+    font-size: 2rem;
+    font-family: $font-primary;
+    font-weight: 600;
+    // position: absolute;
+    // top: 50%;
 
-  border-radius: 50%;
-  right: 50%;
+    // -webkit-transform: translateX(-50%) translateY(-50%);
+    // transform: translateX(-50%) translateY(-50%);
+  }
+  height: 5rem;
 
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
+  width: 80%;
+  margin: 5rem auto;
 }
 .unhand {
   cursor: default;

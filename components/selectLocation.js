@@ -18,10 +18,9 @@ export default function Location(props) {
   const [resort, setResort] = useState("");
 
   function handleChange(resort) {
-    if (!getLocalAddress()) {
-      setLocalAddress(resort);
-    }
-    props.emit(resort);
+    let msg = setLocalAddress(resort);
+
+    props.emit(resort, msg);
   }
 
   return (
@@ -41,9 +40,8 @@ export default function Location(props) {
         id='resort'
         value={resort}
         onChange={(event) => {
-          setResort();
           handleChange(event.target.value);
-          setResort();
+          setResort("");
         }}
       >
         <option value=''></option>

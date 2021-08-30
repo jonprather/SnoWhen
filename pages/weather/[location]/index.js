@@ -41,7 +41,7 @@ export default function location() {
   return (
     <div className='location'>
       <Nav />
-      <BackButton url={`/weather`} />
+      <BackButton url={`/weather`} path={[location]} />
       <div className='location__forecast'>
         <h1 className='heading'>{location}</h1>
         <h2 className='subheading mb-16'>Snow Forecast</h2>

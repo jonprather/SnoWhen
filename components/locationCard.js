@@ -3,6 +3,7 @@ import Link from "next/link";
 import { formatDate } from "../lib/helpers/formatDate";
 export default function locationCard({ weatherData, i, id, deleteFromLS }) {
   console.log(weatherData);
+  if (!weatherData?.name) return "";
   return (
     <>
       <Link
@@ -12,6 +13,17 @@ export default function locationCard({ weatherData, i, id, deleteFromLS }) {
               `}
       >
         <div className='home__card'>
+          <div class='hidden flex justify-c align-c'>
+            <button
+              onClick={(e) => {
+                deleteFromLS(id);
+                console.log("ID", id);
+                e.stopPropagation();
+              }}
+            >
+              X
+            </button>
+          </div>
           <h1 className='home__card-heading'>{weatherData?.name}</h1>
           <p className='home__card-state'>Ca</p>
 
@@ -48,17 +60,7 @@ export default function locationCard({ weatherData, i, id, deleteFromLS }) {
           </div>
 
           <div className='home__card__accent-box'>
-            <p className='home__card__accent-box__details'>
-              <button
-                onClick={(e) => {
-                  deleteFromLS(id);
-                  console.log("ID", id);
-                  e.stopPropagation();
-                }}
-              >
-                Remove
-              </button>
-            </p>
+            <p className='home__card__accent-box__details'>Click for Details</p>
             {/* <p className='home__card__accent-box__details home__card__accent-box__details--riser'>
               Click for Details
             </p> */}
