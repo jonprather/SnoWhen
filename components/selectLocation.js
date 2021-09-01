@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { setLocalAddress, getLocalAddress } from "../lib/LocalStorage";
+import { setLocalAddress } from "../lib/LocalStorage";
+
 export default function Location(props) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,14 +27,8 @@ export default function Location(props) {
   return (
     <div className='locations__search-box'>
       <p className='locations__search-box__title'>Find a Resort</p>
-      {/* <p className='locations__search-box__paragraph'>
-        Search Our growing resort List for your favorites. Then Quickly get the
-        data you want without distraction.
-      </p> */}
       {isLoading && <span>Loading...</span>}
-
       {error && <span>Error {error.message}</span>}
-
       <label htmlFor='resort'> </label>
       <select
         name='resort'

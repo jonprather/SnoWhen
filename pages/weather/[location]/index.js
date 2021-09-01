@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import WeatherCard from "../../../components/weatherCard";
+import dynamic from "next/dynamic";
+
+const WeatherCard = dynamic(() => import("../../../components/weatherCard"));
+
 import Graph from "../../../components/graph";
-import DarkMode from "../../../components/darkMode";
 import Nav from "../../../components/nav";
 import BackButton from "../../../components/backButton";
+
 import { formatDate } from "../../../lib/helpers/formatDate";
 import { weatherReducer } from "../../../lib/weatherReducer";
 
@@ -98,6 +100,3 @@ export default function location() {
     </div>
   );
 }
-//queryclient.queryCache.queries.queryKey[0]===mammoth //can filter by this
-//queryclient?.queryCache.queries[0].state.data ///this is the obj i want which then can do .forecast etc
-//but bc refresh breaks it i might just want to try tryFetch or whatever its called

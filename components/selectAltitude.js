@@ -14,9 +14,7 @@ export default function selectAltitude({ emitAltitude, altitude }) {
   function handleClick(alt) {
     emitAltitude(alt);
     //take the base mid upper and add some bottom border class to it
-
     setActiveElement(alt);
-    //is this the best approach
   }
 
   return (

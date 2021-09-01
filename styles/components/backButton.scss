@@ -3,7 +3,7 @@
   //   width: 10.2rem;
   &__wrapper {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     position: absolute;
     align-items: center;
 
@@ -16,10 +16,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // margin-left: 5.5rem;
-    // position: absolute;
-    // margin-top: 15.9rem;
-    //   margin-top: 17.9rem;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,11 +33,10 @@
       line-height: 3.8rem;
       letter-spacing: 0em;
       text-align: center;
-      // height: 4rem;
     }
     &__text {
       padding-left: 1.5rem;
-      // height: 3rem;
+
       padding: 0.2rem 1.5rem;
       vertical-align: center;
       color: inherit;
@@ -52,18 +48,14 @@
       letter-spacing: -0.04em;
       text-align: center;
       text-transform: lowercase;
-
-      // height: 2rem;
     }
   }
 
-  //   gap: 1rem;;
-
   &__path {
     font-family: $font-primary;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 3.8rem;
     letter-spacing: -0.04em;
     text-align: center;
@@ -73,9 +65,9 @@
     display: flex;
     justify-content: flex-start;
     gap: 0.5rem;
-    // position: absolute;
+
     & > p {
-      width: 5rem; //fit-content;
+      width: 5rem;
     }
   }
 }

@@ -1,17 +1,22 @@
 import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
 import React, { useEffect, useState } from "react";
-import WeatherCard from "../../../components/weatherCard";
-import Graph from "../../../components/graph";
-import Nav from "../../../components/nav";
-import SelectDay from "../../../components/selectDay";
-import SelectAltitude from "../../../components/selectAltitude";
-import { weatherReducer } from "../../../lib/weatherReducer";
-import { militaryToStandardTime } from "../../../lib/helpers/militaryToStandardTime";
 
-import DarkMode from "../../../components/darkMode";
+import dynamic from "next/dynamic";
+const Nav = dynamic(() => import("../../../components/nav"));
+const SelectAltitude = dynamic(() =>
+  import("../../../components/selectAltitude")
+);
+const SelectDay = dynamic(() => import("../../../components/selectDay"));
+const WeatherCard = dynamic(() => import("../../../components/weatherCard"));
+
+import Graph from "../../../components/graph";
 import BackButton from "../../../components/backButton";
 
+//helpers
+import { weatherReducer } from "../../../lib/weatherReducer";
+
+import { militaryToStandardTime } from "../../../lib/helpers/militaryToStandardTime";
 import { formatDate } from "../../../lib/helpers/formatDate";
 
 export default function location() {
@@ -25,7 +30,7 @@ export default function location() {
   const [altitude, setAltitude] = useState("base");
   const [location, setLocation] = useState(null);
   const [weatherObj, setWeatherObj] = useState(null);
-  console.log("ROUTER___________", router);
+
   function handleEmit(data) {
     setDayId(data);
   }
@@ -143,6 +148,3 @@ export default function location() {
     </div>
   );
 }
-//queryclient.queryCache.queries.queryKey[0]===mammoth //can filter by this
-//queryclient?.queryCache.queries[0].state.data ///this is the obj i want which then can do .forecast etc
-//but bc refresh breaks it i might just want to try tryFetch or whatever its called

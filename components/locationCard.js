@@ -61,9 +61,6 @@ export default function locationCard({ weatherData, i, id, deleteFromLS }) {
 
           <div className='home__card__accent-box'>
             <p className='home__card__accent-box__details'>Click for Details</p>
-            {/* <p className='home__card__accent-box__details home__card__accent-box__details--riser'>
-              Click for Details
-            </p> */}
           </div>
         </div>
       </Link>

@@ -1,17 +1,30 @@
 .home {
   background-color: var(--bg-primary);
   &__hero-img {
-    height: 34.9rem;
+    height: 34.9rem !important;
     // background-color: var(--accent-box-bg); //$color-primary-light;
-    & > img {
-      // position: absolute;
-      z-index: 1;
+    width: 100vw;
 
-      height: 31.97rem; // 30rem;; //34.9rem;
-      // width: 144rem;
+    position: relative;
+    //setting this position to relative was key to getting the inner img from next to behave and fit this container
+    z-index: 1;
+    &__img {
       width: 100%;
-      object-fit: cover;
+
+      // height: 34.9rem !important;
+      // min-height: 34.9rem !important;
+      // position: relative !important;
+      // object-fit: cover; // Optional
     }
+    // & > img {
+    //   // position: absolute;
+    //   z-index: 1;
+
+    //   height: 31.97rem; // 30rem;; //34.9rem;
+    //   // width: 144rem;
+    //   width: 100%;
+    //   object-fit: cover;
+    // }
 
     // background: url("snowy-trees-large.jpg");
   }
