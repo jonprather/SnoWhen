@@ -1,43 +1,43 @@
+/**
+ * @jest-environment jsdom
+ */
 import React, { useEffect, useState } from "react";
 import { useQueries } from "react-query";
-import axios from "axios";
-// import SelectLocation from "../../components/selectLocation";
-// import Nav from "../../components/nav";
 
-import { render } from "react-dom";
-import FlashMessage from "react-flash-message";
-import useTimeout from "../../components/hooks/useTimeout";
-const Nav = dynamic(() => import("../../components/nav"));
-const SelectLocation = dynamic(() => import("../../components/selectLocation"));
-
-// const weatherReducer = dynamic(() =>
-//   import("../../lib/weatherReducer").then((mod) => mod.weatherReducer)
-// );
-import { weatherReducer } from "../../lib/weatherReducer";
-console.log("WEATHER REDUCER", weatherReducer);
-import { formatDate } from "../../lib/helpers/formatDate";
-import dynamic from "next/dynamic";
-const LocationCard = dynamic(() => import("../../components/locationCard"));
-const myLoader = ({ src, width, quality }) => {
-  return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
-};
-import { getAllLocal, getLocalDarkMode } from "../../lib/LocalStorage";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
-// import hero from "../../public/images/snowy-trees-large.jpg";
+
+import axios from "axios";
+
+//components
+import dynamic from "next/dynamic";
+const Nav = dynamic(() => import("../../components/nav"));
+const SelectLocation = dynamic(() => import("../../components/selectLocation"));
+const LocationCard = dynamic(() => import("../../components/locationCard"));
+
+import { buildUrl } from "cloudinary-build-url";
+
+// custom helpers
+import { weatherReducer } from "../../lib/weatherReducer";
+import { getAllLocal, getLocalDarkMode } from "../../lib/LocalStorage";
+import useLocalStorage from "../../components/hooks/useLocalStorage";
 
 export default function index() {
   const router = useRouter();
-  var [error, setError] = useState("");
-  // const [weatherObj, setWeatherObj] = useState(null);
+
+  const url = buildUrl("images/snowy-trees-large_ix0jck", {
+    cloud: {
+      cloudName: "dudethatsmyname",
+    },
+  });
+  const [darkmode, setDarkmode] = useLocalStorage("darkmode", "light");
+  const [error, setError] = useState("");
   const [sortDirection, setSortDirection] = useState("desc");
   const [searchHistory, setSearchHistory] = useState(null); //by default can set this in useEffect to get from cookie local storage or have default
   const [resort, setResort] = useState(null);
   const [deleted, setDeleted] = useState(null);
-  const [flashMsg, setFlashMsg] = useState("");
-  const [timerID, setTimerID] = useState();
-  var [sortFunction, setSortFunction] = useState({
+
+  const [sortFunction, setSortFunction] = useState({
     asc: (a, b) =>
       a?.data?.coordinates?.createdAt - b?.data?.coordinates?.createdAt,
     desc: (a, b) =>
@@ -46,24 +46,18 @@ export default function index() {
 
   useEffect(() => {
     setSearchHistory(getAllLocal());
-    if (getLocalDarkMode()) {
+    console.log("DARKMODE IN STATE", darkmode);
+    if (typeof document !== "undefined") {
+      if (resort) return "";
+      //so dont rerrun when resort exists
       document.documentElement.setAttribute("data-theme", getLocalDarkMode());
     }
-    console.log("CHECK ME OUT");
-    // setTimeout(() => {
-    //   setFlashMsg("");
-    //   console.log("flash msg", flashMsg);
-    // }, 1000);  //this one works but idk if good practice bc in dep array
-    // setFlashMsg(() => {
-    //   return setTimeout(() => null, 3000);
-    // });
-  }, [resort, deleted, flashMsg]);
+  }, [resort, deleted]);
 
   function handleDeletion(id) {
     localStorage.removeItem(id);
-    setFlashMsg({ msg: "Resort Deleted!", type: "delete" });
+
     setSearchHistory(getAllLocal());
-    resetFlash();
   }
   const getWeather = async function (resort) {
     try {
@@ -71,8 +65,7 @@ export default function index() {
       const { data } = await axios.get(
         `/api/snowReport?ID=${resort?.queryKey[1]?.resortCode}`
       );
-      // test with fakeSnowReport after this
-      console.log(data);
+
       return data;
     } catch (error) {
       setError(error.message);
@@ -89,23 +82,13 @@ export default function index() {
       };
     }) ?? []
   );
-  function resetFlash() {
-    var timeout = setTimeout(() => {
-      setFlashMsg(null);
-
-      console.log("flash msg", flashMsg?.type);
-    }, 5000);
-  }
 
   function handleEmit(resortObj, msg) {
     setResort(resortObj);
-    setFlashMsg(msg);
-    resetFlash();
   }
 
   return (
     //loop over results....
-
     <section className='home'>
       <Nav />
       <div className='home__hero-img'>
@@ -115,26 +98,16 @@ export default function index() {
           src='/images/snowy-trees-large.jpg'
           loading='lazy'
         /> */}
-        {/* <Image
-          src={"/images/snowy-trees-large.jpg"}
+        <Image
+          src={url}
           alt='Picture of Snowy Tree'
-          layout='intrinsic'
-          width={1440}
-          height={340}
-        /> */}
+          layout='fill'
+          objectFit='cover'
+          className={"home__hero-img__img"}
+        />
       </div>
       <SelectLocation emit={handleEmit} />
 
-      {flashMsg && (
-        <div className={`flash-msg__box flash-msg__box--${flashMsg?.type}`}>
-          <p className={"flash-msg__box__text"}>{flashMsg?.msg}</p>
-        </div>
-      )}
-      {/* <FlashMessage duration={5000}>
-          <p className='flash-msg' style={{ color: "red" }}>
-            {flashMsg}
-          </p>
-        </FlashMessage> */}
       {error ? (
         <>
           <p className='heading error'>Error </p>
@@ -142,12 +115,11 @@ export default function index() {
         </>
       ) : searchHistory ? (
         <>
-          <h1 className='heading'>Favorite Resorts</h1>
+          <h1 className='heading mt-12'>Favorite Resorts</h1>
           <h2 className='subheading mb-12'>Recent Searches</h2>
         </>
       ) : (
         <>
-          {/* <h1 className='heading'>Favorite resorts</h1> */}
           <h2 className='subheading mb-12'>Add some Resorts!</h2>
         </>
       )}
@@ -185,14 +157,3 @@ export default function index() {
     </section>
   );
 }
-
-//   <button
-// onClick={() => {
-//   localStorage.removeItem(
-//     ele?.data?.id
-//   );
-//   setSearchHistory(getAllLocal());
-// }}
-// >
-// remove
-// </button>
