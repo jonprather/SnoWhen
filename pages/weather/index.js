@@ -11,7 +11,6 @@ import axios from "axios";
 
 //components
 import dynamic from "next/dynamic";
-const Nav = dynamic(() => import("../../components/nav"));
 const SelectLocation = dynamic(() => import("../../components/selectLocation"));
 const LocationCard = dynamic(() => import("../../components/locationCard"));
 
@@ -90,14 +89,7 @@ export default function index() {
   return (
     //loop over results....
     <section className='home'>
-      <Nav />
       <div className='home__hero-img'>
-        {/* <Image src={require(`../../public/images/snowy-trees-large.jpg`)} /> */}
-        {/* <img
-          alt='snowy tree image'
-          src='/images/snowy-trees-large.jpg'
-          loading='lazy'
-        /> */}
         <Image
           src={url}
           alt='Picture of Snowy Tree'

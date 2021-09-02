@@ -11,7 +11,7 @@ export default function daySelector({
   date,
 }) {
   const router = useRouter();
-  let dayId = router.query.dayId * 1;
+  let dayId = router?.query?.dayId * 1;
   function handleClick(direction) {
     let newDay = direction === "up" ? addDay(date) : subtractDay(date);
     let pathName = `/weather/${locationName.toLowerCase()}/${newDay.toLowerCase()}`;
@@ -22,7 +22,7 @@ export default function daySelector({
       }
       emit(dayId + 1);
 
-      return router.push(
+      return router?.push(
         {
           pathname: pathName,
           query: {
@@ -36,7 +36,7 @@ export default function daySelector({
     }
     if (dayId === 0) return "";
     emit(dayId - 1);
-    return router.push(
+    return router?.push(
       {
         pathname: pathName,
         query: {

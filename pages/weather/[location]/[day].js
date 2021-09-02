@@ -3,7 +3,7 @@ import { useQueryClient } from "react-query";
 import React, { useEffect, useState } from "react";
 
 import dynamic from "next/dynamic";
-const Nav = dynamic(() => import("../../../components/nav"));
+
 const SelectAltitude = dynamic(() =>
   import("../../../components/selectAltitude")
 );
@@ -38,34 +38,33 @@ export default function location() {
     setAltitude(alt);
   }
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!router?.isReady) return;
     if (!queryClient) return;
 
     if (queryClient?.queryCache.queries.length === 0) {
-      router.push(`/weather`);
+      router?.push(`/weather`);
     }
 
-    let id = router.query.locationId;
-    let daysId = router.query.dayId;
+    let id = router?.query?.locationId;
+    let daysId = router?.query?.dayId;
 
     setLocationId(id);
     setDayId(daysId);
 
-    setLocation(router.query.location.toLowerCase());
+    setLocation(router?.query?.location?.toLowerCase());
     setTimeout(() => {}, 1000);
     setWeatherObj(() => {
       return weatherReducer(queryClient?.queryCache?.queries[id]?.state)[
         "snowPerHour"
       ][daysId];
     });
-  }, [router.isReady, dayId, altitude]);
+  }, [router?.isReady, dayId, altitude]);
 
   return (
     <div className='day'>
-      <Nav />
       <BackButton
         url={`/weather/${location}?locationId=${locationId}`}
-        path={[location, router.query.day]}
+        path={[location, router?.query?.day]}
       />
 
       <div className='day__forecast'>

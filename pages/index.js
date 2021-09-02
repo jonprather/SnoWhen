@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-
-const Nav = dynamic(() => import("../components/nav"));
 
 export default function index() {
   const router = useRouter();
@@ -12,7 +9,6 @@ export default function index() {
 
   return (
     <section className='landing-page'>
-      <Nav />
       <div className='home__hero-img'>
         {/* <Image src={require(`../../public/images/snowy-trees-large.jpg`)} /> */}
         <img alt='snowy tree image' src='/images/snowy-trees-large.jpg' defer />

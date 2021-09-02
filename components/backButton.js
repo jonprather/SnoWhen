@@ -12,7 +12,7 @@ export default function backButton({ url, path }) {
       </button>
       <div className='back-button__path'>
         {path?.map((ele, i) => {
-          return <span>/ {ele}</span>;
+          return <span key={ele}>/ {ele}</span>;
         })}
       </div>
     </div>

@@ -23,5 +23,3 @@ export default async function handler(req, res) {
   // need some error handling thos
   res.status(200).json(mammothData);
 }
-
-/// long fake data below just delete when deploy

@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 const WeatherCard = dynamic(() => import("../../../components/weatherCard"));
 
 import Graph from "../../../components/graph";
-import Nav from "../../../components/nav";
+
 import BackButton from "../../../components/backButton";
 
 import { formatDate } from "../../../lib/helpers/formatDate";
@@ -21,16 +21,16 @@ export default function location() {
   const [weatherObj, setWeatherObj] = useState(null);
 
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!router?.isReady) return;
 
-    var id = router.query.locationId;
+    var id = router?.query?.locationId;
     setLocationId(id);
-    setLocation(router.query.location.toLowerCase());
+    setLocation(router?.query?.location?.toLowerCase());
 
     if (!queryClient) return;
 
     if (queryClient?.queryCache.queries.length === 0) {
-      router.push(`/weather`);
+      router?.push(`/weather`);
     }
 
     setWeatherObj(() => {
@@ -38,11 +38,10 @@ export default function location() {
         "snowPerDay"
       ];
     });
-  }, [router.isReady]);
+  }, [router?.isReady]);
 
   return (
     <div className='location'>
-      <Nav />
       <BackButton url={`/weather`} path={[location]} />
       <div className='location__forecast'>
         <h1 className='heading'>{location}</h1>
@@ -72,7 +71,7 @@ export default function location() {
                     <a
                       className='link'
                       onClick={() =>
-                        router.push(
+                        router?.push(
                           `/weather/${location}/${formatDate(
                             weatherObj[i].date
                           ).toLowerCase()}?locationId=${locationId}&dayId=${i}`
