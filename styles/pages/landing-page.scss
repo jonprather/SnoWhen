@@ -1,4 +1,344 @@
-.landing-page {
-  //   font-size: 5rem !important;
-  //   padding-top: 10rem;
+.landing-page-header {
+  background-color: var(
+    --graph-container-bg
+  ); //var(--graph-container-bg); // $color-primary-light;
+
+  @media only screen and (min-width: $bp-large) {
+    display: flex;
+    gap: 0;
+    flex-direction: row-reverse;
+  }
+  &__container {
+    // margin-left: 4.2rem;
+    padding-top: 10.2rem;
+    width: 80%; //29.2rem;
+    margin: 0 auto;
+
+    @media only screen and (min-width: $bp-large) {
+      width: 81.8rem;
+      padding-left: 9.8rem;
+      padding-top: 16.5rem;
+
+      height: 75rem; // 100vh; //74rem;
+    }
+    @media only screen and (min-width: $bp-largest) {
+      grid-template-columns: repeat(3, auto);
+      // justify-content: unset;
+    }
+    &__header-box {
+      margin: 0;
+      width: 29rem;
+      @media only screen and (min-width: $bp-large) {
+        width: 56.8rem;
+      }
+    }
+    &__heading {
+      color: var(--text-color); //var(--heading-color);
+
+      font-family: $font-display;
+      font-size: 8.8rem; //8rem; // 4.901rem;
+      font-style: normal;
+      font-weight: 900;
+      line-height: 6.2rem;
+      letter-spacing: -0.11em;
+      text-align: left;
+      margin-bottom: 0.5rem;
+      @media only screen and (min-width: $bp-large) {
+        font-size: 15rem;
+        margin-bottom: 2.5rem;
+      }
+    }
+
+    &__subheading {
+      color: var(--text-color);
+
+      font-family: $font-primary;
+
+      font-size: 1.8rem; //1.4rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 2.1rem;
+      letter-spacing: -0.045em;
+      text-align: center;
+      width: 29rem;
+      text-transform: uppercase;
+
+      @media only screen and (min-width: $bp-large) {
+        font-size: 2.4rem;
+        width: 56.8rem;
+        line-height: 3.6rem;
+        margin-bottom: 16rem;
+      }
+    }
+    &__text {
+      /* The Simplest way to find your next powder day */
+      color: var(--text-color);
+
+      width: 22rem; //19.386rem;
+      height: 4.832rem;
+
+      font-family: $font-primary;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 2.5rem; //2rem; //1.61072rem;
+      line-height: 2.4rem;
+      letter-spacing: -0.045em;
+      text-transform: capitalize;
+
+      margin-bottom: 5rem; //3.868rem;
+      @media only screen and (min-width: $bp-large) {
+        font-size: 2.8rem;
+        width: 33.7rem;
+        line-height: 3.5rem;
+
+        margin-bottom: 7.3rem;
+      }
+    }
+    &__button {
+      margin-bottom: 3.75rem;
+      @media only screen and (min-width: $bp-large) {
+        margin-bottom: 4.286rem;
+      }
+      &--forecast {
+      }
+    }
+  }
+  &__img-container {
+    /* beautiful-scenery-clear-white-snowy-mountains-hills 1 */
+    background-color: gray;
+    // width: 37.5rem;//was full on small screen
+    height: 32.6rem;
+    position: relative;
+    @media only screen and (min-width: $bp-large) {
+      width: 62.2rem;
+      height: 75rem; // 100vh; //74rem;
+    }
+    &__img {
+    }
+  }
+}
+
+.landing-page-forecast {
+  background-color: var(--accent-box-bg); // $color-primary-light;
+  &__container {
+    margin: 0 auto;
+    width: 80%; // 29.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @media only screen and (min-width: $bp-large) {
+      width: 100%; // 29.2rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 75rem; // 100vh; //74rem;
+      height: fit-content;
+    }
+
+    &__header-box {
+      // margin: 0;
+      // width: 29rem;
+      padding-top: 8rem;
+      @media only screen and (min-width: $bp-large) {
+        width: 56.8rem;
+        padding-top: 12rem;
+      }
+    }
+    &__heading {
+      font-family: $font-display;
+      color: var(--text-color); //var(--heading-color);
+      font-size: 6rem; //;4rem; ///2.463rem;
+      font-style: normal;
+      font-weight: 900;
+      line-height: 3.1rem;
+      letter-spacing: -0.11em;
+      text-align: center;
+
+      /* Simple Forecast */
+
+      // width: 24.736rem;
+      height: 3.13rem;
+      margin-bottom: 2rem;
+
+      @media only screen and (min-width: $bp-large) {
+        // font-size: 6.8rem;
+        margin: 0 auto;
+        margin-bottom: 2.5rem;
+        width: fit-content;
+        text-align: center;
+        font-size: 8rem;
+
+        // line-height: 6.1rem;
+      }
+    }
+
+    &__subheading {
+      margin: 0 auto;
+      // color: var(--subheading-color);
+      color: var(--text-color);
+
+      /* Find Fresh Snow */
+
+      width: 17.43rem;
+      height: 1.848rem;
+      padding-top: 0.1rem;
+      font-family: $font-primary;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 2rem; //1.23167rem;
+      line-height: 1.8rem;
+      /* identical to box height */
+      text-align: center;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+
+      margin-bottom: 5.352rem;
+
+      @media only screen and (min-width: $bp-large) {
+        // font-size: 6.8rem;
+        margin: 0 auto;
+        margin-bottom: 10rem;
+        width: fit-content;
+        font-family: $font-primary;
+        font-size: 2.4rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 3.6rem;
+        letter-spacing: -0.045em;
+      }
+    }
+    &__text {
+      color: var(--text-color);
+      //could add margin 0 here but then would need to adjus tthe headings as well
+      font-family: $font-primary;
+      font-size: 2rem; //.5rem; // 1.5rem; //1.232rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 2.5rem; //1.847rem;
+      letter-spacing: -0.045em;
+      text-align: left;
+      /* Easily see the conditions for your favorite mountains with the Simplest Ski resort forecasts. Don’t get stuck in an avalanche of data. get key weather info to help choose your next powder trip. */
+
+      width: 29.2rem;
+      height: 12.4rem;
+
+      @media only screen and (min-width: $bp-large) {
+        width: 48.2rem;
+        font-size: 2.5rem;
+        line-height: 3.6rem;
+        // text-transform: ;
+      }
+    }
+    &__p-1 {
+      margin-bottom: 0rem;
+      @media only screen and (min-width: $bp-large) {
+        margin-bottom: 4rem;
+      }
+    }
+
+    &__p-2 {
+      margin-bottom: 0rem;
+
+      @media only screen and (min-width: $bp-large) {
+        margin-bottom: 0rem;
+      }
+    }
+    &__callout {
+      /* It’s free. check it out! */
+      font-family: $font-primary;
+      margin-bottom: 0.462rem;
+      width: fit-content; // 10.213rem;
+      height: 1.386rem;
+      color: var(--heading-span-color);
+      font-family: $font-primary;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 1.25rem; //0.92375rem;
+      line-height: 1.4rem;
+      /* identical to box height */
+      text-align: center;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+
+      @media only screen and (min-width: $bp-large) {
+        font-size: 1.8rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 2.7rem;
+        letter-spacing: -0.045em;
+        width: fit-content;
+        text-align: center;
+        margin-bottom: 2rem;
+        // position: relative;
+        top: 8.4rem;
+      }
+      position: relative;
+      top: 6.2rem;
+    }
+    &__button {
+      position: relative;
+      top: 6.4rem;
+      z-index: 100;
+      @media only screen and (min-width: $bp-large) {
+        position: relative;
+        top: 8.4rem;
+      }
+    }
+  }
+  &__img-container {
+    /* beautiful-snowy-landscape-with-mountains 1 */
+
+    // position: absolute;
+    // width: 37.5rem;
+    width: 100vw; //62.2rem;
+    max-width: 100%;
+    height: 30.9rem;
+    // left: 0px;
+    // top: 1197px;
+    // height: 34.9rem !important;
+    // background-color: var(--accent-box-bg); //$color-primary-light;
+    // width: 100vw;
+
+    position: relative;
+    background-color: gray;
+    &__img {
+    }
+  }
+}
+
+.btn--check-snow {
+  width: 16.625rem;
+  height: 5.925rem;
+
+  background: #3282b8;
+  box-shadow: 0px 2.30103px 2.30103px rgba(0, 0, 0, 0.25);
+  border-radius: 34.5155px;
+  //typography
+
+  font-family: $font-primary;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2.07093rem;
+  line-height: 3.1rem;
+  text-align: center;
+  letter-spacing: -0.065em;
+  text-transform: uppercase;
+  margin-bottom: 3.75rem;
+  @media only screen and (min-width: $bp-large) {
+    height: 10.3rem;
+    width: 28.9rem;
+
+    border-radius: 6rem;
+    //typography
+
+    font-size: 3.6rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 5.4rem;
+    letter-spacing: -0.065em;
+    text-align: center;
+  }
 }
