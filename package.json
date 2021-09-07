@@ -9,6 +9,7 @@
     "test": " jest"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.22.4",
     "@zeit/next-sass": "^1.0.1",
     "axios": "^0.21.1",
     "cloudinary-build-url": "^0.2.1",

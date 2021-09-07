@@ -90,13 +90,13 @@ export default function index() {
     //loop over results....
     <section className='home'>
       <div className='home__hero-img'>
-        <Image
+        {/* <Image
           src={url}
           alt='Picture of Snowy Tree'
           layout='fill'
           objectFit='cover'
           className={"home__hero-img__img"}
-        />
+        /> */}
       </div>
       <SelectLocation emit={handleEmit} />
 
@@ -106,10 +106,12 @@ export default function index() {
           <p className='subheading error'>{error}</p>
         </>
       ) : searchHistory ? (
-        <>
-          <h1 className='heading mt-12'>Favorite Resorts</h1>
+        <div className=' home__heading-container'>
+          <h1 className='heading home__heading-container__heading'>
+            Favorite Resorts
+          </h1>
           <h2 className='subheading mb-12'>Recent Searches</h2>
-        </>
+        </div>
       ) : (
         <>
           <h2 className='subheading mb-12'>Add some Resorts!</h2>

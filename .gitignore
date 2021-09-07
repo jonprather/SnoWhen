@@ -28,3 +28,10 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+# bs stuff
+lib/mammothData.json
+pages/api/supabase.js
+pages/supatest.js 
+src/client.js 
+

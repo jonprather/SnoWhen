@@ -95,9 +95,14 @@
       }
     }
     &__button {
+      color: white;
       margin-bottom: 3.75rem;
       @media only screen and (min-width: $bp-large) {
         margin-bottom: 4.286rem;
+      }
+      transition: all 0.25s ease-in;
+      &:hover {
+        transform: scale(1.05) translateY(-6px);
       }
       &--forecast {
       }
@@ -264,7 +269,7 @@
       text-transform: uppercase;
 
       @media only screen and (min-width: $bp-large) {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
         font-style: normal;
         font-weight: 600;
         line-height: 2.7rem;
@@ -282,9 +287,14 @@
       position: relative;
       top: 6.4rem;
       z-index: 100;
+      transition: all 0.25s ease-in;
+      color: white;
+      &:hover {
+        transform: scale(1.05) translateY(-6px);
+      }
       @media only screen and (min-width: $bp-large) {
         position: relative;
-        top: 8.4rem;
+        top: 8.25rem;
       }
     }
   }

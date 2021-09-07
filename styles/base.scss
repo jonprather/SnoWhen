@@ -78,13 +78,13 @@ html[data-theme="dark"] {
   /////////
   --bg-primary: rgba(27, 38, 44, 100);
   --bg-nav: rgba(27, 38, 44, 100);
-  --subheading-color: rgba(255, 255, 255, 0.2);
-  --heading-color: #0f4c75;
+  --subheading-color: rgba(255, 255, 255, 0.5);
+  --heading-color: #3282b8; //#bbe1fa; // #0f4c75;
   --heading-span-color: #ffff; //
   --text-color: #ffff;
   --selection-text: #0f4c75;
 
-  --underline-color: #0f4c75;
+  --underline-color: #3282b8;
   --accent-box-bg: rgba(27, 38, 44, 100); // rgba(187, 225, 250, 0.05);
   --lightmodebox-bg: rgb(
     37,
@@ -108,7 +108,7 @@ button {
   // margin: 0 auto;
   text-decoration: none;
   background: none;
-  color: white;
+  // color: white;
   cursor: pointer;
 
   // transition: background 250ms ease-in-out, transform 150ms ease;
@@ -125,9 +125,23 @@ button {
 }
 //utitlity
 .underline {
-  border-bottom: 3px solid var(--heading-color) !important;
+  border-bottom: 3px solid var(--underline-color) !important;
+  &--transparent {
+    border-bottom: 3px solid transparent !important;
+    // color: transparent; //rgba($color: transparent, $alpha: 0.7);
+  }
   &--null {
     border-bottom: 3px solid transparent !important;
+    // color: transparent; //rgba($color: transparent, $alpha: 0.7);
+  }
+}
+.underline--darkmode {
+  // color: transparent; //rgba($color: transparent, $alpha: 0.7);
+
+  &--null {
+    color: transparent; //rgba($color: transparent, $alpha: 0.7);
+
+    // color: transparent; //rgba($color: transparent, $alpha: 0.7);
   }
 }
 // .hidden {

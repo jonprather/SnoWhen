@@ -55,14 +55,14 @@
   &__subheading {
     @extend .subheading;
     text-align: right !important;
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
     margin: 0 2rem 4rem 0 !important;
 
     // display: flex;
     // justify-content: flex-end;
   }
   &__total {
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
     @extend .subheading;
 
     margin: 0 0 4rem 2rem !important;
@@ -134,7 +134,7 @@
           text-transform: uppercase;
           margin-top: 1rem;
           font-family: $font-primary;
-          font-size: 2.1rem;
+          font-size: 1.6rem;
           font-style: normal;
           font-weight: 700;
           line-height: 3.1rem;
@@ -142,6 +142,9 @@
           text-align: center;
           color: var(--subheading-color);
           text-align: center;
+          // @media only screen and (min-width: $bp-small) {
+          //   font-size: 2.1rem;
+          // }
         }
       }
     }

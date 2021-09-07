@@ -1,24 +1,6 @@
-// <div className='altitude-selector'>
-// <button
-//   className='day-selector__base'
-//   onClick={() => handleClick("base")}
-// >
-//   Base
-// </button>
-
-// <button className='day-selector__mid' onClick={() => handleClick("mid")}>
-//   Mid
-// </button>
-// <button
-//   className='day-selector__top'
-//   onClick={() => handleClick("upper")}
-// >
-//   Top
-// </button>
-// </div>
 .select-altitude {
   // margin: 0 auto;
-  width: 16rem;
+  // width: 16rem;
   position: static;
   margin: 0 auto;
   // @media only screen and (min-width: $bp-small) {
@@ -32,7 +14,7 @@
     // max-width: 104.4rem;
     position: absolute;
 
-    top: -8px;
+    top: -2rem;
   }
   // @media only screen and (min-width: $bp-largest) {
   //   // max-width: 104.4rem;
@@ -49,13 +31,13 @@
     line-height: 1.8rem;
     letter-spacing: 0em;
     text-align: center;
-    padding-bottom: 0.25rem;
+    // padding-bottom: 1.25rem;
+    margin-bottom: 0.5rem;
   }
   &__container {
     margin: 0 auto;
-    margin-bottom: 1.1rem;
-    height: 3.8rem;
-    width: 16rem;
+    height: 4.8rem;
+    width: 19.6rem;
     // width: 70%;
     margin-bottom: 3rem;
     @media only screen and (min-width: $bp-large) {
@@ -63,7 +45,7 @@
       position: static;
       margin: 0;
       margin-bottom: 1.1rem;
-      width: 16rem;
+      // width: 16rem;
     }
     @media only screen and (min-width: $bp-largest) {
       // max-width: 104.4rem;
@@ -84,15 +66,18 @@
     display: flex;
     justify-content: space-evenly;
     gap: 0.5rem;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
+    // padding: 2rem 2.75rem;
+
     & > button {
       padding: 0 0.5rem;
+      color: white; // var(--heading-color); // var(--selection-text);
     }
 
     & > button:focus {
       outline: none;
       & > p {
-        color: var(--selection-text);
+        // color: var(--selection-text);
       }
     }
     & > button:hover {

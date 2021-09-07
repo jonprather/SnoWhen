@@ -9,7 +9,7 @@ export default function nav() {
         <Link href='/weather'>
           <p className='nav__brand-title'>
             {" "}
-            <span>sno</span>When
+            <span>Sno</span>When
           </p>
         </Link>
       </nav>

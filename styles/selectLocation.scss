@@ -2,12 +2,12 @@
   //   position: relative;
   z-index: 100;
 
-  position: relative;
-  top: -10rem; // -12.5rem; //for when there is a picture 12.5 is good -15rem; //
+  // position: relative;
+  // top: -3rem; //-5re; // -12.5rem; // -12.5rem; //for when there is a picture 12.5 is good -15rem; //
   background: #0f4c75;
   border-radius: 4.7rem;
   height: 20rem;
-  width: 61.5rem;
+  width: 80rem; //61.5rem;
 
   & > select {
     width: 20rem;
@@ -41,8 +41,8 @@
 
   margin: 0 auto;
   @media only screen and (min-width: $bp-large) {
-    height: 20rem;
-    width: 61.5rem;
+    height: 20rem; // 20rem;
+    width: 64rem; //61.5rem;
   }
   height: 23.6rem;
   width: 75%;

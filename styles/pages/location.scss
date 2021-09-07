@@ -33,18 +33,23 @@
 
 .location {
   background-color: var(--bg-primary);
+  // background-color: var(--weather-container-bg);
+  //yeah so just change this to min height so doesnt show white but then theres the clash of colors between sections wtf
+  min-height: 100vh;
 
   &__forecast {
     background-color: var(--weather-container-bg);
     padding-bottom: 25rem;
-    padding-top: 15.9rem;
+    padding-top: 18rem; // 15.9rem;
     &__daySelector {
     }
   }
 
   &__weather {
-    background-color: var(--weather-container-bg);
+    // background-color: var(--weather-container-bg);
     padding-bottom: 20rem;
+    padding-top: 18rem;
+
     &__subheading {
       margin-bottom: 16.6rem;
     }
