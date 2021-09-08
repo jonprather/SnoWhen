@@ -11,7 +11,7 @@
   align-items: center;
   border-radius: 4.7rem;
   font-family: Poppins;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 500;
   line-height: 1.8rem;
@@ -30,6 +30,9 @@
     &:hover {
       // color: var(--heading-color);
       // transform: scale(1.1);
+    }
+    & > p {
+      font-size: 1.3rem;
     }
     // border: 3px solid transparent;
     border-radius: 0rem;
@@ -104,7 +107,7 @@ label {
     }
   }
   .notification {
-    font-size: 20px;
+    font-size: 2rem;
     width: 100%;
     .selected:before {
       // content: "Dark";

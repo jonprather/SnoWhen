@@ -39,6 +39,9 @@ html {
   --underline-color: white;
   --selection-text: #1b262c;
   --accent-box-bg: #bbe1fa;
+  --home-header-bg: rgba(187, 225, 250, 0.6);
+  --landing-accent-box-bg: #bbe1fa; // rgba(187, 225, 250, 0.05);
+
   --lightmodebox-bg: #0f4c75;
   --graph-container-bg: white;
   --weather-container-bg: rgba(187, 225, 250, 0.22);
@@ -79,13 +82,16 @@ html[data-theme="dark"] {
   --bg-primary: rgba(27, 38, 44, 100);
   --bg-nav: rgba(27, 38, 44, 100);
   --subheading-color: rgba(255, 255, 255, 0.5);
+  --home-header-bg: rgba(27, 38, 44, 100);
   --heading-color: #3282b8; //#bbe1fa; // #0f4c75;
   --heading-span-color: #ffff; //
   --text-color: #ffff;
   --selection-text: #0f4c75;
 
   --underline-color: #3282b8;
-  --accent-box-bg: rgba(27, 38, 44, 100); // rgba(187, 225, 250, 0.05);
+  --accent-box-bg: rgba(27, 38, 44, 0.3);
+  --landing-accent-box-bg: rgba(27, 38, 44, 100); // rgba(187, 225, 250, 0.05);
+  // rgba(187, 225, 250, 0.05);
   --lightmodebox-bg: rgb(
     37,
     52,
@@ -116,7 +122,7 @@ button {
   -moz-appearance: none;
   //typography
   font-family: $font-primary;
-  font-size: 1.2rem;
+  // font-size: 1.2rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.8rem;
@@ -189,8 +195,14 @@ button {
 .mb-12 {
   margin-bottom: 14rem;
 }
+.mb-8 {
+  margin-bottom: 8rem;
+}
 .mt-12 {
   margin-top: 14rem;
+}
+.pt-10 {
+  padding-top: 10rem;
 }
 .flex {
   display: flex;
@@ -217,6 +229,15 @@ p {
 html {
   box-sizing: border-box;
   font-size: 62.5%; // 10px/16px = 62.5% -> 1rem = 10px
+  @media only screen and (min-width: 1800px) {
+    font-size: 70%;
+  }
+  @media only screen and (min-width: 2400px) {
+    font-size: 120%;
+  }
+  @media only screen and (min-width: 3600px) {
+    font-size: 150%;
+  }
 
   @media only screen and (max-width: $bp-largest) {
     font-size: 50%;

@@ -22,11 +22,12 @@
 
 .weather-card {
   transition: all 0.2s ease-in;
+  background-color: var(--graph-container-bg);
   &:hover {
     transform: scale(1.1) rotate(0.5deg);
     box-shadow: 0px 6px 6px 0px #00000040;
   }
-  background-color: var(--graph-container-bg);
+  // background-color: var(--graph-container-bg);
   &__container {
     display: grid;
     grid-template-columns: repeat(1, auto);

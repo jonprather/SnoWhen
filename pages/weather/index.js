@@ -97,28 +97,31 @@ export default function index() {
           objectFit='cover'
           className={"home__hero-img__img"}
         /> */}
+        {/* <h1 className='heading home__heading-container__heading'>
+          Select Resorts
+        </h1>
+        <h2 className='subheading mb-8'>Click Below</h2> */}
+        <SelectLocation emit={handleEmit} />
       </div>
-      <SelectLocation emit={handleEmit} />
-
-      {error ? (
-        <>
-          <p className='heading error'>Error </p>
-          <p className='subheading error'>{error}</p>
-        </>
-      ) : searchHistory ? (
-        <div className=' home__heading-container'>
-          <h1 className='heading home__heading-container__heading'>
-            Favorite Resorts
-          </h1>
-          <h2 className='subheading mb-12'>Recent Searches</h2>
-        </div>
-      ) : (
-        <>
-          <h2 className='subheading mb-12'>Add some Resorts!</h2>
-        </>
-      )}
 
       <main className='home__main'>
+        {error ? (
+          <>
+            <p className='heading error'>Error </p>
+            <p className='subheading error'>{error}</p>
+          </>
+        ) : searchHistory ? (
+          <div className=' home__heading-container'>
+            <h1 className='heading home__heading-container__heading'>
+              Favorite Resorts
+            </h1>
+            <h2 className='subheading mb-12'>Recent Searches</h2>
+          </div>
+        ) : (
+          <>
+            <h2 className='subheading pt-10  mb-12'>Add some Resorts!</h2>
+          </>
+        )}
         {results[results.length - 1]?.isLoading && (
           <p className='subheading'>...Loading</p>
         )}

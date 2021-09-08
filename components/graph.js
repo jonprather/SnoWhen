@@ -39,7 +39,7 @@ export default function graph({ data, location, isHourlyTitles }) {
                 }}
               >
                 <div className='graph__container--top__block__total'>
-                  {unit.total > 2 ? (
+                  {unit.total > 3 ? (
                     unit.total > 37 ? (
                       unit.total + '"'
                     ) : (

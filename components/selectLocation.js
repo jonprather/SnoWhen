@@ -6,8 +6,8 @@ export default function Location(props) {
   const [isLoading, setIsLoading] = useState(true);
   const resorts = [
     { name: "Mammoth", code: 619002 },
-    { name: "Everest", code: 420 },
-    { name: "K2", code: 4201 },
+    { name: "Snow Summit", code: 420 },
+    { name: "Big Bear", code: 4201 },
   ];
 
   useEffect(() => {

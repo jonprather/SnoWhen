@@ -1,7 +1,11 @@
 .home {
-  background-color: var(--bg-primary);
-  padding-top: 18rem;
-  // min-height: 100vh;
+  // background-color: var(--bg-primary);
+  background-color: var(
+    --home-header-bg
+  ); // var(--lightmodebox-bg); //$color-primary-light;
+
+  padding-top: 18rem; //18rem;
+  min-height: 100vh;
   &__heading-container {
     padding-top: 10rem;
     &__heading {
@@ -9,11 +13,11 @@
   }
   &__hero-img {
     // height: 34.9rem !important;
-    background-color: var(--accent-box-bg); //$color-primary-light;
+    // background-color: var(--accent-box-bg); //$color-primary-light;
     // width: 100%;
     // top: 0;
     // left: 0;
-    // position: absolute;
+    // position: relative;
     //setting this position to relative was key to getting the inner img from next to behave and fit this container
     z-index: 1;
     &__img {
@@ -38,15 +42,32 @@
   }
 
   &__main {
-    margin-top: 10.5rem;
+    margin-top: 14rem; //10.5rem;
     padding-bottom: 10rem;
     // display: flex;
     // justify-content: center;
     z-index: 0;
+    // background-color: var(--bg-primary); // var(--accent-box-bg);
+    background-color: var(--graph-container-bg); //
+    // border-top-left-radius: 40px;
+    // border-top-right-radius: 40px;
+    // position: relative;
+    // top: -10rem;
+    // background-color: $color-primary-dark;
+    // box-shadow: 0px 6px 6px 0px #00000040;
   }
 
   &__card {
     transition: all 0.4s ease-in;
+    position: relative;
+    box-shadow: $box-shadow;
+
+    height: 41rem;
+    width: 37rem;
+    background-color: var(--graph-container-bg); //rgba(255, 255, 255, 0.02);
+    // background: $card-background;
+
+    border-radius: 2.4rem;
 
     & .hidden {
       display: none;
@@ -79,7 +100,7 @@
       // -webkit-transform: translateX(-50%); // translateY(-50%);
       // transform: translateX(-50%); // translateY(-50%);
     }
-    background-color: var(--lightmodebox-bg);
+    // background-color: var(--lightmodebox-bg);
     transition: all 0.3s ease-in;
     &:hover {
       // margin-top: 10px;
@@ -103,15 +124,6 @@
         // justify-content: unset;
       }
     }
-    position: relative;
-    box-shadow: $box-shadow;
-
-    height: 41rem;
-    width: 37rem;
-    background-color: var(--graph-container-bg); //rgba(255, 255, 255, 0.02);
-    background: $card-background;
-
-    border-radius: 2.4rem;
 
     &-heading {
       font-family: $font-display;
@@ -144,6 +156,7 @@
       color: var(--subheading-color);
     }
     &-state {
+      display: none;
       position: absolute;
       top: 5rem;
       right: 4rem;

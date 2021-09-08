@@ -4,10 +4,25 @@
 
   // position: relative;
   // top: -3rem; //-5re; // -12.5rem; // -12.5rem; //for when there is a picture 12.5 is good -15rem; //
-  background: #0f4c75;
+  background: $color-primary-dark;
   border-radius: 4.7rem;
+  box-shadow: $box-shadow;
+  height: 30rem;
+  width: 120rem; //61.5rem;
+  margin: 0 auto;
+
   height: 20rem;
-  width: 80rem; //61.5rem;
+  width: 70%;
+  box-sizing: border-box;
+  border-radius: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media only screen and (min-width: $bp-smallest) {
+    height: 20rem; // 20rem;
+    width: 60rem; //61.5rem;
+  }
 
   & > select {
     width: 20rem;
@@ -24,6 +39,10 @@
     outline: none;
     border: none;
     // box-shadow: 2px 2px $color-black;
+    @media only screen and (min-width: $bp-large) {
+      // height: 3.5rem; // 20rem;
+      // width: 21rem; //61.5rem;
+    }
   }
   &__title {
     /* Find a Location */
@@ -38,19 +57,6 @@
     color: #ffffff;
     margin-bottom: 4.4rem;
   }
-
-  margin: 0 auto;
-  @media only screen and (min-width: $bp-large) {
-    height: 20rem; // 20rem;
-    width: 64rem; //61.5rem;
-  }
-  height: 23.6rem;
-  width: 75%;
-  box-sizing: border-box;
-  border-radius: 47px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
   &__header {
     text-transform: capitalize;

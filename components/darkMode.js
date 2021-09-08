@@ -45,7 +45,7 @@ export default function darkMode({ darkModeTheme }) {
           class='input'
           id='toggle'
           type='checkbox'
-          checked={theme !== "dark"}
+          defaultChecked={theme !== "dark"}
           onClick={() => handleToggle()}
         />
         <div class='toggle-wrapper'>

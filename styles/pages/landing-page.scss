@@ -1,3 +1,7 @@
+.landing-page {
+  // min-height: 100vh;
+  // background-color: var(--graph-container-bg);
+}
 .landing-page-header {
   background-color: var(
     --graph-container-bg
@@ -10,16 +14,21 @@
   }
   &__container {
     // margin-left: 4.2rem;
-    padding-top: 10.2rem;
+    padding-top: 16rem; // 10.2rem;
     width: 80%; //29.2rem;
     margin: 0 auto;
 
     @media only screen and (min-width: $bp-large) {
       width: 81.8rem;
       padding-left: 9.8rem;
-      padding-top: 16.5rem;
+      padding-top: 17.5rem;
 
-      height: 75rem; // 100vh; //74rem;
+      height: 76rem; // 100vh; //74rem;
+      @media only screen and (min-width: 1600px) {
+        width: 80%; //81.8rem;
+        padding-left: 9.8rem;
+        padding-top: 17.5rem;
+      }
     }
     @media only screen and (min-width: $bp-largest) {
       grid-template-columns: repeat(3, auto);
@@ -67,7 +76,7 @@
         font-size: 2.4rem;
         width: 56.8rem;
         line-height: 3.6rem;
-        margin-bottom: 16rem;
+        margin-bottom: 16.6rem; // 16rem;
       }
     }
     &__text {
@@ -91,7 +100,7 @@
         width: 33.7rem;
         line-height: 3.5rem;
 
-        margin-bottom: 7.3rem;
+        margin-bottom: 7.4rem; // 7.8rem;
       }
     }
     &__button {
@@ -104,8 +113,6 @@
       &:hover {
         transform: scale(1.05) translateY(-6px);
       }
-      &--forecast {
-      }
     }
   }
   &__img-container {
@@ -116,7 +123,10 @@
     position: relative;
     @media only screen and (min-width: $bp-large) {
       width: 62.2rem;
-      height: 75rem; // 100vh; //74rem;
+      height: 76rem; // 100vh; //74rem;
+    }
+    @media only screen and (min-width: 1600px) {
+      width: 55%; //81.8rem;
     }
     &__img {
     }
@@ -124,7 +134,8 @@
 }
 
 .landing-page-forecast {
-  background-color: var(--accent-box-bg); // $color-primary-light;
+  // min-height: 100vh;
+  background-color: var(--landing-accent-box-bg); // $color-primary-light;
   &__container {
     margin: 0 auto;
     width: 80%; // 29.2rem;
@@ -294,7 +305,7 @@
       }
       @media only screen and (min-width: $bp-large) {
         position: relative;
-        top: 8.25rem;
+        top: 8.5rem;
       }
     }
   }

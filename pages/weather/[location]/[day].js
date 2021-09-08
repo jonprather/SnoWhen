@@ -52,11 +52,12 @@ export default function location() {
     setDayId(daysId);
 
     setLocation(router?.query?.location?.toLowerCase());
-    setTimeout(() => {}, 1000);
+
     setWeatherObj(() => {
-      return weatherReducer(queryClient?.queryCache?.queries[id]?.state)[
-        "snowPerHour"
-      ][daysId];
+      return weatherReducer(
+        queryClient?.queryCache?.queries[id]?.state,
+        altitude
+      )["snowPerHour"][daysId];
     });
   }, [router?.isReady, dayId, altitude]);
 
@@ -91,7 +92,7 @@ export default function location() {
               />
             )}
           </div>
-          {weatherObj && (
+          {weatherObj && altitude && (
             <Graph
               location={location}
               isHourlyTitles={true}

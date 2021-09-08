@@ -1,5 +1,7 @@
 import axios from "axios";
 import { mammothData } from "../../lib/mammothFaker";
+import { fakeEve } from "../../lib/fakeEve";
+import { fakeK } from "../../lib/fakeK";
 
 export default async function handler(req, res) {
   //ill have to take in a req which includes the resort code
@@ -21,5 +23,8 @@ export default async function handler(req, res) {
   //   console.log("NEW API DATA", data);
   // mmamothData the fake data for now to make work go live put in data obj from the api call above
   // need some error handling thos
-  res.status(200).json(mammothData);
+  if (619002 == req?.query?.ID) return res.status(200).json(mammothData);
+  if (420 == req?.query?.ID) return res.status(200).json(fakeEve);
+  if (4201 == req?.query?.ID) return res.status(200).json(fakeK);
+  // res.status(200).json(mammothData);
 }
