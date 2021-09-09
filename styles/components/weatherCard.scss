@@ -110,8 +110,11 @@
     gap: 3rem;
     // -webkit-column-gap: 3rem;
     // column-gap: 3rem;
-    @media only screen and (min-width: $bp-smallest) {
+
+    @media only screen and (min-width: $bp-small) {
       gap: 2.12rem;
+      padding: 0 0rem;
+
       justify-content: center;
     }
     & > div > h4 {
