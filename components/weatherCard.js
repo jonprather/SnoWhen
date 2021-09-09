@@ -11,7 +11,7 @@ export default function weatherCard({
   icon,
 }) {
   const nullText = "n/a";
-  console.log("ICONS,-", icon);
+
   return (
     <div
       className='weather-card'

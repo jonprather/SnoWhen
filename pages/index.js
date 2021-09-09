@@ -34,8 +34,7 @@ export default function index() {
 
         <div className='landing-page-header__img-container'>
           <Image
-            src='https://res.cloudinary.com/dudethatsmyname/image/upload/v1630715207/images/beautiful-scenery-clear-white-snowy-mountains-hills_gjsbjb.jpg
-          '
+            src='/hero.jpg'
             alt='Picture of Snowy Mountains'
             layout='fill'
             objectFit='cover'
@@ -73,8 +72,7 @@ export default function index() {
         </div>
         <div className='landing-page-forecast__img-container'>
           <Image
-            src='https://res.cloudinary.com/dudethatsmyname/image/upload/v1630715277/images/beautiful-snowy-landscape-with-mountains_wwaif7.jpg
-          '
+            src='/footer.jpg'
             alt='Picture of Snowy Mountains'
             layout='fill'
             objectFit='cover'

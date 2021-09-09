@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   //ill have to take in a req which includes the resort code
   //   __NEXT_INIT_QUERY: { ID: 'undefined' },
   //   query: { ID: 'undefined' },
-  console.log("REq is ", req?.query?.ID);
+
   //works but may want to do some try catch blocks or something
   //   try {
   //     const { data } = await axios.get(

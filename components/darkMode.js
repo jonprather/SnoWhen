@@ -7,8 +7,6 @@ import useLocalStorage from "./hooks/useLocalStorage";
 export default function darkMode({ darkModeTheme }) {
   const [theme, setTheme] = useLocalStorage("darkmode", "light");
 
-  console.log("IN DARK MODE--", theme);
-
   function handleToggle(bool) {
     if (theme === "dark") {
       return setTheme("light");
@@ -18,7 +16,6 @@ export default function darkMode({ darkModeTheme }) {
   }
 
   useEffect(() => {
-    console.log("IN DARK MODE USEEFFECT", theme);
     if (typeof document !== "undefined") {
       document.documentElement.setAttribute("data-theme", theme);
     }
@@ -52,7 +49,6 @@ export default function darkMode({ darkModeTheme }) {
           <span class='selector'></span>
         </div>
         <p class='notification'>
-          {" "}
           <span class='selected'></span>
         </p>
       </label>
