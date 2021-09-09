@@ -106,9 +106,10 @@
   &__info-container {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 3rem;
     @media only screen and (min-width: $bp-smallester) {
       gap: 2.12rem;
+      justify-content: center;
     }
     & > div > h4 {
       font-family: $font-primary;

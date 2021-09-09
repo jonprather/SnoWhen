@@ -240,7 +240,11 @@
       color: var(--subheading-color);
     }
     &__forecast-days-box {
-      padding: 0.6rem 6rem;
+      padding: 0.6rem 2.4rem;
+
+      @media only screen and (min-width: $bp-smallester) {
+        padding: 0.6rem 6rem;
+      }
       display: flex;
       justify-content: space-between;
       color: var(--text-color);
