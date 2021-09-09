@@ -90,7 +90,11 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem;
+    @media only screen and (min-width: $bp-medium) {
+      margin-bottom: 2rem;
+    }
+
     & > p {
       color: var(--heading-span-color); // var(--text-color);
       font-family: $font-primary;
@@ -132,7 +136,10 @@
       line-height: 21px;
       letter-spacing: -0.065em;
       text-align: center;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0rem;
+      @media only screen and (min-width: $bp-medium) {
+        margin-bottom: 0.5rem;
+      }
     }
     & > div > p {
       font-family: $font-primary;
