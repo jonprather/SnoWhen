@@ -105,8 +105,11 @@
   }
   &__info-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    padding: 0 6rem;
     gap: 3rem;
+    // -webkit-column-gap: 3rem;
+    // column-gap: 3rem;
     @media only screen and (min-width: $bp-smallester) {
       gap: 2.12rem;
       justify-content: center;
