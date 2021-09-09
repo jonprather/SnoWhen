@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
 
-  gap: 5.8rem;
+  // gap: 1rem; //5.8rem;
   //   position: absolute;
   //   margin-top: 15.9rem;
   color: var(--subheading-color);
@@ -33,6 +33,7 @@
     text-align: center;
     color: var(--heading-color);
     width: 5rem;
+    margin: 0rem 5.8rem;
   }
   &__forward-button {
     @extend .day-selector__back-button;
