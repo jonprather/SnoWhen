@@ -16,7 +16,10 @@
 
     &__graph-container {
       margin: 0 auto;
-      width: min(104.4rem, 90%);
+      width: 80%;
+      @media only screen and (min-width: $bp-small) {
+        width: min(104.4rem, 90%);
+      }
       position: relative;
       &__header {
         // display: flex;
