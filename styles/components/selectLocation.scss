@@ -19,17 +19,24 @@
   align-items: center;
   width: 66%;
   border-radius: 24px;
+  border-radius: 24px;
+  -moz-border-radius: 24px;
+  -webkit-border-radius: 24px;
 
   @media only screen and (min-width: $bp-smallest) {
     height: 20rem; // 20rem;
     width: 60rem; //61.5rem;
     border-radius: 48px;
+    -moz-border-radius: 48px;
+    -webkit-border-radius: 48px;
   }
 
   & > select {
     width: 20rem;
     // height: 2.5rem;
     border-radius: 2.5rem;
+    -moz-border-radius: 24px;
+    -webkit-border-radius: 24px;
     padding: 0.25rem;
     padding-left: 2.2rem;
 
