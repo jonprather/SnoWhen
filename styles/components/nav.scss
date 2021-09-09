@@ -9,7 +9,7 @@
   height: 8rem;
   z-index: 10;
   &__brand-title {
-    color: $color-primary-dark; //var(--heading-color);
+    color: var(--heading-color);
     margin: 2.8rem 0 0 5.5rem;
     font-family: $font-display;
     font-size: 3rem;
@@ -22,8 +22,8 @@
     &:hover {
       cursor: pointer;
     }
-    & > span {
-      color: var(--heading-span-color);
-    }
+    // & > span {
+    //   color: var(--heading-span-color);
+    // }
   }
 }
