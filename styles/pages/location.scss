@@ -40,7 +40,11 @@
   &__forecast {
     background-color: var(--weather-container-bg);
     padding-bottom: 25rem;
-    padding-top: 18rem; // 15.9rem;
+    padding-top: 24rem; // 15.9rem;
+
+    @media only screen and (min-width: $bp-medium) {
+      padding-top: 18rem; // 15.9rem;
+    }
     &__daySelector {
     }
   }
