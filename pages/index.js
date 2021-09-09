@@ -55,14 +55,14 @@ export default function index() {
           </div>
           <p className='landing-page-forecast__container__text landing-page-forecast__container__p-1'>
             Easily see the conditions for your favorite mountains with the
-            Simplest Ski resort forecasts.
+            simplest ski resort forecasts.
           </p>
           <p className='landing-page-forecast__container__text landing-page-forecast__container__p-2'>
             Don’t get stuck in an avalanche of data. Focus on just the info you
             need help choose your next powder trip.
           </p>
           <h3 className='landing-page-forecast__container__callout'>
-            Its Free. Check it out!
+            Check the forecast!
           </h3>
           <button
             onClick={handleClick}
