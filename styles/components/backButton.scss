@@ -39,7 +39,6 @@
     }
     &__text {
       padding-left: 1.5rem;
-
       padding: 0.2rem 1.5rem;
       vertical-align: center;
       color: inherit;
@@ -51,12 +50,15 @@
       letter-spacing: -0.04em;
       text-align: center;
       text-transform: lowercase;
+      & > p {
+        height: 2.48rem;
+      }
     }
   }
 
   &__path {
     font-family: $font-primary;
-    font-size: 1.45rem;
+    font-size: 1.6rem;
     font-style: normal;
     font-weight: 600;
     line-height: 3.8rem;
