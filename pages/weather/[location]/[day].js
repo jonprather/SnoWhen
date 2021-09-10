@@ -70,7 +70,7 @@ export default function location() {
 
       <div className='day__forecast'>
         <h1 className='heading'>{location}</h1>
-        <h2 className='subheading mb-16'>Hourly Forecast</h2>
+        <h2 className='subheading mb-18'>Hourly Forecast</h2>
 
         <div className='day__forecast__graph-container'>
           <div className='day__forecast__graph-container__header'>
@@ -104,7 +104,9 @@ export default function location() {
       </div>
       <div className='day__weather'>
         <h1 className='heading'>{location} </h1>
-        <h2 className='subheading day__weather__subheading'>Hourly Weather </h2>
+        <h2 className='subheading day__weather__subheading mb-18'>
+          Hourly Weather{" "}
+        </h2>
         <div className='day__weather__cards-container'>
           <div className='day__weather__cards-container__header'>
             <div className='day__weather__cards-container__header--positioner'>

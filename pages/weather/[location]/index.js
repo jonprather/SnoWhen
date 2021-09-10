@@ -45,7 +45,7 @@ export default function location() {
       <BackButton url={`/weather`} path={[location]} />
       <div className='location__forecast'>
         <h1 className='heading'>{location}</h1>
-        <h2 className='subheading mb-16'>Snow Forecast</h2>
+        <h2 className='subheading mb-18'>Snow Forecast</h2>
         {!weatherObj && <p className='subheading'>..Loading</p>}
         <div className='day__forecast__graph-container'>
           {weatherObj && (
@@ -60,7 +60,9 @@ export default function location() {
       </div>
       <div className='location__weather'>
         <h1 className='heading'>{location} </h1>
-        <h2 className='subheading location__weather__subheading'>Weather </h2>
+        <h2 className='subheading location__weather__subheading mb-18'>
+          Weather{" "}
+        </h2>
 
         <div className='day__weather__cards-container'>
           <div className='weather-card__container'>
