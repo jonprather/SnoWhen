@@ -23,7 +23,10 @@
   justify-content: center;
   gap: 0rem; //0.15rem;
   position: absolute;
-  right: 5.5rem;
+  right: 3rem;
+  @media only screen and (min-width: $bp-small) {
+    right: 5.5rem;
+  }
   margin: 3.4rem 0 0 5.5rem;
   & > button {
     color: var(--text-color); //var(--text-color);
@@ -103,6 +106,7 @@ label {
       position: absolute;
       top: 50%;
       left: 0.5rem;
+
       transform: translateY(-50%);
       background-color: $color-primary-dark;
       transition: left 0.25s ease;
