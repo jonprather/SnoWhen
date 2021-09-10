@@ -113,7 +113,7 @@ export default function index() {
         ) : searchHistory ? (
           <div className=' home__heading-container'>
             <h1 className='heading home__heading-container__heading'>
-              Favorite Resorts
+              Favorites
             </h1>
             <h2 className='subheading mb-12'>Recent Searches</h2>
           </div>
