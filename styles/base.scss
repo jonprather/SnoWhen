@@ -51,29 +51,6 @@ html {
   --weather-card-desc-bg: rgba(187, 225, 250, 0.33);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: rgba(27, 38, 44, 100);
-    --bg-nav: rgba(27, 38, 44, 100);
-    --subheading-color: rgba(255, 255, 255, 0.2);
-    --heading-color: #0f4c75;
-    --heading-span-color: #ffff; //
-    --text-color: #ffff;
-    --selection-text: #0f4c75;
-
-    --underline-color: #0f4c75;
-    --accent-box-bg: rgba(27, 38, 44, 100); // rgba(187, 225, 250, 0.05);
-    --lightmodebox-bg: rgb(
-      44,
-      62,
-      72
-    ); ///rgba(27, 38, 44, 100); //rgba(255, 255, 255, 0.03);
-    --graph-container-bg: rgba(255, 255, 255, 0.02);
-    --weather-container-bg: rgba(255, 255, 255, 0.005);
-    --weather-card-bg: rgba(255, 255, 255, 0.005);
-    --weather-card-desc-bg: rgba(255, 255, 255, 0.01);
-  }
-}
 // @media (prefers-color-scheme: light) {
 
 // }
