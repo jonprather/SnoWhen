@@ -14,10 +14,16 @@ export default function nav() {
                 <p className='nav__brand__title'>SnoWhen</p>
               </div>
             </Link>
-            <button className='nav__pages-container__home'>Home</button>
-            <button className='nav__pages-container__about'>About</button>
+            <div className='nav__pages-container__links'>
+              <button className='nav__pages-container__links__home'>
+                Home
+              </button>
+              <button className='nav__pages-container__links__about'>
+                About
+              </button>
 
-            <button className='nav__pages-container__faq'>FAQ</button>
+              <button className='nav__pages-container__links__faq'>FAQ</button>
+            </div>
           </div>
         </div>
         <div className='nav__auth-container'>

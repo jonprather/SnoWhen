@@ -65,12 +65,16 @@
     display: flex;
     gap: 2.7rem;
     align-items: center;
-    &__home {
-    }
+    &__links {
+      display: flex;
+      gap: 2rem;
+      &__home {
+      }
 
-    &__about {
-    }
-    &__faq {
+      &__about {
+      }
+      &__faq {
+      }
     }
   }
   &__auth-container {
