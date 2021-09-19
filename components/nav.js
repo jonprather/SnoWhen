@@ -9,10 +9,10 @@ export default function nav() {
         <div>
           <div className='nav__pages-container'>
             <Link href='/weather'>
-              <>
-                <img src='/logo.png' className='nav__brand-title' />
-                <p>SnoWhen</p>
-              </>
+              <div className='nav__brand'>
+                <img src='/logo.png' className='nav__brand__logo' />
+                <p className='nav__brand__title'>SnoWhen</p>
+              </div>
             </Link>
             <button className='nav__pages-container__home'>Home</button>
             <button className='nav__pages-container__about'>About</button>
