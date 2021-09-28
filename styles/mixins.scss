@@ -1,0 +1,29 @@
+@mixin heading($font-size) {
+  .heading {
+    font-family: $font-display;
+    font-size: 5rem;
+    color: var(--heading-color);
+    line-height: 10rem;
+    letter-spacing: -0.08em;
+
+    font-style: normal;
+    font-weight: 400;
+    line-height: 5.1rem;
+    letter-spacing: -0.11em;
+    text-align: center;
+
+    font-family: $font-display;
+    //   font-style: normal;
+    font-weight: 800;
+    font-size: 8rem;
+    line-height: 6.5rem;
+    text-align: center;
+    letter-spacing: -0.065em;
+    text-align: center;
+    padding-top: 2.2rem;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+
+    color: var(--heading-color);
+  }
+}

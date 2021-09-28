@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import DarkMode from "./darkMode";
 
 export default function nav() {
+  const [open, setOpen] = useState(false);
+  function handleToggle() {
+    setOpen((prev) => !prev);
+  }
   return (
     <div className='nav__wrapper'>
       <nav className='nav'>
@@ -23,6 +27,19 @@ export default function nav() {
               </button>
 
               <button className='nav__pages-container__links__faq'>FAQ</button>
+            </div>
+            <div className='nav__hamburger'>
+              <button onClick={handleToggle}>
+                {" "}
+                <i class='fa fa-bars nav__hamburger__icon fa-lg'></i>
+              </button>
+              {open && (
+                <div className='nav__dropdown'>
+                  <button className=''>Home</button>
+                  <button className=''>About</button>
+                  <button className=''>FAQ</button>
+                </div>
+              )}
             </div>
           </div>
         </div>

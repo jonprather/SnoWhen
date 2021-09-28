@@ -90,20 +90,15 @@ export default function index() {
     //loop over results....
     <section className='home'>
       <div className='home__hero-img'>
-        {/* <Image
-          src={url}
-          alt='Picture of Snowy Tree'
-          layout='fill'
-          objectFit='cover'
-          className={"home__hero-img__img"}
-        /> */}
-        {/* <h1 className='heading home__heading-container__heading'>
-          Select Resorts
+        <h1 className='home__heading-container__heading'>
+          Where are you skiing?
         </h1>
-        <h2 className='subheading mb-8'>Click Below</h2> */}
-        <SelectLocation emit={handleEmit} />
+        <h2 className='home__heading-container__subheading mb-8'>
+          Get Simple Forecasts for California Ski Resorts
+        </h2>
       </div>
-
+      <SelectLocation emit={handleEmit} />
+      {/* <img src='/snow-bg.png' className='home__heading-container__mtn' /> */}
       <main className='home__main'>
         {error ? (
           <>
@@ -111,11 +106,28 @@ export default function index() {
             <p className='subheading error'>{error}</p>
           </>
         ) : searchHistory ? (
-          <div className=' home__heading-container'>
-            <h1 className='heading home__heading-container__heading'>
-              Favorites
+          <div className='home__heading-container'>
+            {/* <img
+              src='/mtn-bg-blue.png'
+              className='home__heading-container__mtn'
+            /> */}
+            <div className='home__heading-container__svg-wrapper'>
+              <svg
+                width='2126'
+                height='985'
+                viewBox='0 0 2126 985'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  d='M0 0C688.784 136.861 1454.23 51.1291 2100.41 0L2126 985C1705.43 919.41 921.173 863.633 0 901.291C133.279 584.565 229.401 343.513 0 0Z'
+                  fill='#BBE1FA'
+                />
+              </svg>
+            </div>
+            <h1 className='heading home__heading-container__heading home__heading-container__heading--smaller'>
+              Recent Searches
             </h1>
-            <h2 className='subheading mb-12'>Recent Searches</h2>
           </div>
         ) : (
           <>
@@ -150,6 +162,16 @@ export default function index() {
               </React.Fragment>
             ))}
         </div>
+        {/* <div className=' home__card card'>
+          <div class='item1'>Heading</div>
+          <div class='item2'>Next Week</div>
+          <div class='item3'>Snow Total</div>
+          <div class='item4'>Mon</div>
+          <div class='item5'>TUe</div>
+          <div class='item6'>Wedn</div>
+          <div class='item7'>Th</div>
+          <div class='item8'>Fri</div>
+        </div> */}
       </main>
     </section>
   );

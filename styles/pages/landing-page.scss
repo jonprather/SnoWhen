@@ -1,8 +1,24 @@
 .landing-page {
   // min-height: 100vh;
   // background-color: var(--graph-container-bg);
+  // background-image:
+  // background-image: url("/hero-bg.png");
+  // width: 100%;
+  // height: 100vh;
+  min-height: 100vh;
 }
 .landing-page-header {
+  max-width: 160rem;
+  margin: 0 auto;
+  background-image: url("/hero-bg.png");
+  background-size: cover;
+  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+  // height: 100vh;
   background-color: var(
     --graph-container-bg
   ); //var(--graph-container-bg); // $color-primary-light;
@@ -14,74 +30,90 @@
   }
   &__container {
     // margin-left: 4.2rem;
-    padding-top: 16rem; // 10.2rem;
-    width: 80%; //29.2rem;
+    padding-top: 20rem; // 16rem; // 10.2rem;
+    // width: 80%; //29.2rem;
     margin: 0 auto;
-
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     @media only screen and (min-width: $bp-large) {
-      width: 81.8rem;
-      padding-left: 9.8rem;
-      padding-top: 17.5rem;
-
-      height: 76rem; // 100vh; //74rem;
-      @media only screen and (min-width: 1600px) {
-        width: 80%; //81.8rem;
-        padding-left: 9.8rem;
-        padding-top: 17.5rem;
-      }
+      padding-top: 14rem; // 16rem; // 10.2rem;
+      width: 80%;
     }
+    //   @media only screen and (min-width: 1600px) {
+    //     width: 80%; //81.8rem;
+    //     padding-left: 9.8rem;
+    //     padding-top: 17.5rem;
+    //   }
+    // }
     @media only screen and (min-width: $bp-largest) {
-      grid-template-columns: repeat(3, auto);
       // justify-content: unset;
     }
     &__header-box {
       margin: 0;
-      width: 29rem;
-      @media only screen and (min-width: $bp-large) {
-        width: 56.8rem;
-      }
+      width: min(45rem, 100%);
+      // @media only screen and (min-width: $bp-large) {
+      //   width: 45rem;
+      // }
     }
     &__heading {
       color: var(--text-color); //var(--heading-color);
+      color: white;
+
+      //////////lato
 
       font-family: $font-display;
-      font-size: 8.8rem; //8rem; // 4.901rem;
+      font-size: 8rem;
       font-style: normal;
-      font-weight: 900;
-      line-height: 6.2rem;
-      letter-spacing: -0.11em;
-      text-align: left;
-      margin-bottom: 0.5rem;
+      font-weight: 600;
+      line-height: 9.6rem;
+      letter-spacing: -0.05em;
+      text-align: center;
+      margin-bottom: 5.4rem;
+
       @media only screen and (min-width: $bp-large) {
-        font-size: 15rem;
-        margin-bottom: 2.5rem;
+        // font-size: 15rem;
+        margin-bottom: 5.4rem;
       }
     }
 
     &__subheading {
-      color: var(--text-color);
+      color: $color-subheader;
 
-      font-family: $font-primary;
+      font-family: $font-display;
 
-      font-size: 1.8rem; //1.4rem;
+      font-size: 2.8rem;
       font-style: normal;
-      font-weight: 700;
-      line-height: 2.1rem;
-      letter-spacing: -0.045em;
+      font-weight: 600;
+      line-height: 3.4rem;
+      letter-spacing: 0em;
       text-align: center;
-      width: 29rem;
-      text-transform: uppercase;
 
+      width: min(32rem, 80%);
+
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom: 16rem;
+      @media only screen and (min-width: $bp-medium) {
+        // font-size: 2.4rem;
+        // width: 30rem;
+        // line-height: 3.6rem;
+        // margin-bottom: 16.6rem; // 16rem;
+        margin-bottom: 10rem;
+      }
       @media only screen and (min-width: $bp-large) {
-        font-size: 2.4rem;
-        width: 56.8rem;
-        line-height: 3.6rem;
-        margin-bottom: 16.6rem; // 16rem;
+        // font-size: 2.4rem;
+        // width: 30rem;
+        // line-height: 3.6rem;
+        // margin-bottom: 16.6rem; // 16rem;
+        margin-bottom: 5.8rem; // 5.6rem;
       }
     }
     &__text {
       /* The Simplest way to find your next powder day */
       color: var(--text-color);
+      color: white;
 
       width: 22rem; //19.386rem;
       height: 4.832rem;
@@ -106,7 +138,10 @@
     &__button {
       color: white;
       margin-bottom: 3.75rem;
+      // position: absolute;
+      // bottom: 5rem;
       @media only screen and (min-width: $bp-large) {
+        position: static;
         margin-bottom: 4.286rem;
       }
       transition: all 0.25s ease-in;
@@ -213,7 +248,7 @@
 
       margin-bottom: 5.352rem;
 
-      @media only screen and (min-width: $bp-large) {
+      @media only screen and (min-width: $bp-medium) {
         // font-size: 6.8rem;
         margin: 0 auto;
         margin-bottom: 10rem;
@@ -296,16 +331,17 @@
     }
     &__button {
       position: relative;
-      top: 6.4rem;
+      // top: 6.4rem;
       z-index: 100;
       transition: all 0.25s ease-in;
       color: white;
       &:hover {
         transform: scale(1.05) translateY(-6px);
       }
-      @media only screen and (min-width: $bp-large) {
-        position: relative;
-        top: 8.5rem;
+      bottom: 5rem;
+      @media only screen and (min-width: $bp-medium) {
+        // position: relative;
+        // top: 8.5rem;
       }
     }
   }
@@ -331,31 +367,46 @@
 }
 
 .btn--check-snow {
-  width: 16.625rem;
-  height: 5.925rem;
+  // width:  //20rem; // 16.625rem;
+  height: 10rem; //5.925rem;
+  height: 12rem; // 10.3rem;
+  width: 80%; //28.9rem;
+  font-size: 3rem;
 
-  background: $color-primary-dark; // #3282b8;
+  background: $color-primary; // #3282b8;
   box-shadow: 0px 2.30103px 2.30103px rgba(0, 0, 0, 0.25);
-  border-radius: 34.5155px;
+  border-radius: 3.4rem; // 34.5155px;
   //typography
 
   font-family: $font-primary;
   font-style: normal;
-  font-weight: bold;
-  font-size: 2.07093rem;
+  font-weight: 700;
+  // font-size: 1.8rem; //2.07093rem;
   line-height: 3.1rem;
   text-align: center;
   letter-spacing: -0.065em;
   text-transform: uppercase;
   margin-bottom: 3.75rem;
+  max-width: 40rem;
+
+  @media only screen and (min-width: $bp-small) {
+    height: 12rem; // 10.3rem;
+    width: 50%;
+    max-width: 40rem;
+  }
+  @media only screen and (min-width: $bp-medium) {
+    // height: 12rem; // 10.3rem;
+    max-width: 40rem;
+    width: 60%;
+  }
   @media only screen and (min-width: $bp-large) {
     height: 10.3rem;
     width: 28.9rem;
 
-    border-radius: 6rem;
+    // border-radius: 6rem;
     //typography
 
-    font-size: 3.6rem;
+    font-size: 3rem;
     font-style: normal;
     font-weight: 700;
     line-height: 5.4rem;

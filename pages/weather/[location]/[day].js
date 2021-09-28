@@ -74,10 +74,6 @@ export default function location() {
 
         <div className='day__forecast__graph-container'>
           <div className='day__forecast__graph-container__header'>
-            <SelectAltitude
-              emitAltitude={handleEmitAltitude}
-              altitude={altitude}
-            />
             {!weatherObj && <p className='subheading'>..Loading</p>}
             {weatherObj && (
               <SelectDay
@@ -91,6 +87,10 @@ export default function location() {
                 emit={handleEmit}
               />
             )}
+            <SelectAltitude
+              emitAltitude={handleEmitAltitude}
+              altitude={altitude}
+            />
           </div>
           {weatherObj && altitude && (
             <Graph

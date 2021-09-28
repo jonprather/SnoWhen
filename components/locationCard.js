@@ -13,22 +13,21 @@ export default function locationCard({ weatherData, i, id, deleteFromLS }) {
               `}
       >
         <div className='home__card'>
-          <div class='hidden flex justify-c align-c'>
-            <button
-              onClick={(e) => {
-                deleteFromLS(id);
-                console.log("ID", id);
-                e.stopPropagation();
-              }}
-            >
-              X
-            </button>
+          <div className='home__card-heading__wrapper'>
+            <h1 className='home__card-heading mb-12'>{weatherData?.name}</h1>
           </div>
-          <h1 className='home__card-heading'>{weatherData?.name}</h1>
+
           <p className='home__card-state'>Ca</p>
 
-          <h2 className='home__card-subheading mb-16'>mountain</h2>
-
+          <div className='home__card__mtn-bg mb-16'>
+            <img src='/mtn-bg.png' className='' />
+          </div>
+          <div className='home__card__snowflake'>
+            <img
+              src='/snowflake-black.png'
+              className='home__heading-container__mtn'
+            />
+          </div>
           <div className='home__card__snow-amount-box'>
             <div>
               <p className='home__card__snow-amount-box-heading'>Next Week</p>
@@ -37,11 +36,11 @@ export default function locationCard({ weatherData, i, id, deleteFromLS }) {
               </p>
             </div>
             <p className='home__card__snow-amount-box-quantity'>
-              {weatherData["total"]} "
+              {weatherData["total"]}"
             </p>
           </div>
 
-          <p className='home__card__forecast-heading'>Forecast</p>
+          {/* <p className='home__card__forecast-heading'>Forecast</p> */}
 
           <div className='home__card__forecast-days-box'>
             {weatherData["snowPerDay"].map((day, i) => {
@@ -60,7 +59,19 @@ export default function locationCard({ weatherData, i, id, deleteFromLS }) {
           </div>
 
           <div className='home__card__accent-box'>
-            <p className='home__card__accent-box__details'>Click for Details</p>
+            <div class='flex justify-c align-c'>
+              <button
+                className='home__card__delete'
+                onClick={(e) => {
+                  deleteFromLS(id);
+                  console.log("ID", id);
+                  e.stopPropagation();
+                }}
+              >
+                Remove
+              </button>
+            </div>
+            <p className='home__card__accent-box__details'>Click for More</p>
           </div>
         </div>
       </Link>

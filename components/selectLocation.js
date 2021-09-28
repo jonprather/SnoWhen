@@ -19,35 +19,57 @@ export default function Location(props) {
   const [resort, setResort] = useState("");
 
   function handleChange(resort) {
+    setResort(resort);
+  }
+  function handleSubmit() {
     let msg = setLocalAddress(resort);
-
     props.emit(resort, msg);
+    setResort("");
+    // router.push('/weather/') //push to item on search
+    // setResort("");
   }
 
   return (
     <div className='locations__search-box'>
-      <p className='locations__search-box__title'>Find a Resort</p>
       {isLoading && <span>Loading...</span>}
       {error && <span>Error {error.message}</span>}
-      <label htmlFor='resort'> </label>
-      <select
-        name='resort'
-        id='resort'
-        value={resort}
-        onChange={(event) => {
-          handleChange(event.target.value);
-          setResort("");
-        }}
-      >
-        <option value=''></option>
-        {resorts.map((resort, i) => {
-          return (
-            <option key={i} value={resort.code}>
-              {resort.name}
-            </option>
-          );
-        })}
-      </select>
+      <div className='locations__search-box__inner-container'>
+        <div className='locations__search-box__inner-container__select-box'>
+          <label
+            className='locations__search-box__inner-container__select-box__label'
+            htmlFor='resort'
+          >
+            Select Resort
+          </label>
+
+          <select
+            className='locations__search-box__inner-container__select-box__select'
+            name='resort'
+            id='resort'
+            value={resort}
+            onChange={(event) => {
+              handleChange(event.target.value);
+            }}
+          >
+            <option value=''></option>
+            {resorts.map((resort, i) => {
+              return (
+                <option key={i} value={resort.code}>
+                  {resort.name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className='locations__search-box__inner-container__button-box'>
+          <button
+            onClick={handleSubmit}
+            className='locations__search-box__inner-container__button-box__button'
+          >
+            <i class='fa fa-search' aria-hidden='true'></i> <span>Search</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

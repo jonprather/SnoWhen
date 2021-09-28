@@ -1,19 +1,132 @@
 .home {
   // background-color: var(--bg-primary);
-  background-color: var(
-    --home-header-bg
-  ); // var(--lightmodebox-bg); //$color-primary-light;
-
+  // background-color: var(
+  //   --home-header-bg
+  // ); // var(--lightmodebox-bg); //$color-primary-light;
+  // background-color: rgb(253, 253, 253);
+  background-color: #f2f2f2;
   min-height: 100vh;
+  max-width: 160rem;
+  margin: 0 auto;
   &__heading-container {
-    padding-top: 10rem;
+    z-index: 1000;
+    padding-top: 5rem; //10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    @media only screen and (min-width: $bp-medium) {
+      padding-top: 8rem; //10rem;
+      margin-bottom: 4.2rem;
+    }
+
     &__heading {
+      z-index: inherit;
+      color: var(--text-color); //var(--heading-color);
+      color: white !important;
+
+      //////////lato
+
+      font-family: $font-display;
+      font-size: 4rem; //4.8rem;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      text-align: center;
+      margin-bottom: 2.6rem; //5.4rem;
+      line-height: 7rem;
+      @media only screen and (min-width: 281px) {
+        font-size: 4.6rem;
+        line-height: 8.4rem;
+      }
+      @media only screen and (min-width: $bp-iphone5) {
+        font-size: 5.2rem;
+        line-height: 9.4rem;
+      }
+      @media only screen and (min-width: $bp-smallest) {
+        font-size: 6.4rem;
+      }
+      @media only screen and (min-width: $bp-small) {
+        font-size: 7rem;
+      }
+
+      @media only screen and (min-width: $bp-medium) {
+        font-size: 8rem;
+        line-height: 9.6rem;
+      }
+
+      &--smaller {
+        font-size: 4rem !important;
+        font-weight: 500 !important;
+        letter-spacing: 0em !important;
+      }
+    }
+    &__mtn {
+      height: 5.6rem; // 6.4rem;
+      width: 8rem; //8.8rem;
+      display: inline-block;
+      z-index: inherit;
+      // background-color: transparent;
+      background-blend-mode: multiply;
+      background-color: rgba($color-primary-light, 1);
+      border-radius: 500px;
+      background: transparent;
+      // background-blend-mode: screen;
+      & > img {
+      }
+    }
+    &__subheading {
+      color: $color-subheader; //white;
+
+      font-family: $font-display;
+
+      font-size: 2.8rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 3.4rem;
+      letter-spacing: 0em;
+      text-align: center;
+
+      // width: 32rem;
+      width: min(80%, 60rem);
+
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom: 16rem;
+      @media only screen and (min-width: $bp-medium) {
+        // font-size: 2.4rem;
+        // width: 30rem;
+        // line-height: 3.6rem;
+        // margin-bottom: 16.6rem; // 16rem;
+        margin-bottom: 10rem;
+      }
+      @media only screen and (min-width: $bp-large) {
+        // font-size: 2.4rem;
+        // width: 30rem;
+        // line-height: 3.6rem;
+        // margin-bottom: 16.6rem; // 16rem;
+        margin-bottom: 5.8rem; // 5.6rem;
+      }
+    }
+
+    &__svg-wrapper {
+      position: absolute;
+      top: 70rem;
+      right: 10;
+      display: none;
+      @media only screen and (min-width: $bp-small) {
+        top: 55rem;
+      }
+      @media only screen and (min-width: $bp-medium) {
+        top: 60rem;
+      }
     }
   }
   &__hero-img {
-    padding-top: 18rem; //18rem;
+    padding-top: 14rem; //18rem;
 
-    height: 52.1rem; // 34.9rem !important;
+    height: 50rem; // 40.8rem; // 52.1rem; // 34.9rem !important;
     // background-color: var(--accent-box-bg); //$color-primary-light;
     // width: 100%;
     // top: 0;
@@ -21,6 +134,21 @@
     // position: relative;
     //setting this position to relative was key to getting the inner img from next to behave and fit this container
     z-index: 1;
+    background-image: url("/location-hero.png");
+    background-size: cover;
+    // height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    @media only screen and (min-width: $bp-small) {
+      padding-top: 13rem; //18rem;
+
+      height: 42rem;
+    }
+    @media only screen and (min-width: $bp-medium) {
+      padding-top: 13rem; //18rem;
+
+      height: 42rem;
+    }
     &__img {
       // width: 100%;
 
@@ -49,7 +177,8 @@
     // justify-content: center;
     z-index: 0;
     // background-color: var(--bg-primary); // var(--accent-box-bg);
-    background-color: var(--graph-container-bg); //
+    // background-color: var(--graph-container-bg); //
+    // background-color: lightgray;
     // border-top-left-radius: 40px;
     // border-top-right-radius: 40px;
     // position: relative;
@@ -59,23 +188,55 @@
   }
 
   &__card {
+    margin: 0 auto;
+    z-index: 100;
     transition: all 0.4s ease-in;
     position: relative;
     box-shadow: $box-shadow;
-    margin-bottom: 10rem;
-    height: 41rem;
 
-    width: 100%;
-    // height: 84%;
-
-    @media only screen and (min-width: $bp-smallester) {
-      height: 41rem;
-      width: 37rem;
-    }
+    margin-bottom: 6rem;
+    height: 52rem; // // 51rem; //46rem;
+    // border: 0.5px solid rgba(lightgray, 0.25);
+    width: 90vw;
     background-color: var(--graph-container-bg); //rgba(255, 255, 255, 0.02);
     // background: $card-background;
+    // padding-top: 2.2rem;
+    // border-radius: 1px; // 2.4rem;
+    transition: all 0.3s ease-in;
+    overflow: hidden;
 
-    border-radius: 2.4rem;
+    @media only screen and (min-width: $bp-iphone5) {
+      // height: 41rem;
+      margin-bottom: 8rem;
+
+      width: 79vw;
+    }
+    @media only screen and (min-width: $bp-smallester) {
+      // height: 41rem;
+      width: 37rem;
+      width: 60vw;
+      margin-bottom: 4rem;
+    }
+    @media only screen and (min-width: $bp-smallest) {
+      // height: 41rem;
+      width: 39rem;
+      width: 50vw;
+
+      margin-bottom: 4rem;
+      // padding-top: 1rem;
+    }
+    @media only screen and (min-width: $bp-small) {
+      // padding-top: 2rem;
+
+      // height: 44rem;
+      width: 44rem;
+      // padding-top: 1rem;
+    }
+    @media only screen and (min-width: $bp-medium) {
+      // padding-top: 0.5rem;
+      height: 44rem;
+      width: 39rem;
+    }
 
     & .hidden {
       display: none;
@@ -86,86 +247,184 @@
       }
     }
     &:hover .hidden {
-      display: flex;
-      position: absolute;
-      top: 10;
-      width: 2.5rem;
-      height: 2.5rem;
+      @media only screen and (min-width: $bp-medium) {
+        display: flex;
+        position: absolute;
+        top: 10;
+        width: 2.5rem;
+        height: 2.5rem;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--subheading-color);
 
-      text-align: center;
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--subheading-color);
-      // background-color: var(--lightmodebox-bg);
-      border-radius: 4rem;
-      position: absolute;
-
-      top: 2.5%;
-
-      border-radius: 50%;
-      right: 4%;
-
-      // -webkit-transform: translateX(-50%); // translateY(-50%);
-      // transform: translateX(-50%); // translateY(-50%);
+        border-radius: 4rem;
+        position: absolute;
+        top: 2.5%;
+        border-radius: 50%;
+        right: 4%;
+        color: white;
+      }
+      color: white;
     }
-    // background-color: var(--lightmodebox-bg);
-    transition: all 0.3s ease-in;
+
     &:hover {
-      // margin-top: 10px;
-      transform: scale(1.15) rotate(0.5deg);
-      box-shadow: 0px 6px 6px 0px #00000040;
-      cursor: pointer;
+      @media only screen and (min-width: $bp-medium) {
+        transform: scale(1.15);
+        box-shadow: 0px 6px 6px 0px #00000040;
+        cursor: pointer;
+      }
+      color: white;
     }
-    overflow: hidden;
+
     &-container {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+      //   margin-left: 8.6rem;
       @media only screen and (min-width: $bp-smallester) {
         display: grid;
         grid-template-columns: repeat(1, auto);
         row-gap: 4rem;
-        column-gap: 7.9rem;
+        column-gap: 4rem; // 7.9rem;
         justify-content: center;
+        width: 66%;
       }
-      width: 66%;
-      margin: 0 auto;
-      //   margin-left: 8.6rem;
+      @media only screen and (min-width: $bp-medium) {
+      }
       @media only screen and (min-width: $bp-large) {
         grid-template-columns: repeat(2, auto);
       }
       @media only screen and (min-width: $bp-largest) {
         grid-template-columns: repeat(3, auto);
         // justify-content: unset;
+
+        column-gap: 4rem; // 7.9rem;
+      }
+
+      &:after {
+        // background-color: rgba($color-primary-light, 1);
+        background-color: #0b3856;
+        // background-image: url("/mtn-bg");
+        background-size: cover;
+        height: 60rem;
+        position: absolute;
+        top: -16rem;
+        content: ""; /* This is necessary for the pseudo element to work. */
+        display: flex; /* This will put the pseudo element on its own line. */
+        margin: 0 auto; /* This will center the border. */
+        width: 99vw; /* Change this to whatever width you want. */
+        // padding-top: 8rem; /* This creates some space between the element and the border. */
+        height: 100%;
+        border-radius: 0 20px 20px 0;
+        align-items: flex-end;
+        color: white;
+        // border-bottom: 1px solid rgba(white, 0.5);
+        z-index: 0; /* This creates the border. Replace black with whatever color you want. */
+
+        @media only screen and (min-width: $bp-medium) {
+          height: 100%;
+        }
+        @media only screen and (min-width: $bp-largest) {
+          border-radius: 0rem; // 1rem 0rem 0rem 1rem;
+
+          width: 120%;
+          height: 100%;
+          left: 0;
+        }
+        @media only screen and (min-width: $bp-max) {
+          width: 150%;
+          height: 120%;
+          left: 50%;
+          transform: translateX(-50%);
+          border-radius: 0rem;
+        }
       }
     }
 
     &-heading {
       font-family: $font-display;
-      //   font-style: normal;
-      font-weight: 800;
-      font-size: 6rem;
+      font-size: 5.7rem; // 6.5rem;
+      font-style: normal;
+      font-weight: 600;
       line-height: 4.6rem;
+      // letter-spacing: -0.065em;
       text-align: center;
-      letter-spacing: -0.065em;
-      text-align: center;
-      padding-top: 2.2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 4.6rem; // 4rem; // 4.8rem;
+      // color: var(--heading-color);
+      color: white;
+      z-index: 10000;
+      // transform: rotate(2deg);
+      @media only screen and (min-width: $bp-iphone5) {
+      }
+      @media only screen and (min-width: $bp-medium) {
+        font-weight: 600;
+        font-size: 5.2rem; // 6rem;
+        line-height: 4.6rem;
+        text-align: center;
+        // letter-spacing: -0.065em;
+        text-align: center;
+        // padding-top: 2.2rem;
+        margin-bottom: 5rem; // 4rem; // 4.8rem;
+      }
+      &__wrapper {
+        z-index: 1000;
 
-      color: var(--heading-color);
+        // padding: 1.8rem 6.6rem;
+
+        width: 100%;
+
+        height: 10rem;
+
+        display: flex; /* This will put the pseudo element on its own line. */
+        margin: 0 auto; /* This will center the border. */
+        /* Change this to whatever width you want. */
+        justify-content: center;
+        align-items: center;
+        //   left: -28.21rem;
+        //   top: 355.88rem;
+
+        z-index: 2;
+        //   background: rgba(187, 225, 250, 0.025);
+        background: $color-primary-dark; // var(--accent-box-bg);
+        // background: linear-gradient(90deg, #3282b8 0%, #0f4c75 100%);
+        // background: linear-gradient(90deg, #bbe1fa 0%, #3282b8 100%);
+        // border-radius: 0px 0px 24px 24px;
+        // transform: rotate(-2deg);
+        padding: 5rem 6rem 0 6rem;
+        margin-bottom: 4.2rem;
+
+        @media only screen and (min-width: $bp-small) {
+          height: 10.8rem;
+          // padding: 2rem 3rem;
+        }
+        @media only screen and (min-width: $bp-medium) {
+          height: 8rem;
+        }
+        @media only screen and (min-width: $bp-large) {
+          height: 9rem;
+          // padding: 2rem 3rem;
+        }
+      }
     }
     &-subheading {
-      width: 6.1rem;
+      width: fit-content; //6.1rem;
       height: 2.1rem;
       text-align: center;
       margin: 0 auto;
       font-family: $font-primary;
       font-style: normal;
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1.8rem;
       line-height: 1.8rem;
-      letter-spacing: -0.01em;
+      // letter-spacing: -0.01em;
       text-transform: uppercase;
       margin-bottom: 4.3rem;
 
       color: var(--subheading-color);
+      @media only screen and (min-width: $bp-medium) {
+        font-size: 1.4rem;
+      }
     }
     &-state {
       display: none;
@@ -188,145 +447,279 @@
     &__snow-amount-box {
       //   margin-left: 7.6rem;
       display: flex;
-      justify-content: space-around;
-      gap: 1.4rem;
-      width: 23rem;
+      justify-content: space-between;
+      gap: 3rem; //4.2rem; // 2.4rem; // 1.4rem;
+      width: fit-content;
       margin: 0 auto;
       font-family: $font-primary;
-      margin-bottom: 5.3rem;
+      margin-bottom: 9.7rem; // 8.9rem; // 8.4rem; // 4.5rem;
+      align-items: flex-end;
+
+      width: 100%;
+
+      // background-color: rgba($color-primary-light, 0.2);
+      // border-bottom: 2.5px solid rgba($color-primary-light, 0.75);
+
+      padding: 0.5rem 6.1rem;
+
+      // border-radius: 5px;
+
+      @media only screen and (min-width: $bp-medium) {
+        margin-bottom: 8.2rem; //8.2rem; // 7.4rem;
+      }
 
       &-heading {
         // font-family: Poppins;
-        font-size: 2.6rem;
+        font-family: $font-primary;
+        font-size: 3.2rem;
         font-style: normal;
         font-weight: 700;
         line-height: 3.6rem;
-        letter-spacing: -0.065em;
-        text-align: left;
-        color: var(--heading-color);
+        // letter-spacing: -0.025em;
+        text-align: center;
+        color: $color-primary-dark; // $color-black;
+        @media only screen and (min-width: $bp-medium) {
+          font-size: 2.6rem;
+          font-style: normal;
+          font-weight: 700;
+
+          line-height: 2.8rem;
+          letter-spacing: -0.005em;
+          text-align: left;
+        }
       }
       &-subheading {
         font-family: $font-primary;
-        font-size: 1.2rem;
+        font-size: 2rem;
         font-style: normal;
         font-weight: 700;
-        line-height: 1.8rem;
+        line-height: 3rem;
         letter-spacing: -0.01em;
         text-align: left;
         text-transform: uppercase;
-
         color: var(--subheading-color);
+
+        @media only screen and (min-width: $bp-medium) {
+          font-size: 1.2rem;
+        }
       }
       &-quantity {
         // font-family: Poppins;
-        font-size: 3.8rem;
+        font-size: 5.8rem;
+        // height: 8rem;
+        // width: 8rem;
+        // background-color: $color-primary-light;
+        // border-radius: 40px;
+        text-align: center;
+        vertical-align: center;
         font-style: normal;
-        font-weight: 700;
-        line-height: 4.4rem;
-        letter-spacing: -0.065em;
+        font-weight: 600;
+        line-height: 6rem; // 3.6rem;
+        letter-spacing: -0.035em;
         text-align: left;
         color: var(--heading-color);
+        color: $color-primary-dark;
+        // border-bottom: 4px solid $color-primary-light;
+        @media only screen and (min-width: $bp-medium) {
+          font-size: 4.6rem;
+        }
       }
     }
 
     &__forecast-heading {
       font-family: $font-primary;
-      font-size: 1.4rem;
+      font-size: 2rem;
       font-style: normal;
       font-weight: 600;
-      line-height: 2.1rem;
+      line-height: 2.9rem;
       letter-spacing: -0.03em;
       text-align: center;
       color: var(--subheading-color);
+      @media only screen and (min-width: $bp-medium) {
+        font-size: 1.6rem;
+        line-height: 2.1rem;
+      }
     }
     &__forecast-days-box {
-      padding: 0.6rem 2.4rem;
+      padding: 0.6rem 6.1rem; // 0.6rem 2.4rem;
 
       @media only screen and (min-width: $bp-smallester) {
-        padding: 0.6rem 6rem;
+        // padding: 0.6rem 6rem;
       }
       display: flex;
       justify-content: space-between;
       color: var(--text-color);
       &-cell {
-        display: block;
-        margin: 0 auto;
+        // display: block;
+        // margin: 0 auto;
       }
       &-day {
         color: var(--subheading-color);
 
         font-family: $font-primary;
-        font-size: 1.6rem;
+        font-size: 2rem;
         font-style: normal;
         font-weight: 700;
-        line-height: 1.8rem;
+        // line-height: 2.4rem;
         letter-spacing: 0em;
         text-align: center;
         @media only screen and (min-width: $bp-medium) {
-          font-size: 1.4rem;
+          font-size: 1.6rem;
+          // line-height: 2rem;
         }
       }
       &-amount {
         color: var(--text-color);
         font-family: $font-primary;
-        font-size: 1.8rem;
+        font-size: 2.2rem;
         font-style: normal;
         font-weight: 500;
-        line-height: 2.7rem;
-        letter-spacing: -0.065em;
+        line-height: 3rem;
+        letter-spacing: -0.035em;
         text-align: center;
+        @media only screen and (min-width: $bp-medium) {
+          font-size: 1.8rem;
+          line-height: 2.7rem;
+        }
+      }
+    }
+    &__delete {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: white;
+      font-family: $font-primary;
+      display: block;
+      @media only screen and (min-width: $bp-medium) {
+        font-size: 1.6rem;
+        display: none;
+      }
+      .home__card:hover & {
+        display: block;
       }
     }
     &__accent-box {
       /* Rectangle 18 */
 
       position: absolute;
-      padding: 2rem 6rem;
-      margin-right: 6rem;
-      width: 110%;
+      bottom: 0;
+      padding: 0 6rem;
+      // margin-right: 6rem;
+      // width: 110%;
       height: 10rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
       //   left: -28.21rem;
       //   top: 355.88rem;
-      bottom: -25px;
+      // bottom: -25px;
       z-index: 2;
       //   background: rgba(187, 225, 250, 0.025);
-      background: var(--accent-box-bg);
-      border-radius: 0px 0px 24px 24px;
-      transform: rotate(-3deg);
-      @media only screen and (min-width: $bp-medium) {
-        height: 9.25rem;
+      background: $color-primary-dark; // var(--accent-box-bg);
+      // background: linear-gradient(90deg, #3282b8 0%, #0f4c75 100%);
+      // background: linear-gradient(90deg, #bbe1fa 0%, #3282b8 100%);
+      // border-radius: 0px 0px 24px 24px;
+      // transform: rotate(-2deg);
+      @media only screen and (min-width: $bp-small) {
+        // height: 10.8rem;
+        // padding: 2rem 6rem;
       }
+      @media only screen and (min-width: $bp-medium) {
+        height: 8rem;
+      }
+      @media only screen and (min-width: $bp-large) {
+        height: 8rem; // 9.8rem;
+        // padding: 2rem 6rem;
+      }
+
       &:hover {
         // color: var(--heading-color);
         // transform: scale(1.1) rotate(-3deg);
       }
       &__details {
-        color: var(--heading-span-color);
-        transform: rotate(3deg);
-        padding-top: 0.25rem;
+        color: white;
+        // transform: rotate(2deg);
+        // padding-top: 0.25rem;
+        font-family: $font-primary;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.8rem;
+        // padding-right: 1.8rem;
+        // padding-bottom: 5rem;
+        // padding-top: 1rem;
+        line-height: 2.1rem;
+        /* identical to box height */
+        text-align: right;
+        // letter-spacing: -0.01em;
+        display: flex;
+        align-items: center;
+
+        @media only screen and (min-width: $bp-small) {
+          font-size: 1.6rem;
+          // padding-top: 0.25rem;
+          // padding-bottom: 0rem;
+          padding-right: 0rem;
+        }
+        @media only screen and (min-width: $bp-medium) {
+          font-size: 1.6rem;
+          // padding-top: 0.1rem;
+          // padding-bottom: 0rem;
+          display: none;
+
+          padding-right: 0rem;
+        }
         & > button {
           &:hover {
             color: var(--heading-color);
-            transform: scale(1.1) rotate(0.5deg);
+            // transform: scale(1.1) rotate(0.5deg);
+            @media only screen and (min-width: $bp-medium) {
+              color: var(--heading-color);
+              // transform: scale(1.1) rotate(0.5deg);
+            }
           }
         }
-
-        display: none;
 
         .home__card:hover & {
           display: block;
         }
-        font-family: $font-primary;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 1rem;
-        line-height: 2.1rem;
-        /* identical to box height */
-        text-align: right;
-        letter-spacing: -0.01em;
-
-        // color: rgba(255, 255, 255, 0.95);
       }
     }
+  }
+}
+
+.home__card__snowflake {
+  position: absolute;
+  // display: none;
+  left: -2rem; // -6rem; //53
+  bottom: 55%; // 85%; // 80%;
+  // transform: rotate(30deg);
+  // bottom: 4rem;
+  & > img {
+    height: 10rem; //12
+    width: 10rem;
+  }
+
+  @media only screen and (min-width: $bp-small) {
+    bottom: 54%; // 85%; // 80%;
+  }
+  @media only screen and (min-width: $bp-medium) {
+    bottom: 52%; // 85%; // 80%;
+  }
+  @media only screen and (min-width: $bp-large) {
+    bottom: 50%; // 85%; // 80%;
+  }
+}
+.home__card__mtn-bg {
+  position: absolute;
+  left: 50%;
+  top: 21rem; // 13rem;
+  transform: translateX(-50%);
+  @media only screen and (min-width: $bp-medium) {
+    top: 17.8rem; //16rem; // 17rem;
+  }
+  & > img {
+    height: 10.4rem;
+    object-fit: cover;
+    // width: 100%;
   }
 }

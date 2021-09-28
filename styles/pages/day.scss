@@ -16,7 +16,7 @@
 
     &__graph-container {
       margin: 0 auto;
-      width: 80%;
+      width: 100%;
       @media only screen and (min-width: $bp-small) {
         width: min(104.4rem, 90%);
       }

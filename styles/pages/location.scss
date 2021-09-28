@@ -1,38 +1,5 @@
-// html {
-//   transition: color 300ms, background-color 300ms;
-//   background: var(--background-primary);
-//   color: var(--color-primary);
-// --bg-primary: $color-white;
-//   --subheading-color: rgba(255, 255, 255, 0.2);
-//   --heading-color: $color-primary-dark;
-//   --text-color: $color-black;
-//   --accent-box-bg: rgba(2, 3, 3, 0.2);
-//   --lightmodebox-bg: $color-primary-dark;
-// }var(--heading-color);
-//
-//         <div>
-//           Back Button //will have to use icons fot it or arrow smbol &arrRight{" "}
-//         </div>
-//         <div>
-//           Day picker ie day and or arrow brackets to pick next day also back
-//           button
-//         </div>
-//         {state && (
-//           <Graph
-//             location={location}
-//             isHourlyTitles={false}
-//             dayIndex={null}
-//             data={
-//               weatherAccumulation(queryClient?.queryCache?.queries[id].state)[
-//                 "snowPerDay"
-//               ]
-//             }
-//           />
-//         )}
-//       </div>
-
 .location {
-  background-color: var(--bg-primary);
+  background-color: rgb(37, 52, 61); // var(--graph-container-bg);
   // background-color: var(--weather-container-bg);
   //yeah so just change this to min height so doesnt show white but then theres the clash of colors between sections wtf
   min-height: 100vh;

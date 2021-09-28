@@ -67,13 +67,14 @@
     margin: 0 0 4rem 2rem !important;
   }
   &__container {
+    width: 90%;
     @media only screen and (min-width: $bp-smallester) {
       // max-width: 104.4rem;
-      width: 70%;
+      width: 90%;
     }
     @media only screen and (min-width: $bp-medium) {
       // max-width: 104.4rem;
-      width: 80%;
+      width: 90%;
     }
     @media only screen and (min-width: $bp-large) {
       // max-width: 104.4rem;
@@ -83,7 +84,6 @@
       // max-width: 104.4rem;
       width: 100%;
     }
-    width: 80%;
     &--top {
       padding: 1rem;
       padding-bottom: 0rem;

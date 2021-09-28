@@ -1,6 +1,6 @@
 .darkmode {
   z-index: 10;
-  margin: 0rem auto;
+  // margin: 0rem auto;
   // height: 2rem; //7.5rem; // 3.8rem;
   width: 15rem; //11.9rem;
   // padding-top: 3px;
@@ -22,12 +22,12 @@
   // flex-direction: column;
   justify-content: center;
   gap: 0rem; //0.15rem;
-  position: absolute;
-  right: 3rem;
-  @media only screen and (min-width: $bp-small) {
-    right: 5.5rem;
-  }
-  margin: 3.4rem 0 0 5.5rem;
+  // position: absolute;
+  // right: 3rem;
+  // @media only screen and (min-width: $bp-small) {
+  //   right: 5.5rem;
+  // }
+  // margin: 3.4rem 0 0 5.5rem;
   & > button {
     color: var(--text-color); //var(--text-color);
     &:hover {

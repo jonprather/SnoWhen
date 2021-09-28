@@ -16,14 +16,14 @@ export default function index() {
       <header className='landing-page-header'>
         <div className='landing-page-header__container'>
           <div className='landing-page-header__container__header-box'>
-            <h1 className='landing-page-header__container__heading'>SnoWhen</h1>
-            <h2 className='landing-page-header__container__subheading mb-12'>
-              Know When Its Snowing
+            <h1 className='landing-page-header__container__heading'>
+              Know When It's Snowing
+            </h1>
+            <h2 className='landing-page-header__container__subheading'>
+              The Simplest way to find your next powder day
             </h2>
           </div>
-          <p className='landing-page-header__container__text'>
-            The Simplest way to find your next powder day{" "}
-          </p>
+          {/* <p className='landing-page-header__container__text'> </p> */}
           <button
             onClick={handleClick}
             className='btn--check-snow landing-page-header__container__button'
@@ -32,17 +32,17 @@ export default function index() {
           </button>
         </div>
 
-        <div className='landing-page-header__img-container'>
-          <Image
-            src='/hero.jpg'
+        {/* <div className='landing-page-header__img-container'> */}
+        {/* <Image
+            src='/hero-bg.png'
             alt='Picture of Snowy Mountains'
             layout='fill'
             objectFit='cover'
             className={"landing-page-header__img-container__img"}
-          />
-        </div>
+          /> */}
+        {/* </div> */}
       </header>
-      <main className='landing-page-forecast'>
+      {/* <main className='landing-page-forecast'>
         <div className='landing-page-forecast__container'>
           <div className='landing-page-forecast__container__header-box'>
             <h1 className='landing-page-forecast__container__heading'>
@@ -79,7 +79,7 @@ export default function index() {
             className={"landing-page-forecast__img-container__img"}
           />
         </div>
-      </main>
+      </main> */}
     </section>
   );
 }

@@ -1,143 +1,150 @@
 .locations__search-box {
-  //   position: relative;
+  position: relative;
+  top: -10rem;
   z-index: 100;
 
   // position: relative;
   // top: -3rem; //-5re; // -12.5rem; // -12.5rem; //for when there is a picture 12.5 is good -15rem; //
-  background: $color-primary-dark;
-  border-radius: 4.7rem;
-  box-shadow: $box-shadow;
-  height: 30rem;
-  width: 120rem; //61.5rem;
+  background: #ffffff;
+  box-shadow: 2px 7px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem; // 1rem; //4.7rem;
+
   margin: 0 auto;
 
-  height: 20rem;
-  width: 70%;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 66%;
-  border-radius: 24px;
-  border-radius: 24px;
-  -moz-border-radius: 24px;
-  -webkit-border-radius: 24px;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
 
+  width: 90vw;
+  // height: 17.5rem;
+
+  @media only screen and (min-width: $bp-iphone5) {
+    width: 79vw;
+    padding-bottom: 1rem;
+  }
+  @media only screen and (min-width: $bp-smallester) {
+    width: 60vw; // 46rem;
+    // top: -5.2rem;
+  }
   @media only screen and (min-width: $bp-smallest) {
-    height: 20rem; // 20rem;
-    width: 60rem; //61.5rem;
-    border-radius: 48px;
-    -moz-border-radius: 48px;
-    -webkit-border-radius: 48px;
+    width: 44rem; // 46rem;
+    // top: -5.2rem;
+  }
+  @media only screen and (min-width: $bp-medium) {
+    width: 46rem;
+    top: -5.2rem;
+    padding-bottom: 0rem;
   }
 
-  & > select {
-    width: 20rem;
-    // height: 2.5rem;
-    border-radius: 2.5rem;
-    -moz-border-radius: 24px;
-    -webkit-border-radius: 24px;
-    padding: 0.25rem;
-    padding-left: 2.2rem;
+  &__inner-container {
+    padding: 3.3rem;
+    padding-bottom: 3.4rem;
+    &__select-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+      @media only screen and (min-width: $bp-medium) {
+        flex-direction: row;
+      }
+      margin-bottom: 2.9rem;
 
-    font-family: $font-primary;
-    font-size: 2rem;
-    font-weight: 500;
-    color: $color-primary-dark; //var(--subheading-color); //var(--heading-span-color); //
-    background-color: white; //var(--bg-primary);
-    outline: none;
-    border: none;
-    // box-shadow: 2px 2px $color-black;
-    @media only screen and (min-width: $bp-large) {
-      // height: 3.5rem; // 20rem;
-      // width: 21rem; //61.5rem;
-    }
-  }
-  &__title {
-    /* Find a Location */
-    padding-top: 4rem;
-    font-family: $font-primary;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 2.4rem;
-    line-height: 3.6rem;
-    text-align: center;
+      &__label {
+        //typography
+        font-family: $font-primary;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 2.4rem;
+        line-height: 2.4rem;
+        text-align: center;
+        letter-spacing: -0.065em;
+        // margin-right: 2.1rem;
+        margin-bottom: 2rem;
+        @media only screen and (min-width: $bp-iphone5) {
+          // font-size: 2rem;
+        }
+        @media only screen and (min-width: $bp-small) {
+        }
+        @media only screen and (min-width: $bp-medium) {
+          margin-bottom: 0rem;
+          font-size: 1.8rem;
+        }
+        @media only screen and (min-width: $bp-largest) {
+          // font-size: 1.6rem;
+        }
+      }
+      &__select {
+        width: 92%;
+        height: 4.8rem; // 4.6rem;
+        background: rgba(0, 0, 0, 0.02);
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        box-sizing: border-box;
+        border-radius: 0.6rem;
 
-    color: #ffffff;
-    margin-bottom: 4.4rem;
-  }
+        padding-left: 1rem;
 
-  &__header {
-    text-transform: capitalize;
-    font-family: Poppins;
-    font-size: 2.3rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 2.1rem;
-    letter-spacing: 0em;
-    text-align: center;
-    margin-top: 3.1rem;
-    margin-bottom: 3.4rem;
-  }
-
-  &__paragraph {
-    font-family: Poppins;
-    font-size: 1.2rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.9rem;
-    letter-spacing: 0em;
-    text-align: center;
-    margin-bottom: 2.5rem;
-    width: 45ch;
-  }
-
-  &__input-container {
-    position: relative;
-    width: 44.8rem;
-    height: 5.6rem;
-    border: 1px solid #ea0000;
-    box-sizing: border-box;
-    border-radius: 47px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    &-input {
-      margin-left: 2.9rem;
-      width: 60%;
-      height: 3rem;
-      // padding-left: 1.9rem;
-      font-family: Poppins;
-      font-size: 1.2rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 1.8rem;
-      letter-spacing: 0em;
-      text-align: left;
-      &:focus {
-        outline: none;
+        //typography
+        font-family: $font-primary;
+        font-size: 2.2rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 2.1rem;
+        letter-spacing: -0.065em;
+        @media only screen and (min-width: $bp-medium) {
+          font-size: 1.6rem;
+          width: 26.8rem;
+          height: 4rem;
+        }
       }
     }
-    &-button {
-      margin-right: 0.7rem;
 
-      font-family: Poppins;
-      font-size: 1.4rem;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 2.1rem;
-      letter-spacing: 0em;
-      text-align: center;
+    &__button-box {
+      display: flex;
+      justify-content: center;
+      @media only screen and (min-width: $bp-medium) {
+        justify-content: flex-end;
+      }
 
-      width: 11.6rem;
-      height: 4.6rem;
-
-      /* Red */
-      color: white;
-      background: #ea0000;
-      border-radius: 47px;
+      &__button {
+        // display: flex;
+        justify-content: flex-start;
+        // padding-left: 2rem;
+        width: 92%;
+        height: 5.8rem; //5.6rem;
+        background: #3282b8;
+        border-radius: 0.5rem;
+        color: white;
+        //typography
+        font-family: $font-primary;
+        font-size: 2.2rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 2.1rem;
+        letter-spacing: -0.065em;
+        text-align: center;
+        // @media only screen and (min-width: $bp-iphone5) {
+        //   width: 26.8rem;
+        //   height: 4.8rem; //4rem;
+        //   font-size: 1.6rem;
+        //   // font-size: 1.4rem;
+        // }
+        @media only screen and (min-width: $bp-medium) {
+          width: 11rem;
+          height: 4rem;
+          font-size: 1.6rem;
+          padding-left: 0rem;
+          display: inline-block;
+          // font-size: 1.4rem;
+        }
+        & > span {
+          font-size: inherit;
+          margin-left: 1.1rem;
+          @media only screen and (min-width: $bp-medium) {
+            margin-left: 0.9rem;
+          }
+        }
+      }
     }
   }
 }
