@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import DarkMode from "./darkMode";
 import { NavModal } from "./navModal";
-import { Content } from "./NavModalContent";
 
 export default function nav() {
   // const [open, setOpen] = useState(false);
