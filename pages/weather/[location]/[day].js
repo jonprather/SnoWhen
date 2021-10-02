@@ -63,17 +63,30 @@ export default function location() {
 
   return (
     <div className='day'>
-      <BackButton
-        url={`/weather/${location}?locationId=${locationId}`}
-        path={[location, router?.query?.day]}
-      />
-
-      <div className='day__forecast'>
+      <div className='location__header'>
+        <BackButton
+          url={`/weather/${location}?locationId=${locationId}`}
+          path={[location, router?.query?.day]}
+        />
         <h1 className='heading'>{location}</h1>
         <h2 className='subheading mb-18'>Hourly Forecast</h2>
+      </div>
 
+      <div className='day__forecast'>
         <div className='day__forecast__graph-container'>
+          {weatherObj && altitude && (
+            <Graph
+              location={location}
+              isHourlyTitles={true}
+              dayIndex={dayId}
+              data={weatherObj}
+            />
+          )}
           <div className='day__forecast__graph-container__header'>
+            <SelectAltitude
+              emitAltitude={handleEmitAltitude}
+              altitude={altitude}
+            />
             {!weatherObj && <p className='subheading'>..Loading</p>}
             {weatherObj && (
               <SelectDay
@@ -87,19 +100,7 @@ export default function location() {
                 emit={handleEmit}
               />
             )}
-            <SelectAltitude
-              emitAltitude={handleEmitAltitude}
-              altitude={altitude}
-            />
           </div>
-          {weatherObj && altitude && (
-            <Graph
-              location={location}
-              isHourlyTitles={true}
-              dayIndex={dayId}
-              data={weatherObj}
-            />
-          )}
         </div>
       </div>
       <div className='day__weather'>

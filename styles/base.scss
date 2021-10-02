@@ -35,6 +35,11 @@ html {
   scroll-behavior: smooth;
   // transition: color 3000ms, background-color 3000ms;
 }
+img {
+  // max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
 :root {
   --bg-primary: #ffff;
   --bg-nav: transparent;
@@ -169,7 +174,7 @@ button {
 }
 .link {
   &:hover {
-    cursor: pointer;
+    // cursor: pointer;
   }
 }
 .mb-18 {

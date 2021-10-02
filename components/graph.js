@@ -15,8 +15,10 @@ export default function graph({ data, location, isHourlyTitles }) {
   // 1.2 bc 12px per inch and rem is 10 px so 1.2rem per inch
   return (
     <div className='graph'>
-      {/* <p className='graph__subheading '>Fresh Snow</p> */}
-
+      <div className='graph__header-box'>
+        <p className='graph__subheading '>Fresh Snow</p>
+        <p className='graph__total'>Total {graphTotal}"</p>
+      </div>
       {false && (
         <div>
           <button>{String.fromCharCode(60)}</button> day{" "}

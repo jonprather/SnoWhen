@@ -3,6 +3,7 @@
  */
 import React, { useEffect, useState } from "react";
 import { useQueries } from "react-query";
+import { useQueryClient } from "react-query";
 
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -34,7 +35,10 @@ export default function index() {
   const [sortDirection, setSortDirection] = useState("desc");
   const [searchHistory, setSearchHistory] = useState(null); //by default can set this in useEffect to get from cookie local storage or have default
   const [resort, setResort] = useState(null);
+  const [resortName, setResortName] = useState(null);
+
   const [deleted, setDeleted] = useState(null);
+  const queryClient = useQueryClient();
 
   const [sortFunction, setSortFunction] = useState({
     asc: (a, b) =>
@@ -49,10 +53,25 @@ export default function index() {
     if (typeof document !== "undefined") {
       if (resort) return "";
       //so dont rerrun when resort exists
-      document.documentElement.setAttribute("data-theme", getLocalDarkMode());
+      // document.documentElement.setAttribute("data-theme", getLocalDarkMode());
+      if (!queryClient) return;
+
+      //why is this auto pushing to it ........try having resort
+      // if (results.every((num) => num.isSuccess === true) && resort) {
+      //   router.push(`/weather/${resortName}?resortId=${resort}`);
+      // }
     }
   }, [resort, deleted]);
-
+  async function getCacheId(resortId) {
+    let id = queryClient?.queryCache?.queries.findIndex(
+      (ele) => ele.state.data.id == resortId
+    );
+    let name = queryClient?.queryCache?.queries.find(
+      (ele) => ele.state.data.id == resortId
+    )?.state?.data?.name;
+    console.log("name", name);
+    return { id, name };
+  }
   function handleDeletion(id) {
     localStorage.removeItem(id);
 
@@ -77,13 +96,49 @@ export default function index() {
       return {
         queryKey: [obj.resortCode, obj],
         queryFn: (obj) => getWeather(obj),
-        onSuccess: () => console.log("RESULTS IN THING", results),
+        onSuccess: console.log(""),
       };
     }) ?? []
   );
-
-  function handleEmit(resortObj, msg) {
+  //maybe on success i can check for the combo of onSuccess beign true
+  //and onEmit if its true then push to
+  //use onSuccess to set up some state
+  //or better yet can use results.all are good to go that i have in js return for jsx
+  //when all is good then fire off the push... and i should have the data ready in the cache already
+  // results.every((num) => num.isSuccess === true) when this is ready then push to the next page
+  function handleEmit(resortObj, name) {
+    console.log("ResorObj emmited up", resortObj);
     setResort(resortObj);
+    setResortName(name);
+    router.push(`/weather/${name}/search?resortId=${resortObj}`);
+
+    //how do i wait until this is done need to update state so can rerun a function
+
+    //like have the results in useEffect so when its done it will rerun
+    // when its done it sets dsome state
+
+    // array.indexOf
+    //get id and name from cache to get proper url for next page
+    //this breaks when its the first time... its not in the cache yet... hmm
+    //need anothear approach bc this doesnt work first tiem and that is the most important
+    //its not in the cache but ... so can i just have that shit on the resort obj or in local storage store the id of when it was searched and increment it based on the prior ls value ...
+    // but then pppl can break it if they want to maybe i can use async code?
+    //maybe ....... idk
+
+    //need to access the data obj get correct name .. is that how it pulls in the new data?
+    // router.push(`/weather/${name?.toLowerCase()}?locationId=${id}`);
+    //ok now just need the resort name that correspons to this id
+
+    //actaully i think i should jsut get the name and the resort id from the emit action
+    // then push  that can use the resort id as a param in the above funcitno to get the index and use that to access the
+    //query
+    //so abstract a fn takes in resor tid and puts out id
+    // have the other component use that before it runs its use effect query for it
+
+    //for the click away i need to pass down the open function down
+    //maybe not have it as a toogle
+    // also pass in the children//it will come to me but i feel anx like i have to do it asap or ill never get it or ill forget and it wont get done
+    //bc i feel afraid of not afinishing and needing to impress others with worik or getting a job asap fear econ
   }
 
   return (

@@ -10,7 +10,7 @@
 .landing-page-header {
   max-width: 160rem;
   margin: 0 auto;
-  background-image: url("/hero-bg.png");
+  background-image: url("/hero-bg-small-mr.png");
   background-size: cover;
   height: 100vh;
   min-height: 100vh;
@@ -22,7 +22,9 @@
   background-color: var(
     --graph-container-bg
   ); //var(--graph-container-bg); // $color-primary-light;
-
+  @media only screen and (min-width: $bp-small) {
+    background-image: url("/hero-bg.png");
+  }
   @media only screen and (min-width: $bp-large) {
     display: flex;
     gap: 0;
@@ -68,7 +70,7 @@
       font-style: normal;
       font-weight: 600;
       line-height: 9.6rem;
-      letter-spacing: -0.05em;
+      // letter-spacing: -0.05em;
       text-align: center;
       margin-bottom: 5.4rem;
 

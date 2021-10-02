@@ -134,14 +134,14 @@
     // position: relative;
     //setting this position to relative was key to getting the inner img from next to behave and fit this container
     z-index: 1;
-    background-image: url("/location-hero.png");
+    background-image: url("/location-hero-small-mr.png");
     background-size: cover;
     // height: 100vh;
     background-repeat: no-repeat;
     background-position: center;
     @media only screen and (min-width: $bp-small) {
       padding-top: 13rem; //18rem;
-
+      background-image: url("/location-hero.png");
       height: 42rem;
     }
     @media only screen and (min-width: $bp-medium) {
@@ -326,7 +326,7 @@
           height: 100%;
         }
         @media only screen and (min-width: $bp-largest) {
-          border-radius: 0rem; // 1rem 0rem 0rem 1rem;
+          border-radius: 2rem; // 1rem 0rem 0rem 1rem;
 
           width: 120%;
           height: 100%;

@@ -1,16 +1,59 @@
 .location {
-  background-color: rgb(37, 52, 61); // var(--graph-container-bg);
+  // background-color: rgb(37, 52, 61); // var(--graph-container-bg);
   // background-color: var(--weather-container-bg);
+  background-color: $color-primary-dark;
   //yeah so just change this to min height so doesnt show white but then theres the clash of colors between sections wtf
   min-height: 100vh;
 
-  &__forecast {
-    background-color: var(--weather-container-bg);
-    padding-bottom: 25rem;
-    padding-top: 24rem; // 15.9rem;
+  &__header {
+    background-color: $color-primary-dark;
+    & > h1 {
+      color: white;
+      padding-top: 20rem;
+      // padding-bottom: 20rem;
+    }
+    & > h2 {
+      color: white;
+      padding-bottom: 12rem;
+      margin-bottom: 0;
+    }
+    &--2 {
+      background-color: #f2f2f2;
+      border-radius: 0 2rem 0 0;
+      @media only screen and (min-width: $bp-large) {
+        border-radius: 2rem 2rem 0 0;
+      }
 
-    @media only screen and (min-width: $bp-medium) {
-      padding-top: 18rem; // 15.9rem;
+      & > h1 {
+        color: $color-black;
+        padding-top: 8rem;
+
+        // color: white;
+
+        // padding-top: 20rem;
+        // padding-bottom: 10rem;
+      }
+      & > h2 {
+        color: $color-black;
+        // color: white;
+
+        padding-bottom: 0rem;
+        margin-bottom: -1px;
+      }
+    }
+  }
+  &__forecast {
+    background-color: #f2f2f2f2;
+    //var(--weather-container-bg);
+
+    border-radius: 0 2rem 2rem 0;
+    padding-bottom: 10em; // 25rem;
+    padding-top: 4em; // 15.9rem;
+
+    @media only screen and (min-width: $bp-large) {
+      max-width: 90%;
+      margin: 0 auto;
+      border-radius: 2rem;
     }
     &__daySelector {
     }
@@ -19,7 +62,14 @@
   &__weather {
     // background-color: var(--weather-container-bg);
     padding-bottom: 20rem;
-    padding-top: 18rem;
+    padding-top: 16rem;
+    background-color: #f2f2f2;
+    background-color: $color-primary-dark;
+    @media only screen and (min-width: $bp-large) {
+      max-width: 90%;
+      margin: 0 auto;
+      border-radius: 2rem;
+    }
 
     &__subheading {
       // margin-bottom: 16.6rem;
@@ -28,7 +78,7 @@
 
   &__card {
     &:hover {
-      cursor: pointer;
+      // cursor: pointer;
     }
     overflow: hidden;
     &-container {
@@ -54,7 +104,7 @@
     // background-color: rgba(255, 255, 255, 0.02);
     background: rgba(187, 225, 250, 0.025);
 
-    border-radius: 2.4rem;
+    border-radius: 2rem;
 
     &-heading {
       font-family: $font-display;
@@ -202,7 +252,7 @@
       z-index: 2;
       //   background: rgba(187, 225, 250, 0.025);
       background: var(--accent-box-bg);
-      border-radius: 0px 0px 24px 24px;
+      // border-radius: 0px 0px 24px 24px;
       transform: rotate(-3deg);
 
       &__details {

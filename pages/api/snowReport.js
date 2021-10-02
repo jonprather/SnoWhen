@@ -26,5 +26,6 @@ export default async function handler(req, res) {
   if (619002 == req?.query?.ID) return res.status(200).json(mammothData);
   if (420 == req?.query?.ID) return res.status(200).json(fakeEve);
   if (4201 == req?.query?.ID) return res.status(200).json(fakeK);
+  else return res.status(404).json("'error':'bad resort code'");
   // res.status(200).json(mammothData);
 }

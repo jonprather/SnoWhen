@@ -184,6 +184,7 @@
 .nav__dropdown {
   position: absolute;
   top: 10rem;
+  right: 0;
   width: 25rem;
   height: fit-content;
   // background-color: transparent;
@@ -197,4 +198,12 @@
   border: 1px solid black;
   display: flex;
   flex-direction: column;
+  &__wrapper {
+    position: relative;
+  }
+}
+
+.nav--opaque {
+  position: relative;
+  background-color: pink;
 }

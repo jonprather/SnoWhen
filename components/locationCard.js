@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { formatDate } from "../lib/helpers/formatDate";
+import Image from "next/image";
+
 export default function locationCard({ weatherData, i, id, deleteFromLS }) {
   console.log(weatherData);
   if (!weatherData?.name) return "";

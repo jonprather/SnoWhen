@@ -22,8 +22,9 @@ export default function Location(props) {
     setResort(resort);
   }
   function handleSubmit() {
-    let msg = setLocalAddress(resort);
-    props.emit(resort, msg);
+    setLocalAddress(resort);
+    let { name } = resorts.find((ele) => ele.code == resort);
+    props.emit(resort, name);
     setResort("");
     // router.push('/weather/') //push to item on search
     // setResort("");
