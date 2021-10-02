@@ -4,7 +4,8 @@
   background-color: $color-primary-dark;
   //yeah so just change this to min height so doesnt show white but then theres the clash of colors between sections wtf
   min-height: 100vh;
-
+  overflow: hidden;
+  max-width: 100%;
   &__header {
     background-color: $color-primary-dark;
     & > h1 {

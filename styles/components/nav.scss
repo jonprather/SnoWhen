@@ -67,7 +67,10 @@
     color: white;
 
     display: flex;
-    gap: 2rem;
+    // gap: 2rem;
+    &:first-child {
+      // margin-right: 2rem;
+    }
     margin-right: 1rem;
     align-items: center;
     &__title {
@@ -77,6 +80,7 @@
       width: 4rem;
       min-height: 40px;
       min-width: 40px;
+      margin-right: 2rem;
     }
     &:hover {
       cursor: pointer;
@@ -86,7 +90,8 @@
     color: white;
 
     display: flex;
-    gap: 2.7rem;
+    // gap: 2.7rem;
+
     align-items: center;
     padding: 1.5rem 0; //4.8rem;
     @media only screen and (min-width: $bp-small) {
@@ -96,12 +101,12 @@
     &__links {
       font-family: $font-primary;
       color: white;
-
+      margin-left: 2.7rem;
       display: none;
       @media only screen and (min-width: $bp-small) {
         display: flex;
       }
-      gap: 2rem;
+
       font-size: 1.6rem;
       font-weight: 400;
       &__home {
@@ -109,12 +114,13 @@
 
         font-size: inherit;
         color: white;
+        margin-right: 2rem;
       }
 
       &__about {
         font-size: inherit;
         font-family: inherit;
-
+        margin-right: 2rem;
         color: white;
       }
       &__faq {
@@ -128,7 +134,7 @@
   &__auth-container {
     font-family: $font-primary;
     display: none;
-    gap: 2.7rem;
+    // gap: 2.7rem;
     align-items: center;
     color: white;
     font-weight: 400;
@@ -140,7 +146,7 @@
     &__log-in {
       font-size: inherit;
       font-family: inherit;
-
+      margin-right: 2.7rem;
       color: inherit;
       font-weight: inherit;
       border: 1px solid white;
