@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Content } from "./NavModalContent";
+import { Content } from "./navModalContent";
 
 export const NavModal = ({ children }) => {
   const [open, setOpen] = useState(false);
