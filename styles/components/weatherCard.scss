@@ -10,6 +10,8 @@
   }
   // background-color: var(--graph-container-bg);
   &__container {
+    max-width: 100%;
+    overflow: hidden;
     padding: 8em 5em;
     display: grid;
     // grid-template-columns: repeat(1, auto);
@@ -25,11 +27,13 @@
     border-radius: 0 0 2rem 0;
     background-color: #f2f2f2;
     // max-width: 90%;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    margin: 0 auto;
 
-    @media only screen and (min-width: $bp-medium) {
+    @media only screen and (min-width: $bp-smallester) {
       // grid-template-columns: repeat(2, auto);
       // justify-content: center;
+      grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+
       padding: 8em;
     }
     @media only screen and (min-width: $bp-large) {

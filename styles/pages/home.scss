@@ -459,27 +459,28 @@
 
       width: 100%;
 
-      // background-color: rgba($color-primary-light, 0.2);
-      // border-bottom: 2.5px solid rgba($color-primary-light, 0.75);
-
-      padding: 0.5rem 6.1rem;
+      padding: 0.5rem 4rem;
 
       // border-radius: 5px;
 
       @media only screen and (min-width: $bp-medium) {
         margin-bottom: 8.2rem; //8.2rem; // 7.4rem;
+        padding: 0.5rem 6.1rem;
       }
 
       &-heading {
         // font-family: Poppins;
         font-family: $font-primary;
-        font-size: 3.2rem;
+        font-size: 2.6rem; //2.8rem; //3.2rem;
         font-style: normal;
         font-weight: 700;
         line-height: 3.6rem;
         // letter-spacing: -0.025em;
-        text-align: center;
+        text-align: left;
         color: $color-primary-dark; // $color-black;
+        @media only screen and (min-width: $bp-smallest) {
+          font-size: 2.8rem;
+        }
         @media only screen and (min-width: $bp-medium) {
           font-size: 2.6rem;
           font-style: normal;
@@ -543,10 +544,10 @@
       }
     }
     &__forecast-days-box {
-      padding: 0.6rem 6.1rem; // 0.6rem 2.4rem;
+      padding: 0.6rem 4rem; // 0.6rem 2.4rem;
 
-      @media only screen and (min-width: $bp-smallester) {
-        // padding: 0.6rem 6rem;
+      @media only screen and (min-width: $bp-medium) {
+        padding: 0.6rem 6rem;
       }
       display: flex;
       justify-content: space-between;
@@ -604,7 +605,7 @@
 
       position: absolute;
       bottom: 0;
-      padding: 0 6rem;
+      padding: 0 4rem;
       // margin-right: 6rem;
       // width: 110%;
       height: 10rem;
@@ -628,6 +629,7 @@
       }
       @media only screen and (min-width: $bp-medium) {
         height: 8rem;
+        padding: 0 6rem;
       }
       @media only screen and (min-width: $bp-large) {
         height: 8rem; // 9.8rem;
