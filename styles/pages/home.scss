@@ -12,7 +12,7 @@
   margin: 0 auto;
   &__heading-container {
     z-index: 1000;
-    padding-top: 5rem; //10rem;
+    // padding-top: 5rem; //10rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -196,7 +196,7 @@
     position: relative;
     box-shadow: $box-shadow;
 
-    margin-bottom: 6rem;
+    margin-bottom: 3rem;
     // height: 50rem; // // 51rem; //46rem;
     // border: 0.5px solid rgba(lightgray, 0.25);
     width: 90vw;
@@ -209,7 +209,7 @@
 
     @media only screen and (min-width: $bp-iphone5) {
       // height: 41rem;
-      margin-bottom: 8rem;
+      // margin-bottom: 8rem;
 
       width: 79vw;
     }
