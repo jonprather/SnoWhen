@@ -8,8 +8,10 @@
     align-items: center;
 
     margin-top: 12rem; //15.9rem;
-    margin-left: 4rem;
+    margin-left: 3rem;
+    // left: 5%;
     @media only screen and (min-width: $bp-small) {
+      left: 0;
       margin-left: 7.7rem;
     }
     @media only screen and (min-width: $bp-medium) {
@@ -29,7 +31,7 @@
     outline: none;
     transition: all 0.05s ease-in;
     &:hover {
-      color: var(--selection-text);
+      // color: var(--selection-text);
     }
     &__lt {
       font-family: $font-primary;

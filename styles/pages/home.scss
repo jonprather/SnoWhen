@@ -25,7 +25,7 @@
 
     &__heading {
       z-index: inherit;
-      color: var(--text-color); //var(--heading-color);
+      // color: var(--text-color); //var(--heading-color);
       color: white !important;
 
       //////////lato
@@ -197,10 +197,10 @@
     box-shadow: $box-shadow;
 
     margin-bottom: 6rem;
-    height: 52rem; // // 51rem; //46rem;
+    // height: 50rem; // // 51rem; //46rem;
     // border: 0.5px solid rgba(lightgray, 0.25);
     width: 90vw;
-    background-color: var(--graph-container-bg); //rgba(255, 255, 255, 0.02);
+    background-color: white; // var(--graph-container-bg); //rgba(255, 255, 255, 0.02);
     // background: $card-background;
     // padding-top: 2.2rem;
     // border-radius: 1px; // 2.4rem;
@@ -236,7 +236,7 @@
     }
     @media only screen and (min-width: $bp-medium) {
       // padding-top: 0.5rem;
-      height: 44rem;
+      // height: 44rem;
       width: 39rem;
     }
 
@@ -245,7 +245,7 @@
       font-family: $font-display;
 
       & > button {
-        color: var(--subheading-color);
+        color: white; /// var(--subheading-color);
       }
     }
     &:hover .hidden {
@@ -258,7 +258,7 @@
         text-align: center;
         font-size: 1.2rem;
         font-weight: 800;
-        color: var(--subheading-color);
+        color: white; // var(--subheading-color);
 
         border-radius: 4rem;
         position: absolute;
@@ -394,7 +394,7 @@
         // border-radius: 0px 0px 24px 24px;
         // transform: rotate(-2deg);
         padding: 5rem 6rem 0 6rem;
-        margin-bottom: 4.2rem;
+        margin-bottom: 3.6rem;
 
         @media only screen and (min-width: $bp-small) {
           height: 10.8rem;
@@ -423,7 +423,7 @@
       text-transform: uppercase;
       margin-bottom: 4.3rem;
 
-      color: var(--subheading-color);
+      // color: var(--subheading-color);
       @media only screen and (min-width: $bp-medium) {
         font-size: 1.4rem;
       }
@@ -500,7 +500,7 @@
         letter-spacing: -0.01em;
         text-align: left;
         text-transform: uppercase;
-        color: var(--subheading-color);
+        color: #0f4c75; // var(--subheading-color);
 
         @media only screen and (min-width: $bp-medium) {
           font-size: 1.2rem;
@@ -520,7 +520,7 @@
         line-height: 6rem; // 3.6rem;
         letter-spacing: -0.035em;
         text-align: left;
-        color: var(--heading-color);
+        // color: var(--heading-color);
         color: $color-primary-dark;
         // border-bottom: 4px solid $color-primary-light;
         @media only screen and (min-width: $bp-medium) {
@@ -537,7 +537,7 @@
       line-height: 2.9rem;
       letter-spacing: -0.03em;
       text-align: center;
-      color: var(--subheading-color);
+      color: $color-primary-dark; //var(--subheading-color);
       @media only screen and (min-width: $bp-medium) {
         font-size: 1.6rem;
         line-height: 2.1rem;
@@ -545,19 +545,21 @@
     }
     &__forecast-days-box {
       padding: 0.6rem 4rem; // 0.6rem 2.4rem;
-
+      padding-bottom: 12em;
       @media only screen and (min-width: $bp-medium) {
         padding: 0.6rem 6rem;
+        padding-bottom: 10em;
       }
       display: flex;
       justify-content: space-between;
-      color: var(--text-color);
+      // color: var(--text-color);
+
       &-cell {
         // display: block;
         // margin: 0 auto;
       }
       &-day {
-        color: var(--subheading-color);
+        color: $color-primary-dark; //var(--subheading-color);
 
         font-family: $font-primary;
         font-size: 2rem;
@@ -572,9 +574,9 @@
         }
       }
       &-amount {
-        color: var(--text-color);
+        color: $color-black; // var(--text-color);
         font-family: $font-primary;
-        font-size: 2.2rem;
+        font-size: 2.6rem;
         font-style: normal;
         font-weight: 500;
         line-height: 3rem;
@@ -674,10 +676,10 @@
         }
         & > button {
           &:hover {
-            color: var(--heading-color);
+            // color: var(--heading-color);
             // transform: scale(1.1) rotate(0.5deg);
             @media only screen and (min-width: $bp-medium) {
-              color: var(--heading-color);
+              // color: var(--heading-color);
               // transform: scale(1.1) rotate(0.5deg);
             }
           }
@@ -694,8 +696,8 @@
 .home__card__snowflake {
   position: absolute;
   // display: none;
-  left: -2rem; // -6rem; //53
-  bottom: 55%; // 85%; // 80%;
+  left: -3rem; // -6rem; //53
+  bottom: 54%; // 85%; // 80%;
   // transform: rotate(30deg);
   // bottom: 4rem;
   & > img {
@@ -707,6 +709,8 @@
     bottom: 54%; // 85%; // 80%;
   }
   @media only screen and (min-width: $bp-medium) {
+    left: -2rem; // -6rem; //53
+
     bottom: 52%; // 85%; // 80%;
   }
   @media only screen and (min-width: $bp-large) {

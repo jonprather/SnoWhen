@@ -63,38 +63,38 @@ img {
 // @media (prefers-color-scheme: light) {
 
 // }
-html[data-theme="dark"] {
-  // transition: color 3000ms, background-color 3000ms;
+// html[data-theme="dark"] {
+//   // transition: color 3000ms, background-color 3000ms;
 
-  /////////
-  --bg-primary: rgba(27, 38, 44, 100);
-  --bg-nav: rgba(27, 38, 44, 100);
-  --subheading-color: rgba(255, 255, 255, 0.75);
-  --home-header-bg: rgba(27, 38, 44, 100);
-  --heading-color: #3282b8; //#bbe1fa; // #0f4c75;
-  --heading-span-color: #ffff; //
-  --text-color: #ffff;
-  --selection-text: #0f4c75;
+//   /////////
+//   --bg-primary: rgba(27, 38, 44, 100);
+//   --bg-nav: rgba(27, 38, 44, 100);
+//   --subheading-color: rgba(255, 255, 255, 0.75);
+//   --home-header-bg: rgba(27, 38, 44, 100);
+//   --heading-color: #3282b8; //#bbe1fa; // #0f4c75;
+//   --heading-span-color: #ffff; //
+//   --text-color: #ffff;
+//   --selection-text: #0f4c75;
 
-  --underline-color: #3282b8;
-  --accent-box-bg: rgba(27, 38, 44, 0.3);
-  --landing-accent-box-bg: rgba(27, 38, 44, 100); // rgba(187, 225, 250, 0.05);
-  // rgba(187, 225, 250, 0.05);
-  --lightmodebox-bg: rgb(
-    37,
-    52,
-    61
-  ); //rgba(32, 44, 51, 0.932); //rgba(255, 255, 255, 0.9);
-  --graph-container-bg: rgb(37, 52, 61); //rgba(255, 255, 255, 0.02);
-  --weather-container-bg: rgba(
-    32,
-    44,
-    51,
-    0.932
-  ); // rgba(255, 255, 255, 0.005);
-  --weather-card-bg: rgba(255, 255, 255, 0.005);
-  --weather-card-desc-bg: rgba(255, 255, 255, 0.01);
-}
+//   --underline-color: #3282b8;
+//   --accent-box-bg: rgba(27, 38, 44, 0.3);
+//   --landing-accent-box-bg: rgba(27, 38, 44, 100); // rgba(187, 225, 250, 0.05);
+//   // rgba(187, 225, 250, 0.05);
+//   --lightmodebox-bg: rgb(
+//     37,
+//     52,
+//     61
+//   ); //rgba(32, 44, 51, 0.932); //rgba(255, 255, 255, 0.9);
+//   --graph-container-bg: rgb(37, 52, 61); //rgba(255, 255, 255, 0.02);
+//   --weather-container-bg: rgba(
+//     32,
+//     44,
+//     51,
+//     0.932
+//   ); // rgba(255, 255, 255, 0.005);
+//   --weather-card-bg: rgba(255, 255, 255, 0.005);
+//   --weather-card-desc-bg: rgba(255, 255, 255, 0.01);
+// }
 button {
   border: 3px solid transparent;
   padding: 0.5rem 0rem;

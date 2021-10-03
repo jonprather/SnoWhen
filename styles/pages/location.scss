@@ -119,7 +119,7 @@
       padding-top: 2.2rem;
       margin-bottom: 1rem;
 
-      color: var(--heading-color);
+      color: $color-black; // var(--heading-color);
     }
     &-subheading {
       width: 6.1rem;
@@ -135,7 +135,7 @@
       text-transform: uppercase;
       margin-bottom: 4.3rem;
 
-      color: var(--subheading-color);
+      color: $color-primary-dark; // var(--subheading-color);
     }
     &-state {
       position: absolute;

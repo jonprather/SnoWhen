@@ -53,7 +53,7 @@ export default function locationCard({ weatherData, i, id, deleteFromLS }) {
                     {formatDate(day.date)}
                   </p>
                   <p className='home__card__forecast-days-box-amount'>
-                    {day.total} "
+                    {day.total}"
                   </p>
                 </div>
               );
