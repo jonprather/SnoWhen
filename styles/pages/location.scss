@@ -5,7 +5,10 @@
   //yeah so just change this to min height so doesnt show white but then theres the clash of colors between sections wtf
   min-height: 100vh;
   overflow: hidden;
-  max-width: 100%;
+  max-width: 160rem;
+  margin: 0 auto;
+  position: relative;
+  // max-width: 100%;
   &__header {
     background-color: $color-primary-dark;
     & > h1 {
@@ -27,7 +30,7 @@
 
       & > h1 {
         color: $color-black;
-        padding-top: 8rem;
+        padding-top: 6rem;
 
         // color: white;
 
@@ -48,7 +51,7 @@
     //var(--weather-container-bg);
 
     border-radius: 0 2rem 2rem 0;
-    padding-bottom: 10em; // 25rem;
+    padding-bottom: 8em; // 25rem;
     padding-top: 4em; // 15.9rem;
 
     @media only screen and (min-width: $bp-large) {
@@ -63,12 +66,14 @@
   &__weather {
     // background-color: var(--weather-container-bg);
     padding-bottom: 20rem;
-    padding-top: 16rem;
+    padding-top: 8rem;
     background-color: #f2f2f2;
     background-color: $color-primary-dark;
     @media only screen and (min-width: $bp-large) {
       max-width: 90%;
       margin: 0 auto;
+      padding-top: 14rem;
+
       border-radius: 2rem;
     }
 

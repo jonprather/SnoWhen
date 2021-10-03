@@ -62,6 +62,7 @@
         font-size: 4rem !important;
         font-weight: 500 !important;
         letter-spacing: 0em !important;
+        opacity: 0.95;
       }
     }
     &__mtn {
@@ -589,8 +590,9 @@
       }
     }
     &__delete {
-      font-size: 1.8rem;
+      font-size: 1.88rem;
       font-weight: 500;
+      opacity: 0.9;
       color: white;
       font-family: $font-primary;
       display: block;
@@ -646,10 +648,11 @@
         color: white;
         // transform: rotate(2deg);
         // padding-top: 0.25rem;
+        opacity: 0.9;
         font-family: $font-primary;
         font-style: normal;
         font-weight: 500;
-        font-size: 1.8rem;
+        font-size: 1.88rem;
         // padding-right: 1.8rem;
         // padding-bottom: 5rem;
         // padding-top: 1rem;
