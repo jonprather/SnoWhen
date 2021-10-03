@@ -24,7 +24,7 @@
     }
 
     &__heading {
-      z-index: inherit;
+      z-index: 10000;
       // color: var(--text-color); //var(--heading-color);
       color: white !important;
 

@@ -17,7 +17,7 @@
 .heading {
   @extend %heading;
   font-size: 5rem;
-  color: var(--heading-color);
+  color: $color-black; // var(--heading-color);
   line-height: 10rem;
   letter-spacing: -0.08em;
 
@@ -38,13 +38,11 @@
   padding-top: 2.2rem;
   margin-bottom: 2.6rem;
   text-transform: capitalize;
-
-  color: var(--heading-color);
 }
 .subheading {
   font-family: $font-primary;
 
-  color: var(--subheading-color);
+  color: $color-primary-dark; // var(--subheading-color);
   font-size: 2rem !important;
   font-style: normal;
   font-weight: 600;
@@ -64,8 +62,6 @@
 
   text-transform: uppercase;
   // margin-bottom: 4.3rem;
-
-  color: var(--subheading-color);
 }
 .heading-small {
   font-family: $font-primary;
