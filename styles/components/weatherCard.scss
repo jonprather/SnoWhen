@@ -1,9 +1,11 @@
 .weather-card {
+  overflow: hidden;
   transition: all 0.2s ease-in;
   background-color: white; //#f2f2f2; // var(--graph-container-bg);
   box-shadow: $box-shadow;
   // min-width: 33rem;
   padding-bottom: 2.8em;
+  border-radius: 4em;
   &:hover {
     // transform: scale(1.1) rotate(0.5deg);
     box-shadow: 0px 6px 6px 0px #00000040;
@@ -75,21 +77,21 @@
   }
 
   &__description-container {
-    width: 24em;
-    height: 8em;
+    // width: 24em;
+    // height: 8em;
     // width: 66%;
     // background: var(--weather-card-desc-bg);
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+    // box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
     // border-radius: 3.25rem;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     margin-bottom: 2.8em;
-    border: 0.5px solid lightgray;
-    padding: 2em;
+    // border-bottom: 0.5px solid lightgray;
+    // padding: 2em;
     & > p {
-      color: var(--heading-span-color); // var(--text-color);
+      color: $color-black; // var(--heading-span-color); // var(--text-color);
       font-family: $font-primary;
       font-size: 3rem; //2.4rem; // 1.6rem;
       font-style: normal;

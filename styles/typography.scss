@@ -30,14 +30,15 @@
   font-family: $font-display;
   //   font-style: normal;
   font-weight: 800;
-  font-size: 8rem;
+  font-size: 6rem; // 8rem;
   line-height: 6.5rem;
   text-align: center;
   letter-spacing: 0;
   text-align: center;
   padding-top: 2.2rem;
   margin-bottom: 2.6rem;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
 }
 .subheading {
   font-family: $font-primary;

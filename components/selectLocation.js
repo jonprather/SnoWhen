@@ -19,9 +19,14 @@ export default function Location(props) {
   const [resort, setResort] = useState("");
 
   function handleChange(resort) {
+    setError("");
     setResort(resort);
   }
   function handleSubmit() {
+    if (resort === "") {
+      setError("Please select an option to search.");
+      return;
+    }
     setLocalAddress(resort);
     let { name } = resorts.find((ele) => ele.code == resort);
     props.emit(resort, name);
@@ -31,46 +36,51 @@ export default function Location(props) {
   }
 
   return (
-    <div className='locations__search-box'>
-      {isLoading && <span>Loading...</span>}
-      {error && <span>Error {error.message}</span>}
-      <div className='locations__search-box__inner-container'>
-        <div className='locations__search-box__inner-container__select-box'>
-          <label
-            className='locations__search-box__inner-container__select-box__label'
-            htmlFor='resort'
-          >
-            Select Resort
-          </label>
+    <>
+      <div className='locations__search-box'>
+        {isLoading && <span>Loading...</span>}
+        <div className='locations__search-box__inner-container'>
+          <div className='locations__search-box__inner-container__select-box'>
+            <label
+              className='locations__search-box__inner-container__select-box__label'
+              htmlFor='resort'
+            >
+              Select Resort
+            </label>
 
-          <select
-            className='locations__search-box__inner-container__select-box__select'
-            name='resort'
-            id='resort'
-            value={resort}
-            onChange={(event) => {
-              handleChange(event.target.value);
-            }}
-          >
-            <option value=''></option>
-            {resorts.map((resort, i) => {
-              return (
-                <option key={i} value={resort.code}>
-                  {resort.name}
-                </option>
-              );
-            })}
-          </select>
+            <select
+              className='locations__search-box__inner-container__select-box__select'
+              name='resort'
+              id='resort'
+              value={resort}
+              onChange={(event) => {
+                handleChange(event.target.value);
+              }}
+            >
+              <option selected disabled value=''>
+                Select One
+              </option>
+              {resorts.map((resort, i) => {
+                return (
+                  <option key={i} value={resort.code}>
+                    {resort.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className='locations__search-box__inner-container__button-box'>
+            <button
+              onClick={handleSubmit}
+              className='locations__search-box__inner-container__button-box__button'
+            >
+              <i class='fa fa-search' aria-hidden='true'></i>{" "}
+              <span>Search</span>
+            </button>
+          </div>
         </div>
-        <div className='locations__search-box__inner-container__button-box'>
-          <button
-            onClick={handleSubmit}
-            className='locations__search-box__inner-container__button-box__button'
-          >
-            <i class='fa fa-search' aria-hidden='true'></i> <span>Search</span>
-          </button>
-        </div>
+        {error && <div class='error'>{error}</div>}
       </div>
-    </div>
+    </>
   );
 }
