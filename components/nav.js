@@ -37,6 +37,8 @@ export default function nav() {
                 <Link href='/weather'>
                   <button className=''>Home</button>
                 </Link>
+                <button className=''>Log in</button>
+                <button className=''>Sign up</button>
                 <button className=''>About</button>
                 <button className=''>FAQ</button>
               </div>
