@@ -49,18 +49,6 @@ export default function index() {
 
   useEffect(() => {
     setSearchHistory(getAllLocal());
-    console.log("DARKMODE IN STATE", darkmode);
-    if (typeof document !== "undefined") {
-      if (resort) return "";
-      //so dont rerrun when resort exists
-      // document.documentElement.setAttribute("data-theme", getLocalDarkMode());
-      if (!queryClient) return;
-
-      //why is this auto pushing to it ........try having resort
-      // if (results.every((num) => num.isSuccess === true) && resort) {
-      //   router.push(`/weather/${resortName}?resortId=${resort}`);
-      // }
-    }
   }, [resort, deleted]);
   async function getCacheId(resortId) {
     let id = queryClient?.queryCache?.queries.findIndex(
@@ -69,7 +57,7 @@ export default function index() {
     let name = queryClient?.queryCache?.queries.find(
       (ele) => ele.state.data.id == resortId
     )?.state?.data?.name;
-    console.log("name", name);
+
     return { id, name };
   }
   function handleDeletion(id) {
@@ -79,7 +67,6 @@ export default function index() {
   }
   const getWeather = async function (resort) {
     try {
-      console.log("resort", resort);
       const { data } = await axios.get(
         `/api/snowReport?ID=${resort?.queryKey[1]?.resortCode}`
       );
@@ -107,7 +94,6 @@ export default function index() {
   //when all is good then fire off the push... and i should have the data ready in the cache already
   // results.every((num) => num.isSuccess === true) when this is ready then push to the next page
   function handleEmit(resortObj, name) {
-    console.log("ResorObj emmited up", resortObj);
     setResort(resortObj);
     setResortName(name);
     router.push(`/weather/${name}/search?resortId=${resortObj}`);
@@ -194,17 +180,7 @@ export default function index() {
         )}
 
         {/*  &&  */}
-        <div
-          className='home__card-container'
-          style={{
-            gridTemplateColumns:
-              results.length == 1
-                ? "repeat(1, auto)"
-                : results.length == 2000
-                ? "repeat(2, auto)"
-                : "",
-          }}
-        >
+        <div className='home__card-container'>
           {results.every((num) => num.isSuccess === true) &&
             results?.sort(sortFunction[sortDirection]).map((ele, i) => (
               <React.Fragment key={i}>
