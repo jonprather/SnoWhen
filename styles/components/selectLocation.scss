@@ -2,34 +2,23 @@
   position: relative;
   top: -10rem;
   z-index: 100;
-
-  // position: relative;
-  // top: -3rem; //-5re; // -12.5rem; // -12.5rem; //for when there is a picture 12.5 is good -15rem; //
-  background: #ffffff;
+  background: $color-white;
+  //box shadow should also be vars and from adesign system
   box-shadow: 2px 7px 8px rgba(0, 0, 0, 0.15);
-  border-radius: 0.5rem; // 1rem; //4.7rem;
-
+  border-radius: 0.5rem;
   margin: 0 auto;
-
   box-sizing: border-box;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-
   width: 90vw;
-  // height: 17.5rem;
 
   @media only screen and (min-width: $bp-iphone5) {
     width: 79vw;
     padding-bottom: 1rem;
   }
   @media only screen and (min-width: $bp-smallester) {
-    width: 60vw; // 46rem;
-    // top: -5.2rem;
+    width: 60vw;
   }
   @media only screen and (min-width: $bp-smallest) {
-    width: 44rem; // 46rem;
-    // top: -5.2rem;
+    width: 44rem;
   }
   @media only screen and (min-width: $bp-medium) {
     width: 46rem;
@@ -70,9 +59,6 @@
           margin-bottom: 0rem;
           font-size: 1.8rem;
         }
-        @media only screen and (min-width: $bp-largest) {
-          // font-size: 1.6rem;
-        }
       }
       &__select {
         width: 92%;
@@ -107,35 +93,28 @@
       }
 
       &__button {
-        // display: flex;
         justify-content: flex-start;
-        // padding-left: 2rem;
+
         width: 92%;
-        height: 5.8rem; //5.6rem;
+        height: 5.8rem;
         background: #3282b8;
         border-radius: 0.5rem;
         color: white;
         //typography
+        //this should probably be handled on the element itself in typography file... and came from design system
         font-family: $font-primary;
         font-size: 2.2rem;
         font-style: normal;
         font-weight: 500;
         line-height: 2.1rem;
-        // letter-spacing: -0.065em;
         text-align: center;
-        // @media only screen and (min-width: $bp-iphone5) {
-        //   width: 26.8rem;
-        //   height: 4.8rem; //4rem;
-        //   font-size: 1.6rem;
-        //   // font-size: 1.4rem;
-        // }
+
         @media only screen and (min-width: $bp-medium) {
           width: 11rem;
           height: 4rem;
           font-size: 1.6rem;
           padding-left: 0rem;
           display: inline-block;
-          // font-size: 1.4rem;
         }
         & > span {
           font-size: inherit;
