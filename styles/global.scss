@@ -1,6 +1,8 @@
 @import "base.scss";
 
-@import "pages/home.scss";
+//PAGES
+@import "pages/home/index.scss";
+@import "pages/home/card.scss";
 
 @import "pages/location/index.scss";
 @import "pages/location/card.scss";
@@ -8,6 +10,8 @@
 @import "pages/location/weather/index.scss";
 
 @import "pages/landing-page.scss";
+
+//COMPONENTS
 
 @import "components/backButton.scss";
 @import "components/card.scss";

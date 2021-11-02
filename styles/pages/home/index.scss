@@ -1,0 +1,128 @@
+.home {
+  overflow: hidden;
+  max-width: 100%;
+  background-color: #f2f2f2;
+  min-height: 100vh;
+  max-width: 1440px;
+  margin: 0 auto;
+  &__heading-container {
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    @media only screen and (min-width: $bp-medium) {
+      padding-top: 8rem;
+      margin-bottom: 2rem;
+    }
+
+    &__heading {
+      z-index: 10000;
+      color: $color-white !important;
+
+      font-family: $font-display;
+      font-size: 4rem;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      text-align: center;
+      margin-bottom: 2.6rem;
+      line-height: 7rem;
+      @media only screen and (min-width: 281px) {
+        font-size: 4.6rem;
+        line-height: 8.4rem;
+      }
+      @media only screen and (min-width: $bp-iphone5) {
+        font-size: 5.2rem;
+        line-height: 9.4rem;
+      }
+      @media only screen and (min-width: $bp-smallest) {
+        font-size: 6.4rem;
+      }
+      @media only screen and (min-width: $bp-small) {
+        font-size: 7rem;
+      }
+
+      @media only screen and (min-width: $bp-medium) {
+        font-size: 8rem;
+        line-height: 9.6rem;
+      }
+
+      &--smaller {
+        font-size: 2.4rem !important;
+        font-weight: 400 !important;
+        opacity: 0.92;
+      }
+    }
+    &__mtn {
+      height: 5.6rem;
+      width: 8rem;
+      display: inline-block;
+      z-index: inherit;
+      background-blend-mode: multiply;
+      background-color: rgba($color-primary-light, 1);
+      border-radius: 500px;
+      background: transparent;
+    }
+    &__subheading {
+      color: $color-subheader; //white;
+      font-family: $font-display;
+      font-size: 2.8rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 3.4rem;
+      letter-spacing: 0em;
+      text-align: center;
+      width: min(80%, 60rem);
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom: 16rem;
+      @media only screen and (min-width: $bp-medium) {
+        margin-bottom: 10rem;
+      }
+      @media only screen and (min-width: $bp-large) {
+        margin-bottom: 5.8rem;
+      }
+    }
+
+    &__svg-wrapper {
+      position: absolute;
+      top: 70rem;
+      right: 10;
+      display: none;
+      @media only screen and (min-width: $bp-small) {
+        top: 55rem;
+      }
+      @media only screen and (min-width: $bp-medium) {
+        top: 60rem;
+      }
+    }
+  }
+  &__hero-img {
+    padding-top: 14rem;
+    height: 48.4rem;
+
+    z-index: 1;
+    background-image: url("/location-hero-small-mr.png");
+    background-size: cover;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    @media only screen and (min-width: $bp-small) {
+      padding-top: 13rem;
+      background-image: url("/location-hero.png");
+      height: 42rem;
+    }
+    @media only screen and (min-width: $bp-medium) {
+      padding-top: 13rem;
+
+      height: 42rem;
+    }
+  }
+
+  &__main {
+    padding-bottom: 10rem;
+    z-index: 0;
+  }
+}
