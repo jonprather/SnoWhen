@@ -5,10 +5,11 @@
 @import "pages/home/card.scss";
 
 @import "pages/location/index.scss";
+//these are page subparts   ideaslly i'd reuse parts of containers and basic card rather than recreate per page
+
 @import "pages/location/card.scss";
 @import "pages/location/forecast/index.scss";
 @import "pages/location/weather/index.scss";
-
 @import "pages/landing-page.scss";
 
 //COMPONENTS
