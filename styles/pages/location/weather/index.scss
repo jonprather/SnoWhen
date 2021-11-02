@@ -1,0 +1,18 @@
+.location__weather {
+  // background-color: var(--weather-container-bg);
+  padding-bottom: 20rem;
+  padding-top: 8rem;
+  background-color: #f2f2f2;
+  background-color: $color-primary-dark;
+  @media only screen and (min-width: $bp-large) {
+    max-width: 90%;
+    margin: 0 auto;
+    padding-top: 14rem;
+
+    border-radius: 2rem;
+  }
+
+  &__subheading {
+    // margin-bottom: 16.6rem;
+  }
+}

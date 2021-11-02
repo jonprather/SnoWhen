@@ -1,0 +1,22 @@
+.location__forecast {
+  background-color: #f2f2f2f2;
+  //var(--weather-container-bg);
+
+  border-radius: 0 2rem 2rem 0;
+  padding-bottom: 8em; // 25rem;
+  padding-top: 4em; // 15.9rem;
+
+  @media only screen and (min-width: $bp-large) {
+    max-width: 90%;
+    margin: 0 auto;
+    border-radius: 2rem;
+  }
+  &__graph-container {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    @media only screen and (min-width: $bp-small) {
+      width: min(104.4rem, 90%);
+    }
+  }
+}

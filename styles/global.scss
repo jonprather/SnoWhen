@@ -1,8 +1,12 @@
 @import "base.scss";
 
 @import "pages/home.scss";
-@import "pages/location.scss";
-@import "pages/day.scss";
+
+@import "pages/location/index.scss";
+@import "pages/location/card.scss";
+@import "pages/location/forecast/index.scss";
+@import "pages/location/weather/index.scss";
+
 @import "pages/landing-page.scss";
 
 @import "components/backButton.scss";
@@ -12,10 +16,6 @@
 @import "components/selectLocation/selectBox.scss";
 @import "components/selectLocation/buttonBox.scss";
 
-@import "components/selectDay.scss";
-@import "components/selectAltitude.scss";
-
-@import "components/darkMode.scss";
 @import "components/graph.scss";
 
 @import "components/nav.scss";
