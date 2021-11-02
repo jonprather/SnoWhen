@@ -1,15 +1,13 @@
-import { useRouter } from "next/router";
-import { useQueryClient } from "react-query";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+import { useQueryClient } from "react-query";
+
 import dynamic from "next/dynamic";
-
+//components
 const WeatherCard = dynamic(() => import("../../../components/weatherCard"));
-
 import Graph from "../../../components/graph";
-
 import BackButton from "../../../components/backButton";
-
-import { formatDate } from "../../../lib/helpers/formatDate";
 import { weatherReducer } from "../../../lib/weatherReducer";
 
 export default function location() {
@@ -39,7 +37,7 @@ export default function location() {
       ];
     });
   }, [router?.isReady]);
-  console.log("IN LOCAION");
+
   return (
     <div className='location'>
       <div className='location__header'>
