@@ -1,0 +1,40 @@
+.locations__search-box__inner-container__button-box {
+  display: flex;
+  justify-content: center;
+  @media only screen and (min-width: $bp-medium) {
+    justify-content: flex-end;
+  }
+
+  &__button {
+    justify-content: flex-start;
+
+    width: 92%;
+    height: 5.8rem;
+    background: #3282b8;
+    border-radius: 0.5rem;
+    color: white;
+    //typography
+    //this should probably be handled on the element itself in typography file... and came from design system
+    font-family: $font-primary;
+    font-size: 2.2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2.1rem;
+    text-align: center;
+
+    @media only screen and (min-width: $bp-medium) {
+      width: 11rem;
+      height: 4rem;
+      font-size: 1.6rem;
+      padding-left: 0rem;
+      display: inline-block;
+    }
+    & > span {
+      font-size: inherit;
+      margin-left: 1.1rem;
+      @media only screen and (min-width: $bp-medium) {
+        margin-left: 0.9rem;
+      }
+    }
+  }
+}
