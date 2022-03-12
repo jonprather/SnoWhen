@@ -25,12 +25,17 @@ export default function nav() {
                   Home
                 </button>
               </Link>
+              <Link href='/about'>
+                <button className='nav__pages-container__links__about'>
+                  About
+                </button>
+              </Link>
 
-              <button className='nav__pages-container__links__about'>
-                About
-              </button>
-
-              <button className='nav__pages-container__links__faq'>FAQ</button>
+              <Link href='/faq'>
+                <button className='nav__pages-container__links__faq'>
+                  FAQ
+                </button>
+              </Link>
             </div>
             <NavModal>
               <div className='nav__dropdown'>
@@ -39,8 +44,12 @@ export default function nav() {
                 </Link>
                 <button className=''>Log in</button>
                 <button className=''>Sign up</button>
-                <button className=''>About</button>
-                <button className=''>FAQ</button>
+                <Link href='/about'>
+                  <button className=''>About</button>
+                </Link>
+                <Link href='/faq'>
+                  <button className=''>FAQ</button>
+                </Link>
               </div>
             </NavModal>
           </div>
