@@ -5,7 +5,7 @@
 @import "pages/home/card.scss";
 
 @import "pages/location/index.scss";
-//these are page subparts   ideaslly i'd reuse parts of containers and basic card rather than recreate per page
+//these are page subparts -  ideally i'd reuse parts of containers and basic card rather than recreate per page
 
 @import "pages/location/card.scss";
 @import "pages/location/forecast/index.scss";
@@ -25,5 +25,5 @@
 
 @import "components/nav.scss";
 @import "components/weatherCard.scss";
-// implent scss code file like i did darkmode but for graph in comp folder
+// implement scss code file like i did darkmode but for graph in comp folder
 @import "typography.scss";

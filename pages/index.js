@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import page from "../components/page";
 
 export default function index() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function index() {
               The Simplest way to find your next powder day
             </h2>
           </div>
-          {/* <p className='landing-page-header__container__text'> </p> */}
+          {/* <p className='landing-page-header__container__text'> TEST TEXT</p> */}
           <button
             onClick={handleClick}
             className='btn--check-snow landing-page-header__container__button'
