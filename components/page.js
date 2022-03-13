@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-export default function page({ title, subtitle, children }) {
+export default function Page({ title, subtitle, children }) {
   return (
     <section className='landing-page'>
       <header className='landing-page-header'>
