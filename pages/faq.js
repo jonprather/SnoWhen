@@ -1,6 +1,9 @@
 import Link from "next/link";
+import React from "react";
+
 import { useRouter } from "next/router";
 import Page from "../components/page";
+import FAQPair from "../components/FAQPair";
 
 export default function index() {
   const router = useRouter();
@@ -10,23 +13,30 @@ export default function index() {
   const subtitle = "What people ask";
   const title = "FAQ";
   // TODO make the bg image passable
+  const FAQS = [
+    {
+      question: "Why does this site exist?",
+      response: "To provide the simplest resort snow forecast.",
+    },
+    {
+      question: "Why is this site Awesome?",
+      response: "It's simple",
+    },
+  ];
+
   return (
     <>
       <Page title={title} subtitle={subtitle}>
-        <div className='faq'>
-          <p className='faq__question'>Why does this site exist?</p>
-
-          <p className='faq__response'>
-            To provide the simplest resort snow forecast.
-          </p>
-          <p className='faq__question'>
-            Why does this site only have one resort(mammoth)?
-          </p>
-
-          <p className='faq__response'>
-            Because more would cost more and we are currently bootstrapped.
-          </p>
-        </div>
+        <>
+          {FAQS.map((ele) => {
+            return (
+              <FAQPair
+                question={ele.question}
+                response={ele.response}
+              ></FAQPair>
+            );
+          })}
+        </>
       </Page>
     </>
   );
