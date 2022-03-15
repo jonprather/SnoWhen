@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Page from "../../components/Page";
+
 import Link from "next/link";
 import AuthForm from "../../components/AuthForm";
 export default function index() {

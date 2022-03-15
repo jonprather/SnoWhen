@@ -1,6 +1,6 @@
 import React from "react";
 
-import Page from "../components/Page";
+import PageContainer from "../components/PageContainer";
 
 import FAQPair from "../components/FAQPair";
 
@@ -21,7 +21,7 @@ export default function index() {
 
   return (
     <>
-      <Page title={title} subtitle={subtitle}>
+      <PageContainer title={title} subtitle={subtitle}>
         <>
           {FAQS.map((ele) => {
             return (
@@ -33,7 +33,7 @@ export default function index() {
             );
           })}
         </>
-      </Page>
+      </PageContainer>
     </>
   );
 }
