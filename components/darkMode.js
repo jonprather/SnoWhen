@@ -39,17 +39,17 @@ export default function darkMode({ darkModeTheme }) {
       </button>
       <label for='toggle'>
         <input
-          class='input'
+          className='input'
           id='toggle'
           type='checkbox'
           defaultChecked={theme !== "dark"}
           onClick={() => handleToggle()}
         />
-        <div class='toggle-wrapper'>
-          <span class='selector'></span>
+        <div className='toggle-wrapper'>
+          <span className='selector'></span>
         </div>
-        <p class='notification'>
-          <span class='selected'></span>
+        <p className='notification'>
+          <span className='selected'></span>
         </p>
       </label>
       <button onClick={() => setTheme("light")} className='darkmode-light'>

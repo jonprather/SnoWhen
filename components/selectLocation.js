@@ -57,7 +57,7 @@ export default function Location(props) {
                 handleChange(event.target.value);
               }}
             >
-              <option selected disabled value=''>
+              <option defaultValue disabled value=''>
                 Select One
               </option>
               {resorts.map((resort, i) => {
@@ -74,12 +74,12 @@ export default function Location(props) {
               onClick={handleSubmit}
               className='locations__search-box__inner-container__button-box__button'
             >
-              <i class='fa fa-search' aria-hidden='true'></i>{" "}
+              <i className='fa fa-search' aria-hidden='true'></i>{" "}
               <span>Search</span>
             </button>
           </div>
         </div>
-        {error && <div class='error'>{error}</div>}
+        {error && <div className='error'>{error}</div>}
       </div>
     </>
   );

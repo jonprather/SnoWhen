@@ -11,7 +11,7 @@ export default function FAQPair({ question, response }) {
       <div className='faq__wrapper'>
         <p className='faq__question'>{question}</p>
         <button onClick={handleClick}>
-          <i class=' fa fa-solid fa-chevron-down faq__icon'></i>
+          <i className=' fa fa-solid fa-chevron-down faq__icon'></i>
         </button>
       </div>
 

@@ -61,7 +61,7 @@ export default function locationCard({ weatherData, i, id, deleteFromLS }) {
           </div>
 
           <div className='home__card__accent-box'>
-            <div class='flex justify-c align-c'>
+            <div className='flex justify-c align-c'>
               <button
                 className='home__card__delete'
                 onClick={(e) => {
