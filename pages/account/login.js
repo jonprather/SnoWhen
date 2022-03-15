@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 
 import Link from "next/link";
-import AuthForm from "../../components/AuthForm";
+import LoginForm from "../../components/loginForm";
 export default function index() {
   const router = useRouter();
   function handleClick() {
@@ -13,12 +13,12 @@ export default function index() {
   return (
     <div className='auth'>
       <div className='login'>
-        <AuthForm title={title}>
+        <LoginForm title={title}>
           <p className='authForm__footer'>
             Don't have an account?{" "}
             <Link href='/account/register'>Register</Link>
           </p>
-        </AuthForm>
+        </LoginForm>
       </div>
     </div>
   );

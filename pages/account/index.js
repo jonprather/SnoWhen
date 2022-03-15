@@ -1,3 +1,3 @@
 export default function index() {
-  return <div>"Nothing Here Yet"</div>;
+  return <div className='account'> WIP- Nothing Here Yet</div>;
 }

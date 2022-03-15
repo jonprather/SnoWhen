@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
-import AuthForm from "../../components/AuthForm";
+import RegisterForm from "../../components/registerForm";
 export default function index() {
   const router = useRouter();
   function handleClick() {
@@ -14,11 +14,11 @@ export default function index() {
   return (
     <div className='auth'>
       <div className='login'>
-        <AuthForm title={title}>
+        <RegisterForm title={title}>
           <p className='authForm__footer'>
             Already have an account? <Link href='/account/login'>Log In</Link>
           </p>
-        </AuthForm>
+        </RegisterForm>
       </div>
     </div>
   );
