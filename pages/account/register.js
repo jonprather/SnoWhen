@@ -10,15 +10,15 @@ export default function index() {
   }
   const title = "Register";
   const subtitle = "Create an account";
-  const footer = (
-    <p className='authForm__footer'>
-      Already have an account? <Link href='/account/login'>Log In</Link>
-    </p>
-  );
+
   return (
     <div className='auth'>
       <div className='login'>
-        <AuthForm title={title} footer={footer} />
+        <AuthForm title={title}>
+          <p className='authForm__footer'>
+            Already have an account? <Link href='/account/login'>Log In</Link>
+          </p>
+        </AuthForm>
       </div>
     </div>
   );

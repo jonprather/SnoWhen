@@ -12,7 +12,7 @@ const schema = yup
   })
   .required();
 
-export default function AuthForm({ title, footer }) {
+export default function AuthForm({ title, children }) {
   const {
     register,
     handleSubmit,
@@ -46,7 +46,7 @@ export default function AuthForm({ title, footer }) {
 
         <input type='submit' className='authForm__form__btn btn' />
       </form>
-      {footer}
+      {children}
     </div>
   );
 }
