@@ -1,4 +1,5 @@
 import React from "react";
+import Layout from "@/components/layout";
 
 import PageContainer from "../components/PageContainer";
 
@@ -20,7 +21,11 @@ export default function index() {
   ];
 
   return (
-    <>
+    <Layout
+      title='SnoWhen - FAQs'
+      description='Frequently asked questions'
+      keywords='questions, snow, app, forecast, resorts,mountains'
+    >
       <PageContainer title={title} subtitle={subtitle}>
         <>
           {FAQS.map((ele) => {
@@ -34,6 +39,6 @@ export default function index() {
           })}
         </>
       </PageContainer>
-    </>
+    </Layout>
   );
 }

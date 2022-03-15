@@ -44,7 +44,6 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Nav />
           <Component {...pageProps} />
         </Hydrate>
         <ReactQueryDevtools />

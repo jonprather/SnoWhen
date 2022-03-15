@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
 import { useQuery } from "react-query";
 import axios from "axios";
+import Layout from "@/components/layout";
 
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
@@ -61,66 +62,68 @@ export default function locationFromSearch() {
   }, [router?.isReady]);
 
   return (
-    <div className='location'>
-      <div className='location__header'>
-        <BackButton url={`/weather`} path={[location]} />
-        <h1 className='heading'>{location}</h1>
-        <h2 className='subheading mb-18'>Snow Forecast</h2>
-      </div>
-      <div className='location__forecast'>
-        {!query.isSuccess && <p className='subheading'>..Loading</p>}
-        <div className='day__forecast__graph-container'>
-          {query && query?.isSuccess && (
-            <Graph
-              location={location}
-              isHourlyTitles={false}
-              dayIndex={null}
-              data={weatherReducer(query)["snowPerDay"]}
-            />
-          )}
+    <Layout>
+      <div className='location'>
+        <div className='location__header'>
+          <BackButton url={`/weather`} path={[location]} />
+          <h1 className='heading'>{location}</h1>
+          <h2 className='subheading mb-18'>Snow Forecast</h2>
         </div>
-      </div>
-      <div className='location__weather'>
-        <div className='day__weather__cards-container'>
-          <div className='location__header--2'>
-            <h1 className='heading'>{location} </h1>
-            <h2 className='subheading location__weather__subheading mb-18'>
-              Weather
-            </h2>
-          </div>
-          <div className='weather-card__container'>
-            {query?.isSuccess &&
-              weatherReducer(query)["snowPerDay"]?.map((day, i) => {
-                return (
-                  <React.Fragment key={day.date}>
-                    <a
-                      className='link'
-                      onClick={() =>
-                        router?.push(
-                          `/weather/${location}/${formatDate(
-                            weatherObj[i].date
-                          ).toLowerCase()}?locationId=${locationId}&dayId=${i}`
-                        )
-                      }
-                    >
-                      <WeatherCard
-                        key={i}
-                        location={location}
-                        weatherDesc={day.base["wx_desc"]}
-                        humPct={day["hum_pct"]}
-                        windSpd={day.base["windspd_mph"]}
-                        temp={day.base["temp_f"]}
-                        date={day.date}
-                        isHourlyTitles={false}
-                        icon={day.base["wx_icon"].slice(0, -4)}
-                      />
-                    </a>
-                  </React.Fragment>
-                );
-              })}
+        <div className='location__forecast'>
+          {!query.isSuccess && <p className='subheading'>..Loading</p>}
+          <div className='day__forecast__graph-container'>
+            {query && query?.isSuccess && (
+              <Graph
+                location={location}
+                isHourlyTitles={false}
+                dayIndex={null}
+                data={weatherReducer(query)["snowPerDay"]}
+              />
+            )}
           </div>
         </div>
+        <div className='location__weather'>
+          <div className='day__weather__cards-container'>
+            <div className='location__header--2'>
+              <h1 className='heading'>{location} </h1>
+              <h2 className='subheading location__weather__subheading mb-18'>
+                Weather
+              </h2>
+            </div>
+            <div className='weather-card__container'>
+              {query?.isSuccess &&
+                weatherReducer(query)["snowPerDay"]?.map((day, i) => {
+                  return (
+                    <React.Fragment key={day.date}>
+                      <a
+                        className='link'
+                        onClick={() =>
+                          router?.push(
+                            `/weather/${location}/${formatDate(
+                              weatherObj[i].date
+                            ).toLowerCase()}?locationId=${locationId}&dayId=${i}`
+                          )
+                        }
+                      >
+                        <WeatherCard
+                          key={i}
+                          location={location}
+                          weatherDesc={day.base["wx_desc"]}
+                          humPct={day["hum_pct"]}
+                          windSpd={day.base["windspd_mph"]}
+                          temp={day.base["temp_f"]}
+                          date={day.date}
+                          isHourlyTitles={false}
+                          icon={day.base["wx_icon"].slice(0, -4)}
+                        />
+                      </a>
+                    </React.Fragment>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }

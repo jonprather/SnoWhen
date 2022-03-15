@@ -1,11 +1,12 @@
 import PageContainer from "../components/PageContainer";
+import Layout from "@/components/layout";
 
 export default function index() {
   const subtitle = "Our Story";
   const title = "About Us";
 
   return (
-    <>
+    <Layout>
       <PageContainer title={title} subtitle={subtitle}>
         <p className='about'>
           {" "}
@@ -14,6 +15,6 @@ export default function index() {
           rhoncus mattis rhoncus urna neque viverra justo nec ultrices.
         </p>
       </PageContainer>
-    </>
+    </Layout>
   );
 }

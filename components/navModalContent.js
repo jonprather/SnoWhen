@@ -10,7 +10,7 @@ export const Content = ({ onClose, children }) => {
   }, []);
   const clickListener = useCallback(
     (e) => {
-      if (!ref.current.contains(e.target)) {
+      if (!ref?.current?.contains(e.target)) {
         //if the click is not inside the ref close the modal via state change
         onClose?.(); // using optional chaining here, change to onClose && onClose(), if required
         //   if (!(ref.current!).contains(e.target)) {

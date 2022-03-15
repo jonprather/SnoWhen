@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import PageContainer from "../components/PageContainer";
+import Layout from "@/components/layout";
 
 export default function index() {
   const router = useRouter();
@@ -10,7 +11,7 @@ export default function index() {
   const title = "Know When It's Snowing";
 
   return (
-    <>
+    <Layout>
       <PageContainer title={title} subtitle={subtitle}>
         {/* <p className='landing-page-header__container__text'> TEST TEXT</p> */}
         <button
@@ -20,6 +21,6 @@ export default function index() {
           check snow
         </button>
       </PageContainer>
-    </>
+    </Layout>
   );
 }
