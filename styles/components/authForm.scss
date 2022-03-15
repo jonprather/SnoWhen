@@ -1,0 +1,57 @@
+.authForm {
+  margin: 0 auto;
+  width: 90%;
+  @media only screen and (min-width: $bp-smallest) {
+    width: 60%;
+  }
+  @media only screen and (min-width: $bp-medium) {
+    width: 50%;
+  }
+  //   background-color: white;
+  //   opacity: 0.9;
+  border: 1px solid darkslategray;
+  padding: 2.6rem;
+  box-shadow: $box-shadow;
+  //   display: flex;
+  //   justify-content: center;
+  & h1 {
+    margin-bottom: 1.2rem;
+    font-size: 2.4rem;
+  }
+  &__footer {
+    font-weight: 200;
+    // font-size: 10px;
+    // color: orange;
+    & a {
+      color: $color-primary-light; // orangered;
+      text-decoration: none;
+    }
+  }
+
+  &__form {
+    &__form-group {
+      margin-bottom: 1.6rem;
+    }
+    &__label {
+      display: block;
+      margin-bottom: 0.5rem;
+      text-transform: capitalize;
+    }
+    &__input {
+      display: block;
+      width: 100%;
+      height: 40px;
+      padding: 5px;
+      font-size: 18px;
+    }
+    &__btn {
+      margin-bottom: 1.5rem;
+    }
+    &__errors {
+      color: red;
+      padding-top: 0.6rem;
+      font-weight: 200;
+      font-size: 2rem;
+    }
+  }
+}

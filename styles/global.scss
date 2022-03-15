@@ -13,8 +13,12 @@
 @import "pages/landing-page.scss";
 @import "pages/about.scss";
 @import "pages/faq.scss";
+@import "pages/login.scss";
+//for login and register
+@import "pages/auth.scss";
 
 //COMPONENTS
+@import "components/authForm.scss";
 
 @import "components/backButton.scss";
 @import "components/card.scss";
@@ -27,5 +31,6 @@
 
 @import "components/nav.scss";
 @import "components/weatherCard.scss";
+
 // implement scss code file like i did darkmode but for graph in comp folder
 @import "typography.scss";

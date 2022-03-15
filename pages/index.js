@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Page from "../components/page";
+import Page from "../components/Page";
 
 export default function index() {
   const router = useRouter();

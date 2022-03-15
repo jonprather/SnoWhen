@@ -7,7 +7,7 @@ export const NavModal = ({ children }) => {
   return (
     <div className='nav__hamburger'>
       <button onClick={() => setOpen(true)}>
-        <i class='fa fa-bars nav__hamburger__icon fa-lg'></i>
+        <i className='fa fa-bars nav__hamburger__icon fa-lg'></i>
       </button>
       {open && (
         <Content

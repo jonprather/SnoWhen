@@ -1,0 +1,22 @@
+.auth {
+  max-width: 1440px;
+  padding-top: 16rem;
+  margin: 0 auto;
+  background-image: url("/hero-bg-small-mr.png");
+  background-size: cover;
+  min-height: 100vh;
+  height: 100%;
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+  background-color: var(--graph-container-bg);
+  @media only screen and (min-width: $bp-small) {
+    background-image: url("/hero-bg.png");
+  }
+  @media only screen and (min-width: $bp-medium) {
+    padding-top: 12rem;
+  }
+  @media only screen and (min-width: $bp-large) {
+    padding-top: 14rem;
+  }
+}

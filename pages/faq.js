@@ -1,15 +1,10 @@
-import Link from "next/link";
 import React from "react";
 
-import { useRouter } from "next/router";
-import Page from "../components/page";
+import Page from "../components/Page";
+
 import FAQPair from "../components/FAQPair";
 
 export default function index() {
-  const router = useRouter();
-  function handleClick() {
-    router.push("/weather");
-  }
   const subtitle = "What people ask";
   const title = "FAQ";
   // TODO make the bg image passable
@@ -31,6 +26,7 @@ export default function index() {
           {FAQS.map((ele) => {
             return (
               <FAQPair
+                key={ele.question}
                 question={ele.question}
                 response={ele.response}
               ></FAQPair>

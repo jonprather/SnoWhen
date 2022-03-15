@@ -42,8 +42,12 @@ export default function nav() {
                 <Link href='/weather'>
                   <button className=''>Home</button>
                 </Link>
-                <button className=''>Log in</button>
-                <button className=''>Sign up</button>
+                <Link href='/account/login'>
+                  <button className=''>Log in</button>
+                </Link>
+                <Link href='/account/register'>
+                  <button className=''>Sign up</button>
+                </Link>
                 <Link href='/about'>
                   <button className=''>About</button>
                 </Link>
@@ -55,8 +59,12 @@ export default function nav() {
           </div>
         </div>
         <div className='nav__auth-container'>
-          <button className='nav__auth-container__log-in'>Log in</button>
-          <button className='nav__auth-container__sign-up'>Sign up</button>
+          <Link href='/account/login'>
+            <button className='nav__auth-container__log-in'>Log in</button>
+          </Link>
+          <Link href='/account/register'>
+            <button className='nav__auth-container__sign-up'>Sign up</button>
+          </Link>
         </div>
         {/* <DarkMode /> */}
         {/* <div className='nav__hr'></div> */}
