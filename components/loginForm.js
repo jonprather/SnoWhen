@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FaUser } from "react-icons/fa";
 import { useRouter } from "next/router";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import * as yup from "yup";
 
 const schema = yup
@@ -14,7 +15,9 @@ const schema = yup
   .required();
 
 export default function AuthForm({ title, isRegister, children }) {
+  const notify = () => toast("Wow so easy!");
   const router = useRouter();
+  // React.useEffect(() => toast.error("TEST"));
   const {
     register,
     handleSubmit,
@@ -22,9 +25,11 @@ export default function AuthForm({ title, isRegister, children }) {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
   const onSubmit = (data) => {
     console.log(data);
-    router.push("/account");
+
+    // router.push("/account");
   };
 
   return (
@@ -38,7 +43,7 @@ export default function AuthForm({ title, isRegister, children }) {
             Email
           </label>
           <input {...register("email")} className='authForm__form__input' />
-          <p className='authForm__form__errors'>{errors.email?.message}</p>
+          {/* <p className='authForm__form__errors'>{errors.email?.message}</p> */}
         </div>
         <div className='authForm__form__form-group'>
           <label className='authForm__form__label' htmlFor='password'>
@@ -50,29 +55,22 @@ export default function AuthForm({ title, isRegister, children }) {
             className='authForm__form__input'
             {...register("password")}
           />
-          <p className='authForm__form__errors'>{errors.password?.message}</p>
+          {/* <p className='authForm__form__errors'>{errors.password?.message}</p> */}
         </div>
 
-        {isRegister && (
-          <div className='authForm__form__form-group'>
-            <label className='authForm__form__label' htmlFor='confirmPassword'>
-              Confirm password
-            </label>
+        <input
+          onClick={() => {
+            toast.error(errors.email?.message);
+            toast.error(errors.password?.message);
 
-            <input
-              type='password'
-              className='authForm__form__input'
-              {...register("confirmPassword")}
-            />
-            <p className='authForm__form__errors'>
-              {errors.confirmPassword?.message}
-            </p>
-          </div>
-        )}
-
-        <input type='submit' className='authForm__form__btn btn' />
+            toast.error(errors.confirmPassword?.message);
+          }}
+          type='submit'
+          className='authForm__form__btn btn'
+        />
       </form>
       {children}
+      <ToastContainer />
     </div>
   );
 }
