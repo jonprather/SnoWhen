@@ -1,11 +1,13 @@
 .authForm {
   margin: 0 auto;
+  max-width: 44rem;
+
   width: 90%;
   @media only screen and (min-width: $bp-smallest) {
     width: 60%;
   }
   @media only screen and (min-width: $bp-medium) {
-    width: 50%;
+    width: 40%;
   }
   //   background-color: white;
   //   opacity: 0.9;

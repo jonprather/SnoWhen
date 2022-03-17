@@ -45,8 +45,12 @@ export default function AuthForm({ title, isRegister, children }) {
           <label className='authForm__form__label' htmlFor='email'>
             Email
           </label>
-          <input {...register("email")} className='authForm__form__input' />
-          {/* <p className='authForm__form__errors'>{errors.email?.message}</p> */}
+          <input
+            placeholder='john@gmail.com'
+            {...register("email")}
+            className='authForm__form__input'
+          />
+          <p className='authForm__form__errors'>{errors.email?.message}</p>
         </div>
         <div className='authForm__form__form-group'>
           <label className='authForm__form__label' htmlFor='password'>
@@ -58,7 +62,7 @@ export default function AuthForm({ title, isRegister, children }) {
             className='authForm__form__input'
             {...register("password")}
           />
-          {/* <p className='authForm__form__errors'>{errors.password?.message}</p> */}
+          <p className='authForm__form__errors'>{errors.password?.message}</p>
         </div>
 
         <div className='authForm__form__form-group'>
@@ -71,25 +75,12 @@ export default function AuthForm({ title, isRegister, children }) {
             className='authForm__form__input'
             {...register("confirmPassword")}
           />
-          {/* <p className='authForm__form__errors'>
+          <p className='authForm__form__errors'>
             {errors.confirmPassword?.message}
-          </p> */}
-          {/* {toast.error(errors.email?.message) && ""}
-          {toast.error(errors.password?.message) && ""}
-
-          {toast.error(errors.confirmPassword?.message) && ""} */}
+          </p>
         </div>
 
-        <input
-          onClick={() => {
-            toast.error(errors.email?.message);
-            toast.error(errors.password?.message);
-
-            toast.error(errors.confirmPassword?.message);
-          }}
-          type='submit'
-          className='authForm__form__btn btn'
-        />
+        <input type='submit' className='authForm__form__btn btn' />
       </form>
       {children}
     </div>

@@ -14,7 +14,7 @@ const schema = yup
   })
   .required();
 
-export default function AuthForm({ title, isRegister, children }) {
+export default function AuthForm({ title, children }) {
   const notify = () => toast("Wow so easy!");
   const router = useRouter();
   // React.useEffect(() => toast.error("TEST"));
@@ -42,8 +42,12 @@ export default function AuthForm({ title, isRegister, children }) {
           <label className='authForm__form__label' htmlFor='email'>
             Email
           </label>
-          <input {...register("email")} className='authForm__form__input' />
-          {/* <p className='authForm__form__errors'>{errors.email?.message}</p> */}
+          <input
+            {...register("email")}
+            className='authForm__form__input'
+            placeholder='john@gmail.com'
+          />
+          <p className='authForm__form__errors'>{errors.email?.message}</p>
         </div>
         <div className='authForm__form__form-group'>
           <label className='authForm__form__label' htmlFor='password'>
@@ -55,19 +59,10 @@ export default function AuthForm({ title, isRegister, children }) {
             className='authForm__form__input'
             {...register("password")}
           />
-          {/* <p className='authForm__form__errors'>{errors.password?.message}</p> */}
+          <p className='authForm__form__errors'>{errors.password?.message}</p>
         </div>
 
-        <input
-          onClick={() => {
-            toast.error(errors.email?.message);
-            toast.error(errors.password?.message);
-
-            toast.error(errors.confirmPassword?.message);
-          }}
-          type='submit'
-          className='authForm__form__btn btn'
-        />
+        <input type='submit' className='authForm__form__btn btn' />
       </form>
       {children}
       <ToastContainer />
