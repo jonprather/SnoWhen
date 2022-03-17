@@ -45,7 +45,7 @@ export default function AuthForm({ title, children }) {
           <input
             {...register("email")}
             className='authForm__form__input'
-            placeholder='john@gmail.com'
+            // placeholder='john@gmail.com'  looks jank padding wise
           />
           <p className='authForm__form__errors'>{errors.email?.message}</p>
         </div>

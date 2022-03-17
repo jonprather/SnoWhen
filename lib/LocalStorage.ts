@@ -1,6 +1,12 @@
-export const setLocalAddress = function (resortCode) {
+export const setLocalAddress = function (resortCode: string): {
+  msg: string;
+  type: string;
+} {
   if (typeof Storage === "undefined")
-    return { msg: "Your Browser Doesnt support Local Storage Sorry" };
+    return {
+      msg: "Your Browser Doesnt support Local Storage Sorry",
+      type: "fail",
+    };
   const d = new Date();
   let createdAt = d.getTime();
   if (getLocalAddress(resortCode))

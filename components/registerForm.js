@@ -46,7 +46,7 @@ export default function AuthForm({ title, isRegister, children }) {
             Email
           </label>
           <input
-            placeholder='john@gmail.com'
+            // placeholder='john@gmail.com' looks janky
             {...register("email")}
             className='authForm__form__input'
           />

@@ -15,7 +15,7 @@ const LocationCard = dynamic(() => import("../../components/locationCard"));
 
 // custom helpers
 import { weatherReducer } from "../../lib/weatherReducer";
-import { getAllLocal } from "../../lib/LocalStorage";
+import { getAllLocal } from "../../lib/LocalStorage.ts";
 import Layout from "@/components/layout";
 
 export default function index() {
@@ -54,9 +54,9 @@ export default function index() {
     }) ?? []
   );
 
-  function handleEmit(resortObj, name) {
-    setResort(resortObj);
-    router.push(`/weather/${name}/search?resortId=${resortObj}`);
+  function handleEmit({ label, value: resortID }) {
+    setResort(resortID);
+    router.push(`/weather/${label}/search?resortId=${resortID}`);
   }
   function handleDeletion(id) {
     localStorage.removeItem(id);
