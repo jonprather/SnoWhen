@@ -4,16 +4,12 @@ import { setLocalAddress } from "../lib/LocalStorage.ts";
 
 import Select from "react-select";
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
 const resorts = [
   { label: "Mammoth", value: 619002 },
   { label: "Snow Summit", value: 420 },
   { label: "Big Bear", value: 4201 },
 ];
+
 // const resorts = [
 //   { name: "Mammoth", code: 619002 },
 //   { name: "Snow Summit", code: 420 },
@@ -43,7 +39,7 @@ export default function Location(props) {
       setError("Please select an option to search.");
       return;
     }
-    //have
+
     //so it wants resort id and name
     setLocalAddress(resort.value);
     // let name  = resort.label;
@@ -51,26 +47,35 @@ export default function Location(props) {
     setResort("");
     // router.push("/weather/"); //push to item on search
   }
+
+  function customTheme(theme) {
+    let colorDark = "#0f4c75";
+    let colorPrimary = "#3282b8";
+    let colorLight = "#bbe1fa";
+    return {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        primary25: colorLight,
+        primary: colorDark,
+      },
+    };
+  }
   const SelectBox = () => (
     <Select
       options={resorts}
+      theme={customTheme}
       className='locations__search-box__inner-container__select-box__select'
       id='resort'
       isSearchable
-      placeholder='Choose Resort'
-      // value={resort.label}
-      name='IDK'
+      placeholder='Search for Resorts'
+      noOptionsMessage={() => "Resort Not Available"}
       value={resort}
       autoFocus
       onChange={handleChange}
-      blurInputOnSelect
-      closeMenuOnSelect
-      controlShouldRenderValue
-
-      // value={resort}
-      // onChange={(event) => {
-      //   handleChange(event.target.value);
-      // }}
+      // blurInputOnSelect
+      // closeMenuOnSelect
+      // controlShouldRenderValue
     />
   );
 
@@ -119,7 +124,7 @@ export default function Location(props) {
             </button>
           </div>
         </div>
-        {error && <div className='error'>{error}</div>}
+        {error && <div className='error'>{error.message}</div>}
       </div>
     </>
   );
