@@ -71,7 +71,7 @@ export default function locationFromSearch() {
         </div>
         <div className='location__forecast'>
           {!query.isSuccess && <p className='subheading'>..Loading</p>}
-          <div className='day__forecast__graph-container'>
+          <div className='location__forecast__graph-container'>
             {query && query?.isSuccess && (
               <Graph
                 location={location}
@@ -83,7 +83,7 @@ export default function locationFromSearch() {
           </div>
         </div>
         <div className='location__weather'>
-          <div className='day__weather__cards-container'>
+          <div className='location__weather__cards-container'>
             <div className='location__header--2'>
               <h1 className='heading'>{location} </h1>
               <h2 className='subheading location__weather__subheading mb-18'>
