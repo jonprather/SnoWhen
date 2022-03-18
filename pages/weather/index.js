@@ -30,6 +30,7 @@ export default function index() {
 
   useEffect(() => {
     setSearchHistory(getAllLocal());
+    setError("");
   }, [resort]);
 
   const getWeather = async function (resort) {
@@ -37,6 +38,8 @@ export default function index() {
       const { data } = await axios.get(
         `/api/snowReport?ID=${resort?.queryKey[1]?.resortCode}`
       );
+      setError("");
+
       return data;
     } catch (error) {
       setError(error.message);
