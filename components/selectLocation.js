@@ -26,7 +26,7 @@ export default function Location(props) {
     return () => {
       setIsLoading(false);
     };
-  }, [resort, error]);
+  }, [resort]);
 
   function handleChange(resort) {
     console.log("CHange", resort);
@@ -124,11 +124,7 @@ export default function Location(props) {
             </button>
           </div>
         </div>
-        {error && (
-          <div key={error} className='error'>
-            {error}
-          </div>
-        )}
+        {error && <div className='error'>{error}</div>}
       </div>
     </>
   );

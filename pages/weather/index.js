@@ -58,6 +58,8 @@ export default function index() {
   );
 
   function handleEmit({ label, value: resortID }) {
+    if (label === undefined || resortID === undefined) return;
+    console.log(label, resortID);
     setResort(resortID);
     router.push(`/weather/${label}/search?resortId=${resortID}`);
   }
