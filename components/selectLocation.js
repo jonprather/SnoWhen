@@ -26,7 +26,7 @@ export default function Location(props) {
     return () => {
       setIsLoading(false);
     };
-  }, [resort]);
+  }, [resort, error]);
 
   function handleChange(resort) {
     console.log("CHange", resort);
@@ -35,7 +35,7 @@ export default function Location(props) {
   }
   function handleSubmit() {
     console.log("HANDLE SUB=", resort);
-    if (resort === "") {
+    if (resort === "" || resort === undefined) {
       setError("Please select an option to search.");
       return;
     }
@@ -63,7 +63,7 @@ export default function Location(props) {
   }
   const SelectBox = () => (
     <Select
-      autoFocus
+      // autoFocus
       className='locations__search-box__inner-container__select-box__select'
       id='resort'
       isSearchable
@@ -124,7 +124,11 @@ export default function Location(props) {
             </button>
           </div>
         </div>
-        {error && <div className='error'>{error.message}</div>}
+        {error && (
+          <div key={error} className='error'>
+            {error}
+          </div>
+        )}
       </div>
     </>
   );
