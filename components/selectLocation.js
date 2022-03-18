@@ -63,16 +63,16 @@ export default function Location(props) {
   }
   const SelectBox = () => (
     <Select
-      options={resorts}
-      theme={customTheme}
+      autoFocus
       className='locations__search-box__inner-container__select-box__select'
       id='resort'
       isSearchable
-      placeholder='Search for Resorts'
       noOptionsMessage={() => "Resort Not Available"}
-      value={resort}
-      autoFocus
       onChange={handleChange}
+      options={resorts}
+      placeholder='Search for Resorts'
+      theme={customTheme}
+      value={resort}
       // blurInputOnSelect
       // closeMenuOnSelect
       // controlShouldRenderValue

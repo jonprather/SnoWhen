@@ -9,6 +9,7 @@
   margin: 0 auto;
   box-sizing: border-box;
   width: 90vw;
+  min-height: 155px;
 
   @media only screen and (min-width: $bp-iphone5) {
     width: 79vw;

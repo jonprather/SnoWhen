@@ -9,9 +9,9 @@ export const setLocalAddress = function (resortCode: string): {
     };
   const d = new Date();
   let createdAt = d.getTime();
-  if (getLocalAddress(resortCode))
+  if (getLocalAddress(resortCode)) {
     return { msg: "Resort was already added!", type: "already" };
-
+  }
   localStorage.setItem(resortCode, JSON.stringify({ resortCode, createdAt }));
   return { msg: "Resort was succusfully added!", type: "success" };
 };

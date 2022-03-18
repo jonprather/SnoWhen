@@ -12,6 +12,7 @@
   }
   // background-color: var(--graph-container-bg);
   &__container {
+    min-height: 100vh;
     max-width: 100%;
     overflow: hidden;
     padding: 8em 2em;

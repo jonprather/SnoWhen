@@ -1,15 +1,15 @@
 @import "base.scss";
 
 //PAGES
-@import "pages/home/index.scss";
+@import "pages/home/home.scss";
 @import "pages/home/card.scss";
 
-@import "pages/location/index.scss";
+@import "pages/location/location.scss";
 //these are page subparts -  ideally i'd reuse parts of containers and basic card rather than recreate per page
 
 @import "pages/location/card.scss";
-@import "pages/location/forecast/index.scss";
-@import "pages/location/weather/index.scss";
+@import "pages/location/forecast/location__forecast.scss";
+@import "pages/location/weather/location__weather.scss";
 @import "pages/landing-page.scss";
 @import "pages/about.scss";
 @import "pages/faq.scss";
