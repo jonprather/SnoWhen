@@ -36,7 +36,7 @@ export default function Location(props) {
   function handleSubmit() {
     console.log("HANDLE SUB=", resort);
     if (resort === "" || resort === undefined) {
-      setError("Please select an option to search.");
+      setError("Please select an option to search."); // TODO FIXME -takes two clicks instead of one
       return;
     }
 
