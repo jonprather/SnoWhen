@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
-
+import SnowTotalGraph from "@/components/snowTotalGraph";
 import { useQueryClient } from "react-query";
 
 import dynamic from "next/dynamic";
@@ -51,12 +51,13 @@ export default function location() {
           {!weatherObj && <p className='subheading'>..Loading</p>}
           <div className='location__forecast__graph-container'>
             {weatherObj && (
-              <Graph
-                location={location}
-                isHourlyTitles={false}
-                dayIndex={null}
-                data={weatherObj}
-              />
+              // <Graph
+              //   location={location}
+              //   isHourlyTitles={false}
+              //   dayIndex={null}
+              //   data={weatherObj}
+              // />
+              <SnowTotalGraph data={weatherObj} />
             )}
           </div>
         </div>

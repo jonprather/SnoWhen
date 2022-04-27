@@ -9,6 +9,7 @@ export const NavModal = ({ children }) => {
       <button onClick={() => setOpen(true)}>
         <i className='fa fa-bars nav__hamburger__icon fa-lg'></i>
       </button>
+
       {open && (
         <Content
           onClose={() => {

@@ -1,0 +1,80 @@
+.overlay {
+  //   padding-bottom: 10rem;
+  //   height: 110%;
+  position: relative;
+  z-index: 10;
+  &::before {
+    content: "";
+    background-color: #092e46; // $color-black; // #092e46;//
+    opacity: 0.7;
+    // Not bad with primary dark and fullZ
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    border-radius: inherit;
+  }
+}
+.hide {
+  z-index: -10;
+  display: none;
+  transform: translateY(-20px);
+}
+// Utility color
+.color-primary {
+  color: $color-primary;
+}
+.error {
+  font-family: $font-primary;
+  // background-color: $color-error;
+  width: fit-content;
+  // padding: 1em 2em;
+  // display: flex;
+  // align-items: center;
+  height: 5rem;
+  margin: 4rem auto 5rem auto;
+  border-radius: 2rem;
+  color: $color-error !important;
+  // color: $color-error;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0 auto;
+  // margin-bottom: 50rem;
+  z-index: 100000;
+}
+
+.is-blurred {
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
+.dropdown__drawer {
+  position: relative;
+  background-color: white;
+  width: 10em;
+  height: 0;
+
+  overflow: hidden;
+
+  transition: height 0.3s ease-out;
+}
+.is-open {
+  height: auto;
+}
+
+.dropdown__toggle {
+  display: block;
+  // padding: 0.5em 1em;
+  // border: 1px solid hsl(280, 10%, 80%);
+  // color: hsl(280, 30%, 60%);
+  // background-color: white;
+  // font: inherit;
+  // text-decoration: none;
+
+  transition: background-color 0.2s linear;
+}
+//new plan fuck the drop down maybe can fade it in opacity wise but the drop down idk if it will work

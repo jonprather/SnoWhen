@@ -39,6 +39,19 @@ export default function index() {
           })}
         </>
       </PageContainer>
+      <style jsx>
+        {`
+          body {
+            backgroung-color: pink;
+          }
+          p {
+            font-size: 40rem !important;
+          }
+          .faq__question {
+            color: red;
+          }
+        `}
+      </style>
     </Layout>
   );
 }

@@ -202,6 +202,13 @@
   flex-direction: column;
   &__wrapper {
     position: relative;
+    transition: all 0.3s ease;
+    // opacity: 0;
+    // transform: translateX(200px);
+    &.is-open {
+      opacity: 1;
+      // transform: translateX(-200px);
+    }
   }
 }
 

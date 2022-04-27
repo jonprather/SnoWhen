@@ -5,7 +5,7 @@ import { Hydrate } from "react-query/hydration";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-const Nav = dynamic(() => import("../components/nav"));
+
 export default function MyApp({ Component, pageProps }) {
   const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { setLocalAddress } from "../lib/LocalStorage.ts";
+import { setLocalAddress } from "../lib/LocalStorage.js";
 // import { SelectBox } from "@/components/selectBox";
 
 import Select from "react-select";

@@ -24,6 +24,7 @@
     "react-query": "^3.19.1",
     "react-select": "^5.2.2",
     "react-toastify": "^8.2.0",
+    "recharts": "^2.1.9",
     "sass": "^1.38.0",
     "webpack": "^4.46.0",
     "yup": "^0.32.11"

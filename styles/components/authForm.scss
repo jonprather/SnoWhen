@@ -11,13 +11,15 @@
   }
   //   background-color: white;
   //   opacity: 0.9;
-  border: 1px solid darkslategray;
-  padding: 2.6rem;
+  // border: 0.5px solid $color-black;
+  border-radius: 6px;
+  padding: 2.4rem 3.2rem;
   box-shadow: $box-shadow;
   //   display: flex;
   //   justify-content: center;
+
   & h1 {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.6rem;
     font-size: 2.4rem;
   }
   &__footer {
@@ -32,7 +34,7 @@
 
   &__form {
     &__form-group {
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.6rem;
     }
     &__label {
       display: block;
@@ -48,7 +50,7 @@
     }
     &__btn {
       margin-bottom: 1.4rem;
-      // margin-top: 1rem;
+      // margin-top: 0.4rem;
       padding: 1rem;
     }
     &__errors {

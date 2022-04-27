@@ -33,7 +33,7 @@ export default function AuthForm({ title, children }) {
   };
 
   return (
-    <div className='authForm'>
+    <div className='authForm overlay'>
       <h1>
         <FaUser /> {title}
       </h1>

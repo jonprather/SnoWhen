@@ -15,7 +15,7 @@ const LocationCard = dynamic(() => import("../../components/locationCard"));
 
 // custom helpers
 import { weatherReducer } from "../../lib/weatherReducer";
-import { getAllLocal } from "../../lib/LocalStorage.ts";
+import { getAllLocal } from "../../lib/LocalStorage.js";
 import Layout from "@/components/layout";
 
 export default function index() {
@@ -29,7 +29,8 @@ export default function index() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    setSearchHistory(getAllLocal());
+    //TODO also that json bug that is occuring after changing the local storage functionality... could skipp it and hard code it for now
+    setSearchHistory([]);
     setError("");
   }, [resort]);
 
