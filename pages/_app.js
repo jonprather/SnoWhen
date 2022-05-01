@@ -5,7 +5,7 @@ import { Hydrate } from "react-query/hydration";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-
+import { AuthProvider } from "@/context/AuthContext";
 export default function MyApp({ Component, pageProps }) {
   const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
 
@@ -44,7 +44,9 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Component {...pageProps} />
+          <AuthProvider>
+            <Component {...pageProps} />
+          </AuthProvider>
         </Hydrate>
         <ReactQueryDevtools />
       </QueryClientProvider>

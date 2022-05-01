@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as yup from "yup";
-
+import AuthContext from "@/context/AuthContext";
 const schema = yup
   .object({
     email: yup.string().required("Email is required").email(),
@@ -17,7 +17,13 @@ const schema = yup
 export default function AuthForm({ title, children }) {
   const notify = () => toast("Wow so easy!");
   const router = useRouter();
-  // React.useEffect(() => toast.error("TEST"));
+  const { login, error } = React.useContext(AuthContext);
+  React.useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
   const {
     register,
     handleSubmit,
@@ -27,6 +33,8 @@ export default function AuthForm({ title, children }) {
   });
 
   const onSubmit = (data) => {
+    const { email, password } = data;
+    login({ email, password });
     console.log(data);
 
     // router.push("/account");

@@ -3,29 +3,43 @@ import { mammothData } from "../../lib/mammothFaker";
 import { fakeEve } from "../../lib/fakeEve";
 import { fakeK } from "../../lib/fakeK";
 
-export default async function handler(req, res) {
-  //ill have to take in a req which includes the resort code
-  //   __NEXT_INIT_QUERY: { ID: 'undefined' },
-  //   query: { ID: 'undefined' },
+// TODO
+//so it will receive inpu tas a query to a specific resort
+//and send out to strapi the call to snowReport/id  the d i passed in
+// can then send back the datato client
+//then the cleint can use it like before so it shouldnt have to change much there jsut pas the resort id like before
+import cookie from "cookie";
+import { API_URL } from "@/config/index";
 
-  //works but may want to do some try catch blocks or something
-  //   try {
-  //     const { data } = await axios.get(
-  //       `https://api.weatherunlocked.com/api/resortforecast/${req?.query?.ID}?app_id=${process.env.RESORT_APP_ID}&app_key=${process.env.RESORT_APP_KEY}`
-  //     );
-  //     res.status(200).json(data);
-  //   } catch (error) {
-  //     console.log(error.response.data.error);
-  //     return "Problem Connecting to the Weather API";
-  //   }
-  // /api/fakeWeather
+export default async (req, res) => {
+  if (req.method === "GET") {
+    if (!req.headers.cookie) {
+      res.status(403).json({ message: "Not Authorized" });
+      return;
+    }
 
-  //   console.log("NEW API DATA", data);
-  // mmamothData the fake data for now to make work go live put in data obj from the api call above
-  // need some error handling thos
-  if (619002 == req?.query?.ID) return res.status(200).json(mammothData);
-  if (420 == req?.query?.ID) return res.status(200).json(fakeEve);
-  if (4201 == req?.query?.ID) return res.status(200).json(fakeK);
-  else return res.status(404).json("'error':'bad resort code'");
-  // res.status(200).json(mammothData);
-}
+    const { token } = cookie.parse(req.headers.cookie);
+    // TODO  Remeber have fake resort that wil lfail this call can either return fake data if want or
+    //let fail
+    const strapiRes = await fetch(
+      `${API_URL}/api/snow-report/${req?.query?.ID}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const snowReport = await strapiRes.json();
+
+    if (strapiRes.ok) {
+      res.status(200).json({ snowReport });
+    } else {
+      res.status(403).json({ message: "User forbidden" });
+    }
+  } else {
+    res.setHeader("Allow", ["GET"]);
+    res.status(405).json({ message: `Method ${req.method} not allowed` });
+  }
+};

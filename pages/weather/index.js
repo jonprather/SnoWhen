@@ -30,7 +30,9 @@ export default function index() {
 
   useEffect(() => {
     //TODO also that json bug that is occuring after changing the local storage functionality... could skipp it and hard code it for now
-    setSearchHistory([]);
+    setSearchHistory([]); //get all local is jank replace with strapi BE and  make this inside the app
+    //TODO replace with strapi also could have it be protected route and also have login set up for portfolio proj purposes
+
     setError("");
   }, [resort]);
 
@@ -74,6 +76,13 @@ export default function index() {
 
   return (
     <Layout>
+      {/* THis could be a heading molecule, and a seach molecule that make up a organism, which make up a template
+    all of which i can reuse */}
+      {/* //SO TODO set up the atomic desgin basics for the above so i can get it working for account page
+     also might want to make a hook for the react query shit ...  
+     // SO make the folder structure can even look up example then try it out based on above atoms, molecles organisms
+     //template 
+     */}
       <section className='home'>
         <div className='home__hero-img'>
           <h1 className='home__heading-container__heading'>

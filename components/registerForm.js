@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as yup from "yup";
-
+import AuthContext from "@/context/AuthContext";
 const schema = yup
   .object({
     email: yup.string().required("Email is required").email(),
@@ -21,18 +21,27 @@ const schema = yup
 
 export default function AuthForm({ title, isRegister, children }) {
   const router = useRouter();
+  const { register, error } = React.useContext(AuthContext);
+
   const {
-    register,
+    register: registerFormData,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
   const onSubmit = (data) => {
+    const { email, password } = data;
     console.log(data);
-    router.push("/account");
+    const username = email;
+    console.log({ username, email, password });
+    register({ username, email, password });
   };
-
+  React.useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
   return (
     <div className='authForm overlay'>
       <h1>
@@ -47,7 +56,7 @@ export default function AuthForm({ title, isRegister, children }) {
           </label>
           <input
             // placeholder='john@gmail.com' looks janky
-            {...register("email")}
+            {...registerFormData("email")}
             className='authForm__form__input'
           />
           <p className='authForm__form__errors'>{errors.email?.message}</p>
@@ -60,7 +69,7 @@ export default function AuthForm({ title, isRegister, children }) {
           <input
             type='password'
             className='authForm__form__input'
-            {...register("password")}
+            {...registerFormData("password")}
           />
           <p className='authForm__form__errors'>{errors.password?.message}</p>
         </div>
@@ -73,7 +82,7 @@ export default function AuthForm({ title, isRegister, children }) {
           <input
             type='password'
             className='authForm__form__input'
-            {...register("confirmPassword")}
+            {...registerFormData("confirmPassword")}
           />
           <p className='authForm__form__errors'>
             {errors.confirmPassword?.message}
