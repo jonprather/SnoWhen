@@ -21,7 +21,7 @@ const schema = yup
 
 export default function AuthForm({ title, isRegister, children }) {
   const router = useRouter();
-  const { register, error } = React.useContext(AuthContext);
+  const { register, error, user } = React.useContext(AuthContext);
 
   const {
     register: registerFormData,
@@ -32,16 +32,16 @@ export default function AuthForm({ title, isRegister, children }) {
   });
   const onSubmit = (data) => {
     const { email, password } = data;
-    console.log(data);
     const username = email;
-    console.log({ username, email, password });
     register({ username, email, password });
   };
   React.useEffect(() => {
+    if (user) router.push("/account");
+
     if (error) {
       toast.error(error);
     }
-  }, [error]);
+  }, [error, user]);
   return (
     <div className='authForm overlay'>
       <h1>

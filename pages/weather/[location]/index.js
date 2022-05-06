@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import SnowTotalGraph from "@/components/snowTotalGraph";
+
 import { useQueryClient } from "react-query";
 
 import dynamic from "next/dynamic";
 //components
 const WeatherCard = dynamic(() => import("../../../components/weatherCard"));
-import Graph from "../../../components/graph";
-import BackButton from "../../../components/backButton";
-import { weatherReducer } from "../../../lib/weatherReducer";
+import Graph from "@/components/graph";
+import BackButton from "@/components/molecules/backButton";
+import { weatherReducer } from "@/helpers/weatherReducer";
 
 export default function location() {
   const router = useRouter();
@@ -33,9 +34,15 @@ export default function location() {
     }
 
     setWeatherObj(() => {
-      return weatherReducer(queryClient?.queryCache?.queries[id]?.state)[
-        "snowPerDay"
-      ];
+      console.log(
+        "SNOW PER DAY",
+        queryClient?.queryCache?.queries[id]?.state.data.snowReport.data[0]
+          .attributes.blob
+      );
+      return weatherReducer(
+        queryClient?.queryCache?.queries[id]?.state.data.snowReport.data[0]
+          .attributes.blob
+      )["snowPerDay"];
     });
   }, [router?.isReady]);
 
@@ -43,7 +50,7 @@ export default function location() {
     <Layout>
       <div className='location'>
         <div className='location__header'>
-          <BackButton url={`/weather`} path={[location]} />
+          <BackButton url={`/account`} path={[location]} />
           <h1 className='heading'>{location}</h1>
           <h2 className='subheading mb-18'>Snow Forecast</h2>
         </div>
@@ -51,13 +58,13 @@ export default function location() {
           {!weatherObj && <p className='subheading'>..Loading</p>}
           <div className='location__forecast__graph-container'>
             {weatherObj && (
-              // <Graph
-              //   location={location}
-              //   isHourlyTitles={false}
-              //   dayIndex={null}
-              //   data={weatherObj}
-              // />
-              <SnowTotalGraph data={weatherObj} />
+              <Graph
+                location={location}
+                isHourlyTitles={false}
+                dayIndex={null}
+                data={weatherObj}
+              />
+              /* <SnowTotalGraph data={weatherObj} /> THis is jank still */
             )}
           </div>
         </div>

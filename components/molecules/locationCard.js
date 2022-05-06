@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { formatDate } from "../lib/helpers/formatDate";
+import { formatDate } from "@/helpers/formatDate";
 import Image from "next/image";
 
 export default function locationCard({ weatherData, i, id, deleteFromLS }) {

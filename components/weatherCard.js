@@ -1,5 +1,5 @@
 import React from "react";
-import { formatDate } from "../lib/helpers/formatDate";
+import { formatDate } from "@/helpers/formatDate";
 export default function weatherCard({
   weatherDesc,
   humPct,
@@ -53,3 +53,7 @@ export default function weatherCard({
     </div>
   );
 }
+
+// TODO they look bad can cut out the colors on top and go back to rotated bottom on bottom
+// and some other means of deleting
+//also a container animation between this and details page would look sick

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { setLocalAddress } from "../lib/LocalStorage.js";
+// import { setLocalAddress } from "@/helpers/"
 // import { SelectBox } from "@/components/selectBox";
 
 import Select from "react-select";
-
+// TODO get these resorts dynamically from api or pass them down from getServerSide props call which i do in account
 const resorts = [
   { label: "Mammoth", value: 619002 },
   { label: "Snow Summit", value: 420 },
@@ -41,9 +41,20 @@ export default function Location(props) {
     }
 
     //so it wants resort id and name
-    setLocalAddress(resort.value);
+    // setLocalAddress(resort.value);
     // let name  = resort.label;
     props.emit(resort);
+
+    //TODO make this create a request to create an item
+    //   so have to handl ereq to strapi
+    // pushing any data to top level so that it is clean ui state ie to reset any state... idk if needed need to
+    //rethink how this will work now that its in strapi not Local Storage
+
+    //TODO also add rest of crud functionality to dashboard
+    // eg like dette need to pass that function down for deltion also ones for creation a simple function
+    // defined in a context file which hits api and or strapi to achieve functionality
+    //maybe use context api to avoid prop drilling
+    //TODO bonus add resorts to slect box based on hitting API so its easy when add new ones
     setResort("");
     // router.push("/weather/"); //push to item on search
   }

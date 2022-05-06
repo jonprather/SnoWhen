@@ -5,9 +5,7 @@ import LoginForm from "../../components/loginForm";
 import Layout from "@/components/layout";
 export default function index() {
   const router = useRouter();
-  function handleClick() {
-    // router.push("/weather");  //may push to account on protected page if have one or just back to home
-  }
+
   const title = "Log In";
   const subtitle = "Sign in to your account";
 

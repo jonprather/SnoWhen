@@ -11,8 +11,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { formatDate } from "../lib/helpers/formatDate";
-import { militaryToStandardTime } from "../lib/helpers/militaryToStandardTime";
+import { formatDate } from "@/helpers/formatDate";
+import { militaryToStandardTime } from "@/helpers/militaryToStandardTime";
 //so dont need military time its for when i use the day component when its daily time
 
 export default function SnowTotalGraph({ data }) {

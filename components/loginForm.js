@@ -17,12 +17,16 @@ const schema = yup
 export default function AuthForm({ title, children }) {
   const notify = () => toast("Wow so easy!");
   const router = useRouter();
-  const { login, error } = React.useContext(AuthContext);
+  const { login, error, user } = React.useContext(AuthContext);
+
   React.useEffect(() => {
+    if (user) router.push("/account");
+    //this will auto push if already logged in
+    //also will push auto from the promise area of AuthContext
     if (error) {
       toast.error(error);
     }
-  }, [error]);
+  }, [user, error]);
 
   const {
     register,
@@ -35,11 +39,9 @@ export default function AuthForm({ title, children }) {
   const onSubmit = (data) => {
     const { email, password } = data;
     login({ email, password });
-    console.log(data);
-
-    // router.push("/account");
+    console.log("Data here to check", user);
+    // if (user) router.push("/account/");
   };
-
   return (
     <div className='authForm overlay'>
       <h1>

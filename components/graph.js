@@ -1,6 +1,6 @@
 import React from "react";
-import { formatDate } from "../lib/helpers/formatDate";
-import { militaryToStandardTime } from "../lib/helpers/militaryToStandardTime";
+import { formatDate } from "@/helpers/formatDate";
+import { militaryToStandardTime } from "@/helpers/militaryToStandardTime";
 
 export default function graph({ data, location, isHourlyTitles }) {
   console.log("data in comp bro", data);

@@ -5,6 +5,12 @@ export default async (req, res) => {
   if (req.method === "POST") {
     const { identifier, password } = req.body;
 
+    if (!password || !identifier) {
+      return res.status(400).json({
+        error: "Missing required params",
+      });
+    } //shouldn't happen bc cleint side validation but i suppose helps from non browser based agents
+
     const strapiRes = await fetch(`${API_URL}/api/auth/local`, {
       method: "POST",
       headers: {

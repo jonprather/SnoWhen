@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
       setUser(data.user);
       console.log("RES.OK....", data);
 
-      // router.push("/account/");
+      router.push("/account/");
     } else {
       console.log(data.message);
       setError(data.message);
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
 
     if (res.ok) {
       setUser(data.user);
-      // router.push("/account/");
+      router.push("/account/");
       //ok seems to work next test the jwt works right now the user is in AuthProvider
       // Errors arent working right yet DUe to strapi bug so //
       // TODO there

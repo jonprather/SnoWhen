@@ -7,14 +7,14 @@ import Layout from "@/components/layout";
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
-const WeatherCard = dynamic(() => import("../../../components/weatherCard"));
+const WeatherCard = dynamic(() => import("@/components/weatherCard"));
 
-import Graph from "../../../components/graph";
+import Graph from "@/components/graph";
 
-import BackButton from "../../../components/backButton";
+import BackButton from "@/components/molecules/backButton";
 
-import { formatDate } from "../../../lib/helpers/formatDate";
-import { weatherReducer } from "../../../lib/weatherReducer";
+import { formatDate } from "@/helpers/formatDate";
+import { weatherReducer } from "@/helpers/weatherReducer";
 
 export default function locationFromSearch() {
   const router = useRouter();
@@ -65,7 +65,7 @@ export default function locationFromSearch() {
     <Layout>
       <div className='location'>
         <div className='location__header'>
-          <BackButton url={`/weather`} path={[location]} />
+          <BackButton url={`/account`} path={[location]} />
           <h1 className='heading'>{location}</h1>
           <h2 className='subheading mb-18'>Snow Forecast</h2>
         </div>

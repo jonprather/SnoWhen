@@ -9,12 +9,17 @@ import { useQueries } from "react-query";
 import { useQueryClient } from "react-query";
 
 import dynamic from "next/dynamic";
+import Hero from "@/components/organisms/Hero";
 //components
-const SelectLocation = dynamic(() => import("../../components/selectLocation"));
-const LocationCard = dynamic(() => import("../../components/locationCard"));
+const SelectLocation = dynamic(() =>
+  import("@/components/molecules/selectLocation")
+);
+const LocationCard = dynamic(() =>
+  import("@/components/molecules/locationCard")
+);
 
 // custom helpers
-import { weatherReducer } from "../../lib/weatherReducer";
+import { weatherReducer } from "@/helpers/weatherReducer";
 import { getAllLocal } from "../../lib/LocalStorage.js";
 import Layout from "@/components/layout";
 
@@ -84,14 +89,7 @@ export default function index() {
      //template 
      */}
       <section className='home'>
-        <div className='home__hero-img'>
-          <h1 className='home__heading-container__heading'>
-            Where are you skiing?
-          </h1>
-          <h2 className='home__heading-container__subheading mb-8'>
-            Get Simple Forecasts for California Ski Resorts
-          </h2>
-        </div>
+        <Hero></Hero>
         <SelectLocation emit={handleEmit} />
         <main className='home__main'>
           {error ? (
@@ -133,7 +131,9 @@ export default function index() {
               results?.map((ele, i) => (
                 <React.Fragment key={i}>
                   <LocationCard
-                    weatherData={weatherReducer(ele)}
+                    weatherData={weatherReducer(
+                      ele?.data?.snowReport.data[0].attributes.blob
+                    )}
                     i={i}
                     id={ele?.data?.id}
                     deleteFromLS={handleDeletion}

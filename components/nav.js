@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 import DarkMode from "./darkMode";
 import { NavModal } from "./navModal";
-
+import AuthContext from "@/context/AuthContext.js";
 export default function nav() {
-  // const [open, setOpen] = useState(false);
-  // function handleToggle() {
-  //   setOpen((prev) => !prev);
-  // }
+  const { logout, user } = React.useContext(AuthContext);
+  const [wtf, setWtf] = useState(false);
+
+  function handleLogOut() {
+    console.log("You should be logged out", user);
+    logout();
+  }
   return (
     <div className='nav__wrapper'>
       <nav className='nav'>
@@ -20,7 +23,7 @@ export default function nav() {
               </div>
             </Link>
             <div className='nav__pages-container__links'>
-              <Link href='/weather'>
+              <Link href='/account'>
                 <button className='nav__pages-container__links__home'>
                   Home
                 </button>
@@ -39,15 +42,21 @@ export default function nav() {
             </div>
             <NavModal>
               <div className='nav__dropdown'>
-                <Link href='/weather'>
+                <Link href='/account'>
                   <button className=''>Home</button>
                 </Link>
-                <Link href='/account/login'>
-                  <button className=''>Log in</button>
-                </Link>
-                <Link href='/account/register'>
-                  <button className=''>Sign up</button>
-                </Link>
+                {user ? (
+                  <button onClick={handleLogOut}>Log out</button>
+                ) : (
+                  <>
+                    <Link href='/account/login'>
+                      <button className=''>Log in</button>
+                    </Link>
+                    <Link href='/account/register'>
+                      <button className=''>Sign up</button>
+                    </Link>
+                  </>
+                )}
                 <Link href='/about'>
                   <button className=''>About</button>
                 </Link>
@@ -59,12 +68,25 @@ export default function nav() {
           </div>
         </div>
         <div className='nav__auth-container'>
-          <Link href='/account/login'>
-            <button className='nav__auth-container__log-in'>Log in</button>
-          </Link>
-          <Link href='/account/register'>
-            <button className='nav__auth-container__sign-up'>Sign up</button>
-          </Link>
+          {user ? (
+            <>
+              <span>{user.username}</span>
+              <button className='nav__logout' onClick={handleLogOut}>
+                <span>Log out</span>
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href='/account/login'>
+                <button className='nav__auth-container__log-in'>Log in</button>
+              </Link>
+              <Link href='/account/register'>
+                <button className='nav__auth-container__sign-up'>
+                  Sign up
+                </button>
+              </Link>
+            </>
+          )}
         </div>
         {/* <DarkMode /> */}
         {/* <div className='nav__hr'></div> */}

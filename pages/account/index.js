@@ -2,36 +2,43 @@ import Layout from "@/components/layout";
 
 import { parseCookies } from "@/helpers/index";
 import { useRouter } from "next/router";
-
+import AccountPage from "@/components/templates/Account";
 import { API_URL } from "@/config/index";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import AuthContext from "@/context/AuthContext";
 
 import { useQueries } from "react-query";
 import { useQueryClient } from "react-query";
 //this is the strapi endpoint
 
 export default function index({ resorts, token }) {
-  console.log(resorts.data[1].attributes.resort.data.attributes.code);
+  const { user } = React.useContext(AuthContext);
+
   const router = useRouter();
   console.log(resorts);
   const queryClient = useQueryClient();
-
+  const [error, setError] = useState("");
+  // TODO This error isnt set up look to weather index to se tit right
+  // TODO something jank on line 24 here hmm object isntead of jsx type
   //HIT API
-  const getWeather = async function (resort) {
+  const getWeather = async function (resortCode) {
     try {
-      const { data } = await axios.get(
-        `/api/snowReport?ID=${resort?.queryKey[1]?.resortCode}`
-      );
+      const { data } = await axios.get(`/api/snowReport?ID=${resortCode}`);
       setError("");
-
+      // console.log("GET WEATHER", data);
       return data;
     } catch (error) {
       setError(error.message);
       console.error(error);
     }
   };
-
+  function handleEmit({ label, value: resortID }) {
+    if (label === undefined || resortID === undefined) return;
+    // console.log(label, resortID);
+    setResort(resortID);
+    router.push(`/weather/${label}/search?resortId=${resortID}`);
+  }
   const results = useQueries(
     resorts.data?.map((resort, i) => {
       const resortCode = resort.attributes.resort.data.attributes.code;
@@ -51,7 +58,7 @@ export default function index({ resorts, token }) {
           Authorization: `Bearer ${token}`,
         },
       });
-
+      //TODO look up more about sending tokens this way is it safe?
       const data = await res.json();
 
       if (!res.ok) {
@@ -61,50 +68,40 @@ export default function index({ resorts, token }) {
       }
     }
   };
-
+  console.log("RESULTS", results);
   return (
     <Layout title='SnoWhen - Account' description='snoWhen Account page'>
-      <div className='account'> WIP- Nothing Here Yet</div>;
-      {/* <div className={styles.dash}>
-        <h1>Dashboard</h1>
-        <h3>My Events</h3>
+      {/* Resorts is based off seach history historically maybe i can just resluts its just so 
+      to show no results section
+       */}
 
-        {events.map((evt) => (
-          <DashboardEvent key={evt.id} evt={evt} handleDelete={deleteEvent} />
-        ))}
-      </div> */}
+      <AccountPage
+        handleEmit={handleEmit}
+        error={error}
+        resorts={resorts}
+        results={results}
+      >
+        <h1> {user?.username}</h1>
+      </AccountPage>
     </Layout>
   );
 }
 
 export async function getServerSideProps({ req }) {
   const { token } = parseCookies(req);
-  // TODO havent done this method yet can prob just use auth/local routes instead
-  // this will call the finall method and auto get all favs from this user
-  // for delte jsut need ot make sure pass it the id then we good.../
-  //so this works to get the favs for this user
-  //but what about snow report
-  //i could still have local storage??
-  //
-  // hmm so i suppose my question is to chain calls ie serially or on same request get all the data
-  //so it swould look like
-  //go to account
-  //hits BE for Fav Resorts
-  //do i A- on Backend get relevant data from another table and send it with it
-  //     Would be like service for snowReports and filter by either date or sort by asc (or is it desc) then fetch that
-  //   repeat for each resort so it would  several proises i guess the react query calls like i already have been doin
-  // So prospective think about best way maybe google around for advice then try one
-  //yeah i think it would work any big probs? makes that call dep on another but nobody would use that fav info without the data
-  //but could use it just for crud data of that fav
-  //another option could have a query param flag to also send that data
-  // ?getForecast=true
-  //if thats true then also fetch that shit in the controller //or vice versa
-  //that way if jsut want it without it dont have to worry about it
 
-  //also can maybe prefer to keep seperate bc want to only do more req to the snowData api with react query
-  //this is all technical ill probably not have time to pick perfect approach here so probably aim for flexibity first can go for speed later
+  // TODO  just checkin gfor a token Doesnt prevent old or fake tokens i dont think
+  // will resorts having a value be usable like
+  //could check token against an auth route like make a req to strapi BE but will lag more
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/account/login",
+        permanent: false,
+      },
+    };
+  }
 
-  //or B- do another call
   const res = await fetch(`${API_URL}/api/favorites`, {
     method: "GET",
     headers: {
@@ -113,7 +110,7 @@ export async function getServerSideProps({ req }) {
   });
 
   const resorts = await res.json();
-
+  console.log("IN SSR", resorts);
   return {
     props: {
       resorts,

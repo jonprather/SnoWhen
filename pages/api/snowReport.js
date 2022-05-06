@@ -21,8 +21,9 @@ export default async (req, res) => {
     const { token } = cookie.parse(req.headers.cookie);
     // TODO  Remeber have fake resort that wil lfail this call can either return fake data if want or
     //let fail
+    // req?.query?.ID is what goes in here but can try hard coded bc dfake resorts
     const strapiRes = await fetch(
-      `${API_URL}/api/snow-report/${req?.query?.ID}`,
+      `${API_URL}/api/snow-reports/${req?.query?.ID}`,
       {
         method: "GET",
         headers: {
@@ -30,13 +31,17 @@ export default async (req, res) => {
         },
       }
     );
-
+    // TODO now im getting a 403 forbidden error Auth error but im sending token right?
+    // TODO pass down proper error if stuff not found rather than fail silently
+    // IE url was wrong got 404 from strapi but that wasnt passed to client
+    console.log("IN api Area 2", strapiRes);
     const snowReport = await strapiRes.json();
 
     if (strapiRes.ok) {
       res.status(200).json({ snowReport });
     } else {
       res.status(403).json({ message: "User forbidden" });
+      // TODO replace this with proper format automatically with .statusText and .status
     }
   } else {
     res.setHeader("Allow", ["GET"]);

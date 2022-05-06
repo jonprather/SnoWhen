@@ -216,3 +216,10 @@
   position: relative;
   background-color: pink;
 }
+
+.nav__logout {
+  color: white;
+  & span {
+    margin-left: 2rem;
+  }
+}
