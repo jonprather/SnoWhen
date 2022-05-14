@@ -6,6 +6,8 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { AuthProvider } from "@/context/AuthContext";
+import { FavoritesProvider } from "@/context/FavoritesContext";
+
 export default function MyApp({ Component, pageProps }) {
   const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
 
@@ -45,7 +47,9 @@ export default function MyApp({ Component, pageProps }) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <AuthProvider>
-            <Component {...pageProps} />
+            <FavoritesProvider>
+              <Component {...pageProps} />
+            </FavoritesProvider>
           </AuthProvider>
         </Hydrate>
         <ReactQueryDevtools />

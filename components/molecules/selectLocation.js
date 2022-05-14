@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 // import { setLocalAddress } from "@/helpers/"
 // import { SelectBox } from "@/components/selectBox";
-
+import FavoritesContext from "@/context/FavoritesContext";
 import Select from "react-select";
 // TODO get these resorts dynamically from api or pass them down from getServerSide props call which i do in account
+//also pass in id value as that will help for delete by id
+//also perhaps in create as well
+
 const resorts = [
-  { label: "Mammoth", value: 619002 },
-  { label: "Snow Summit", value: 420 },
-  { label: "Big Bear", value: 4201 },
+  { label: "Mammoth", value: 619002, id: 1 },
+  { label: "Snow Summit", value: 420, id: 2 },
+  { label: "Big Bear", value: 4201, id: 3 },
 ];
 
 // const resorts = [
@@ -17,6 +20,7 @@ const resorts = [
 // ];
 
 export default function Location(props) {
+  const { saveSearchHistory } = useContext(FavoritesContext);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [resort, setResort] = useState([]);
@@ -35,6 +39,7 @@ export default function Location(props) {
   }
   function handleSubmit() {
     console.log("HANDLE SUB=", resort);
+    saveSearchHistory({ resortID: resort.id });
     if (resort === "" || resort === undefined) {
       setError("Please select an option to search."); // TODO FIXME -takes two clicks instead of one
       return;
@@ -43,8 +48,11 @@ export default function Location(props) {
     //so it wants resort id and name
     // setLocalAddress(resort.value);
     // let name  = resort.label;
-    props.emit(resort);
-
+    // so can be from setFavorite(resort)
+    //can also have a setFavErrorMsg too so not to compete with this one
+    // props.emit(resort);
+    //so instead of props.emit all the way up can make this come from FavoritesContext.
+    // its just for handling ui state can prob do that with context
     //TODO make this create a request to create an item
     //   so have to handl ereq to strapi
     // pushing any data to top level so that it is clean ui state ie to reset any state... idk if needed need to

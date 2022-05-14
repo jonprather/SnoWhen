@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { formatDate } from "@/helpers/formatDate";
 import Image from "next/image";
+import FavoritesContext from "@/context/FavoritesContext";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useRouter } from "next/router";
 
-export default function locationCard({ weatherData, i, id, deleteFromLS }) {
+export default function locationCard({
+  weatherData,
+  i,
+  id,
+  deleteFromLS,
+  searchHistoryId,
+  liked,
+}) {
+  const [toggleState, setToggleState] = useState(liked);
   console.log(weatherData);
+  const router = useRouter();
+
+  const { deleteSearchHistory, toggleLikeResort } =
+    useContext(FavoritesContext);
+  const refreshData = () => {
+    // router.push("/account");
+    router.replace(router.asPath);
+    // TODO anti pattern ( bc two sources of turth and init state with props)
+    //but idk how else to keep the scroll to top from happeing when use the router methods on SSR page
+    //this way might be in sync if can match it to response but then  makes this uneeded...
+    setToggleState((prev) => !prev);
+  };
   if (!weatherData?.name) return "";
   return (
     <>
@@ -65,7 +88,10 @@ export default function locationCard({ weatherData, i, id, deleteFromLS }) {
               <button
                 className='home__card__delete'
                 onClick={(e) => {
-                  deleteFromLS(id);
+                  // deleteFromLS(id);
+                  //TODO this works if can pass it correct favorite id
+                  //which i think is related to the data passed in here
+                  deleteSearchHistory({ id: searchHistoryId });
                   console.log("ID", id);
                   e.stopPropagation();
                 }}
@@ -73,7 +99,27 @@ export default function locationCard({ weatherData, i, id, deleteFromLS }) {
                 Remove
               </button>
             </div>
-            <p className='home__card__accent-box__details'>Click for More</p>
+            <p className='home__card__accent-box__details'>
+              {" "}
+              <button
+                className='home__card__delete'
+                onClick={(e) => {
+                  toggleLikeResort({
+                    searchHistoryId: searchHistoryId,
+                    liked: liked,
+                  });
+                  refreshData();
+                  //TODO i dont like how it scrolls to top when use this fn (for when use liked not toggle)
+                  console.log("liked in card area", liked);
+                  e.stopPropagation();
+                }}
+              >
+                {/* //this works but duplicated source of truth and init state with props anti patterns */}
+                {/* //maybe could debounce this in someway handle locally and do req in bg?? */}
+                {/* like could get out of sync if req fails ...  */}
+                {liked ? <FaHeart /> : <FaRegHeart />}
+              </button>
+            </p>
           </div>
         </div>
       </Link>

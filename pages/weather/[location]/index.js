@@ -30,7 +30,7 @@ export default function location() {
     if (!queryClient) return;
 
     if (queryClient?.queryCache.queries.length === 0) {
-      router?.push(`/weather`);
+      router?.push(`/account`);
     }
 
     setWeatherObj(() => {
@@ -42,7 +42,7 @@ export default function location() {
       return weatherReducer(
         queryClient?.queryCache?.queries[id]?.state.data.snowReport.data[0]
           .attributes.blob
-      )["snowPerDay"];
+      )?.["snowPerDay"];
     });
   }, [router?.isReady]);
 

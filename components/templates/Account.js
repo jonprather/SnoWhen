@@ -6,7 +6,12 @@ import ErrorText from "@/components/molecules/error";
 // import Loading from "@/components/atoms/Loading";
 // Is this really an atom or a molecule im not sure it depends if uses more stuff like spinner
 // TODO make this a molecule made up of atoms which incude some spinner library
-export default function account({ handleEmit, error, resorts, results }) {
+export default function account({
+  handleEmit,
+  error,
+  resortsSearchHistory,
+  results,
+}) {
   return (
     <section className='home'>
       {/* These together could be an organism
@@ -20,7 +25,7 @@ export default function account({ handleEmit, error, resorts, results }) {
       For now this is fine but can make this a better template and resuable by using more slots for flexibilty
       */}
         <ErrorText error={error} />
-        <SavedResortsBG resorts={resorts} />
+        <SavedResortsBG resortsSearchHistory={resortsSearchHistory} />
         {/* THese props might have to change  dep on new api */}
         <Loading loading={results[results.length - 1]?.isLoading} />
         <CardContainer results={results}></CardContainer>
