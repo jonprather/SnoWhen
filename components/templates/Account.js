@@ -2,7 +2,7 @@ import SavedResortsBG from "../molecules/SavedResortsBG";
 import CardContainer from "../organisms/CardContainer";
 import Header from "@/components/organisms/AccountHeader";
 import Loading from "@/components/atoms/Loading";
-import ErrorText from "@/components/molecules/error";
+import ErrorText from "@/components/molecules/Error";
 // import Loading from "@/components/atoms/Loading";
 // Is this really an atom or a molecule im not sure it depends if uses more stuff like spinner
 // TODO make this a molecule made up of atoms which incude some spinner library
