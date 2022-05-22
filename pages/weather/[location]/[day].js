@@ -12,13 +12,13 @@ const SelectDay = dynamic(() => import("../../../components/selectDay"));
 const WeatherCard = dynamic(() => import("../../../components/weatherCard"));
 
 import Graph from "../../../components/graph";
-import BackButton from "../../../components/backButton";
+import BackButton from "../../../components/molecules/backButton";
 
 //helpers
-import { weatherReducer } from "../../../lib/weatherReducer";
+import { weatherReducer } from "../../../helpers/weatherReducer";
 
-import { militaryToStandardTime } from "../../../lib/helpers/militaryToStandardTime";
-import { formatDate } from "../../../lib/helpers/formatDate";
+import { militaryToStandardTime } from "../../../helpers/militaryToStandardTime";
+import { formatDate } from "../../../helpers/formatDate";
 
 export default function location() {
   const router = useRouter();

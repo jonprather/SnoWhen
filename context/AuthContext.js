@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }) => {
 
   // Register user
   const register = async (user) => {
-    console.log("USER IN AUTHCONTEXT", user);
     const res = await fetch(`${NEXT_URL}/api/register`, {
       method: "POST",
       headers: {
@@ -24,14 +23,11 @@ export const AuthProvider = ({ children }) => {
     });
 
     const data = await res.json();
-    console.log("RES!!!,", res);
     if (res.ok) {
       setUser(data.user);
-      console.log("RES.OK....", data);
 
       router.push("/account/");
     } else {
-      console.log(data.message);
       setError(data.message);
       setError(null);
     }
@@ -89,11 +85,16 @@ export const AuthProvider = ({ children }) => {
       setUser(data.user);
     } else {
       setUser(null);
+      router.push("/account/login");
+      //this works as an auth check and redirect..
+      //call it once in account useEffect
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, error, register, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, error, register, login, logout, checkUserLoggedIn }}
+    >
       {children}
     </AuthContext.Provider>
   );

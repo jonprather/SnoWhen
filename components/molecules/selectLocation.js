@@ -33,13 +33,11 @@ export default function Location(props) {
   }, [resort]);
 
   function handleChange(resort) {
-    console.log("CHange", resort);
     setError("");
     setResort(resort);
   }
   function handleSubmit() {
-    console.log("HANDLE SUB=", resort);
-    saveSearchHistory({ resortID: resort.id });
+    saveSearchHistory({ resort: resort.id });
     if (resort === "" || resort === undefined) {
       setError("Please select an option to search."); // TODO FIXME -takes two clicks instead of one
       return;

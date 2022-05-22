@@ -131,9 +131,9 @@ export default function index() {
               results?.map((ele, i) => (
                 <React.Fragment key={i}>
                   <LocationCard
-                    weatherData={weatherReducer(
-                      ele?.data?.snowReport.data[0].attributes.blob
-                    )}
+                    weatherData={weatherReducer(ele.data)}
+                    // does this take ele?.data?.snowReport.data[0].attributes.blob now? idk
+                    //why it cant read snowPer day...
                     i={i}
                     id={ele?.data?.id}
                     deleteFromLS={handleDeletion}

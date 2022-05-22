@@ -18,13 +18,11 @@ export default function CardContainer({ results }) {
       */}
       {results.every((num) => num.isSuccess === true) &&
         results?.map((ele, i) => {
-          console.log("EKE", ele);
-
           return (
-            <React.Fragment key={ele?.data?.snowReport.data[0].id}>
+            <React.Fragment key={ele?.data?.snowReport.data[0]?.id}>
               <LocationCard
                 weatherData={weatherReducer(
-                  ele?.data?.snowReport.data[0].attributes.blob
+                  ele?.data?.snowReport?.data[0]?.attributes?.blob
                 )}
                 i={i}
                 id={ele?.data?.id}

@@ -33,5 +33,7 @@ yarn-error.log*
 lib/mammothData.json
 pages/api/supabase.js
 pages/supatest.js 
-src/client.js 
+src/client.js
+
+CognitiveLoadReducers
 

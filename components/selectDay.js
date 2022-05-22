@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { formatDate, addDay, subtractDay } from "../lib/helpers/formatDate";
+import { formatDate, addDay, subtractDay } from "../helpers/formatDate";
 
 export default function daySelector({
   locationId,

@@ -13,9 +13,10 @@ import { useQueries } from "react-query";
 import { useQueryClient } from "react-query";
 //this is the strapi endpoint
 
-export default function index({ resortsSearchHistory, token }) {
-  const { user } = React.useContext(AuthContext);
-  const { likeResort, setToken } = React.useContext(FavoritesContext);
+export default function index() {
+  const { user, checkUserLoggedIn } = React.useContext(AuthContext);
+  const { searchHistory, likeResort, setToken, getResorts } =
+    React.useContext(FavoritesContext);
 
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -23,25 +24,35 @@ export default function index({ resortsSearchHistory, token }) {
   // TODO This error isnt set up look to weather index to se tit right
   // TODO something jank on line 24 here hmm object isntead of jsx type
   //HIT API
-  const handleScroll = () => {
-    var scrollpos = sessionStorage.getItem("scrollpos");
-    if (scrollpos) {
-      window.scrollTo(0, scrollpos);
-      sessionStorage.removeItem("scrollpos");
-    }
-  };
+  // const handleScroll = () => {
+  //   var scrollpos = sessionStorage.getItem("scrollpos");
+  //   if (scrollpos) {
+  //     window.scrollTo(0, scrollpos);
+  //     sessionStorage.removeItem("scrollpos");
+  //   }
+  // };
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+
+  //     sessionStorage.setItem("scrollpos", window.scrollY);
+  //   };
+  // });
+  // TODO wtf after all that work shit still scrolls to the top when i fetch new data wtf now it stutters wtf man
+  //shits wack
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    // setToken(token);  this will be broken need to pass token a diff way or
+    //encapsults the delete and update calls in api calls
+    getResorts();
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-
-      sessionStorage.setItem("scrollpos", window.scrollY);
+      () => {};
     };
-  });
+  }, []);
+  console.log("Search HISTORY in account page", searchHistory);
 
   useEffect(() => {
-    setToken(token);
-
+    checkUserLoggedIn();
     return () => {
       () => {};
     };
@@ -63,8 +74,8 @@ export default function index({ resortsSearchHistory, token }) {
     router.push(`/weather/${label}/search?resortId=${resortID}`);
   }
   const results = useQueries(
-    resortsSearchHistory.data?.map((resort, i) => {
-      const resortCode = resort.attributes.resort.data.attributes.code;
+    searchHistory?.data?.map((resort, i) => {
+      const resortCode = resort.attributes.resort.data?.attributes?.code;
       return {
         queryKey: [resortCode, resort],
         queryFn: (resort) => getWeather(resortCode),
@@ -72,8 +83,7 @@ export default function index({ resortsSearchHistory, token }) {
       };
     }) ?? []
   );
-  resortsSearchHistory.data?.map((searchHistoryItem, i) => {
-    console.log("SEARCH HISTROY ITEM ", searchHistoryItem);
+  searchHistory?.data?.map((searchHistoryItem, i) => {
     results.forEach((ele) => {
       ele.searchHistoryId = searchHistoryItem.id;
       ele.liked = searchHistoryItem.attributes.liked;
@@ -101,7 +111,7 @@ export default function index({ resortsSearchHistory, token }) {
       }
     }
   };
-
+  if (!searchHistory) return "";
   return (
     <Layout title='SnoWhen - Account' description='snoWhen Account page'>
       {/* Resorts is based off seach history historically maybe i can just resluts its just so 
@@ -111,7 +121,7 @@ export default function index({ resortsSearchHistory, token }) {
       <AccountPage
         handleEmit={handleEmit}
         error={error}
-        resortsSearchHistory={resortsSearchHistory}
+        resortsSearchHistory={searchHistory}
         results={results}
       >
         <h1> {user?.username}</h1>
@@ -120,34 +130,31 @@ export default function index({ resortsSearchHistory, token }) {
   );
 }
 
-export async function getServerSideProps({ req }) {
-  const { token } = parseCookies(req);
-  console.log("IN SSR");
-  // TODO  just checkin gfor a token Doesnt prevent old or fake tokens i dont think
-  // will resorts having a value be usable like
-  //could check token against an auth route like make a req to strapi BE but will lag more
-  if (!token) {
-    return {
-      redirect: {
-        destination: "/account/login",
-        permanent: false,
-      },
-    };
-  }
+// export async function getServerSideProps({ req }) {
+//   const { token } = parseCookies(req);
 
-  const res = await fetch(`${API_URL}/api/favorites`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+//   if (!token) {
+//     return {
+//       redirect: {
+//         destination: "/account/login",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  const resortsSearchHistory = await res.json();
+//   const res = await fetch(`${API_URL}/api/favorites`, {
+//     method: "GET",
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
 
-  return {
-    props: {
-      resortsSearchHistory,
-      token,
-    },
-  };
-}
+//   const resortsSearchHistory = await res.json();
+
+//   return {
+//     props: {
+//       resortsSearchHistory,
+//       token,
+//     },
+//   };
+// }

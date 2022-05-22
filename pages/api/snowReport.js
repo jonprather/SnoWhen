@@ -34,7 +34,6 @@ export default async (req, res) => {
     // TODO now im getting a 403 forbidden error Auth error but im sending token right?
     // TODO pass down proper error if stuff not found rather than fail silently
     // IE url was wrong got 404 from strapi but that wasnt passed to client
-    console.log("IN api Area 2", strapiRes);
     const snowReport = await strapiRes.json();
 
     if (strapiRes.ok) {

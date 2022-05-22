@@ -2,7 +2,7 @@ export default function SavedResortsBG({ resortsSearchHistory }) {
   return (
     // TODO this might actually be an organism level im not sure. Also these components may be molecules
     <>
-      {resortsSearchHistory.data.length ? (
+      {resortsSearchHistory?.data?.length ? (
         <div className='home__heading-container'>
           <div className='home__heading-container__svg-wrapper'>
             <svg

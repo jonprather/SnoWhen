@@ -22,7 +22,7 @@ export default function locationCard({
     useContext(FavoritesContext);
   const refreshData = () => {
     // router.push("/account");
-    router.replace(router.asPath);
+    // router.replace(router.asPath);
     // TODO anti pattern ( bc two sources of turth and init state with props)
     //but idk how else to keep the scroll to top from happeing when use the router methods on SSR page
     //this way might be in sync if can match it to response but then  makes this uneeded...

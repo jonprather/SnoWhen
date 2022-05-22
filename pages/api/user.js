@@ -9,6 +9,7 @@ export default async (req, res) => {
     }
 
     const { token } = cookie.parse(req.headers.cookie);
+    //TODO now that not SSR need a way to redircet on uathed maybe in auth ctx
     // TODO  Prob dont need it tbh buti dont htink ive set this route up in strapi yet or the controller for it
     const strapiRes = await fetch(`${API_URL}/api/users/me`, {
       method: "GET",
