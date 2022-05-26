@@ -5,16 +5,20 @@
   min-height: 100vh;
   max-width: 1440px;
   margin: 0 auto;
+
   &__heading-container {
     z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     gap: 2rem;
-    margin-bottom: 3rem;
+    padding: 2rem;
+    margin: 3rem 0;
+    background-color: #0b3856;
+    height: 100rem;
     @media only screen and (min-width: $bp-medium) {
-      padding-top: 8rem;
-      margin-bottom: 2rem;
+      // padding-top: 8rem;
+      // margin-bottom: 2rem;
     }
 
     &__heading {
@@ -122,6 +126,7 @@
   }
 
   &__main {
+    margin-top: 10rem;
     padding-bottom: 10rem;
     z-index: 0;
   }

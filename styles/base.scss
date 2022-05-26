@@ -300,7 +300,11 @@ button,
 [type="submit"] {
   -webkit-appearance: button;
 }
-
+button {
+  // -webkit-appearance: none;
+  // -moz-appearance: none;
+  border: none;
+}
 .recharts-responsive-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

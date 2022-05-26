@@ -1,8 +1,12 @@
-export default function Loading({ loading }) {
+import PuffLoader from "react-spinners/PuffLoader"; //ScaleLoader is p cool
+
+export default function Loading({ loading, color = "white" }) {
+  const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "white",
+  };
   return (
-    <div>
-      {loading && <p className='subheading'>...Loading</p>}
-      {""}
-    </div>
+    <PuffLoader color={color} loading={loading} css={override} size={150} />
   );
 }

@@ -1,4 +1,24 @@
-export default function SavedResortsBG({ resortsSearchHistory }) {
+export default function SavedResortsBG({
+  resortsSearchHistory,
+  showFavs,
+  resultsLengthsObj,
+  children,
+}) {
+  const { length, filteredLength } = resultsLengthsObj;
+  console.log(" PRELENGTHS CHECK IN BG", length, filteredLength);
+
+  if (!length || !filteredLength) {
+    //TOD) works but looks bad when goes from having 1 or more to having zero screen shifts up bc no more content
+    //most of the issues stem from that after psuedo element maybe can replace or something...
+    console.log("IN LENGTHS CHECK IN BG");
+    return (
+      <div className='home__heading-container'>
+        <h1 className='heading home__heading-container__heading home__heading-container__heading--smaller'>
+          {showFavs ? "No Favorites" : "No Search History"}
+        </h1>
+      </div>
+    );
+  }
   return (
     // TODO this might actually be an organism level im not sure. Also these components may be molecules
     <>
@@ -19,8 +39,9 @@ export default function SavedResortsBG({ resortsSearchHistory }) {
             </svg>
           </div>
           <h1 className='heading home__heading-container__heading home__heading-container__heading--smaller'>
-            Saved Resorts
+            {showFavs ? "Liked Resorts" : "Search History"}
           </h1>
+          {children}
         </div>
       ) : (
         <>

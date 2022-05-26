@@ -1,7 +1,26 @@
 import { weatherReducer } from "@/helpers/weatherReducer";
 import React, { useEffect, useState } from "react";
 import LocationCard from "@/components/molecules/locationCard";
-export default function CardContainer({ results }) {
+export default function CardContainer({
+  results,
+  showFavs,
+  filterFunc,
+  resultsLengthsObj,
+}) {
+  const { length, filteredLength } = resultsLengthsObj;
+
+  //TODO after filter off the last remaining item it shows jank bg ie it thought the children woudl be there
+  //instead now after filtering thesres nothing but its still shows as if there would be
+  //that bg being dynamically created based on content is causing problems maybe a min height?
+  if (length && !filteredLength) {
+    return (
+      <div className='home__card-container home__card-container--empty'></div>
+    );
+  }
+  //this is jank i think i need to lay out expactly wha ti want in each state and then make
+  //either a state machine or put in the logic to make it happen and also work between compoents
+  // BG and this
+  //problem is the other BG component doesnt knwo then have it show up as add some resorts and this...
   return (
     <div className='home__card-container'>
       {/* TODO make the props pass in correct data might be different now
@@ -16,8 +35,12 @@ export default function CardContainer({ results }) {
      but favorites are unique to people even though they share a resort code
      so worse case i can math them but i think the object method will be easier
       */}
+      {/* //TODO  remove inline reducer its getting called all the time its wasteful */}
+      {/* //can do a check to see if .length is now zero after filter if soo show message
+      nothing to show need some way to get the length dynamically bc here its in the ma pfunction 
+       */}
       {results.every((num) => num.isSuccess === true) &&
-        results?.map((ele, i) => {
+        results?.filter(filterFunc).map((ele, i) => {
           return (
             <React.Fragment key={ele?.data?.snowReport.data[0]?.id}>
               <LocationCard

@@ -6,3 +6,24 @@
   font-weight: 300;
   margin: 0 auto;
 }
+
+.filter-favorite-menu {
+  font-size: 2.2rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+
+  @media only screen and (max-width: $bp-medium) {
+    margin-bottom: 4rem;
+  }
+  text-transform: uppercase;
+  &__btn {
+    margin-right: 2rem;
+
+    border-bottom: 4px solid transparent;
+
+    &--active {
+      border-bottom: 4px solid $color-primary-dark;
+    }
+  }
+}
