@@ -77,6 +77,8 @@ export default function location() {
               </h2>
             </div>
             <div className='weather-card__container'>
+              <Loading loading={!weatherObj} color={"black"} />
+
               {weatherObj &&
                 weatherObj.map((day, i) => {
                   return (
