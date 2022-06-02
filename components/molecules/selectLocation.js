@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 // import { setLocalAddress } from "@/helpers/"
 // import { SelectBox } from "@/components/selectBox";
+import Loading from "../atoms/Loading";
 import FavoritesContext from "@/context/FavoritesContext";
 import Select from "react-select";
 // TODO get these resorts dynamically from api or pass them down from getServerSide props call which i do in account
@@ -99,7 +100,7 @@ export default function Location(props) {
   return (
     <>
       <div className='locations__search-box'>
-        {isLoading && <span>Loading...</span>}
+        <Loading loading={isLoading} />
         <div className='locations__search-box__inner-container'>
           <div className='locations__search-box__inner-container__select-box'>
             <label

@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 import { useRouter } from "next/router";
 import Nav from "./nav";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Layout({
   title = "SnoWhen",
@@ -12,7 +13,11 @@ export default function Layout({
   const router = useRouter();
 
   return (
-    <div>
+    <motion.div
+      exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <Nav />
       <Head>
         <title>{title}</title>
@@ -20,7 +25,7 @@ export default function Layout({
         <meta name='keywords' content={keywords} />
       </Head>
 
-      <div className='layout'>{children}</div>
-    </div>
+      <motion.div className='layout'>{children}</motion.div>
+    </motion.div>
   );
 }

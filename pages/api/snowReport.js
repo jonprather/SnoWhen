@@ -22,15 +22,16 @@ export default async (req, res) => {
     // TODO  Remeber have fake resort that wil lfail this call can either return fake data if want or
     //let fail
     // req?.query?.ID is what goes in here but can try hard coded bc dfake resorts
-    const strapiRes = await fetch(
-      `${API_URL}/api/snow-reports/${req?.query?.ID}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    //DUMMY DaTA
+    let id = req?.query?.ID;
+    //TODO extra feature make the strapi api have snow total in main properties not blob so can filter by that
+
+    const strapiRes = await fetch(`${API_URL}/api/snow-reports/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     // TODO now im getting a 403 forbidden error Auth error but im sending token right?
     // TODO pass down proper error if stuff not found rather than fail silently
     // IE url was wrong got 404 from strapi but that wasnt passed to client

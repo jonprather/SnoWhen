@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AuthContext from "@/context/AuthContext";
 import FavoritesContext from "@/context/FavoritesContext";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { useQueries } from "react-query";
 import { useQueryClient } from "react-query";
@@ -22,25 +23,7 @@ export default function index() {
   const queryClient = useQueryClient();
   const [error, setError] = useState("");
   // TODO This error isnt set up look to weather index to se tit right
-  // TODO something jank on line 24 here hmm object isntead of jsx type
-  //HIT API
-  // const handleScroll = () => {
-  //   var scrollpos = sessionStorage.getItem("scrollpos");
-  //   if (scrollpos) {
-  //     window.scrollTo(0, scrollpos);
-  //     sessionStorage.removeItem("scrollpos");
-  //   }
-  // };
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
 
-  //     sessionStorage.setItem("scrollpos", window.scrollY);
-  //   };
-  // });
-  // TODO wtf after all that work shit still scrolls to the top when i fetch new data wtf now it stutters wtf man
-  //shits wack
   useEffect(() => {
     // setToken(token);  this will be broken need to pass token a diff way or
     //encapsults the delete and update calls in api calls
@@ -49,7 +32,6 @@ export default function index() {
       () => {};
     };
   }, []);
-  console.log("Search HISTORY in account page", searchHistory);
 
   useEffect(() => {
     checkUserLoggedIn();
@@ -83,10 +65,24 @@ export default function index() {
       };
     }) ?? []
   );
+  const isLoading = results.some((query) => query.isLoading);
   searchHistory?.data?.map((searchHistoryItem, i) => {
-    results.forEach((ele) => {
-      ele.searchHistoryId = searchHistoryItem.id;
-      ele.liked = searchHistoryItem.attributes.liked;
+    console.log("SEARCH HISTORY", searchHistory);
+
+    results.forEach((ele, j) => {
+      console.log("SEARCH HISTORY ITEM", searchHistoryItem);
+      //ohh so its looping twice and since its mutating only leaves the last one the newest ok
+      // so how do i get it to be one for one bewteen search hisotry
+      //yeah how do i map an id from history to be an id on the results obj(snow data)
+      //can i trust it to be in same order and do it by id
+      if (i === j) {
+        ele.searchHistoryId = searchHistoryItem.id;
+        ele.liked = searchHistoryItem.attributes.liked;
+      }
+      //TODO somehting jank here its setting the same id for each result elemetn its getting the most recent search history id
+      //  and putting it on each history item
+      //TODO same problem with liked so this is the jank i need it to be unique to each one but here its taking the
+      //outer loop id and putting it on each inner loop
     });
   });
 
@@ -101,13 +97,13 @@ export default function index() {
           Authorization: `Bearer ${token}`,
         },
       });
-      //TODO look up more about sending tokens this way is it safe?
+
       const data = await res.json();
 
       if (!res.ok) {
         toast.error(data.message);
       } else {
-        router.reload();
+        // router.reload();
       }
     }
   };
@@ -123,6 +119,7 @@ export default function index() {
         error={error}
         resortsSearchHistory={searchHistory}
         results={results}
+        isLoading={isLoading}
       >
         <h1> {user?.username}</h1>
       </AccountPage>

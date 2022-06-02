@@ -58,7 +58,7 @@ export const FavoritesProvider = ({ children }) => {
       updatedBy: user.id,
       liked: !liked,
     };
-
+    // TODO WHY ARE THEY ALL GETTING LIKED when click on one FIXME
     const res = await fetch(`${NEXT_URL}/api/toggleLike/${searchHistoryId}`, {
       method: "POST",
       headers: {

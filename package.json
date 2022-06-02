@@ -16,6 +16,7 @@
     "cloudinary-build-url": "^0.2.1",
     "cookie": "^0.5.0",
     "dayjs": "^1.10.6",
+    "framer-motion": "^6.3.4",
     "next": "^10.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",

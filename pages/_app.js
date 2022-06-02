@@ -8,7 +8,9 @@ import dynamic from "next/dynamic";
 import { AuthProvider } from "@/context/AuthContext";
 import { FavoritesProvider } from "@/context/FavoritesContext";
 
-export default function MyApp({ Component, pageProps }) {
+import { AnimatePresence } from "framer-motion";
+
+export default function MyApp({ Component, pageProps, router }) {
   const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
 
   const [queryClient] = React.useState(
@@ -48,7 +50,9 @@ export default function MyApp({ Component, pageProps }) {
         <Hydrate state={pageProps.dehydratedState}>
           <AuthProvider>
             <FavoritesProvider>
-              <Component {...pageProps} />
+              <AnimatePresence exitBeforeEnter>
+                <Component {...pageProps} key={router.route} />
+              </AnimatePresence>
             </FavoritesProvider>
           </AuthProvider>
         </Hydrate>

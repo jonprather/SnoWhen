@@ -5,6 +5,13 @@ import Image from "next/image";
 import FavoritesContext from "@/context/FavoritesContext";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useRouter } from "next/router";
+import {
+  fadeInRight,
+  stagger,
+  containerScale,
+  fadeInBottom,
+} from "@/lib/animate";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function locationCard({
   weatherData,
@@ -15,7 +22,6 @@ export default function locationCard({
   liked,
 }) {
   const [toggleState, setToggleState] = useState(liked);
-  console.log(weatherData);
   const router = useRouter();
 
   const { deleteSearchHistory, toggleLikeResort } =
@@ -28,14 +34,27 @@ export default function locationCard({
     //this way might be in sync if can match it to response but then  makes this uneeded...
     setToggleState((prev) => !prev);
   };
-  if (!weatherData?.name) return "";
+  // if (!weatherData?.name) return "";
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, scale: 1 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      exit={{ opacity: 0, x: 0, scale: 1 }}
+      // variants={fadeInBottom}
+      key={id}
+      // layout={"position"}
+      Layout
+    >
+      {/* //LUL its so aggressive in your face how to i chill it out?? 
+       also this is triggering it on all three which is not what i want
+      
+      */}
       <Link
         href={`/weather/${weatherData?.name
           .toLowerCase()
           .trim()}?locationId=${i}
               `}
+        scroll={false}
       >
         <div className='home__card'>
           <div className='home__card-heading__wrapper'>
@@ -61,14 +80,14 @@ export default function locationCard({
               </p>
             </div>
             <p className='home__card__snow-amount-box-quantity'>
-              {weatherData["total"]}"
+              {weatherData?.total}
             </p>
           </div>
 
           {/* <p className='home__card__forecast-heading'>Forecast</p> */}
 
           <div className='home__card__forecast-days-box'>
-            {weatherData["snowPerDay"].map((day, i) => {
+            {weatherData?.snowPerDay.map((day, i) => {
               if (i > 4) return "";
               return (
                 <div key={i} className='home__card__forecast-days-box-cell'>
@@ -92,7 +111,6 @@ export default function locationCard({
                   //TODO this works if can pass it correct favorite id
                   //which i think is related to the data passed in here
                   deleteSearchHistory({ id: searchHistoryId });
-                  console.log("ID", id);
                   e.stopPropagation();
                 }}
               >
@@ -104,13 +122,14 @@ export default function locationCard({
               <button
                 className='home__card__delete'
                 onClick={(e) => {
+                  console.log("CARD HIstory ID", searchHistoryId);
+
                   toggleLikeResort({
                     searchHistoryId: searchHistoryId,
                     liked: liked,
                   });
-                  refreshData();
+                  // refreshData();
                   //TODO i dont like how it scrolls to top when use this fn (for when use liked not toggle)
-                  console.log("liked in card area", liked);
                   e.stopPropagation();
                 }}
               >
@@ -123,6 +142,6 @@ export default function locationCard({
           </div>
         </div>
       </Link>
-    </>
+    </motion.div>
   );
 }
