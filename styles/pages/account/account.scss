@@ -8,22 +8,39 @@
 }
 
 .filter-favorite-menu {
-  font-size: 2.2rem;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
+  z-index: 1000;
+  font-size: 2rem;
+  background-color: white; //#f1f1f1; // rgb(255 255 255 / 100%);
+  padding: 2.6rem;
+  border-radius: 1rem;
+  position: relative;
+  max-width: 40rem;
+  width: 66.66%;
+  margin: 0 auto;
+  top: 40px;
+  box-shadow: $box-shadow;
+  /* margin: 0; */
+  /* margin-top: 1rem; */
 
-  @media only screen and (max-width: $bp-medium) {
-    margin-bottom: 4rem;
+  @media only screen and (min-width: $bp-medium) {
+    top: 60px;
+    font-size: 2rem;
   }
-  text-transform: uppercase;
+
+  &__tab {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    position: relative;
+  }
   &__btn {
     margin-right: 2rem;
+    position: relative;
 
-    border-bottom: 4px solid transparent;
+    // border-bottom: 4px solid transparent;
 
-    &--active {
-      border-bottom: 4px solid $color-primary-dark;
-    }
+    // &--active {
+    //   border-bottom: 4px solid $color-primary-dark;
+    // }
   }
 }

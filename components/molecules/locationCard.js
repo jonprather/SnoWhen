@@ -3,67 +3,54 @@ import Link from "next/link";
 import { formatDate } from "@/helpers/formatDate";
 import Image from "next/image";
 import FavoritesContext from "@/context/FavoritesContext";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaTrash } from "react-icons/fa";
+
 import { useRouter } from "next/router";
-import {
-  fadeInRight,
-  stagger,
-  containerScale,
-  fadeInBottom,
-} from "@/lib/animate";
-import { motion, AnimatePresence } from "framer-motion";
+import { fadeInRight, hover, tap } from "@/lib/animate";
+import { motion } from "framer-motion";
 
 export default function locationCard({
   weatherData,
   i,
-  id,
-  deleteFromLS,
   searchHistoryId,
   liked,
 }) {
-  const [toggleState, setToggleState] = useState(liked);
   const router = useRouter();
 
   const { deleteSearchHistory, toggleLikeResort } =
     useContext(FavoritesContext);
-  const refreshData = () => {
-    // router.push("/account");
-    // router.replace(router.asPath);
-    // TODO anti pattern ( bc two sources of turth and init state with props)
-    //but idk how else to keep the scroll to top from happeing when use the router methods on SSR page
-    //this way might be in sync if can match it to response but then  makes this uneeded...
-    setToggleState((prev) => !prev);
-  };
-  // if (!weatherData?.name) return "";
+
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 1 }}
-      animate={{ opacity: 1, x: 0, scale: 1 }}
-      exit={{ opacity: 0, x: 0, scale: 1 }}
-      // variants={fadeInBottom}
-      key={id}
-      // layout={"position"}
-      Layout
+    <Link
+      href={`/weather/${weatherData?.name.toLowerCase().trim()}?locationId=${i}
+          `}
     >
-      {/* //LUL its so aggressive in your face how to i chill it out?? 
-       also this is triggering it on all three which is not what i want
-      
-      */}
-      <Link
-        href={`/weather/${weatherData?.name
-          .toLowerCase()
-          .trim()}?locationId=${i}
-              `}
-        scroll={false}
+      <motion.div
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        variants={fadeInRight}
+        whileHover={hover}
+        whileTap={tap}
+        layout={"position"}
       >
         <div className='home__card'>
           <div className='home__card-heading__wrapper'>
-            <h1 className='home__card-heading mb-12'>{weatherData?.name}</h1>
+            <button
+              className='home__card__delete'
+              onClick={(e) => {
+                deleteSearchHistory({ id: searchHistoryId });
+                e.stopPropagation();
+              }}
+            >
+              <FaTrash />
+            </button>
+            <h1 className='home__card-heading'>{weatherData?.name}</h1>
           </div>
 
           <p className='home__card-state'>Ca</p>
 
-          <div className='home__card__mtn-bg mb-16'>
+          <div className='home__card__mtn-bg'>
             <img src='/mtn-bg.png' className='' />
           </div>
           <div className='home__card__snowflake'>
@@ -74,74 +61,40 @@ export default function locationCard({
           </div>
           <div className='home__card__snow-amount-box'>
             <div>
-              <p className='home__card__snow-amount-box-heading'>Next Week</p>
+              {/* <p className='home__card__snow-amount-box-heading'>Next Week</p> */}
               <p className='home__card__snow-amount-box-subheading'>
-                Snow Total
+                Snow Total {weatherData?.total}
               </p>
             </div>
-            <p className='home__card__snow-amount-box-quantity'>
+            {/* <p className='home__card__snow-amount-box-quantity'>
               {weatherData?.total}
-            </p>
+            </p> */}
           </div>
+
+          <p className='home__card__accent-box__details'>
+            {" "}
+            <button
+              className='home__card__like'
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleLikeResort({
+                  searchHistoryId: searchHistoryId,
+                  liked: liked,
+                });
+              }}
+            >
+              {/* TODO //maybe could debounce this in someway handle locally and do req in bg?? */}
+              {liked ? <FaHeart /> : <FaRegHeart />}
+            </button>
+          </p>
 
           {/* <p className='home__card__forecast-heading'>Forecast</p> */}
 
-          <div className='home__card__forecast-days-box'>
-            {weatherData?.snowPerDay.map((day, i) => {
-              if (i > 4) return "";
-              return (
-                <div key={i} className='home__card__forecast-days-box-cell'>
-                  <p className='home__card__forecast-days-box-day'>
-                    {formatDate(day.date)}
-                  </p>
-                  <p className='home__card__forecast-days-box-amount'>
-                    {day.total}"
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className='home__card__accent-box'>
-            <div className='flex justify-c align-c'>
-              <button
-                className='home__card__delete'
-                onClick={(e) => {
-                  // deleteFromLS(id);
-                  //TODO this works if can pass it correct favorite id
-                  //which i think is related to the data passed in here
-                  deleteSearchHistory({ id: searchHistoryId });
-                  e.stopPropagation();
-                }}
-              >
-                Remove
-              </button>
-            </div>
-            <p className='home__card__accent-box__details'>
-              {" "}
-              <button
-                className='home__card__delete'
-                onClick={(e) => {
-                  console.log("CARD HIstory ID", searchHistoryId);
-
-                  toggleLikeResort({
-                    searchHistoryId: searchHistoryId,
-                    liked: liked,
-                  });
-                  // refreshData();
-                  //TODO i dont like how it scrolls to top when use this fn (for when use liked not toggle)
-                  e.stopPropagation();
-                }}
-              >
-                {/* //this works but duplicated source of truth and init state with props anti patterns */}
-                {/* //maybe could debounce this in someway handle locally and do req in bg?? */}
-                {/* like could get out of sync if req fails ...  */}
-                {liked ? <FaHeart /> : <FaRegHeart />}
-              </button>
-            </p>
-          </div>
+          <div className='home__card__accent-box'></div>
         </div>
-      </Link>
-    </motion.div>
+      </motion.div>
+    </Link>
   );
 }
+
+//TODO could refactor this to be clearner use smaller peices atomic design style

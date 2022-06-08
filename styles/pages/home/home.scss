@@ -8,14 +8,14 @@
 
   &__heading-container {
     z-index: 1000;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
+    position: relative;
+    z-index: 0;
     gap: 2rem;
     padding: 2rem;
-    margin: 3rem 0;
+    padding-top: 12rem;
+    // margin: 3rem 0;
     background-color: #0b3856;
-    height: 100rem;
+    min-height: 100rem;
     @media only screen and (min-width: $bp-medium) {
       // padding-top: 8rem;
       // margin-bottom: 2rem;
@@ -126,7 +126,7 @@
   }
 
   &__main {
-    margin-top: 10rem;
+    margin-top: 8rem;
     padding-bottom: 10rem;
     z-index: 0;
   }

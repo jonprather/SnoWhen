@@ -2,16 +2,12 @@
   color: white;
   width: 80%;
   font-size: 2rem;
-  // background-color: rgba($color: #ffffff, $alpha: 6);
   box-shadow: $box-shadow;
-  // border-bottom: 1px solid black;
   padding: 2rem;
   margin: 0 auto;
 
   margin-bottom: 1.6rem;
   border-radius: 6px;
-  //TODO add animation on open and close
-  //TODO fix padding issue on form
 
   &__wrapper {
     display: flex;

@@ -8,9 +8,8 @@ const override = {
   borderColor: "white",
 };
 import SavedResortsBG from "../molecules/SavedResortsBG";
-import CardContainer from "../organisms/CardContainer";
 import Header from "@/components/organisms/AccountHeader";
-import Loading from "@/components/atoms/Loading";
+
 import ErrorText from "@/components/molecules/Error";
 
 export default function account({
@@ -29,11 +28,12 @@ export default function account({
   const filteredLength = results?.filter(filterFunc)?.length;
   const length = results.length;
   useEffect(() => {
-    setFiltered(results);
-    //TODO this doesnt seem to have the new liked info which comes from the faovrites context toggle update
-    // where they set search hisotry to be in lien with it so should this be in line with snowdata aka results
-    //or the resorts stuff im confused
-    //maybe im off base on this one maybe look at how like flows down it might not be realted to this
+    // should only filter if on liked tab
+    //so needs the shared state ofthat bool passed into Filter here
+
+    let filtered = results.filter((ele) => (showFavs ? ele.liked : ele));
+    setFiltered(filtered);
+
     //ok fixed it it needed to reset if results reset which makes sense but means im doing a fetch everytime a buttons clicked
     //then doing another fetch to get new results seems p wasteful...
     //could leave it as it was and only set after inital load then keep res tin memory as a copy
@@ -69,21 +69,41 @@ export default function account({
         <SavedResortsBG
           resortsSearchHistory={resortsSearchHistory}
           showFavs={showFavs}
+          filtered={filtered}
+          results={results}
           resultsLengthsObj={{ length, filteredLength }}
-        >
-          <>
-            <Loading loading={isLoading} />
+          isLoading={isLoading}
+        ></SavedResortsBG>
+        {/* TODO ok fixed it was bc of nesting in reasort bg 
+        so next up is to redo the bg wrapper without it using the children pattern
+        might be several apporaches 
+        such as passing down components - seems uneeded
+        passing down props and importing comiets inside it 
+        make it an organism composed 
+        of the cards and the header and the bg wrapper
+        jus tid what props youll need
+        import in the child and should be good
+        
+         */}
+        {/* //TODO  fix animationi jank why does it not fully load in it gets stuck
+          maybe just finish one with minmal animatinos and can add more over time... 
+          // ideally it doesnt jump jank wise on render and also flows in an out via animatePresence
+          //not sure why this is such a bitch 
+           */}
 
-            <CardContainer
-              filtered={filtered}
-              results={results}
-              showFavs={showFavs}
-              filterFunc={filterFunc}
-              resultsLengthsObj={{ length, filteredLength }}
-              isLoading={isLoading}
-            ></CardContainer>
-          </>
-        </SavedResortsBG>
+        {/* WOW it doesnt work in here either idk why wtf
+           
+           tried to relocatie but something else is the cause......  */}
+        {/* <Loading className='abs' loading={isLoading} />
+
+        <CardContainer
+          filtered={filtered}
+          results={results}
+          showFavs={showFavs}
+          filterFunc={filterFunc}
+          resultsLengthsObj={{ length, filteredLength }}
+          isLoading={isLoading}
+        ></CardContainer> */}
       </main>
     </section>
   );

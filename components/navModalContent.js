@@ -32,7 +32,6 @@ export const Content = ({ onClose, children }) => {
   }, []);
   return (
     <div className='nav__dropdown__wrapper' ref={ref}>
-      {/* TODO add is oepn contigent on whteter state is set to open or note should then trigger combo class */}
       {children}
     </div>
   );
