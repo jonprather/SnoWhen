@@ -9,6 +9,8 @@ export const FavoritesProvider = ({ children }) => {
   const { user } = React.useContext(AuthContext);
   const [searchHistory, setSearchHistory] = useState(null);
   const [error, setError] = useState(null);
+  const [msg, setMsg] = useState(null);
+
   const router = useRouter();
 
   const saveSearchHistory = async ({ resort }) => {
@@ -20,10 +22,13 @@ export const FavoritesProvider = ({ children }) => {
       },
       body: JSON.stringify({ data: { resort } }),
     });
+    setMsg(null);
 
     const data = await res.json();
     if (res.ok) {
-      const arrayCopy = searchHistory.data.slice();
+      setMsg("Resort Saved");
+
+      const arrayCopy = searchHistory ? searchHistory.data.slice() : [];
       arrayCopy.push(data.data.data);
       setSearchHistory((favArrObjs) => {
         return { ...favArrObjs, data: arrayCopy };
@@ -37,17 +42,25 @@ export const FavoritesProvider = ({ children }) => {
   };
 
   const getResorts = async () => {
-    const res = await fetch(`${NEXT_URL}/api/resorts`, {
-      method: "GET",
-    });
+    try {
+      const res = await fetch(`${NEXT_URL}/api/resorts`, {
+        method: "GET",
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (res.ok) {
-      setSearchHistory(data.resortsSearchHistory);
-    } else {
-      setError(data.message);
-      setError(null);
+      if (res.ok) {
+        setSearchHistory(data.resortsSearchHistory);
+      } else {
+        console.log("IN elese", data.message);
+
+        setError(data.message);
+        // setError(null);
+      }
+    } catch (error) {
+      console.log("IN CATCH", error);
+      setError(error);
+      //
     }
   };
 
@@ -71,6 +84,9 @@ export const FavoritesProvider = ({ children }) => {
     if (res.ok) {
       let idFromNew = strapiToggleData?.data.id;
       let newLikeValue = strapiToggleData?.data.attributes?.liked;
+      //TODO changed to use filtered data in cards need to update this to be in sysnc
+      //ie use and setFiltered rather than just searchHistory or init filtered with this data not
+      //just results but results is of the snow data which should be downstream from this
       let mapData = searchHistory.data.map((ele) => {
         if (ele.id === idFromNew) {
           let newObj = {
@@ -82,6 +98,8 @@ export const FavoritesProvider = ({ children }) => {
           return ele;
         }
       });
+      //TODO so this sets the searchHistory which triggers the next snowData which is passed to Locc ard
+      //and not filtered the second time...
       setSearchHistory((favArrObjs) => {
         return { ...favArrObjs, data: [...mapData] };
       });
@@ -97,13 +115,18 @@ export const FavoritesProvider = ({ children }) => {
       method: "DELETE",
     });
     const data = await res.json();
+    setMsg(null);
+
     if (res.ok) {
+      setMsg("Succesfully Deleted Item");
+      //TODO could get actually name here rather than 'item'
       setSearchHistory((prev) => {
         const arrayCopy = prev.data.slice();
         const filteredArr = arrayCopy.filter((e) => e.id !== id);
         return { ...prev, data: filteredArr };
       });
     } else {
+      setMsg(null);
       setError(data.message);
       setError(null);
     }
@@ -117,6 +140,8 @@ export const FavoritesProvider = ({ children }) => {
         toggleLikeResort,
         deleteSearchHistory,
         saveSearchHistory,
+        msg,
+        setMsg,
       }}
     >
       {children}

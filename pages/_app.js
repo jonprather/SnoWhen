@@ -9,7 +9,8 @@ import { AuthProvider } from "@/context/AuthContext";
 import { FavoritesProvider } from "@/context/FavoritesContext";
 
 import { AnimatePresence } from "framer-motion";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function MyApp({ Component, pageProps, router }) {
   const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
 
@@ -58,6 +59,7 @@ export default function MyApp({ Component, pageProps, router }) {
         </Hydrate>
         <ReactQueryDevtools />
       </QueryClientProvider>
+      <ToastContainer />
     </>
   );
 }

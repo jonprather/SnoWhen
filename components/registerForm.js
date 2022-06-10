@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FaUser } from "react-icons/fa";
 import { useRouter } from "next/router";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import * as yup from "yup";
 import AuthContext from "@/context/AuthContext";
 const schema = yup
@@ -21,7 +20,7 @@ const schema = yup
 
 export default function AuthForm({ title, isRegister, children }) {
   const router = useRouter();
-  const { register, error, user } = React.useContext(AuthContext);
+  const { register, error, user, setError } = React.useContext(AuthContext);
 
   const {
     register: registerFormData,
@@ -35,63 +34,69 @@ export default function AuthForm({ title, isRegister, children }) {
     const username = email;
     register({ username, email, password });
   };
-  React.useEffect(() => {
+  useEffect(() => {
     if (user) router.push("/account");
+  }, [user]);
+  // TODO why does linking register sometimes push me into login?
+  // maybe i get pushed to account and then to login....
 
+  useEffect(() => {
     if (error) {
       toast.error(error);
+      setError(null);
     }
-  }, [error, user]);
+  }, [error]);
   return (
-    <div className='authForm overlay'>
-      <h1>
-        <FaUser /> {title}
-      </h1>
-      <ToastContainer />
+    <>
+      <div className='authForm overlay'>
+        <h1>
+          <FaUser /> {title}
+        </h1>
 
-      <form className='authForm__form' onSubmit={handleSubmit(onSubmit)}>
-        <div className='authForm__form__form-group'>
-          <label className='authForm__form__label' htmlFor='email'>
-            Email
-          </label>
-          <input
-            // placeholder='john@gmail.com' looks janky
-            {...registerFormData("email")}
-            className='authForm__form__input'
-          />
-          <p className='authForm__form__errors'>{errors.email?.message}</p>
-        </div>
-        <div className='authForm__form__form-group'>
-          <label className='authForm__form__label' htmlFor='password'>
-            password
-          </label>
+        <form className='authForm__form' onSubmit={handleSubmit(onSubmit)}>
+          <div className='authForm__form__form-group'>
+            <label className='authForm__form__label' htmlFor='email'>
+              Email
+            </label>
+            <input
+              // placeholder='john@gmail.com' looks janky
+              {...registerFormData("email")}
+              className='authForm__form__input'
+            />
+            <p className='authForm__form__errors'>{errors.email?.message}</p>
+          </div>
+          <div className='authForm__form__form-group'>
+            <label className='authForm__form__label' htmlFor='password'>
+              password
+            </label>
 
-          <input
-            type='password'
-            className='authForm__form__input'
-            {...registerFormData("password")}
-          />
-          <p className='authForm__form__errors'>{errors.password?.message}</p>
-        </div>
+            <input
+              type='password'
+              className='authForm__form__input'
+              {...registerFormData("password")}
+            />
+            <p className='authForm__form__errors'>{errors.password?.message}</p>
+          </div>
 
-        <div className='authForm__form__form-group'>
-          <label className='authForm__form__label' htmlFor='confirmPassword'>
-            Confirm password
-          </label>
+          <div className='authForm__form__form-group'>
+            <label className='authForm__form__label' htmlFor='confirmPassword'>
+              Confirm password
+            </label>
 
-          <input
-            type='password'
-            className='authForm__form__input'
-            {...registerFormData("confirmPassword")}
-          />
-          <p className='authForm__form__errors'>
-            {errors.confirmPassword?.message}
-          </p>
-        </div>
+            <input
+              type='password'
+              className='authForm__form__input'
+              {...registerFormData("confirmPassword")}
+            />
+            <p className='authForm__form__errors'>
+              {errors.confirmPassword?.message}
+            </p>
+          </div>
 
-        <input type='submit' className='authForm__form__btn btn' />
-      </form>
-      {children}
-    </div>
+          <input type='submit' className='authForm__form__btn btn' />
+        </form>
+        {children}
+      </div>
+    </>
   );
 }

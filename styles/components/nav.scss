@@ -82,6 +82,10 @@
       min-height: 40px;
       min-width: 40px;
       margin-right: 2rem;
+      position: relative;
+      z-index: 1;
+      //TODO get this to be under toast messages not ABove it
+      //same with other parts of the nav the taost is under it which is jank
     }
     &:hover {
       cursor: pointer;

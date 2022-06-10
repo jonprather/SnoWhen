@@ -3,6 +3,7 @@ import Layout from "@/components/layout";
 import { parseCookies } from "@/helpers/index";
 import { useRouter } from "next/router";
 import AccountPage from "@/components/templates/Account";
+import { toast } from "react-toastify";
 import { API_URL } from "@/config/index";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -15,9 +16,21 @@ import { useQueryClient } from "react-query";
 //this is the strapi endpoint
 
 export default function index() {
-  const { user, checkUserLoggedIn } = React.useContext(AuthContext);
-  const { searchHistory, likeResort, setToken, getResorts } =
-    React.useContext(FavoritesContext);
+  const {
+    user,
+    checkUserLoggedIn,
+    msg: authMsg,
+    setMsg: setAuthMsg,
+  } = React.useContext(AuthContext);
+  const {
+    searchHistory,
+    likeResort,
+    setToken,
+    getResorts,
+    error: favError,
+    msg,
+    setMsg,
+  } = React.useContext(FavoritesContext);
 
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -39,9 +52,44 @@ export default function index() {
       () => {};
     };
   }, []);
+  useEffect(() => {
+    //TODO so two are logged or rather it keeps the one from first page and they are stacked its weird
+    if (error) {
+      toast.error(error);
+      setError("");
+    }
+    if (favError) {
+      toast.error(favError);
+      setFavErrorMsg("");
+    }
+  }, [error, favError]);
+
+  useEffect(() => {
+    if (msg) {
+      toast.success(msg);
+      setMsg(null);
+    }
+  }, [msg]);
+  useEffect(() => {
+    if (authMsg && authMsg.type === "logout") return;
+    // TODO make the above short stop when its a logOut msg or add obj props
+    // for diff types like logout like action objects basically
+    // TODO fix splling/grammmer on msg strings...
+    // TODO  why are there two like it keeps the first one even though msg should be changed
+    //it remains after index page
+    if (authMsg && authMsg.msg) {
+      toast.success(authMsg.msg);
+      //TODO why is this toasting have two one nested one?
+      setAuthMsg(null);
+      //this is on logout its seeing this when still on account page b4 push then sets to null before has
+      // a chance
+    }
+  }, [authMsg]);
 
   const getWeather = async function (resortCode) {
     try {
+      // TODO if this errors out sends no data still fills ui with stuff
+      //bc has resorts this is then called but returns no data but still ui shows half baked stuff
       const { data } = await axios.get(`/api/snowReport?ID=${resortCode}`);
       setError("");
       return data;
@@ -67,22 +115,13 @@ export default function index() {
   );
   const isLoading = results.some((query) => query.isLoading);
   searchHistory?.data?.map((searchHistoryItem, i) => {
-    console.log("SEARCH HISTORY", searchHistory);
-
     results.forEach((ele, j) => {
-      console.log("SEARCH HISTORY ITEM", searchHistoryItem);
-      //ohh so its looping twice and since its mutating only leaves the last one the newest ok
-      // so how do i get it to be one for one bewteen search hisotry
       //yeah how do i map an id from history to be an id on the results obj(snow data)
       //can i trust it to be in same order and do it by id
       if (i === j) {
         ele.searchHistoryId = searchHistoryItem.id;
         ele.liked = searchHistoryItem.attributes.liked;
       }
-      //TODO somehting jank here its setting the same id for each result elemetn its getting the most recent search history id
-      //  and putting it on each history item
-      //TODO same problem with liked so this is the jank i need it to be unique to each one but here its taking the
-      //outer loop id and putting it on each inner loop
     });
   });
 
@@ -102,12 +141,14 @@ export default function index() {
 
       if (!res.ok) {
         toast.error(data.message);
+        setError(error);
       } else {
         // router.reload();
+        //TODO shouldnt i toast a succesufl crud op as well like for delete
       }
     }
   };
-  if (!searchHistory) return "";
+  // if (!searchHistory) return "";
   return (
     <Layout title='SnoWhen - Account' description='snoWhen Account page'>
       {/* Resorts is based off seach history historically maybe i can just resluts its just so 

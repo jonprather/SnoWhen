@@ -4,6 +4,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Loading from "../atoms/Loading";
 import FavoritesContext from "@/context/FavoritesContext";
 import Select from "react-select";
+import { toast } from "react-toastify";
 // TODO get these resorts dynamically from api or pass them down from getServerSide props call which i do in account
 //also pass in id value as that will help for delete by id
 //also perhaps in create as well
@@ -21,10 +22,10 @@ const resorts = [
 // ];
 
 export default function Location(props) {
-  const { saveSearchHistory } = useContext(FavoritesContext);
+  const { saveSearchHistory, searchHistory } = useContext(FavoritesContext);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [resort, setResort] = useState([]);
+  const [resort, setResort] = useState(null);
 
   useEffect(() => {
     setIsLoading(false);
@@ -32,40 +33,41 @@ export default function Location(props) {
       setIsLoading(false);
     };
   }, [resort]);
-
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      setError("");
+    }
+  }, [error]);
   function handleChange(resort) {
     setError("");
     setResort(resort);
   }
   function handleSubmit() {
-    saveSearchHistory({ resort: resort.id });
-    if (resort === "" || resort === undefined) {
-      setError("Please select an option to search."); // TODO FIXME -takes two clicks instead of one
+    if (resort === "" || !resort) {
+      setError("Please select an option to search.");
       return;
     }
+    const hasItem = searchHistory
+      ? searchHistory.data.filter(
+          (ele) => +ele.attributes.resort.data.attributes.code === resort.value
+        ).length
+      : false;
 
-    //so it wants resort id and name
-    // setLocalAddress(resort.value);
-    // let name  = resort.label;
-    // so can be from setFavorite(resort)
-    //can also have a setFavErrorMsg too so not to compete with this one
-    // props.emit(resort);
-    //so instead of props.emit all the way up can make this come from FavoritesContext.
-    // its just for handling ui state can prob do that with context
-    //TODO make this create a request to create an item
-    //   so have to handl ereq to strapi
-    // pushing any data to top level so that it is clean ui state ie to reset any state... idk if needed need to
-    //rethink how this will work now that its in strapi not Local Storage
+    if (hasItem) {
+      setError(`${resort.label} is already in History!`);
+      return;
+    }
+    if (resort.id) {
+      saveSearchHistory({ resort: resort.id });
+    }
 
-    //TODO also add rest of crud functionality to dashboard
-    // eg like dette need to pass that function down for deltion also ones for creation a simple function
-    // defined in a context file which hits api and or strapi to achieve functionality
-    //maybe use context api to avoid prop drilling
     //TODO bonus add resorts to slect box based on hitting API so its easy when add new ones
     setResort("");
     // router.push("/weather/"); //push to item on search
   }
-
+  // TODO maybe msg based toasts for liek adding removing are uneeded bc have animations...
+  //errros still clutch tho
   function customTheme(theme) {
     let colorDark = "#0f4c75";
     let colorPrimary = "#3282b8";
@@ -142,7 +144,9 @@ export default function Location(props) {
             </button>
           </div>
         </div>
-        {error && <div className='error'>{error}</div>}
+        {/* {error && <div className='error'>{error}</div>}
+        
+        using toast instead */}
       </div>
     </>
   );

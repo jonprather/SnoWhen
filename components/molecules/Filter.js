@@ -59,6 +59,7 @@ export default function Filter({
         {tabs.map((ele) => {
           return (
             <button
+              key={"" + ele.id}
               className={"filter-favorite-menu__btn"}
               onKeyDown={(event) =>
                 event.key === "Enter" ? handleClick(ele) : null

@@ -34,13 +34,7 @@ export default async (req, res) => {
 
       res.status(200).json({ user: data.user });
     } else {
-      console.log(" FAILLLSSS IN API ROUTE objs", data);
-      // TODO well strapi has a bug where it doesnt send error data correctly ...
-      // https://forum.strapi.io/t/strapi-v4-error-message-does-not-work-properly/17935
-
-      res
-        .status(data?.statusCode)
-        .json({ message: data?.message[0]?.messages[0]?.message });
+      res.status(data.error.status).json({ message: data.error.message });
     }
   } else {
     res.setHeader("Allow", ["POST"]);
