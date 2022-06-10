@@ -116,7 +116,12 @@ export const FavoritesProvider = ({ children }) => {
     });
     const data = await res.json();
     setMsg(null);
-
+    //feel like can clean this up have reducer for state updates (def) and msg?
+    //TODO make this use a reducer as well
+    // SET UP REDUCER, USEREducer call
+    // SET up Action objs , payload,
+    // replace  calls with the new dispatch
+    //should just be local to this file
     if (res.ok) {
       setMsg("Succesfully Deleted Item");
       //TODO could get actually name here rather than 'item'

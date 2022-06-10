@@ -9,15 +9,17 @@ export default function index() {
   function handleClick() {
     router.push("/account");
   }
+  //TODO important!! WHY is api/user getting called on this page and redir you to login why is it called just by reffering to auth?
+
   const subtitle = "The Simplest way to find your next powder day";
   const title = "Know When It's Snowing";
-  const { user, msg, setMsg } = React.useContext(AuthContext);
+  const { dispatchMsg, message } = React.useContext(AuthContext);
   useEffect(() => {
-    if (msg && msg.msg) {
-      toast.success(msg.msg);
-      setMsg(null);
+    if (message) {
+      toast.success(message);
+      dispatchMsg({});
     }
-  }, [msg]);
+  }, [message]);
   return (
     <Layout>
       <PageContainer title={title} subtitle={subtitle}>

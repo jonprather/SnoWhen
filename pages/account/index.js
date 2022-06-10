@@ -16,16 +16,10 @@ import { useQueryClient } from "react-query";
 //this is the strapi endpoint
 
 export default function index() {
-  const {
-    user,
-    checkUserLoggedIn,
-    msg: authMsg,
-    setMsg: setAuthMsg,
-  } = React.useContext(AuthContext);
+  const { user, checkUserLoggedIn, dispatchMsg, message } =
+    React.useContext(AuthContext);
   const {
     searchHistory,
-    likeResort,
-    setToken,
     getResorts,
     error: favError,
     msg,
@@ -71,20 +65,11 @@ export default function index() {
     }
   }, [msg]);
   useEffect(() => {
-    if (authMsg && authMsg.type === "logout") return;
-    // TODO make the above short stop when its a logOut msg or add obj props
-    // for diff types like logout like action objects basically
-    // TODO fix splling/grammmer on msg strings...
-    // TODO  why are there two like it keeps the first one even though msg should be changed
-    //it remains after index page
-    if (authMsg && authMsg.msg) {
-      toast.success(authMsg.msg);
-      //TODO why is this toasting have two one nested one?
-      setAuthMsg(null);
-      //this is on logout its seeing this when still on account page b4 push then sets to null before has
-      // a chance
+    if (message) {
+      toast.success(message);
+      dispatchMsg({});
     }
-  }, [authMsg]);
+  }, [message]);
 
   const getWeather = async function (resortCode) {
     try {

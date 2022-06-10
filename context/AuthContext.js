@@ -1,6 +1,29 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useReducer } from "react";
 import { useRouter } from "next/router";
 import { NEXT_URL } from "@/config/index";
+
+const MSG_ACTIONS = {
+  REGISTER: "Registration",
+  LOGIN: "Login",
+  LOGOUT: "Logout",
+};
+
+const msgReducer = (state, action) => {
+  let string = "Successful";
+  console.log("IN REDUCER", state, action);
+  switch (action.type) {
+    case MSG_ACTIONS.REGISTER:
+      return `${MSG_ACTIONS.REGISTER} ${string}`;
+    case MSG_ACTIONS.LOGIN:
+      return `${MSG_ACTIONS.LOGIN} ${string}`;
+    case MSG_ACTIONS.LOGOUT:
+      return `${MSG_ACTIONS.LOGOUT} ${string}`;
+    default:
+      return "";
+      break;
+  }
+};
+//this reducer is unecc bc i dont use prior state and its better for old state this might be good for msg making tho
 
 const AuthContext = createContext();
 const createMsg = (keyword) => {
@@ -10,6 +33,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [msg, setMsg] = useState(null);
+  const [message, dispatchMsg] = useReducer(msgReducer, { type: null });
 
   const router = useRouter();
 
@@ -29,7 +53,8 @@ export const AuthProvider = ({ children }) => {
     if (res.ok) {
       setUser(data.user);
       // could use reducer with payload and
-      setMsg({ type: "register", msg: createMsg() });
+      // setMsg({ type: "register", msg: createMsg() });
+      dispatchMsg({ type: MSG_ACTIONS.REGISTER });
 
       router.push("/account/");
     } else {
@@ -56,7 +81,7 @@ export const AuthProvider = ({ children }) => {
 
       if (res.ok) {
         setUser(data.user);
-        setMsg({ type: "login", msg: "login successful" });
+        dispatchMsg({ type: MSG_ACTIONS.LOGIN });
 
         router.push("/account/");
         //ok seems to work next test the jwt works right now the user is in AuthProvider
@@ -90,7 +115,9 @@ export const AuthProvider = ({ children }) => {
 
     if (res.ok) {
       setUser(null);
-      setMsg({ type: "logout", msg: "logout successful" });
+      // setMsg({ type: "logout", msg: "logout successful" });
+      dispatchMsg({ type: MSG_ACTIONS.LOGOUT });
+
       router.push("/");
     }
   };
@@ -123,6 +150,8 @@ export const AuthProvider = ({ children }) => {
         checkUserLoggedIn,
         msg,
         setMsg,
+        dispatchMsg,
+        message,
       }}
     >
       {children}
