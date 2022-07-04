@@ -10,7 +10,7 @@ import axios from "axios";
 import AuthContext from "@/context/AuthContext";
 import FavoritesContext from "@/context/FavoritesContext";
 import { motion, AnimatePresence } from "framer-motion";
-
+import useSnowData from "@/components/hooks/useSnowData";
 import { useQueries } from "react-query";
 import { useQueryClient } from "react-query";
 //this is the strapi endpoint
@@ -25,6 +25,10 @@ export default function index() {
     msg,
     setMsg,
   } = React.useContext(FavoritesContext);
+  //TODO replace fav context with useQuery hook useResorts
+  //will also have to set one up for mutations for likes using Optimistic updates
+  // another for delete etc
+  const { snowData } = useSnowData(searchHistory);
 
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -35,16 +39,19 @@ export default function index() {
     // setToken(token);  this will be broken need to pass token a diff way or
     //encapsults the delete and update calls in api calls
     getResorts();
-    return () => {
-      () => {};
-    };
   }, []);
+  useEffect(() => {
+    // setToken(token);  this will be broken need to pass token a diff way or
+    //encapsults the delete and update calls in api calls
+
+    if (searchHistory) {
+      console.log("SNOW DAATA test hooks", snowData);
+    }
+  }, [searchHistory, snowData]);
 
   useEffect(() => {
     checkUserLoggedIn();
-    return () => {
-      () => {};
-    };
+    //  TODO is this what i really want isnt it better to check user
   }, []);
   useEffect(() => {
     //TODO so two are logged or rather it keeps the one from first page and they are stacked its weird
@@ -71,36 +78,16 @@ export default function index() {
     }
   }, [message]);
 
-  const getWeather = async function (resortCode) {
-    try {
-      // TODO if this errors out sends no data still fills ui with stuff
-      //bc has resorts this is then called but returns no data but still ui shows half baked stuff
-      const { data } = await axios.get(`/api/snowReport?ID=${resortCode}`);
-      setError("");
-      return data;
-    } catch (error) {
-      setError(error.message);
-      console.error(error);
-    }
-  };
   function handleEmit({ label, value: resortID }) {
     if (label === undefined || resortID === undefined) return;
     setResort(resortID);
     router.push(`/weather/${label}/search?resortId=${resortID}`);
   }
-  const results = useQueries(
-    searchHistory?.data?.map((resort, i) => {
-      const resortCode = resort.attributes.resort.data?.attributes?.code;
-      return {
-        queryKey: [resortCode, resort],
-        queryFn: (resort) => getWeather(resortCode),
-        onSuccess: console.log(""),
-      };
-    }) ?? []
-  );
-  const isLoading = results.some((query) => query.isLoading);
+
+  // TODO make this code irrelevant with react query
+  const isLoading = snowData.some((query) => query.isLoading);
   searchHistory?.data?.map((searchHistoryItem, i) => {
-    results.forEach((ele, j) => {
+    snowData.forEach((ele, j) => {
       //yeah how do i map an id from history to be an id on the results obj(snow data)
       //can i trust it to be in same order and do it by id
       if (i === j) {
@@ -144,7 +131,7 @@ export default function index() {
         handleEmit={handleEmit}
         error={error}
         resortsSearchHistory={searchHistory}
-        results={results}
+        results={snowData}
         isLoading={isLoading}
       >
         <h1> {user?.username}</h1>
