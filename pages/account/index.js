@@ -14,40 +14,22 @@ import useSnowData from "@/components/hooks/useSnowData";
 import { useQueries } from "react-query";
 import { useQueryClient } from "react-query";
 //this is the strapi endpoint
-
+import useSearchHistory from "@/components/hooks/useSearchHistory";
 export default function index() {
   const { user, checkUserLoggedIn, dispatchMsg, message } =
     React.useContext(AuthContext);
-  const {
-    searchHistory,
-    getResorts,
-    error: favError,
-    msg,
-    setMsg,
-  } = React.useContext(FavoritesContext);
+  const { error: favError, msg, setMsg } = React.useContext(FavoritesContext);
   //TODO replace fav context with useQuery hook useResorts
   //will also have to set one up for mutations for likes using Optimistic updates
   // another for delete etc
+  const { searchHistory } = useSearchHistory();
+
   const { snowData } = useSnowData(searchHistory);
 
   const router = useRouter();
   const queryClient = useQueryClient();
   const [error, setError] = useState("");
   // TODO This error isnt set up look to weather index to se tit right
-
-  useEffect(() => {
-    // setToken(token);  this will be broken need to pass token a diff way or
-    //encapsults the delete and update calls in api calls
-    getResorts();
-  }, []);
-  useEffect(() => {
-    // setToken(token);  this will be broken need to pass token a diff way or
-    //encapsults the delete and update calls in api calls
-
-    if (searchHistory) {
-      console.log("SNOW DAATA test hooks", snowData);
-    }
-  }, [searchHistory, snowData]);
 
   useEffect(() => {
     checkUserLoggedIn();
@@ -87,17 +69,6 @@ export default function index() {
   // TODO make this code irrelevant with react query
   const isLoading = snowData.some((query) => query.isLoading);
   // irrelevant bc have is fetching and the rest is stale while revalidate so shouldnt be an issue right?
-
-  searchHistory?.data?.map((searchHistoryItem, i) => {
-    snowData.forEach((ele, j) => {
-      //yeah how do i map an id from history to be an id on the results obj(snow data)
-      //can i trust it to be in same order and do it by id
-      if (i === j) {
-        ele.searchHistoryId = searchHistoryItem.id;
-        ele.liked = searchHistoryItem.attributes.liked;
-      }
-    });
-  });
 
   // maybe this can just call teh auth context methods that way i can toast.erro
   //i mean if can toast from context would be dope but idk how that works
