@@ -86,6 +86,8 @@ export default function index() {
 
   // TODO make this code irrelevant with react query
   const isLoading = snowData.some((query) => query.isLoading);
+  // irrelevant bc have is fetching and the rest is stale while revalidate so shouldnt be an issue right?
+
   searchHistory?.data?.map((searchHistoryItem, i) => {
     snowData.forEach((ele, j) => {
       //yeah how do i map an id from history to be an id on the results obj(snow data)
@@ -126,7 +128,10 @@ export default function index() {
       {/* Resorts is based off seach history historically maybe i can just resluts its just so 
       to show no results section
        */}
-
+      {/* TODO after refactorign laoding to use isFetching can eliminate passign it down
+ prob is other componetns relied on it for sycrounous state which will be uneeded with RQ calls
+ plus if not can get rid of state liek TKDODO said
+ */}
       <AccountPage
         handleEmit={handleEmit}
         error={error}

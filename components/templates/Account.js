@@ -8,31 +8,19 @@ const override = {
 };
 import SavedResortsBG from "../molecules/SavedResortsBG";
 import Header from "@/components/organisms/AccountHeader";
-
-import ErrorText from "@/components/molecules/Error";
+import useSnowData from "../hooks/useSnowData";
 
 export default function account({
   handleEmit,
   error,
-  resortsSearchHistory,
   results,
-  isLoading,
+  resortsSearchHistory,
 }) {
-  const [showFavs, setShowFavs] = useState(false);
-  const [filtered, setFiltered] = useState([]);
-
-  const filterFunc = function (ele) {
-    return showFavs ? ele.liked : true;
-  };
-  const filteredLength = results?.filter(filterFunc)?.length;
-  const length = results.length;
-  useEffect(() => {
-    let filtered = results.filter((ele) => (showFavs ? ele.liked : ele));
-    setFiltered(filtered);
-    //ok fixed it it needed to reset if results reset which makes sense but means im doing a fetch everytime a buttons clicked
-    //TODO then doing another fetch to get new results seems p wasteful...
-  }, [isLoading, results]);
-
+  const { showFavs, setShowFavs, snowData, isLoading } =
+    useSnowData(resortsSearchHistory);
+  console.log("LOADING", isLoading);
+  //ok ERROS working when hit strapi here for snow data but also need to do it in fav ctx and
+  // then watch for it in places where thats called set it in ctx wtach in ui then call taostify in useEffect
   return (
     <section className='home'>
       {/* These together could be an organism
@@ -42,23 +30,13 @@ export default function account({
       <Header emit={handleEmit}></Header>
       <main className='home__main'>
         {/* Maybe to stay a template this stuff is slots or passed in components */}
-        <Filter
-          showFavs={showFavs}
-          setShowFavs={setShowFavs}
-          setFiltered={setFiltered}
-          results={results}
-          isLoading={isLoading}
-        />
-
-        <ErrorText error={error} />
+        <Filter setShowFavs={setShowFavs} />
+        {/* //TODO  replace error here with gloabl error hadnler in RQ */}
 
         <SavedResortsBG
-          resortsSearchHistory={resortsSearchHistory}
-          showFavs={showFavs}
-          filtered={filtered}
-          results={results}
-          resultsLengthsObj={{ length, filteredLength }}
+          filtered={snowData}
           isLoading={isLoading}
+          results={results}
         ></SavedResortsBG>
       </main>
     </section>

@@ -19,7 +19,7 @@ export default function locationCard({
 
   const { deleteSearchHistory, toggleLikeResort } =
     useContext(FavoritesContext);
-
+  if (!weatherData) return null;
   return (
     <Link
       href={`/weather/${weatherData?.name.toLowerCase().trim()}?locationId=${i}

@@ -28,6 +28,7 @@ export default function MyApp({ Component, pageProps, router }) {
         },
       })
   );
+  // TODO set up default error handler to pass to toast
   //   const queryClient = new QueryClient();
 
   return (

@@ -10,12 +10,7 @@ const motionStyle = {
   borderRadius: "8px",
   zIndex: 0,
 };
-export default function Filter({
-  showFavs,
-  setShowFavs,
-  setFiltered,
-  results,
-}) {
+export default function Filter({ setShowFavs }) {
   const [selected, setSelected] = useState(1);
   const tabs = [
     {
@@ -39,17 +34,9 @@ export default function Filter({
   // its basically liek a lib making it very versatile prob is i dont want it jus tfor selction it should also trigger
   // a state change higher up based on whats selected how do i couple that wihout coupling that?
 
-  useEffect(() => {
-    if (!showFavs) {
-      setFiltered(results);
-      return;
-    }
-    const isLiked = (ele) => ele.liked;
-
-    setFiltered(results?.filter(isLiked));
-  }, [showFavs]);
-
   function handleClick({ id, showFavs, clk, extraFunction }) {
+    console.log("FILTER SHOW FAVS", showFavs);
+
     if (typeof extraFunction === "function") extraFunction(showFavs);
     if (typeof clk === "function") clk(id);
   }

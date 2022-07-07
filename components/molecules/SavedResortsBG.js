@@ -3,16 +3,7 @@ import Loading from "@/components/atoms/Loading";
 import CardContainer from "../organisms/CardContainer";
 import Filter from "./Filter";
 import { container } from "@/lib/animate";
-export default function SavedResortsBG({
-  resortsSearchHistory,
-  showFavs,
-  resultsLengthsObj,
-  results,
-  isLoading,
-  filtered,
-}) {
-  const { length, filteredLength } = resultsLengthsObj;
-
+export default function SavedResortsBG({ results, filtered, isLoading }) {
   return (
     <div className='home__heading-container'>
       <div className='home__heading-container__svg-wrapper'>
@@ -44,15 +35,8 @@ export default function SavedResortsBG({
           </motion.h2>
         )}
       </AnimatePresence>
-      <Loading className='abs' loading={isLoading} />
 
-      <CardContainer
-        filtered={filtered}
-        results={results}
-        showFavs={showFavs}
-        resultsLengthsObj={{ length, filteredLength }}
-        isLoading={isLoading}
-      ></CardContainer>
+      <CardContainer isLoading={isLoading} filtered={filtered}></CardContainer>
     </div>
   );
 }
