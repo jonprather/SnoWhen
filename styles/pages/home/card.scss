@@ -5,7 +5,7 @@
   box-shadow: $box-shadow;
   margin-bottom: 4rem;
   // width: 90vw;
-  max-width: 100rem;
+  max-width: 64rem;
   background-color: white;
   transition: all 0.3s ease-in;
   overflow: hidden;
@@ -331,28 +331,28 @@
     @media only screen and (min-width: 350px) {
       -webkit-transform-origin-x: 120rem;
     }
-    @media only screen and (min-width: 400px) {
+    @media only screen and (min-width: 415px) {
       -webkit-transform-origin-x: 128rem;
     }
     @media only screen and (min-width: 500px) {
-      -webkit-transform-origin-x: 140rem;
+      -webkit-transform-origin-x: 130rem;
     }
 
     @media only screen and (min-width: 590px) {
-      -webkit-transform-origin-x: 156rem;
+      -webkit-transform-origin-x: 130rem;
     }
     @media only screen and (min-width: 800px) {
-      -webkit-transform-origin-x: 136rem;
+      -webkit-transform-origin-x: 128rem;
     }
-    @media only screen and (min-width: 900px) {
-      -webkit-transform-origin-x: 152rem;
-    }
-    @media only screen and (min-width: 1050px) {
-      -webkit-transform-origin-x: 165rem;
-    }
-    @media only screen and (min-width: 1200px) {
-      -webkit-transform-origin-x: 160rem;
-    }
+    // @media only screen and (min-width: 900px) {
+    //   -webkit-transform-origin-x: 155rem;
+    // }
+    // @media only screen and (min-width: 1050px) {
+    //   -webkit-transform-origin-x: 128rem;
+    // }
+    // @media only screen and (min-width: 1200px) {
+    //   -webkit-transform-origin-x: 160rem;
+    // }
 
     &__details {
       color: white;
@@ -370,9 +370,6 @@
       display: flex;
       align-items: center;
       justify-content: right;
-      //TODO can maybe make this in line with the other text content?
-      // padding: 2rem;
-
       @media only screen and (min-width: $bp-small) {
         font-size: 1.6rem;
         padding-right: 0rem;
