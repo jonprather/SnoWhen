@@ -31,7 +31,9 @@ export default function useSearchHistory() {
   // So need to take the call  put it here use RQ instead and return the data
   //does it need anything like a user obj is it dependent on that?
 
-  const { data = [] } = useQuery([queryKeys.resorts], getResorts);
+  const { data = [] } = useQuery([queryKeys.resorts], getResorts, {
+    // enabled: true,
+  });
   // ok so i got confused its called data the feild i wanted to pull off
   //taking off a needless wrapper object
   return {

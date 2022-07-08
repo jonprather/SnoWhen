@@ -21,6 +21,9 @@ export default function CardContainer({ filtered, isLoading }) {
                 i={i}
                 id={ele?.data?.snowReport?.data[0].id}
                 searchHistoryId={ele?.data.snowReport.favoriteId}
+                resortCode={
+                  "" + ele?.data?.snowReport?.data[0].attributes.blob.id
+                }
                 liked={ele?.data.snowReport.liked}
                 key={"" + ele?.data?.snowReport?.data[0]?.id}
               />

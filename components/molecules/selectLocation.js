@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 // import { setLocalAddress } from "@/helpers/"
 // import { SelectBox } from "@/components/selectBox";
+import useSaveSearchHistory from "../hooks/useSaveSearchHistory";
 import Loading from "../atoms/Loading";
 import FavoritesContext from "@/context/FavoritesContext";
 import Select from "react-select";
@@ -26,9 +27,10 @@ export default function Location(props) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [resort, setResort] = useState(null);
-
+  const addResort = useSaveSearchHistory();
   useEffect(() => {
     setIsLoading(false);
+
     return () => {
       setIsLoading(false);
     };
@@ -59,7 +61,7 @@ export default function Location(props) {
       return;
     }
     if (resort.id) {
-      saveSearchHistory({ resort: resort.id });
+      addResort({ resort: resort.id });
     }
 
     //TODO bonus add resorts to slect box based on hitting API so its easy when add new ones

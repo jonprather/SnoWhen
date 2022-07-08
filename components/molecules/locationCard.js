@@ -8,17 +8,19 @@ import { FaHeart, FaRegHeart, FaTrash } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { fadeInRight, hover, tap } from "@/lib/animate";
 import { motion } from "framer-motion";
-
+import useRemoveSearchHistory from "../hooks/useRemoveSearchHistory";
 export default function locationCard({
   weatherData,
   i,
   searchHistoryId,
   liked,
+  resortCode,
 }) {
   const router = useRouter();
-
-  const { deleteSearchHistory, toggleLikeResort } =
-    useContext(FavoritesContext);
+  const deleteSearchHistory = useRemoveSearchHistory(resortCode);
+  //ok forgot to call it so im exzporting the hook which returns the mutate function so need to call it
+  //thats why i got the improper hook use
+  const { toggleLikeResort } = useContext(FavoritesContext);
   if (!weatherData) return null;
   return (
     <Link

@@ -4,6 +4,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useQueries } from "react-query";
 import { useQueryClient } from "react-query";
+import { queryKeys } from "src/react-query/constants";
+
 import react, { useState, useCallback } from "react";
 const getWeather = async function (resortCode, searchHistory) {
   try {
@@ -48,10 +50,10 @@ export default function useSnowData(searchHistory) {
     searchHistory?.data?.map((resort, i) => {
       const resortCode = resort.attributes.resort.data?.attributes?.code;
       return {
-        queryKey: ["snowReports", resortCode],
+        queryKey: [queryKeys.snowReports, resortCode],
         queryFn: () => getWeather(resortCode, searchHistory),
         onSuccess: console.log(""),
-        enabled: !!searchHistory,
+        // enabled: !!searchHistory,
         //TODO write filterFN to filter by likedResort
         select: showFavs ? filterFn : undefined,
       };
