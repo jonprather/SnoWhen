@@ -18,6 +18,7 @@ const getResorts = async () => {
     } else {
     }
   } catch (error) {
+    console.log("WHAT", error);
     //should pass this to gloabl error handler does that happen automatically do i nned to catch here?
   }
 };

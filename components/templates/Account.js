@@ -18,7 +18,6 @@ export default function account({
 }) {
   const { showFavs, setShowFavs, snowData, isLoading } =
     useSnowData(resortsSearchHistory);
-  console.log("LOADING", isLoading);
   //ok ERROS working when hit strapi here for snow data but also need to do it in fav ctx and
   // then watch for it in places where thats called set it in ctx wtach in ui then call taostify in useEffect
   return (

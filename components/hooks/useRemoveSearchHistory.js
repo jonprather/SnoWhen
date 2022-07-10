@@ -21,14 +21,23 @@ const deleteSearchHistory = async ({ id }) => {
 export default function useRemoveSearchHistory(resort) {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(deleteSearchHistory, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([queryKeys.resorts]),
-        queryClient.invalidateQueries([queryKeys.snowReports, resort], {
-          refetchActive: false,
-        });
+    onSuccess: async (deletedResort) => {
+      queryClient.setQueryData(queryKeys.resorts, (old = []) => {
+        const idToDelete = deletedResort.data.data.id;
+        const filteredArr = old.resortsSearchHistory.data.filter(
+          (ele) => ele.id !== idToDelete
+        );
+
+        let tempObj = Object.assign({}, old);
+        tempObj.resortsSearchHistory.data = filteredArr;
+        return tempObj;
+      });
+
+      queryClient.invalidateQueries([queryKeys.snowReports, resort], {
+        refetchActive: false,
+      });
     },
   });
-  //TODO consider could also maybe update cahce instead or  set stale time or diff refetch options
 
   return mutate;
 }

@@ -9,6 +9,11 @@ import { useRouter } from "next/router";
 import { fadeInRight, hover, tap } from "@/lib/animate";
 import { motion } from "framer-motion";
 import useRemoveSearchHistory from "../hooks/useRemoveSearchHistory";
+import useLikeResort from "../hooks/useLikeResort";
+import useSnowData from "../hooks/useSnowData";
+import useSearchHistory from "../hooks/useSearchHistory";
+
+import AuthContext from "@/context/AuthContext";
 export default function locationCard({
   weatherData,
   i,
@@ -16,8 +21,16 @@ export default function locationCard({
   liked,
   resortCode,
 }) {
+  const { user } = useContext(AuthContext);
+  const [state, setState] = useState(false);
+
   const router = useRouter();
   const deleteSearchHistory = useRemoveSearchHistory(resortCode);
+  const likeSearchHistory = useLikeResort(resortCode);
+  const { searchHistory } = useSearchHistory();
+
+  const { snowData } = useSnowData(searchHistory);
+  console.log("SNOW DATA IN LOCA", snowData);
   //ok forgot to call it so im exzporting the hook which returns the mutate function so need to call it
   //thats why i got the improper hook use
   const { toggleLikeResort } = useContext(FavoritesContext);
@@ -79,10 +92,16 @@ export default function locationCard({
               className='home__card__like'
               onClick={(e) => {
                 e.stopPropagation();
-                toggleLikeResort({
+                setState((prev) => !prev);
+                likeSearchHistory({
                   searchHistoryId: searchHistoryId,
                   liked: liked,
-                });
+                  user,
+                }); // log this check if this works whats passed etc...
+                // toggleLikeResort({
+                //   searchHistoryId: searchHistoryId,
+                //   liked: liked,
+                // });
               }}
             >
               {/* TODO //maybe could debounce this in someway handle locally and do req in bg?? */}
