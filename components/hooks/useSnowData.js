@@ -52,7 +52,7 @@ export default function useSnowData(searchHistory) {
         queryKey: [queryKeys.snowReports, resortCode],
         queryFn: () => getWeather(resortCode, searchHistory),
         onSuccess: console.log(""),
-        // enabled: !!searchHistory,
+        enabled: !!searchHistory,
         //TODO write filterFN to filter by likedResort
         select: showFavs ? filterFn : undefined,
       };

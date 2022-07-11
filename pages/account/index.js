@@ -1,33 +1,24 @@
-import Layout from "@/components/layout";
-
-import { parseCookies } from "@/helpers/index";
 import { useRouter } from "next/router";
-import AccountPage from "@/components/templates/Account";
+import { useContext, useEffect, useState } from "react";
+
 import { toast } from "react-toastify";
-import { API_URL } from "@/config/index";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+
 import AuthContext from "@/context/AuthContext";
-import FavoritesContext from "@/context/FavoritesContext";
-import { motion, AnimatePresence } from "framer-motion";
 import useSnowData from "@/components/hooks/useSnowData";
-import { useQueries } from "react-query";
-import { useQueryClient } from "react-query";
-//this is the strapi endpoint
 import useSearchHistory from "@/components/hooks/useSearchHistory";
+
+import Layout from "@/components/layout";
+import AccountPage from "@/components/templates/Account";
+
 export default function index() {
   const { user, checkUserLoggedIn, dispatchMsg, message } =
-    React.useContext(AuthContext);
-  const { error: favError, msg, setMsg } = React.useContext(FavoritesContext);
-  //TODO replace fav context with useQuery hook useResorts
-  //will also have to set one up for mutations for likes using Optimistic updates
-  // another for delete etc
-  const { searchHistory } = useSearchHistory();
+    useContext(AuthContext);
 
+  const { searchHistory } = useSearchHistory();
   const { snowData } = useSnowData(searchHistory);
 
   const router = useRouter();
-  const queryClient = useQueryClient();
+
   const [error, setError] = useState("");
   // TODO This error isnt set up look to weather index to se tit right
 
@@ -36,23 +27,12 @@ export default function index() {
     //  TODO is this what i really want isnt it better to check user
   }, []);
   useEffect(() => {
-    //TODO so two are logged or rather it keeps the one from first page and they are stacked its weird
     if (error) {
       toast.error(error);
       setError("");
     }
-    if (favError) {
-      toast.error(favError);
-      setFavErrorMsg("");
-    }
-  }, [error, favError]);
+  }, [error]);
 
-  useEffect(() => {
-    if (msg) {
-      toast.success(msg);
-      setMsg(null);
-    }
-  }, [msg]);
   useEffect(() => {
     if (message) {
       toast.success(message);
@@ -70,35 +50,9 @@ export default function index() {
   const isLoading = snowData.some((query) => query.isLoading);
   // irrelevant bc have is fetching and the rest is stale while revalidate so shouldnt be an issue right?
 
-  // maybe this can just call teh auth context methods that way i can toast.erro
-  //i mean if can toast from context would be dope but idk how that works
-  // can always just return delte error and if so then toast that
-  const deleteEvent = async (id) => {
-    if (confirm("Are you sure?")) {
-      const res = await fetch(`${API_URL}/favorites/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        toast.error(data.message);
-        setError(error);
-      } else {
-        // router.reload();
-        //TODO shouldnt i toast a succesufl crud op as well like for delete
-      }
-    }
-  };
   // if (!searchHistory) return "";
   return (
     <Layout title='SnoWhen - Account' description='snoWhen Account page'>
-      {/* Resorts is based off seach history historically maybe i can just resluts its just so 
-      to show no results section
-       */}
       {/* TODO after refactorign laoding to use isFetching can eliminate passign it down
  prob is other componetns relied on it for sycrounous state which will be uneeded with RQ calls
  plus if not can get rid of state liek TKDODO said
@@ -115,32 +69,3 @@ export default function index() {
     </Layout>
   );
 }
-
-// export async function getServerSideProps({ req }) {
-//   const { token } = parseCookies(req);
-
-//   if (!token) {
-//     return {
-//       redirect: {
-//         destination: "/account/login",
-//         permanent: false,
-//       },
-//     };
-//   }
-
-//   const res = await fetch(`${API_URL}/api/favorites`, {
-//     method: "GET",
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-
-//   const resortsSearchHistory = await res.json();
-
-//   return {
-//     props: {
-//       resortsSearchHistory,
-//       token,
-//     },
-//   };
-// }
