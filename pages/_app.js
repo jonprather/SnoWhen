@@ -1,6 +1,6 @@
 import "../styles/global.scss";
 import React from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider, QueryCache } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Head from "next/head";
@@ -9,8 +9,10 @@ import { AuthProvider } from "@/context/AuthContext";
 import { FavoritesProvider } from "@/context/FavoritesContext";
 
 import { AnimatePresence } from "framer-motion";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
+
 export default function MyApp({ Component, pageProps, router }) {
   const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
 
@@ -24,12 +26,13 @@ export default function MyApp({ Component, pageProps, router }) {
             refetchOnReconnect: false,
             retry: false,
             staleTime: twentyFourHoursInMs,
+            onError: (error) =>
+              toast.error(`Something Went Wrong dude ${error}`),
           },
         },
       })
   );
   // TODO set up default error handler to pass to toast
-  //   const queryClient = new QueryClient();
 
   return (
     <>

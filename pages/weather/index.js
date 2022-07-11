@@ -34,10 +34,7 @@ export default function index() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    //TODO also that json bug that is occuring after changing the local storage functionality... could skipp it and hard code it for now
     setSearchHistory([]); //get all local is jank replace with strapi BE and  make this inside the app
-    //TODO replace with strapi also could have it be protected route and also have login set up for portfolio proj purposes
-
     setError("");
   }, [resort]);
 
@@ -136,7 +133,6 @@ export default function index() {
                     //why it cant read snowPer day...
                     i={i}
                     id={ele?.data?.id}
-                    deleteFromLS={handleDeletion}
                   />
                 </React.Fragment>
               ))}

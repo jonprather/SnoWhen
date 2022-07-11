@@ -6,21 +6,16 @@ import react, { useState } from "react";
 import { queryKeys } from "src/react-query/constants";
 import { NEXT_URL } from "@/config/index";
 const getResorts = async () => {
-  try {
-    const res = await fetch(`${NEXT_URL}/api/resorts`, {
-      method: "GET",
-    });
-
-    var data = await res.json();
-    if (res.ok) {
-      console.log("DATA IN HISTORY FETCH", data);
-      return data;
-    } else {
-    }
-  } catch (error) {
-    console.log("WHAT", error);
-    //should pass this to gloabl error handler does that happen automatically do i nned to catch here?
-  }
+  //let errors propagate to RQ to be handled there
+  //TODO either handle bad status or use axios
+  const res = await axios.get(`${NEXT_URL}/api/resorts`);
+  console.log("RES", res);
+  return res.data;
+  // var data = await res.json();
+  // if (res.ok) {
+  //   return data;
+  // } else {
+  // }
 };
 export default function useSearchHistory() {
   //dont need to pass anything bc it gets user info from cookie bc signed in

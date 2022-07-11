@@ -18,7 +18,7 @@ export default async (req, res) => {
     });
 
     const data = await strapiRes.json();
-
+    // throw new Error("TEST");
     if (strapiRes.ok) {
       // Set Cookie
       res.setHeader(

@@ -1,5 +1,7 @@
 //make the loading and error automatic like check isFetching in loading spinner
 // and onError pass it a default error handler ( in global config or jus tin hook of useQueries)
+// pass it one or more history objs and it will give you  a combined resutls obj with a report for each resort
+// also works with single quries just pre filter and pass it one resort
 import axios from "axios";
 import { useEffect } from "react";
 import { useQueries } from "react-query";
@@ -12,7 +14,7 @@ const getWeather = async function (resortCode, searchHistory) {
     // TODO if this errors out sends no data still fills ui with stuff
     //bc has resorts this is then called but returns no data but still ui shows half baked stuff
     const { data } = await axios.get(`/api/snowReport?ID=${resortCode}`);
-
+    // Mutate data to have the properties from searchHistory
     const snowReportResort =
       data.snowReport.data[0]?.attributes.resort.data.attributes.code;
 
@@ -20,7 +22,6 @@ const getWeather = async function (resortCode, searchHistory) {
       const searchHistoryResort = val.attributes.resort.data.attributes.code;
       let liked = val.attributes.liked;
       let id = val.id;
-      console.log("search History val id and bool", liked, id);
       if (searchHistoryResort === snowReportResort) {
         data.snowReport.liked = liked;
         data.snowReport.favoriteId = id;
@@ -36,9 +37,7 @@ const getWeather = async function (resortCode, searchHistory) {
 export default function useSnowData(searchHistory) {
   const [showFavs, setShowFavs] = useState(false);
 
-  useEffect(() => {
-    console.log("FILTER SHOW FAVS", showFavs);
-  }, [showFavs]);
+  useEffect(() => {}, [showFavs]);
 
   const filterFn = useCallback((data) => {
     if (data.snowReport.liked) {
