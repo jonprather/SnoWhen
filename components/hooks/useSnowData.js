@@ -5,33 +5,33 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useQueries } from "react-query";
-import { useQueryClient } from "react-query";
 import { queryKeys } from "src/react-query/constants";
+import { toast } from "react-toastify";
 
-import react, { useState, useCallback } from "react";
+//TODO repeat the process of checkign error flow for the other useHooks also auth ( which use ctx)
+// have done useSearchHistory and useSnowData both erro flows work and end in toast
+// also consider error boundary approach for CSR pages..
+
+import { useState, useCallback } from "react";
 const getWeather = async function (resortCode, searchHistory) {
-  try {
-    // TODO if this errors out sends no data still fills ui with stuff
-    //bc has resorts this is then called but returns no data but still ui shows half baked stuff
-    const { data } = await axios.get(`/api/snowReport?ID=${resortCode}`);
-    // Mutate data to have the properties from searchHistory
-    const snowReportResort =
-      data.snowReport.data[0]?.attributes.resort.data.attributes.code;
+  // TODO if this errors out sends no data still fills ui with stuff
+  //bc has resorts this is then called but returns no data but still ui shows half baked stuff
+  const { data } = await axios.get(`/api/snowReport?ID=${resortCode}`);
+  // Mutate data to have the properties from searchHistory
+  const snowReportResort =
+    data.snowReport.data[0]?.attributes.resort.data.attributes.code;
 
-    searchHistory.data.forEach((val, i) => {
-      const searchHistoryResort = val.attributes.resort.data.attributes.code;
-      let liked = val.attributes.liked;
-      let id = val.id;
-      if (searchHistoryResort === snowReportResort) {
-        data.snowReport.liked = liked;
-        data.snowReport.favoriteId = id;
-      }
-    });
+  searchHistory.data.forEach((val, i) => {
+    const searchHistoryResort = val.attributes.resort.data.attributes.code;
+    let liked = val.attributes.liked;
+    let id = val.id;
+    if (searchHistoryResort === snowReportResort) {
+      data.snowReport.liked = liked;
+      data.snowReport.favoriteId = id;
+    }
+  });
 
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
+  return data;
 };
 
 export default function useSnowData(searchHistory) {
@@ -51,10 +51,6 @@ export default function useSnowData(searchHistory) {
       return {
         queryKey: [queryKeys.snowReports, resortCode],
         queryFn: () => getWeather(resortCode, searchHistory),
-        onSuccess: console.log(""),
-        enabled: !!searchHistory,
-        //TODO write filterFN to filter by likedResort
-        select: showFavs ? filterFn : undefined,
       };
     }) ?? []
   );

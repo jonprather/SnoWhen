@@ -2,19 +2,25 @@ import { useMutation } from "react-query";
 import { useQueryClient } from "react-query";
 import { queryKeys } from "src/react-query/constants";
 import { NEXT_URL } from "@/config/index";
-
+import { toast } from "react-toastify";
+import axios from "axios";
 const deleteSearchHistory = async ({ id }) => {
-  if (!confirm("Delete this item from seach history?")) {
-    return;
-  }
-  const res = await fetch(`${NEXT_URL}/api/deleteHistory/${id}`, {
-    method: "DELETE",
-  });
-  const data = await res.json();
+  try {
+    if (!confirm("Delete this item from seach history?")) {
+      return;
+    }
+    const res = await axios.delete(`${NEXT_URL}/api/deleteHistory/${id}`);
 
-  if (res.ok) {
-    return data;
-  } else {
+    // if (res.ok) {
+    //   const data = await res.json();
+    //   if (!data) throw new Error("Error deleting item");
+    //   return data;
+    // } else {
+    //   throw new Error("Error deleting item");
+    // }
+    return res.data;
+  } catch (e) {
+    throw e;
   }
 };
 
@@ -23,9 +29,15 @@ export default function useRemoveSearchHistory(resort) {
   const { mutate } = useMutation(deleteSearchHistory, {
     onSuccess: async (deletedResort) => {
       queryClient.setQueryData(queryKeys.resorts, (old = []) => {
-        const idToDelete = deletedResort.data.data.id;
-        const filteredArr = old.resortsSearchHistory.data.filter(
-          (ele) => ele.id !== idToDelete
+        //TODO would be cool if passed error down to here
+        // rather than throw error this way shouldnt get here shouldnt be success if no deletedResort
+        // if (!deletedResort) throw new Error("Error Connecting to the server");
+        // YEAH not working as expected it comes here even tho throwing error in api
+        // not sure how it makes it to onSuccess given an error..>!???
+        //bc fetch doesnt oby default on diff status
+        const idToDelete = deletedResort?.data?.data?.id;
+        const filteredArr = old?.resortsSearchHistory?.data?.filter(
+          (ele) => ele?.id !== idToDelete
         );
 
         let tempObj = Object.assign({}, old);
@@ -36,6 +48,7 @@ export default function useRemoveSearchHistory(resort) {
       queryClient.invalidateQueries([queryKeys.snowReports, resort], {
         refetchActive: false,
       });
+      toast.success("Resort Deleted!", { toastId: "DELETED HISTORY ITEM" });
     },
   });
 

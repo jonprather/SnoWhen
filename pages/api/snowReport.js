@@ -25,23 +25,23 @@ export default async (req, res) => {
     //DUMMY DaTA
     let id = req?.query?.ID;
     //TODO extra feature make the strapi api have snow total in main properties not blob so can filter by that
-
     const strapiRes = await fetch(`${API_URL}/api/snow-reports/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+
     // TODO now im getting a 403 forbidden error Auth error but im sending token right?
     // TODO pass down proper error if stuff not found rather than fail silently
     // IE url was wrong got 404 from strapi but that wasnt passed to client
+    //TODO need react error boundaries as a wrong move here led to eroor trying to reac props in react
     const snowReport = await strapiRes.json();
 
     if (strapiRes.ok) {
       res.status(200).json({ snowReport });
     } else {
-      res.status(403).json({ message: "User forbidden" });
-      // TODO replace this with proper format automatically with .statusText and .status
+      res.status(data.error.status).json({ message: data.error.message });
     }
   } else {
     res.setHeader("Allow", ["GET"]);

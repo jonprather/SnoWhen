@@ -2,6 +2,8 @@ import { useMutation } from "react-query";
 import { useQueryClient } from "react-query";
 import { queryKeys } from "src/react-query/constants";
 import { NEXT_URL } from "@/config/index";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const toggleLikeResort = async ({ searchHistoryId, liked, user }) => {
   const favoriteData = {
@@ -11,24 +13,15 @@ const toggleLikeResort = async ({ searchHistoryId, liked, user }) => {
     liked: !liked,
   };
 
-  const res = await fetch(`${NEXT_URL}/api/toggleLike/${searchHistoryId}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ data: { ...favoriteData } }),
-  });
-
-  var strapiToggleData = await res.json();
-  if (res.ok) {
-    return "Success";
-  } else {
-    // setError(strapiToggleData.message);
-    //TODO go through make sure these errors are handled globally corectly by RQ default and that apis ( next) are sending
-    //right data fo rerrors not that nested stuff from v 3 of strapie
-    //TODO fix where loading spinner shows up seems to not work as well as it once did when i set them
-    // from isLoading manually rather than is fetching in the component
-  }
+  const res = await axios.post(
+    `${NEXT_URL}/api/toggleLike/${searchHistoryId}`,
+    {
+      data: {
+        ...favoriteData,
+      },
+    }
+  );
+  return res;
 };
 
 export default function useLikeResort(resort) {
@@ -55,6 +48,7 @@ export default function useLikeResort(resort) {
       return { previous, updatedSnowData };
     },
     onError: (err, updatedSnowData, context) => {
+      toast.error(err.message, { toastId: err.message });
       queryClient.setQueryData(
         [queryKeys.snowReports, resort],
         context.previous

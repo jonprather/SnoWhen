@@ -27,7 +27,15 @@ export default function MyApp({ Component, pageProps, router }) {
             retry: false,
             staleTime: twentyFourHoursInMs,
             onError: (error) =>
-              toast.error(`Something Went Wrong dude ${error}`),
+              toast.error(`Something Went Wrong: ${error}`, {
+                toastId: "1-" + error.message,
+              }),
+          },
+          mutations: {
+            onError: (error) =>
+              toast.error(`Something Went Wrong: ${error}`, {
+                toastId: "2-" + error.message,
+              }),
           },
         },
       })

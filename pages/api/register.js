@@ -4,7 +4,6 @@ import { API_URL } from "@/config/index";
 export default async (req, res) => {
   if (req.method === "POST") {
     const { username, email, password } = req.body;
-    console.log("IN API ROUTE objs", username, email, password);
     const strapiRes = await fetch(`${API_URL}/api/auth/local/register`, {
       method: "POST",
       headers: {
@@ -41,3 +40,5 @@ export default async (req, res) => {
     res.status(405).json({ message: `Method ${req.method} not allowed` });
   }
 };
+
+//TODO ?? just saw a saved resort for a new user??? how did that happen???

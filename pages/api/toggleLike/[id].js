@@ -31,9 +31,7 @@ export default async (req, res) => {
       data = data.data;
       res.status(200).json({ data });
     } else {
-      res
-        .status(data.statusCode)
-        .json({ message: data.message[0].messages[0].message });
+      res.status(data.error.status).json({ message: data.error.message });
     }
   } else {
     res.setHeader("Allow", ["POST"]);
