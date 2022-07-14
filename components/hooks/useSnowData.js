@@ -8,14 +8,10 @@ import { useQueries } from "react-query";
 import { queryKeys } from "src/react-query/constants";
 import { toast } from "react-toastify";
 
-//TODO repeat the process of checkign error flow for the other useHooks also auth ( which use ctx)
-// have done useSearchHistory and useSnowData both erro flows work and end in toast
-// also consider error boundary approach for CSR pages..
+//TODO  consider error boundary approach for CSR pages..
 
 import { useState, useCallback } from "react";
 const getWeather = async function (resortCode, searchHistory) {
-  // TODO if this errors out sends no data still fills ui with stuff
-  //bc has resorts this is then called but returns no data but still ui shows half baked stuff
   const { data } = await axios.get(`/api/snowReport?ID=${resortCode}`);
   // Mutate data to have the properties from searchHistory
   const snowReportResort =
@@ -51,6 +47,7 @@ export default function useSnowData(searchHistory) {
       return {
         queryKey: [queryKeys.snowReports, resortCode],
         queryFn: () => getWeather(resortCode, searchHistory),
+        select: showFavs ? filterFn : undefined,
       };
     }) ?? []
   );
