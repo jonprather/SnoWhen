@@ -31,6 +31,7 @@ export default function locationCard({
 
   const { snowData } = useSnowData(searchHistory);
   console.log("SNOW DATA IN LOCA", snowData);
+  //TODO find out why optimistic update seems to change the cahce but not really
   //ok forgot to call it so im exzporting the hook which returns the mutate function so need to call it
   //thats why i got the improper hook use
   const { toggleLikeResort } = useContext(FavoritesContext);
@@ -78,7 +79,7 @@ export default function locationCard({
             <div>
               {/* <p className='home__card__snow-amount-box-heading'>Next Week</p> */}
               <p className='home__card__snow-amount-box-subheading'>
-                Snow Total {weatherData?.total}
+                Snow Total {weatherData?.snow_six_day_total}
               </p>
             </div>
             {/* <p className='home__card__snow-amount-box-quantity'>
