@@ -36,6 +36,7 @@ export default function account({
           filtered={snowData}
           isLoading={isLoading}
           results={results}
+          showFavs={showFavs}
         ></SavedResortsBG>
       </main>
     </section>

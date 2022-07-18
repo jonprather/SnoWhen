@@ -1,31 +1,23 @@
-import { weatherReducer } from "@/helpers/weatherReducer";
 import React, { useState } from "react";
 import LocationCard from "@/components/molecules/locationCard";
 import Loading from "../atoms/Loading";
 
 import { motion, AnimatePresence } from "framer-motion";
-// {/* TODO move weather reducer to BE or FE fetch */}
-
-export default function CardContainer({ filtered, isLoading }) {
+//TODO Add Some text for null state like add some Resorts same thign liek add some favorites if fav is
+export default function CardContainer({ filtered, isLoading, message }) {
   // filter off empty data to stop the undefined data from showing up
   filtered = filtered.filter((ele) => ele.data);
-
+  console.log("FIKLT", filtered);
+  if (!filtered.length) return <LocationCard nullCaseMessage={message} />;
   return (
-    <div className='home__card-container'>
+    <div className='home__card-container '>
       <Loading />
       <AnimatePresence>
         {!isLoading &&
-          filtered &&
-          filtered.map((ele, i) => {
-            {
-              /* TODO move weatherReducer to a better location like on BE or in Fetch */
-            }
-
+          filtered?.map((ele, i) => {
             return (
               <LocationCard
-                weatherData={weatherReducer(
-                  ele?.data?.snowReport?.data[0]?.attributes?.blob
-                )}
+                weatherData={ele?.data?.snowReport?.data[0]?.attributes?.blob}
                 i={i}
                 id={ele?.data?.snowReport?.data[0].id}
                 searchHistoryId={ele?.data.snowReport.favoriteId}
@@ -34,6 +26,7 @@ export default function CardContainer({ filtered, isLoading }) {
                 }
                 liked={ele?.data.snowReport.liked}
                 key={"" + ele?.data?.snowReport?.data[0]?.id}
+                nullCaseMessage={message}
               />
             );
           })}

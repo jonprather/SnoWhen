@@ -20,7 +20,6 @@ const LocationCard = dynamic(() =>
 
 // custom helpers
 import { weatherReducer } from "@/helpers/weatherReducer";
-import { getAllLocal } from "../../lib/LocalStorage.js";
 import Layout from "@/components/layout";
 
 export default function index() {
@@ -61,19 +60,12 @@ export default function index() {
       };
     }) ?? []
   );
-
+  console.log("REULTS INPUT TO REDUCER", results);
   function handleEmit({ label, value: resortID }) {
     if (label === undefined || resortID === undefined) return;
     console.log(label, resortID);
     setResort(resortID);
     router.push(`/weather/${label}/search?resortId=${resortID}`);
-  }
-  function handleDeletion(id) {
-    localStorage.removeItem(id);
-    setSearchHistory((prev) => {
-      let tempArr = [...prev.filter((ele) => +ele.resortCode !== id)];
-      return tempArr.length === 0 ? null : tempArr;
-    });
   }
 
   return (

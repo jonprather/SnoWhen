@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import SnowTotalGraph from "@/components/snowTotalGraph";
 import Loading from "@/components/atoms/Loading";
 import { useQueryClient } from "react-query";
+import useSnowData from "@/components/hooks/useSnowData";
+import useSearchHistory from "@/components/hooks/useSearchHistory";
 
 import dynamic from "next/dynamic";
 //components
@@ -11,58 +13,51 @@ const WeatherCard = dynamic(() => import("../../../components/weatherCard"));
 import Graph from "@/components/graph";
 import BackButton from "@/components/molecules/backButton";
 import { weatherReducer } from "@/helpers/weatherReducer";
+//import hooks
+// get data from hook
+// get exact weatherReducer stuff which should now be on snowReport data area console log to find it
+//then for weather obj that should be snowPerDay but thats derived state so i prob wont use state for that
+
+// so need snowperday array
+//also location var for tittles
 
 export default function location() {
+  const { searchHistory } = useSearchHistory();
+  const { snowData } = useSnowData(searchHistory);
   const router = useRouter();
+  const value = useRef(0);
+  const id = router?.query?.locationId;
+  const blob = snowData[id]?.data?.snowReport?.data[0]?.attributes.blob ?? {};
+  const snowPerDay = blob?.snow_per_day ?? [];
   const queryClient = useQueryClient();
 
-  const [locationId, setLocationId] = useState("test");
   const [location, setLocation] = useState(null);
-  const [weatherObj, setWeatherObj] = useState(null);
-
   useEffect(() => {
     if (!router?.isReady) return;
 
-    var id = router?.query?.locationId;
-    setLocationId(id);
-    setLocation(router?.query?.location?.toLowerCase());
-
-    if (!queryClient) return;
-
-    if (queryClient?.queryCache.queries.length === 0) {
-      router?.push(`/account`);
-    }
-
-    setWeatherObj(() => {
-      console.log(
-        "SNOW PER DAY",
-        queryClient?.queryCache?.queries[id]?.state.data.snowReport.data[0]
-          .attributes.blob
-      );
-      return weatherReducer(
-        queryClient?.queryCache?.queries[id]?.state.data.snowReport.data[0]
-          .attributes.blob
-      )?.["snowPerDay"];
-    });
+    //TODO i think i can remove this state TKDODO style as it is syncronous setting...
+    setLocation(router.query.location);
   }, [router?.isReady]);
+  if (!router?.isReady) return <Layout></Layout>;
 
   return (
     <Layout>
       <div className='location'>
         <div className='location__header'>
           <BackButton url={`/account`} path={[location]} />
+
           <h1 className='heading'>{location}</h1>
           <h2 className='subheading mb-18'>Snow Forecast</h2>
         </div>
         <div className='location__forecast'>
-          <Loading loading={!weatherObj} color={"black"} />
+          <Loading loading={!snowPerDay} color={"black"} />
           <div className='location__forecast__graph-container'>
-            {weatherObj && (
+            {snowPerDay && (
               <Graph
                 location={location}
                 isHourlyTitles={false}
                 dayIndex={null}
-                data={weatherObj}
+                data={snowPerDay}
               />
               /* <SnowTotalGraph data={weatherObj} /> THis is jank still */
             )}
@@ -71,16 +66,20 @@ export default function location() {
         <div className='location__weather'>
           <div className=''>
             <div className='location__header--2'>
-              <h1 className='heading'>{location} </h1>
+              {location ? (
+                <h1 className='heading'>{location}</h1>
+              ) : (
+                <Loading isLoading={true} />
+              )}
               <h2 className='subheading location__weather__subheading mb-18'>
                 Weather
               </h2>
             </div>
             <div className='weather-card__container'>
-              <Loading loading={!weatherObj} color={"black"} />
+              <Loading loading={!snowPerDay} color={"black"} />
 
-              {weatherObj &&
-                weatherObj.map((day, i) => {
+              {snowPerDay &&
+                snowPerDay.map((day, i) => {
                   return (
                     <React.Fragment key={day.date}>
                       <div

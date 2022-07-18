@@ -31,6 +31,7 @@ export default function MyApp({ Component, pageProps, router }) {
                 toastId: "1-" + error.message,
               }),
           },
+          //TODO instead of printing status codes print something more user friendly
           mutations: {
             onError: (error) =>
               toast.error(`Something Went Wrong: ${error}`, {

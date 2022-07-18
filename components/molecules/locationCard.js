@@ -15,6 +15,7 @@ export default function locationCard({
   searchHistoryId,
   liked,
   resortCode,
+  nullCaseMessage,
 }) {
   const { user } = useContext(AuthContext);
 
@@ -24,6 +25,51 @@ export default function locationCard({
   //TODO find out why optimistic update seems to change the cahce but not really
   //ok forgot to call it so im exzporting the hook which returns the mutate function so need to call it
   //thats why i got the improper hook use
+  if (nullCaseMessage)
+    return (
+      <motion.div
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        variants={fadeInRight}
+        layout={"position"}
+      >
+        <div className='home__card home__card--null'>
+          <div className='home__card-heading__wrapper'>
+            <h1 className='home__card-heading'>{nullCaseMessage.heading}</h1>
+          </div>
+
+          <p className='home__card-state'>Ca</p>
+
+          <div className='home__card__mtn-bg'>
+            <img src='/mtn-bg.png' className='' />
+          </div>
+          <div className='home__card__snowflake'>
+            <img
+              src='/snowflake-black.png'
+              className='home__heading-container__mtn'
+            />
+          </div>
+          <div className='home__card__snow-amount-box'>
+            <div>
+              {/* <p className='home__card__snow-amount-box-heading'>Next Week</p> */}
+              <p className='home__card__snow-amount-box-subheading'>
+                {nullCaseMessage.details}
+              </p>
+            </div>
+            {/* <p className='home__card__snow-amount-box-quantity'>
+          {weatherData?.total}
+        </p> */}
+          </div>
+
+          <p className='home__card__accent-box__details'> </p>
+
+          {/* <p className='home__card__forecast-heading'>Forecast</p> */}
+
+          <div className='home__card__accent-box'></div>
+        </div>
+      </motion.div>
+    );
   if (!weatherData) return null;
   return (
     <Link

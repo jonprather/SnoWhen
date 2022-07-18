@@ -3,7 +3,41 @@ import Loading from "@/components/atoms/Loading";
 import CardContainer from "../organisms/CardContainer";
 import Filter from "./Filter";
 import { container } from "@/lib/animate";
-export default function SavedResortsBG({ results, filtered, isLoading }) {
+export default function SavedResortsBG({
+  results,
+  filtered,
+  isLoading,
+  showFavs,
+}) {
+  function getKey({ showFavs, results, filtered } = {}) {
+    console.log("RESULTS", results);
+    let key = "";
+    key = showFavs ? "showFavs_" : "noShowFavs_";
+    key += results.length > 0 ? "results_" : "noResults_";
+    key += filtered.every((ele) => !ele.data) ? "noLikes" : "likes";
+    return key;
+  }
+  function getMessage({ showFavs, results, filtered } = {}) {
+    const key = getKey({ showFavs, results, filtered });
+    const obj = {
+      showFavs_noResults_noLikes: {
+        heading: "No favorites",
+        details: "add some resorts to like!",
+      },
+      showFavs_results_noLikes: {
+        heading: "No favorites",
+        details: "add some favorites!",
+      },
+      noShowFavs_noResults_noLikes: {
+        heading: "No Resorts",
+        details: "add some resorts!",
+      },
+    };
+    return obj[key];
+  }
+  // filtered[i].data its undefined when its filtered off
+  //TODO Add Some text for null state like add some Resorts same thign liek add some favorites if fav is null
+
   return (
     <div className='home__heading-container'>
       <div className='home__heading-container__svg-wrapper'>
@@ -21,22 +55,11 @@ export default function SavedResortsBG({ results, filtered, isLoading }) {
         </svg>
       </div>
 
-      <AnimatePresence exitBeforeEnter initial={false}>
-        {(results.length === 0 || results === null) && (
-          <motion.h2
-            initial={"hidden"}
-            animate={"show"}
-            exit={"hide"}
-            variants={container}
-            layout
-            className='home__heading-container__subheading'
-          >
-            Add some Resorts!
-          </motion.h2>
-        )}
-      </AnimatePresence>
-
-      <CardContainer isLoading={isLoading} filtered={filtered}></CardContainer>
+      <CardContainer
+        isLoading={isLoading}
+        filtered={filtered}
+        message={getMessage({ showFavs, results, filtered })}
+      ></CardContainer>
     </div>
   );
 }

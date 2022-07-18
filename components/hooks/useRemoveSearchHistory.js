@@ -24,7 +24,7 @@ const deleteSearchHistory = async ({ id }) => {
   }
 };
 
-export default function useRemoveSearchHistory(resort) {
+export default function useRemoveSearchHistory(resortCode) {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(deleteSearchHistory, {
     onSuccess: async (deletedResort) => {
@@ -45,7 +45,7 @@ export default function useRemoveSearchHistory(resort) {
         return tempObj;
       });
 
-      queryClient.invalidateQueries([queryKeys.snowReports, resort], {
+      queryClient.invalidateQueries([queryKeys.snowReports, resortCode], {
         refetchActive: false,
       });
       toast.success("Resort Deleted!", { toastId: "DELETED HISTORY ITEM" });
@@ -54,3 +54,7 @@ export default function useRemoveSearchHistory(resort) {
 
   return mutate;
 }
+
+//TODO why does trying to delete resutls in a 403 ERROR
+// TODO finish checking null states- I was checking whether the ui will show both the add resorts and add Favorites
+///
