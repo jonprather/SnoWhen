@@ -1,17 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
-import { formatDate } from "@/helpers/formatDate";
-import Image from "next/image";
-import FavoritesContext from "@/context/FavoritesContext";
+
 import { FaHeart, FaRegHeart, FaTrash } from "react-icons/fa";
 
-import { useRouter } from "next/router";
 import { fadeInRight, hover, tap } from "@/lib/animate";
 import { motion } from "framer-motion";
 import useRemoveSearchHistory from "../hooks/useRemoveSearchHistory";
 import useLikeResort from "../hooks/useLikeResort";
-import useSnowData from "../hooks/useSnowData";
-import useSearchHistory from "../hooks/useSearchHistory";
 
 import AuthContext from "@/context/AuthContext";
 export default function locationCard({
@@ -22,19 +17,13 @@ export default function locationCard({
   resortCode,
 }) {
   const { user } = useContext(AuthContext);
-  const [state, setState] = useState(false);
 
-  const router = useRouter();
   const deleteSearchHistory = useRemoveSearchHistory(resortCode);
   const likeSearchHistory = useLikeResort(resortCode);
-  const { searchHistory } = useSearchHistory();
 
-  const { snowData } = useSnowData(searchHistory);
-  console.log("SNOW DATA IN LOCA", snowData);
   //TODO find out why optimistic update seems to change the cahce but not really
   //ok forgot to call it so im exzporting the hook which returns the mutate function so need to call it
   //thats why i got the improper hook use
-  const { toggleLikeResort } = useContext(FavoritesContext);
   if (!weatherData) return null;
   return (
     <Link
@@ -93,7 +82,6 @@ export default function locationCard({
               className='home__card__like'
               onClick={(e) => {
                 e.stopPropagation();
-                setState((prev) => !prev);
                 likeSearchHistory({
                   searchHistoryId: searchHistoryId,
                   liked: liked,
