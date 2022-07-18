@@ -13,7 +13,7 @@ export default async (req, res) => {
       });
       //token will be validated by strapi if someone spoofs this
     }
-    const strapiRes = await fetch(`${API_URL}/api/favorites/${id}111`, {
+    const strapiRes = await fetch(`${API_URL}/api/favorites/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
