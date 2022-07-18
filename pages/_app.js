@@ -41,7 +41,8 @@ export default function MyApp({ Component, pageProps, router }) {
         },
       })
   );
-  // TODO set up default error handler to pass to toast
+  // TODO might be better to have local error handling eg for when try to add resort thats already there
+  // give a message indicating resort already addedlike i had in fav ctx b4 switching to RQ
 
   return (
     <>

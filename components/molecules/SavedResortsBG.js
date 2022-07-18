@@ -26,7 +26,7 @@ export default function SavedResortsBG({
       },
       showFavs_results_noLikes: {
         heading: "No favorites",
-        details: "add some favorites!",
+        details: "Like Some Resorts!",
       },
       noShowFavs_noResults_noLikes: {
         heading: "No Resorts",

@@ -8,12 +8,14 @@ export default function CardContainer({ filtered, isLoading, message }) {
   // filter off empty data to stop the undefined data from showing up
   filtered = filtered.filter((ele) => ele.data);
   console.log("FIKLT", filtered);
-  if (!filtered.length) return <LocationCard nullCaseMessage={message} />;
+
   return (
     <div className='home__card-container '>
       <Loading />
       <AnimatePresence>
-        {!isLoading &&
+        {!filtered.length ? (
+          <LocationCard nullCaseMessage={message} />
+        ) : (
           filtered?.map((ele, i) => {
             return (
               <LocationCard
@@ -29,7 +31,8 @@ export default function CardContainer({ filtered, isLoading, message }) {
                 nullCaseMessage={message}
               />
             );
-          })}
+          })
+        )}
       </AnimatePresence>
     </div>
   );
