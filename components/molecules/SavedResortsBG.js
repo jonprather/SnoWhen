@@ -1,42 +1,16 @@
-import { AnimatePresence, motion } from "framer-motion";
-import Loading from "@/components/atoms/Loading";
 import CardContainer from "../organisms/CardContainer";
-import Filter from "./Filter";
-import { container } from "@/lib/animate";
+import useNullElementMessage from "../hooks/useNullElementMessage";
 export default function SavedResortsBG({
   results,
   filtered,
   isLoading,
   showFavs,
 }) {
-  function getKey({ showFavs, results, filtered } = {}) {
-    console.log("RESULTS", results);
-    let key = "";
-    key = showFavs ? "showFavs_" : "noShowFavs_";
-    key += results.length > 0 ? "results_" : "noResults_";
-    key += filtered.every((ele) => !ele.data) ? "noLikes" : "likes";
-    return key;
-  }
-  function getMessage({ showFavs, results, filtered } = {}) {
-    const key = getKey({ showFavs, results, filtered });
-    const obj = {
-      showFavs_noResults_noLikes: {
-        heading: "No favorites",
-        details: "add some resorts to like!",
-      },
-      showFavs_results_noLikes: {
-        heading: "No favorites",
-        details: "Like Some Resorts!",
-      },
-      noShowFavs_noResults_noLikes: {
-        heading: "No Resorts",
-        details: "add some resorts!",
-      },
-    };
-    return obj[key];
-  }
-  // filtered[i].data its undefined when its filtered off
-  //TODO Add Some text for null state like add some Resorts same thign liek add some favorites if fav is null
+  const nullCaseMessage = useNullElementMessage({
+    showFavs,
+    results,
+    filtered,
+  });
 
   return (
     <div className='home__heading-container'>
@@ -58,7 +32,7 @@ export default function SavedResortsBG({
       <CardContainer
         isLoading={isLoading}
         filtered={filtered}
-        message={getMessage({ showFavs, results, filtered })}
+        message={nullCaseMessage}
       ></CardContainer>
     </div>
   );
