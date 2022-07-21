@@ -37,7 +37,7 @@ export default function useSaveSearchHistory() {
 
         return tempObj;
       });
-      toast.success(`${name} added!`, { toastId: code });
+      toast.success(`${name} added!`, { toastId: "added" + code });
     },
 
     //() => queryClient.invalidateQueries([queryKeys.resorts]),

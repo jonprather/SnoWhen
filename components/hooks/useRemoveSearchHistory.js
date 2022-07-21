@@ -48,7 +48,9 @@ export default function useRemoveSearchHistory(resortCode) {
       queryClient.invalidateQueries([queryKeys.snowReports, resortCode], {
         refetchActive: false,
       });
-      toast.success("Resort Deleted!", { toastId: "DELETED HISTORY ITEM" });
+      toast.success("Resort Deleted!", {
+        toastId: "removed" + resortCode,
+      });
     },
   });
 
