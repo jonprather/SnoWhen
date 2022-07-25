@@ -23,9 +23,14 @@ export default function index() {
   // TODO This error isnt set up look to weather index to se tit right
 
   useEffect(() => {
-    checkUserLoggedIn();
+    // checkUserLoggedIn();
+    if (!user) {
+      router.push("account/login");
+    }
     //  TODO is this what i really want isnt it better to check user
-  }, []);
+  }, [user]);
+  //TODO so when not logged in you get pushed to locgin but error still occurs and its a 500 error it should tell user to log in first
+  //so that error is likely coming from the other hooks could make them rely on user ie enable:!!user
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -50,7 +55,7 @@ export default function index() {
   const isLoading = snowData.some((query) => query.isLoading);
   // irrelevant bc have is fetching and the rest is stale while revalidate so shouldnt be an issue right?
 
-  // if (!searchHistory) return "";
+  if (!user) return "";
   return (
     <Layout title='SnoWhen - Account' description='snoWhen Account page'>
       {/* TODO after refactorign laoding to use isFetching can eliminate passign it down

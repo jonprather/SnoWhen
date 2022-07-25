@@ -1,10 +1,12 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useQuery } from "react-query";
 import { useQueryClient } from "react-query";
 import react, { useState } from "react";
 import { queryKeys } from "src/react-query/constants";
 import { NEXT_URL } from "@/config/index";
+import AuthContext from "@/context/AuthContext";
+
 const getResorts = async () => {
   //let errors propagate to RQ to be handled there
   // TODO for demo mode this is fine but would need to filter off by active resorts to not
@@ -15,10 +17,12 @@ const getResorts = async () => {
   return res.data;
 };
 export default function useResorts() {
+  const { user } = useContext(AuthContext);
+
   //dont need to pass anything bc it gets user info from cookie bc signed in
 
   const { data = [] } = useQuery([queryKeys.resorts], getResorts, {
-    // enabled: true,
+    enabled: !!user,
     // TODO could make this enabled based on having a logged in user
   });
 
