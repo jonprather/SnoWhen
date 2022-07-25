@@ -28,7 +28,7 @@ export default function useSaveSearchHistory() {
       let name = newResort.data.data.attributes.resort.data.attributes.name;
       let code = newResort.data.data.attributes.resort.data.attributes.code;
 
-      queryClient.setQueryData(queryKeys.resorts, (old = []) => {
+      queryClient.setQueryData(queryKeys.searchHistory, (old = []) => {
         const oldArray = old.resortsSearchHistory.data;
         const newArray = newResort.data.data;
         const combindedArray = [...oldArray, newArray];

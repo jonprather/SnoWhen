@@ -28,7 +28,7 @@ export default function useRemoveSearchHistory(resortCode) {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(deleteSearchHistory, {
     onSuccess: async (deletedResort) => {
-      queryClient.setQueryData(queryKeys.resorts, (old = []) => {
+      queryClient.setQueryData(queryKeys.searchHistory, (old = []) => {
         //TODO would be cool if passed error down to here
         // rather than throw error this way shouldnt get here shouldnt be success if no deletedResort
         // if (!deletedResort) throw new Error("Error Connecting to the server");

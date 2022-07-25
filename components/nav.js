@@ -94,3 +94,6 @@ export default function nav() {
     </div>
   );
 }
+//TODO add animation like opcaity change when username comes in or out in nav bar the fast switch looks bad
+// also prob should have a diff nav bar or somehting...
+//ALSO wtf is with the bnoundincg around to login and stuff

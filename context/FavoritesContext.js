@@ -4,6 +4,37 @@ import { NEXT_URL, API_URL } from "@/config/index";
 import AuthContext from "@/context/AuthContext";
 import React from "react";
 const FavoritesContext = createContext();
+//feel like can clean this up have reducer for state updates (def) and msg?
+//TODO make this use a reducer as well
+// SET UP REDUCER, USEREducer call
+const ACTIONS = {
+  ADD: "ADD",
+  TOGGLE: "TOGGLE",
+  DELETE: "DELETE",
+};
+
+const historyReducer = (state, action) => {
+  console.log("IN REDUCER", state, action);
+  switch (action.type) {
+    case ACTIONS.ADD:
+      return `${ACTIONS.REGISTER} ${string}`;
+    case ACTIONS.TOGGLE:
+      return `${ACTIONS.LOGIN} ${string}`;
+    case ACTIONS.DELETE:
+      return `${ACTIONS.LOGOUT} ${string}`;
+    default:
+      return "";
+      break;
+  }
+};
+// SET up Action objs , payload,
+// replace  calls with the new dispatch
+//should just be local to this file
+//so is the ADD action the same for both the initail just adding the data to the state like init
+// or should even that try to make a copy but wht if starts as null maybe dont start as null then
+//but it not being null will change how it works well maybe do a null check in reducer then when adding
+//if !state then just add it
+// else spread in the copy and only update the properties in question
 
 export const FavoritesProvider = ({ children }) => {
   const { user } = React.useContext(AuthContext);
@@ -116,12 +147,7 @@ export const FavoritesProvider = ({ children }) => {
     });
     const data = await res.json();
     setMsg(null);
-    //feel like can clean this up have reducer for state updates (def) and msg?
-    //TODO make this use a reducer as well
-    // SET UP REDUCER, USEREducer call
-    // SET up Action objs , payload,
-    // replace  calls with the new dispatch
-    //should just be local to this file
+
     if (res.ok) {
       setMsg("Succesfully Deleted Item");
       //TODO could get actually name here rather than 'item'

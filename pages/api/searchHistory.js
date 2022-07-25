@@ -5,16 +5,16 @@ export default async (req, res) => {
   if (req.method === "GET") {
     const { token } = cookie.parse(req.headers.cookie);
 
-    const strapiRes = await fetch(`${API_URL}/api/resorts`, {
+    const strapiRes = await fetch(`${API_URL}/api/favorites`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    const resorts = await strapiRes.json();
+    const resortsSearchHistory = await strapiRes.json();
     if (strapiRes.ok) {
-      res.status(200).json({ resorts });
+      res.status(200).json({ resortsSearchHistory });
     } else {
       res.status(data.error.status).json({ message: data.error.message });
     }

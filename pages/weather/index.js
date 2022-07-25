@@ -1,6 +1,8 @@
 /**
  * @jest-environment jsdom
  */
+//note THIS IS CRUFT flag for deletion
+
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";

@@ -1,5 +1,5 @@
 import CardContainer from "../organisms/CardContainer";
-import useNullElementMessage from "../hooks/useNullElementMessage";
+import useNullElementMessage from "../../helpers/getNullElementMessage";
 export default function SavedResortsBG({
   results,
   filtered,
@@ -10,8 +10,9 @@ export default function SavedResortsBG({
     showFavs,
     results,
     filtered,
-  });
-
+  }); //returns null if no msg
+  // TODO it shows this when loading hence the ternary when pass it down
+  //if use loading tho it doesn twork when no resorts...
   return (
     <div className='home__heading-container'>
       <div className='home__heading-container__svg-wrapper'>

@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import useSaveSearchHistory from "../hooks/useSaveSearchHistory";
 import useSearchHistory from "../hooks/useSearchHistory";
+import useResorts from "../hooks/useResorts";
+
 import Loading from "../atoms/Loading";
 import Select from "react-select";
 import { toast } from "react-toastify";
 // TODO get these resorts dynamically from api - cant yet due to api cost constraints ie only have mammoth active
-
+//for now we will pull in all despite not being active then wehn active it will be auto filtered
+// bc pull from hook
 const resorts = [
   { label: "Mammoth", value: 619002, id: 1 },
   { label: "Snow Summit", value: 420, id: 2 },
@@ -17,7 +20,26 @@ export default function Location(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [resort, setResort] = useState(null);
   const addResort = useSaveSearchHistory();
+  const { resorts } = useResorts();
   const { searchHistory } = useSearchHistory();
+
+  //TODO put this feature flag in a better spot
+  // demo allows for fake resorts to be in db results so can play aorund with mroe than 1 active resorts bc of $ constraints I only have 1 active
+  //TODO add a button for screen readers to click to details
+  const demo = true;
+
+  const filteredSearchHistory = resorts?.data?.filter(
+    (ele) => demo || ele.attributes.active
+  );
+
+  const resortsList = filteredSearchHistory?.map((ele) => {
+    return {
+      value: ele.attributes.code,
+      id: ele.id,
+      label: ele.attributes.name,
+    };
+  });
+
   useEffect(() => {
     setIsLoading(false);
 
@@ -40,14 +62,12 @@ export default function Location(props) {
       setError("Please select an option to search.");
       return;
     }
+    const resortIsInHistory = (ele) =>
+      +ele.attributes.resort.data.attributes.code === +resort.value;
 
-    const hasItem = searchHistory
-      ? searchHistory.data.filter(
-          (ele) => +ele.attributes.resort.data.attributes.code === resort.value
-        ).length
-      : false;
+    const resortCodeAlreadyAdded = searchHistory?.data?.some(resortIsInHistory);
 
-    if (hasItem) {
+    if (resortCodeAlreadyAdded) {
       setError(`${resort.label} is already in History!`);
       return;
     }
@@ -56,7 +76,6 @@ export default function Location(props) {
     }
 
     setResort("");
-    // router.push("/weather/"); //push to item on search
   }
   // TODO maybe msg based toasts for liek adding removing are uneeded bc have animations...
   function customTheme(theme) {
@@ -79,7 +98,7 @@ export default function Location(props) {
       isSearchable
       noOptionsMessage={() => "Resort Not Available"}
       onChange={handleChange}
-      options={resorts}
+      options={resortsList}
       placeholder='Search for Resorts'
       theme={customTheme}
       value={resort}

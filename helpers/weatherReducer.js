@@ -25,6 +25,7 @@ export const weatherReducer = function (location, alt = "base") {
   }, 0);
   //end reducer-
   //TODO hard to read could refactor
+  //TODO also could use tests
 
   let total = snowPerDay.reduce((acc, ele) => acc + ele.total, 0);
   console.log("WEATHER REDUCER OUTPUT", {
