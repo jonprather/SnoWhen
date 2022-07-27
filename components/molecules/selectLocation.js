@@ -6,16 +6,8 @@ import useResorts from "../hooks/useResorts";
 import Loading from "../atoms/Loading";
 import Select from "react-select";
 import { toast } from "react-toastify";
-// TODO get these resorts dynamically from api - cant yet due to api cost constraints ie only have mammoth active
-//for now we will pull in all despite not being active then wehn active it will be auto filtered
-// bc pull from hook
-const resorts = [
-  { label: "Mammoth", value: 619002, id: 1 },
-  { label: "Snow Summit", value: 420, id: 2 },
-  { label: "Big Bear", value: 4201, id: 3 },
-];
 
-export default function Location(props) {
+export default function Location() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [resort, setResort] = useState(null);
@@ -23,7 +15,12 @@ export default function Location(props) {
   const { resorts } = useResorts();
   const { searchHistory } = useSearchHistory();
 
-  //TODO put this feature flag in a better spot
+  //TODO put this feature flag in a better spot ; is it Used in multiple spots or jsut here
+  // this allows for extra things to be searched for  that arent active; could also have this in useSearchHistory to only fetch live things
+  //but if handle it correctly should search for things that arent there
+  // but its possible if a person used demo data then i changed it then it will have a searchHisotry item thats not able to be fetched
+  //like onlyGetSnowData where resort is active or can do that filter at some point
+  // so restors -> sleet locationsearchHistory -> snowData
   // demo allows for fake resorts to be in db results so can play aorund with mroe than 1 active resorts bc of $ constraints I only have 1 active
   //TODO add a button for screen readers to click to details
   const demo = true;
@@ -74,14 +71,13 @@ export default function Location(props) {
     if (resort.id) {
       addResort({ resort: resort.id });
     }
-
-    setResort("");
+    setResort({});
   }
   // TODO maybe msg based toasts for liek adding removing are uneeded bc have animations...
   function customTheme(theme) {
-    let colorDark = "#0f4c75";
-    let colorPrimary = "#3282b8";
-    let colorLight = "#bbe1fa";
+    const colorDark = "#0f4c75";
+    const colorPrimary = "#3282b8";
+    const colorLight = "#bbe1fa";
     return {
       ...theme,
       colors: {
@@ -108,7 +104,7 @@ export default function Location(props) {
   return (
     <>
       <div className='locations__search-box'>
-        <Loading loading={isLoading} />
+        {/* <Loading loading={isLoading} /> */}
         <div className='locations__search-box__inner-container'>
           <div className='locations__search-box__inner-container__select-box'>
             <label
@@ -125,7 +121,7 @@ export default function Location(props) {
               onClick={handleSubmit}
               className='locations__search-box__inner-container__button-box__button'
             >
-              <i className='fa fa-search' aria-hidden='true'></i>{" "}
+              <i className='fa fa-search' aria-hidden='true'></i>
               <span>Search</span>
             </button>
           </div>
