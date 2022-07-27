@@ -1,0 +1,27 @@
+(
+  <AccountPage
+    handleEmit={handleEmit}
+    error={error}
+    resortsSearchHistory={searchHistory}
+    results={snowData}
+    isLoading={isLoading}
+  >
+    /duplicate results and filtered
+  </AccountPage>
+) /
+  (
+    <>
+      <SavedResortsBG
+        filtered={snowData}
+        isLoading={isLoading}
+        results={results}
+        showFavs={showFavs}
+      ></SavedResortsBG>
+
+      <CardContainer
+        isLoading={isLoading}
+        filtered={filtered}
+        message={nullCaseMessage}
+      ></CardContainer>
+    </>
+  );

@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import { useContext } from "react";
 import LocationCard from "@/components/molecules/locationCard";
 import Loading from "../atoms/Loading";
 
+import useSnowData from "@/components/hooks/useSnowData";
+import useSearchHistory from "@/components/hooks/useSearchHistory";
+import getNullElementMessage from "@/helpers/getNullElementMessage";
 import { motion, AnimatePresence } from "framer-motion";
+import FavoritesContext from "@/context/FavoritesContext";
 //TODO Add Some text for null state like add some Resorts same thign liek add some favorites if fav is
-export default function CardContainer({ filtered, isLoading, message }) {
-  // filter off empty data to stop the undefined data from showing up
-  filtered = filtered.filter((ele) => ele.data);
-  console.log("FIKLT", filtered);
+export default function CardContainer() {
+  const { searchHistory } = useSearchHistory();
+
+  const { snowData } = useSnowData(searchHistory);
+  const { showFavs } = useContext(FavoritesContext);
+  const message = getNullElementMessage({ showFavs, results: snowData });
+
+  // filter off empty data to stop the undefined data(after the filter is changed to showFavs) from showing up
+  const filtered = snowData.filter((ele) => ele.data);
 
   return (
     <div className='home__card-container '>

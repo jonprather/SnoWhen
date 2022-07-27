@@ -6,8 +6,7 @@ describe("Test Null messages", () => {
   it("case where no results and on showAll", () => {
     const showFavs = false;
     const results = [];
-    const filtered = [];
-    let nullMsgObj = getNullElementMessage({ showFavs, results, filtered });
+    let nullMsgObj = getNullElementMessage({ showFavs, results });
 
     expect(nullMsgObj).toStrictEqual({
       heading: "No Resorts",
@@ -18,8 +17,8 @@ describe("Test Null messages", () => {
   it("case where no results and on showFav", () => {
     const showFavs = true;
     const results = [];
-    const filtered = [];
-    let nullMsgObj = getNullElementMessage({ showFavs, results, filtered });
+    let nullMsgObj = getNullElementMessage({ showFavs, results });
+    nullMsgObj; //?
 
     expect(nullMsgObj).toStrictEqual({
       heading: "No favorites",
@@ -31,7 +30,7 @@ describe("Test Null messages", () => {
     const showFavs = true;
     const results = [1, 2, 3];
     const filtered = [];
-    let nullMsgObj = getNullElementMessage({ showFavs, results, filtered });
+    let nullMsgObj = getNullElementMessage({ showFavs, results });
 
     expect(nullMsgObj).toStrictEqual({
       heading: "No favorites",

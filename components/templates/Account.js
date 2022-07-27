@@ -1,43 +1,27 @@
-import React, { useState, useEffect } from "react";
-import ClipLoader from "react-spinners/PuffLoader"; //ScaleLoader is p cool
+import { useContext } from "react";
 import Filter from "@/components/molecules/Filter";
-const override = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "white",
-};
+
 import SavedResortsBG from "../molecules/SavedResortsBG";
 import Header from "@/components/organisms/AccountHeader";
-import useSnowData from "../hooks/useSnowData";
+import FavoritesContext from "@/context/FavoritesContext";
 
-export default function account({
-  handleEmit,
-  error,
-  results,
-  resortsSearchHistory,
-}) {
-  const { showFavs, setShowFavs, snowData, isLoading } =
-    useSnowData(resortsSearchHistory);
-  //ok ERROS working when hit strapi here for snow data but also need to do it in fav ctx and
-  // then watch for it in places where thats called set it in ctx wtach in ui then call taostify in useEffect
+export default function account() {
+  const { setShowFavs } = useContext(FavoritesContext);
+
   return (
     <section className='home'>
       {/* These together could be an organism
      This organism can slot into here or be like a header prop in the page
      */}
       {/* Could add this to context or something if becomes an issue to prop drill it */}
-      <Header emit={handleEmit}></Header>
+      <Header />
       <main className='home__main'>
         {/* Maybe to stay a template this stuff is slots or passed in components */}
+        {/* //HMm could refactor Filter to be more generic not be so coupled to specific implementation 
+         also needs cruft cleaned out as well
+        */}
         <Filter setShowFavs={setShowFavs} />
-        {/* //TODO  replace error here with gloabl error hadnler in RQ */}
-
-        <SavedResortsBG
-          filtered={snowData}
-          isLoading={isLoading}
-          results={results}
-          showFavs={showFavs}
-        ></SavedResortsBG>
+        <SavedResortsBG />
       </main>
     </section>
   );

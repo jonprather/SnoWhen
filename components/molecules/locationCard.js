@@ -21,10 +21,9 @@ export default function locationCard({
 
   const deleteSearchHistory = useRemoveSearchHistory(resortCode);
   const likeSearchHistory = useLikeResort(resortCode);
-
-  //TODO find out why optimistic update seems to change the cahce but not really
-  //ok forgot to call it so im exzporting the hook which returns the mutate function so need to call it
-  //thats why i got the improper hook use
+  //TODO has to be a cleaner way than this implementation i mean so much DRY issues
+  //well can make children components and pass in a message prop and let that control it
+  // so loc cardMsg vs Loc card normal
   if (nullCaseMessage)
     return (
       <motion.div

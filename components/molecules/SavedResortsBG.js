@@ -1,18 +1,5 @@
 import CardContainer from "../organisms/CardContainer";
-import useNullElementMessage from "../../helpers/getNullElementMessage";
-export default function SavedResortsBG({
-  results,
-  filtered,
-  isLoading,
-  showFavs,
-}) {
-  const nullCaseMessage = useNullElementMessage({
-    showFavs,
-    results,
-    filtered,
-  }); //returns null if no msg
-  // TODO it shows this when loading hence the ternary when pass it down
-  //if use loading tho it doesn twork when no resorts...
+export default function SavedResortsBG() {
   return (
     <div className='home__heading-container'>
       <div className='home__heading-container__svg-wrapper'>
@@ -30,11 +17,7 @@ export default function SavedResortsBG({
         </svg>
       </div>
 
-      <CardContainer
-        isLoading={isLoading}
-        filtered={filtered}
-        message={nullCaseMessage}
-      ></CardContainer>
+      <CardContainer />
     </div>
   );
 }

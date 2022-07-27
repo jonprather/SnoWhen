@@ -6,29 +6,20 @@ const objKeys = {
   LIKED: "liked",
   NOTLIKED: "notLiked",
 };
-function getKey({ showFavs, results, filtered } = {}) {
+// this just relies on snowData and showFavs could use useSnowdata here
+function getKey({ showFavs, results } = {}) {
   let keys = [];
   keys.push(showFavs ? objKeys.SHOW_FAVS : objKeys.SHOW_ALL);
   keys.push(results?.length > 0 ? objKeys.RESULTS : objKeys.NORESULTS);
   keys.push(
-    filtered?.every((ele) => !ele.data) ? objKeys.NOTLIKED : objKeys.LIKED
+    results?.every((ele) => !ele.data) ? objKeys.NOTLIKED : objKeys.LIKED
   );
   return keys;
 }
-export default function getNullElementMessage({
-  showFavs,
-  results,
-  filtered,
-} = {}) {
-  console.log(">>>", {
-    showFavs,
-    results,
-    filtered,
-  });
+export default function getNullElementMessage({ showFavs, results } = {}) {
   const [filterTypeKey, hasResultsKey, isLiked] = getKey({
     showFavs,
     results,
-    filtered,
   });
 
   const messageObj = {
@@ -60,6 +51,6 @@ export default function getNullElementMessage({
 
   return messageObj[filterTypeKey]?.[hasResultsKey]?.[isLiked] || null;
 }
-//takes in showFavs, results, filtered and returns a UI message or null
+//takes in showFavs, results aka snowData and returns a UI message or null
 
 //TODO add tests for this for the edge cases and stuff

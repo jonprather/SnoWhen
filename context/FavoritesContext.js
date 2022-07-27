@@ -37,6 +37,8 @@ const historyReducer = (state, action) => {
 // else spread in the copy and only update the properties in question
 
 export const FavoritesProvider = ({ children }) => {
+  const [showFavs, setShowFavs] = useState(false);
+
   const { user } = React.useContext(AuthContext);
   const [searchHistory, setSearchHistory] = useState(null);
   const [error, setError] = useState(null);
@@ -173,6 +175,8 @@ export const FavoritesProvider = ({ children }) => {
         saveSearchHistory,
         msg,
         setMsg,
+        showFavs,
+        setShowFavs,
       }}
     >
       {children}
@@ -181,3 +185,8 @@ export const FavoritesProvider = ({ children }) => {
 };
 
 export default FavoritesContext;
+
+//so most of this needs to be removed but showFavs and setShowFavs is currently being used
+//this also solves the prob of prop drilling so this way is much better and solves that duplicate useState issue
+
+// could perhaps move tha tmsg logic here as well but idk if needs to be global

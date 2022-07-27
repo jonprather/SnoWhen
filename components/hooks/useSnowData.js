@@ -1,16 +1,13 @@
-//make the loading and error automatic like check isFetching in loading spinner
-// and onError pass it a default error handler ( in global config or jus tin hook of useQueries)
-// pass it one or more history objs and it will give you  a combined resutls obj with a report for each resort
-// also works with single quries just pre filter and pass it one resort
+// API-  pass it one or more history objs and it will give you a combined resutls obj with a report for each resort
+//note-  also works with single queries just pre filter and pass it one resort
 import axios from "axios";
-import { useEffect } from "react";
+import { useContext, useCallback } from "react";
 import { useQueries } from "react-query";
-import { queryKeys } from "src/react-query/constants";
-import { toast } from "react-toastify";
 
+import { queryKeys } from "src/react-query/constants";
+import FavoritesContext from "@/context/FavoritesContext";
 //TODO  consider error boundary approach for CSR pages..
 
-import { useState, useCallback } from "react";
 const getWeather = async function (resortCode, searchHistory) {
   const { data } = await axios.get(`/api/snowReport?ID=${resortCode}`);
   // Mutate data to have the properties from searchHistory
@@ -26,20 +23,22 @@ const getWeather = async function (resortCode, searchHistory) {
       data.snowReport.favoriteId = id;
     }
   });
-
   return data;
 };
 
 export default function useSnowData(searchHistory) {
-  const [showFavs, setShowFavs] = useState(false);
+  const { showFavs } = useContext(FavoritesContext);
 
-  useEffect(() => {}, [showFavs]);
-
-  const filterFn = useCallback((data) => {
-    if (data.snowReport.liked) {
-      return data;
-    }
-  });
+  const filterFn = useCallback(
+    (data) => {
+      console.log("SHOW useCB", showFavs, "LIKED:", data.snowReport.liked);
+      if (data.snowReport.liked) {
+        return data;
+      }
+      return null;
+    },
+    [showFavs, searchHistory]
+  );
 
   const results = useQueries(
     searchHistory?.data?.map((resort, i) => {
@@ -48,6 +47,7 @@ export default function useSnowData(searchHistory) {
         queryKey: [queryKeys.snowReports, resortCode],
         queryFn: () => getWeather(resortCode, searchHistory),
         select: showFavs ? filterFn : undefined,
+        staleTime: 5000,
       };
     }) ?? []
   );
@@ -55,8 +55,6 @@ export default function useSnowData(searchHistory) {
   let data = results || [];
   return {
     snowData: data,
-    showFavs,
-    setShowFavs,
     isLoading: results.every((ele) => ele.isLoading),
   };
 }
