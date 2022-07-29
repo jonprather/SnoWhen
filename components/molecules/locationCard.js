@@ -21,6 +21,77 @@ export default function locationCard({
 
   const deleteSearchHistory = useRemoveSearchHistory(resortCode);
   const likeSearchHistory = useLikeResort(resortCode);
+
+  const HomeCard = ({
+    heading = "heading",
+    subHeading = "subheading",
+    isNullState = true,
+  }) => {
+    return (
+      <div className={`home__card ${isNullState && "home__card--null"}`}>
+        <div className='home__card-heading__wrapper'>
+          {!isNullState && (
+            <button
+              className='home__card__delete'
+              onClick={(e) => {
+                deleteSearchHistory({ id: searchHistoryId });
+                e.stopPropagation();
+              }}
+              disabled={isNullState}
+            >
+              {!isNullState && <FaTrash />}
+            </button>
+          )}
+          <h1 className='home__card-heading'>{heading}</h1>
+        </div>
+
+        <p className='home__card-state'>Ca</p>
+
+        <div className='home__card__mtn-bg'>
+          <img src='/mtn-bg.png' className='' />
+        </div>
+        <div className='home__card__snowflake'>
+          <img
+            src='/snowflake-black.png'
+            className='home__heading-container__mtn'
+          />
+        </div>
+        <div className='home__card__snow-amount-box'>
+          <div>
+            <p className='home__card__snow-amount-box-subheading'>
+              {subHeading}
+            </p>
+          </div>
+        </div>
+
+        <div className='home__card__accent-box__details'>
+          {!isNullState && (
+            <button
+              className='home__card__like'
+              onClick={(e) => {
+                e.stopPropagation();
+                likeSearchHistory({
+                  searchHistoryId: searchHistoryId,
+                  liked: liked,
+                  user,
+                });
+              }}
+              disabled={isNullState}
+            >
+              {/* TODO //maybe could debounce this in someway handle locally and do req in bg?? */}
+              {!isNullState ? liked ? <FaHeart /> : <FaRegHeart /> : ""}
+            </button>
+          )}
+
+          {/* // can make these overwritable make them into footers and be overwritable
+          via method or passing null means you dont apply it like in article */}
+        </div>
+
+        <div className='home__card__accent-box'></div>
+      </div>
+    );
+  };
+
   //TODO has to be a cleaner way than this implementation i mean so much DRY issues
   //well can make children components and pass in a message prop and let that control it
   // so loc cardMsg vs Loc card normal
@@ -33,40 +104,11 @@ export default function locationCard({
         variants={fadeInRight}
         layout={"position"}
       >
-        <div className='home__card home__card--null'>
-          <div className='home__card-heading__wrapper'>
-            <h1 className='home__card-heading'>{nullCaseMessage.heading}</h1>
-          </div>
-
-          <p className='home__card-state'>Ca</p>
-
-          <div className='home__card__mtn-bg'>
-            <img src='/mtn-bg.png' className='' />
-          </div>
-          <div className='home__card__snowflake'>
-            <img
-              src='/snowflake-black.png'
-              className='home__heading-container__mtn'
-            />
-          </div>
-          <div className='home__card__snow-amount-box'>
-            <div>
-              {/* <p className='home__card__snow-amount-box-heading'>Next Week</p> */}
-              <p className='home__card__snow-amount-box-subheading'>
-                {nullCaseMessage.details}
-              </p>
-            </div>
-            {/* <p className='home__card__snow-amount-box-quantity'>
-          {weatherData?.total}
-        </p> */}
-          </div>
-
-          <p className='home__card__accent-box__details'> </p>
-
-          {/* <p className='home__card__forecast-heading'>Forecast</p> */}
-
-          <div className='home__card__accent-box'></div>
-        </div>
+        <HomeCard
+          heading={nullCaseMessage.heading}
+          subHeading={nullCaseMessage.details}
+          isNullState={true}
+        />
       </motion.div>
     );
   if (!weatherData) return null;
@@ -84,72 +126,15 @@ export default function locationCard({
         whileTap={tap}
         layout={"position"}
       >
-        <div className='home__card'>
-          <div className='home__card-heading__wrapper'>
-            <button
-              className='home__card__delete'
-              onClick={(e) => {
-                deleteSearchHistory({ id: searchHistoryId });
-                e.stopPropagation();
-              }}
-            >
-              <FaTrash />
-            </button>
-            <h1 className='home__card-heading'>{weatherData?.name}</h1>
-          </div>
-
-          <p className='home__card-state'>Ca</p>
-
-          <div className='home__card__mtn-bg'>
-            <img src='/mtn-bg.png' className='' />
-          </div>
-          <div className='home__card__snowflake'>
-            <img
-              src='/snowflake-black.png'
-              className='home__heading-container__mtn'
-            />
-          </div>
-          <div className='home__card__snow-amount-box'>
-            <div>
-              {/* <p className='home__card__snow-amount-box-heading'>Next Week</p> */}
-              <p className='home__card__snow-amount-box-subheading'>
-                Snow Total {weatherData?.snow_six_day_total}
-              </p>
-            </div>
-            {/* <p className='home__card__snow-amount-box-quantity'>
-              {weatherData?.total}
-            </p> */}
-          </div>
-
-          <p className='home__card__accent-box__details'>
-            {" "}
-            <button
-              className='home__card__like'
-              onClick={(e) => {
-                e.stopPropagation();
-                likeSearchHistory({
-                  searchHistoryId: searchHistoryId,
-                  liked: liked,
-                  user,
-                }); // log this check if this works whats passed etc...
-                // toggleLikeResort({
-                //   searchHistoryId: searchHistoryId,
-                //   liked: liked,
-                // });
-              }}
-            >
-              {/* TODO //maybe could debounce this in someway handle locally and do req in bg?? */}
-              {liked ? <FaHeart /> : <FaRegHeart />}
-            </button>
-          </p>
-
-          {/* <p className='home__card__forecast-heading'>Forecast</p> */}
-
-          <div className='home__card__accent-box'></div>
-        </div>
+        <HomeCard
+          heading={weatherData?.name}
+          subHeading={`Snow Total ${weatherData?.snow_six_day_total}`}
+          isNullState={false}
+        />
       </motion.div>
     </Link>
   );
 }
 
 //TODO could refactor this to be clearner use smaller peices atomic design style
+//TODO consider addign the general compoent and Detailed component pattern here for cards
