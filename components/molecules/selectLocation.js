@@ -39,10 +39,6 @@ export default function Location() {
 
   useEffect(() => {
     setIsLoading(false);
-
-    return () => {
-      setIsLoading(false);
-    };
   }, [resort]);
   useEffect(() => {
     if (error) {
@@ -73,7 +69,7 @@ export default function Location() {
     }
     setResort({});
   }
-  // TODO maybe msg based toasts for liek adding removing are uneeded bc have animations...
+  // TODO maybe msg based toasts for adding removing are uneeded bc have animations...
   function customTheme(theme) {
     const colorDark = "#0f4c75";
     const colorPrimary = "#3282b8";

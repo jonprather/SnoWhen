@@ -35,8 +35,6 @@ export default function Filter({ setShowFavs }) {
   // a state change higher up based on whats selected how do i couple that wihout coupling that?
 
   function handleClick({ id, showFavs, clk, extraFunction }) {
-    console.log("FILTER SHOW FAVS", showFavs);
-
     if (typeof extraFunction === "function") extraFunction(showFavs);
     if (typeof clk === "function") clk(id);
   }

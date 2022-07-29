@@ -12,7 +12,6 @@ import dynamic from "next/dynamic";
 const WeatherCard = dynamic(() => import("../../../components/weatherCard"));
 import Graph from "@/components/graph";
 import BackButton from "@/components/molecules/backButton";
-import { weatherReducer } from "@/helpers/weatherReducer";
 //import hooks
 // get data from hook
 // get exact weatherReducer stuff which should now be on snowReport data area console log to find it

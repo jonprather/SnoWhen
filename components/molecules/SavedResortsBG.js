@@ -1,5 +1,4 @@
-import CardContainer from "../organisms/CardContainer";
-export default function SavedResortsBG() {
+export default function SavedResortsBG({ children }) {
   return (
     <div className='home__heading-container'>
       <div className='home__heading-container__svg-wrapper'>
@@ -17,7 +16,7 @@ export default function SavedResortsBG() {
         </svg>
       </div>
 
-      <CardContainer />
+      {children}
     </div>
   );
 }

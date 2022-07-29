@@ -5,9 +5,9 @@ import Loading from "../atoms/Loading";
 import useSnowData from "@/components/hooks/useSnowData";
 import useSearchHistory from "@/components/hooks/useSearchHistory";
 import getNullElementMessage from "@/helpers/getNullElementMessage";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import FavoritesContext from "@/context/FavoritesContext";
-//TODO Add Some text for null state like add some Resorts same thign liek add some favorites if fav is
+
 export default function CardContainer() {
   const { searchHistory } = useSearchHistory();
 
