@@ -11,9 +11,10 @@ export default function Location() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [resort, setResort] = useState(null);
+
   const addResort = useSaveSearchHistory();
-  const { resorts } = useResorts();
   const { searchHistory } = useSearchHistory();
+  const { resorts } = useResorts();
 
   //TODO put this feature flag in a better spot ; is it Used in multiple spots or jsut here
   // this allows for extra things to be searched for  that arent active; could also have this in useSearchHistory to only fetch live things
@@ -24,7 +25,6 @@ export default function Location() {
   // demo allows for fake resorts to be in db results so can play aorund with mroe than 1 active resorts bc of $ constraints I only have 1 active
   //TODO add a button for screen readers to click to details
   const demo = true;
-
   const filteredSearchHistory = resorts?.data?.filter(
     (ele) => demo || ele.attributes.active
   );
@@ -46,6 +46,7 @@ export default function Location() {
       setError("");
     }
   }, [error]);
+
   function handleChange(resort) {
     setError("");
     setResort(resort);

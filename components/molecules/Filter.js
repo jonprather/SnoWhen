@@ -10,6 +10,18 @@ const motionStyle = {
   borderRadius: "8px",
   zIndex: 0,
 };
+//to generalize this
+// so it would be better if could pass in the setState for which filter is on
+//and also pass in the array of tabs
+//prob with current mode is that tabs has local functions in it
+//need to seperate data from those functions find another way of adding those features in
+//hmm sound slike a prottype solution could work or factory fucntion or something
+// the three non fn properties can be set up in a constructor funciton or base obj to which you add
+// those prototypes form Object.create
+// like tabs.map Object.create(tab[i])
+//TODO finish this refacotring
+//would be better if had tests first 
+//but this can wait maybe focus on BE testing and getting ti produciton ready first
 export default function Filter({ setShowFavs }) {
   const [selected, setSelected] = useState(1);
   const tabs = [

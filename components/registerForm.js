@@ -93,7 +93,13 @@ export default function AuthForm({ title, isRegister, children }) {
             </p>
           </div>
 
-          <input type='submit' className='authForm__form__btn btn' />
+          <input
+            type='submit'
+            className={` btn authForm__form__btn ${
+              Object.entries(errors).length > 0 &&
+              "authForm__form__btn--disabled"
+            }`}
+          />
         </form>
         {children}
       </div>

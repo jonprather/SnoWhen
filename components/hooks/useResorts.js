@@ -13,7 +13,6 @@ const getResorts = async () => {
   //have stale data bc only active resorts will be updated ( ie paid resorts
   // also need to have selct location pull from here rather than hard coded)
   const res = await axios.get(`${NEXT_URL}/api/resorts`);
-  console.log("RES", res);
   return res.data;
 };
 export default function useResorts() {

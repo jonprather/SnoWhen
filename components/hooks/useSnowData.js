@@ -31,7 +31,6 @@ export default function useSnowData(searchHistory) {
 
   const filterFn = useCallback(
     (data) => {
-      console.log("SHOW useCB", showFavs, "LIKED:", data.snowReport.liked);
       if (data.snowReport.liked) {
         return data;
       }

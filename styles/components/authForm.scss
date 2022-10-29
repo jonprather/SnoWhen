@@ -52,6 +52,11 @@
       margin-bottom: 1.4rem;
       // margin-top: 0.4rem;
       padding: 1rem;
+      &--disabled {
+        background-color: lightgray !important ;
+        cursor: default !important ;
+        opacity: 0.7;
+      }
     }
     &__errors {
       color: rgb(255, 20, 20);

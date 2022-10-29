@@ -23,7 +23,6 @@ export default function AuthForm({ title, children }) {
 
   useEffect(() => {
     if (error) {
-      console.log("IN ERROR ZOEN FE USEEFF LOGIN");
       toast.error(error);
 
       setError(null);
@@ -40,8 +39,6 @@ export default function AuthForm({ title, children }) {
   const onSubmit = (data) => {
     const { email, password } = data;
     login({ email, password });
-    console.log("Data here to check", user);
-    // if (user) router.push("/account/");
   };
   return (
     <>
@@ -54,11 +51,7 @@ export default function AuthForm({ title, children }) {
             <label className='authForm__form__label' htmlFor='email'>
               Email
             </label>
-            <input
-              {...register("email")}
-              className='authForm__form__input'
-              // placeholder='john@gmail.com'  looks jank padding wise
-            />
+            <input {...register("email")} className='authForm__form__input' />
             <p className='authForm__form__errors'>{errors.email?.message}</p>
           </div>
           <div className='authForm__form__form-group'>
@@ -69,12 +62,24 @@ export default function AuthForm({ title, children }) {
             <input
               type='password'
               className='authForm__form__input'
+              autoComplete='current-password'
               {...register("password")}
             />
             <p className='authForm__form__errors'>{errors.password?.message}</p>
           </div>
 
-          <input type='submit' className='authForm__form__btn btn' />
+          {false ? (
+            <input type='submit' className='authForm__form__btn btn' />
+          ) : (
+            <button
+              className={` btn authForm__form__btn ${
+                Object.entries(errors).length > 0 &&
+                "authForm__form__btn--disabled"
+              }`}
+            >
+              Submit
+            </button>
+          )}
         </form>
         {children}
       </div>

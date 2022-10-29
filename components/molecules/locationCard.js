@@ -1,14 +1,15 @@
+import { FaHeart, FaRegHeart, FaTrash } from "react-icons/fa";
+import { motion } from "framer-motion";
+
 import React, { useContext } from "react";
 import Link from "next/link";
-
-import { FaHeart, FaRegHeart, FaTrash } from "react-icons/fa";
-
-import { fadeInRight, hover, tap } from "@/lib/animate";
-import { motion } from "framer-motion";
 import useRemoveSearchHistory from "../hooks/useRemoveSearchHistory";
 import useLikeResort from "../hooks/useLikeResort";
-
+import { fadeInRight, hover, tap } from "@/lib/animate";
 import AuthContext from "@/context/AuthContext";
+
+//TODO refactor imports liek above into the 3rp party then react then dev imports
+//TODO can also impor tmany components into one file then export from that file to simplify imports
 export default function locationCard({
   weatherData,
   i,

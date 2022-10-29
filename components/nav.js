@@ -5,7 +5,6 @@ import { NavModal } from "./navModal";
 import AuthContext from "@/context/AuthContext.js";
 export default function nav() {
   const { logout, user } = React.useContext(AuthContext);
-  const [wtf, setWtf] = useState(false);
 
   function handleLogOut() {
     console.log("You should be logged out", user);
