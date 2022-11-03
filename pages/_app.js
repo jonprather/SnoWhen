@@ -15,17 +15,18 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function MyApp({ Component, pageProps, router }) {
   const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
+  const tenSecondsInMs = 1000 * 10;
 
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
         defaultOptions: {
           queries: {
-            refetchOnWindowFocus: false,
-            refetchOnmount: false,
-            refetchOnReconnect: false,
-            retry: false,
-            staleTime: twentyFourHoursInMs,
+            refetchOnWindowFocus: true,
+            refetchOnmount: true,
+            refetchOnReconnect: true,
+            retry: true,
+            staleTime: tenSecondsInMs,
             onError: (error) =>
               toast.error(`Something Went Wrong: ${error}`, {
                 toastId: "1-" + error.message,

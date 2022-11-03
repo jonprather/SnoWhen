@@ -19,8 +19,8 @@ export default function useSearchHistory() {
   const { user } = useContext(AuthContext);
 
   //dont need to pass anything bc it gets user info from cookie bc signed in
-
   const { data = [] } = useQuery([queryKeys.searchHistory], getSearchHistory, {
+    staleTime: 1000,
     // enabled: !!user,
     // TODO could make this enabled based on having a logged in user
   });

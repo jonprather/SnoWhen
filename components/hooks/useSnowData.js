@@ -22,6 +22,8 @@ const getWeather = async function (resortCode, searchHistory) {
       data.snowReport.liked = liked;
       data.snowReport.favoriteId = id;
     }
+    // ok so we are passing the liked status and the favorite id
+    //onto the generic snowreport data cleint side
   });
   return data;
 };
@@ -46,7 +48,7 @@ export default function useSnowData(searchHistory) {
         queryKey: [queryKeys.snowReports, resortCode],
         queryFn: () => getWeather(resortCode, searchHistory),
         select: showFavs ? filterFn : undefined,
-        staleTime: 5000,
+        staleTime: 1000,
       };
     }) ?? []
   );
