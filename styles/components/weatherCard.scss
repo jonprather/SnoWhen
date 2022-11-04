@@ -4,10 +4,14 @@
   background-color: white; //#f2f2f2; // var(--graph-container-bg);
   box-shadow: $box-shadow;
   // min-width: 33rem;
+  max-width: 42rem;
+  margin: 0 auto;
   padding-bottom: 2.8em;
   border-radius: 4em;
   @media only screen and (min-width: $bp-smallester) {
-    width: 90%;
+    // width: 90%;
+    max-width: 34rem;
+
     margin: 0 auto;
   }
   &:hover {
