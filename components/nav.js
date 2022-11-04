@@ -17,7 +17,11 @@ export default function nav() {
           <div className='nav__pages-container'>
             <Link href='/'>
               <div className='nav__brand'>
-                <img src='/logo.png' className='nav__brand__logo' />
+                <img
+                  src='/logo.png'
+                  className='nav__brand__logo'
+                  alt='brand logo'
+                />
                 <p className='nav__brand__title'>SnoWhen</p>
               </div>
             </Link>

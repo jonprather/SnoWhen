@@ -59,6 +59,7 @@ export default function AuthForm({ title, isRegister, children }) {
               Email
             </label>
             <input
+              id='email'
               // placeholder='john@gmail.com' looks janky
               {...registerFormData("email")}
               className='authForm__form__input'
@@ -72,6 +73,7 @@ export default function AuthForm({ title, isRegister, children }) {
 
             <input
               type='password'
+              id='password'
               className='authForm__form__input'
               {...registerFormData("password")}
             />
@@ -84,6 +86,7 @@ export default function AuthForm({ title, isRegister, children }) {
             </label>
 
             <input
+              id='confirmPassword'
               type='password'
               className='authForm__form__input'
               {...registerFormData("confirmPassword")}

@@ -6,7 +6,7 @@ export const NavModal = ({ children }) => {
 
   return (
     <div className='nav__hamburger'>
-      <button onClick={() => setOpen(true)}>
+      <button onClick={() => setOpen(true)} aria-label='navigation'>
         <i className='fa fa-bars nav__hamburger__icon fa-lg'></i>
       </button>
 

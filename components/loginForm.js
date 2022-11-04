@@ -51,7 +51,11 @@ export default function AuthForm({ title, children }) {
             <label className='authForm__form__label' htmlFor='email'>
               Email
             </label>
-            <input {...register("email")} className='authForm__form__input' />
+            <input
+              {...register("email")}
+              className='authForm__form__input'
+              id='email'
+            />
             <p className='authForm__form__errors'>{errors.email?.message}</p>
           </div>
           <div className='authForm__form__form-group'>
@@ -61,6 +65,7 @@ export default function AuthForm({ title, children }) {
 
             <input
               type='password'
+              id='password'
               className='authForm__form__input'
               autoComplete='current-password'
               {...register("password")}
